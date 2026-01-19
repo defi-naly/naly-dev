@@ -32,20 +32,47 @@ export const projects = [
 export const socialLinks = {
   github: {
     label: 'GitHub',
-    href: 'https://github.com/naly',
-    username: '@naly',
+    href: 'https://github.com/defi-naly',
+    username: '@defi-naly',
   },
   twitter: {
     label: 'X (Twitter)',
-    href: 'https://x.com/naly',
-    username: '@naly',
+    href: 'https://x.com/defi_naly',
+    username: '@defi_naly',
   },
   newsletter: {
     label: 'Newsletter',
-    href: 'https://newsletter.naly.dev',
+    href: 'https://moneyverse.substack.com/',
     description: 'Weekly insights on markets & code',
   },
 };
+
+export const writing = [
+  {
+    id: 'how-to-thrive-in-a-crisis',
+    title: 'How to Thrive in a Crisis',
+    description: 'My investment strategy for the next 5 years.',
+    date: '2025-01-19',
+    href: 'https://moneyverse.substack.com/p/how-to-thrive-in-a-crisis',
+    tags: ['Strategy', 'Investing'],
+  },
+  {
+    id: 'the-jackpot-age',
+    title: 'The Jackpot Age',
+    description: 'Hyper-gamble your way to freedom and retire your bloodline.',
+    date: '2025-11-16',
+    href: 'https://moneyverse.substack.com/p/the-jackpot-age',
+    tags: ['Markets', 'Culture'],
+  },
+  {
+    id: 'invisible-bitcoin-zec',
+    title: 'Invisible Bitcoin: A ZEC Investment Thesis',
+    description: "Why Crypto's Most Overlooked Asset Might Be Its Most Important.",
+    date: '2025-10-12',
+    href: 'https://moneyverse.substack.com/p/invisible-bitcoin-a-zec-investment',
+    tags: ['Crypto', 'Zcash'],
+  },
+];
 
 export const siteConfig = {
   name: 'naly.dev',
