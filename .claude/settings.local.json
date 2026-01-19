@@ -3,7 +3,8 @@
     "allow": [
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "WebFetch(domain:moneyverse.substack.com)"
+      "WebFetch(domain:moneyverse.substack.com)",
+      "Bash(git push)"
     ]
   }
 }

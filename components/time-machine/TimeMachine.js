@@ -69,42 +69,35 @@ function calculateData(birthYear) {
   const finalPurchasingPower = 100 * (birthCPI / currentCPI);
   const erosion = 100 - finalPurchasingPower;
   
-  // Calculate basket comparison
+  // Calculate basket comparison - professional assets only
   const basket = [
     {
-      id: 'gas',
-      name: 'Gallons of Gas',
-      icon: '⛽',
-      birthValue: 100 / getValueForYear(purchasingPowerData.gas, birthYear),
-      currentValue: finalPurchasingPower / purchasingPowerData.gas[CURRENT_YEAR],
-    },
-    {
-      id: 'bigMac',
-      name: 'Big Macs',
-      icon: '🍔',
-      birthValue: 100 / getValueForYear(purchasingPowerData.bigMac, birthYear),
-      currentValue: finalPurchasingPower / purchasingPowerData.bigMac[CURRENT_YEAR],
-    },
-    {
-      id: 'movieTicket',
-      name: 'Movie Tickets',
-      icon: '🎬',
-      birthValue: 100 / getValueForYear(purchasingPowerData.movieTicket, birthYear),
-      currentValue: finalPurchasingPower / purchasingPowerData.movieTicket[CURRENT_YEAR],
-    },
-    {
       id: 'gold',
-      name: 'Oz of Gold',
-      icon: '🥇',
+      name: 'Gold',
+      unit: 'oz',
       birthValue: 100 / getValueForYear(purchasingPowerData.gold, birthYear),
       currentValue: finalPurchasingPower / purchasingPowerData.gold[CURRENT_YEAR],
     },
     {
       id: 'sp500',
-      name: 'S&P 500 Shares',
-      icon: '📈',
+      name: 'S&P 500',
+      unit: 'units',
       birthValue: 100 / getValueForYear(purchasingPowerData.sp500, birthYear),
       currentValue: finalPurchasingPower / purchasingPowerData.sp500[CURRENT_YEAR],
+    },
+    {
+      id: 'housing',
+      name: 'Housing',
+      unit: '% of median',
+      birthValue: (100 / getValueForYear(purchasingPowerData.medianHome, birthYear)) * 100,
+      currentValue: (finalPurchasingPower / purchasingPowerData.medianHome[CURRENT_YEAR]) * 100,
+    },
+    {
+      id: 'energy',
+      name: 'Energy',
+      unit: 'gal',
+      birthValue: 100 / getValueForYear(purchasingPowerData.gas, birthYear),
+      currentValue: finalPurchasingPower / purchasingPowerData.gas[CURRENT_YEAR],
     },
   ];
   
