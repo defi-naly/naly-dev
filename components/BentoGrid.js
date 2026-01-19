@@ -145,56 +145,29 @@ function FourthTurningCard() {
   );
 }
 
-// Time Machine - Tool card with decay visualization (horizontal layout)
+// Time Machine - Tool card (minimal)
 function TimeMachineCard() {
   return (
-    <BentoCard href="/tools/time-machine" className="h-full flex flex-row">
-      <div className="flex-1 relative overflow-hidden bg-neutral-950">
-        <svg className="absolute inset-0 w-full h-full p-3" viewBox="0 0 200 80" preserveAspectRatio="xMidYMid meet">
-          {/* Grid lines */}
-          <line x1="0" y1="20" x2="200" y2="20" stroke="#262626" strokeWidth="0.5" />
-          <line x1="0" y1="40" x2="200" y2="40" stroke="#262626" strokeWidth="0.5" />
-          <line x1="0" y1="60" x2="200" y2="60" stroke="#262626" strokeWidth="0.5" />
-
-          {/* $100 label */}
-          <text x="8" y="18" fill="#22c55e" fontSize="9" fontFamily="monospace" opacity="0.9">$100</text>
-
-          {/* Decay curve */}
-          <defs>
-            <linearGradient id="decayGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#22c55e" />
-              <stop offset="100%" stopColor="#ef4444" />
-            </linearGradient>
-            <filter id="glowDecay">
-              <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-              <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
-          <path
-            d="M15,22 Q40,24 70,35 T130,55 T185,68"
-            fill="none"
-            stroke="url(#decayGradient)"
-            strokeWidth="2"
-            strokeLinecap="round"
-            filter="url(#glowDecay)"
-          />
-          <circle cx="185" cy="68" r="3" fill="#ef4444" filter="url(#glowDecay)" />
-
-          {/* End value */}
-          <text x="170" y="78" fill="#ef4444" fontSize="8" fontFamily="monospace" opacity="0.9">~$17</text>
+    <BentoCard href="/tools/time-machine" className="h-full p-4 flex items-center gap-4">
+      <div className="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center flex-shrink-0">
+        <svg className="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
         </svg>
-
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-terminal-surface/50" />
       </div>
-
-      <div className="flex flex-col justify-center p-4 min-w-[140px]">
-        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-mono bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-full w-fit mb-2">
-          TOOL
-        </span>
-        <h3 className="text-sm font-medium text-white group-hover:text-terminal-accent transition-colors">
-          Time Machine
-        </h3>
-        <p className="text-xs text-neutral-400 mt-0.5">Your dollar's life story</p>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 mb-1">
+          <h3 className="text-sm font-medium text-white group-hover:text-terminal-accent transition-colors">
+            Time Machine
+          </h3>
+          <span className="px-1.5 py-0.5 text-[9px] font-mono bg-amber-500/20 text-amber-400 rounded">
+            TOOL
+          </span>
+        </div>
+        <p className="text-xs text-neutral-500">Your dollar's life story</p>
+      </div>
+      <div className="text-right flex-shrink-0">
+        <div className="font-mono text-xs text-neutral-500">$100 →</div>
+        <div className="font-mono text-sm text-amber-400">~$17</div>
       </div>
     </BentoCard>
   );
