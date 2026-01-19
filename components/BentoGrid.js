@@ -2,23 +2,14 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import {
-  ArrowUpRight,
-  Github,
-  Mail,
-  TrendingUp,
-  Layers
-} from 'lucide-react';
-import { projects, socialLinks } from '@/data/projects';
+import { ArrowUpRight, Github, Mail, Layers } from 'lucide-react';
+import { socialLinks } from '@/data/projects';
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1,
-    },
+    transition: { staggerChildren: 0.08, delayChildren: 0.1 },
   },
 };
 
@@ -52,231 +43,174 @@ function BentoCard({ children, className = '', href, external = false }) {
 
   if (href) {
     return external ? (
-      <a href={href} target="_blank" rel="noopener noreferrer">
-        {content}
-      </a>
+      <a href={href} target="_blank" rel="noopener noreferrer">{content}</a>
     ) : (
       <Link href={href}>{content}</Link>
     );
   }
-
   return content;
 }
 
-function TruValuePreview() {
+// TruValue - Large card with iframe preview
+function TruValueCard() {
   return (
-    <div className="flex-1 relative mb-4 rounded border border-neutral-800 bg-terminal-bg overflow-hidden min-h-[180px]">
-      {/* Mini chart visualization */}
-      <div className="absolute inset-0 p-4">
-        {/* Header stats */}
-        <div className="flex justify-between items-start mb-4">
-          <div>
-            <div className="text-[10px] font-mono text-neutral-500 mb-1">S&P 500 / GOLD</div>
-            <div className="text-lg font-mono text-white">2.847</div>
-          </div>
-          <div className="flex items-center gap-1 text-terminal-accent">
-            <TrendingUp className="w-3 h-3" />
-            <span className="text-xs font-mono">+12.4%</span>
-          </div>
+    <BentoCard href="/projects/real-terms" className="col-span-2 row-span-2 p-0 flex flex-col rounded-lg">
+      {/* Site Preview */}
+      <div className="flex-1 relative overflow-hidden bg-neutral-950 rounded-t-lg">
+        <div className="absolute inset-0 pointer-events-none">
+          <iframe
+            src="https://truvalue.lovable.app/"
+            className="w-[200%] h-[200%] origin-top-left scale-50 border-0"
+            title="TruValue Preview"
+          />
         </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-terminal-surface via-transparent to-transparent" />
+      </div>
 
-        {/* Chart area */}
-        <svg className="w-full h-24" viewBox="0 0 200 60" preserveAspectRatio="none">
-          {/* Grid lines */}
-          <line x1="0" y1="15" x2="200" y2="15" stroke="#262626" strokeWidth="0.5" />
-          <line x1="0" y1="30" x2="200" y2="30" stroke="#262626" strokeWidth="0.5" />
-          <line x1="0" y1="45" x2="200" y2="45" stroke="#262626" strokeWidth="0.5" />
+      {/* Content */}
+      <div className="p-5 border-t border-neutral-800">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-xs font-mono bg-terminal-accent/10 text-terminal-accent border border-terminal-accent/20 rounded">
+            <span className="w-1 h-1 rounded-full bg-terminal-accent animate-pulse" />
+            LIVE
+          </span>
+          <span className="text-xs font-mono text-neutral-500">Dashboard</span>
+        </div>
+        <h3 className="text-lg font-medium text-white mb-1 group-hover:text-terminal-accent transition-colors">
+          TruValue
+        </h3>
+        <p className="text-sm text-neutral-400">
+          See assets in their true value. Inflation-adjusted data.
+        </p>
+      </div>
+    </BentoCard>
+  );
+}
 
-          {/* Gradient fill */}
-          <defs>
-            <linearGradient id="chartGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#22c55e" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#22c55e" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-
-          {/* Area fill */}
-          <path
-            d="M0,45 Q20,42 40,38 T80,32 T120,28 T160,22 T200,15 L200,60 L0,60 Z"
-            fill="url(#chartGradient)"
-          />
-
-          {/* Line */}
-          <path
-            d="M0,45 Q20,42 40,38 T80,32 T120,28 T160,22 T200,15"
-            fill="none"
-            stroke="#22c55e"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-
-          {/* End dot */}
-          <circle cx="200" cy="15" r="3" fill="#22c55e" />
+// Fourth Turning - Medium card
+function FourthTurningCard() {
+  return (
+    <BentoCard href="/projects/fourth-turning" className="p-0 flex flex-col rounded-lg">
+      {/* Mini visualization */}
+      <div className="h-28 relative overflow-hidden bg-neutral-950 rounded-t-lg">
+        <svg className="w-full h-full" viewBox="0 0 200 70" preserveAspectRatio="none">
+          <rect x="0" y="0" width="25" height="70" fill="#1a1a1a" />
+          <rect x="25" y="0" width="25" height="70" fill="#0d0d0d" />
+          <rect x="50" y="0" width="25" height="70" fill="#0d0d0d" />
+          <rect x="75" y="0" width="25" height="70" fill="#0d0d0d" />
+          <rect x="100" y="0" width="25" height="70" fill="#1a1a1a" />
+          <rect x="125" y="0" width="25" height="70" fill="#0d0d0d" />
+          <rect x="150" y="0" width="25" height="70" fill="#0d0d0d" />
+          <rect x="175" y="0" width="25" height="70" fill="#1a1a1a" />
+          <text x="12" y="12" fill="#22c55e" fontSize="6" fontFamily="monospace" textAnchor="middle">CRISIS</text>
+          <text x="112" y="12" fill="#22c55e" fontSize="6" fontFamily="monospace" textAnchor="middle">CRISIS</text>
+          <text x="187" y="12" fill="#22c55e" fontSize="6" fontFamily="monospace" textAnchor="middle">CRISIS</text>
+          <path d="M5,55 Q25,50 45,40 T85,30 T125,35 T165,20 T195,15" fill="none" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" />
+          <circle cx="195" cy="15" r="3" fill="#22c55e" />
         </svg>
-
-        {/* Bottom labels */}
-        <div className="flex justify-between mt-2">
-          <span className="text-[9px] font-mono text-neutral-600">2020</span>
-          <span className="text-[9px] font-mono text-neutral-600">2022</span>
-          <span className="text-[9px] font-mono text-neutral-600">2024</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function FeaturedProject() {
-  const project = projects.find(p => p.featured);
-  if (!project) return null;
-
-  return (
-    <BentoCard
-      href={project.href}
-      className="col-span-2 row-span-2 p-6 flex flex-col"
-    >
-      {/* Status badge */}
-      <div className="flex items-center gap-2 mb-4">
-        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-xs font-mono bg-terminal-accent/10 text-terminal-accent border border-terminal-accent/20 rounded">
-          <span className="w-1 h-1 rounded-full bg-terminal-accent animate-pulse" />
-          {project.status.toUpperCase()}
-        </span>
-        <span className="text-xs font-mono text-neutral-500">{project.category}</span>
+        <div className="absolute inset-0 bg-gradient-to-t from-terminal-surface via-transparent to-transparent" />
       </div>
 
-      {/* TruValue Preview */}
-      <TruValuePreview />
-
-      {/* Title and description */}
-      <h3 className="text-lg font-medium text-white mb-1 group-hover:text-terminal-accent transition-colors">
-        {project.title}
-      </h3>
-      <p className="text-sm text-neutral-400 mb-4 line-clamp-2">
-        {project.description}
-      </p>
-
-      {/* Metrics */}
-      <div className="mt-auto flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          {project.tags.slice(0, 2).map(tag => (
-            <span key={tag} className="text-xs font-mono text-neutral-500">
-              {tag}
-            </span>
-          ))}
+      <div className="p-4 border-t border-neutral-800">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-xs font-mono bg-terminal-accent/10 text-terminal-accent border border-terminal-accent/20 rounded">
+            <span className="w-1 h-1 rounded-full bg-terminal-accent animate-pulse" />
+            LIVE
+          </span>
         </div>
-        <div className="text-right">
-          <div className="text-xs font-mono text-neutral-500">{project.metrics.label}</div>
-          <div className="text-sm font-mono text-terminal-accent">{project.metrics.value}</div>
-        </div>
+        <h3 className="text-base font-medium text-white mb-1 group-hover:text-terminal-accent transition-colors">
+          The Fourth Turning
+        </h3>
+        <p className="text-xs text-neutral-400">Economic cycles visualization</p>
       </div>
     </BentoCard>
   );
 }
 
-function FourthTurningPreview() {
+// Writing Card - Crisis Article
+function CrisisArticleCard() {
   return (
-    <div className="mb-3 rounded border border-neutral-800 bg-terminal-bg overflow-hidden h-20">
-      <svg className="w-full h-full" viewBox="0 0 200 50" preserveAspectRatio="none">
-        {/* Cycle bands */}
-        <rect x="0" y="0" width="25" height="50" fill="#1a1a1a" />
-        <rect x="25" y="0" width="25" height="50" fill="#0a0a0a" />
-        <rect x="50" y="0" width="25" height="50" fill="#0a0a0a" />
-        <rect x="75" y="0" width="25" height="50" fill="#0a0a0a" />
-        <rect x="100" y="0" width="25" height="50" fill="#1a1a1a" />
-        <rect x="125" y="0" width="25" height="50" fill="#0a0a0a" />
-        <rect x="150" y="0" width="25" height="50" fill="#0a0a0a" />
-        <rect x="175" y="0" width="25" height="50" fill="#1a1a1a" />
-
-        {/* Cycle labels */}
-        <text x="12" y="8" fill="#22c55e" fontSize="4" fontFamily="monospace" textAnchor="middle">WINTER</text>
-        <text x="112" y="8" fill="#22c55e" fontSize="4" fontFamily="monospace" textAnchor="middle">WINTER</text>
-        <text x="187" y="8" fill="#22c55e" fontSize="4" fontFamily="monospace" textAnchor="middle">WINTER</text>
-
-        {/* Data line */}
-        <path
-          d="M5,40 L20,35 L35,25 L50,20 L65,22 L80,18 L95,30 L110,25 L125,15 L140,18 L155,12 L170,20 L185,10 L195,8"
-          fill="none"
-          stroke="#22c55e"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-
-        {/* Year markers */}
-        <text x="10" y="48" fill="#525252" fontSize="5" fontFamily="monospace">1860</text>
-        <text x="95" y="48" fill="#525252" fontSize="5" fontFamily="monospace">1940</text>
-        <text x="180" y="48" fill="#525252" fontSize="5" fontFamily="monospace">2024</text>
-      </svg>
-    </div>
-  );
-}
-
-function SecondaryProject() {
-  const project = projects.find(p => !p.featured);
-  if (!project) return null;
-
-  return (
-    <BentoCard href={project.href} className="p-5 flex flex-col">
+    <BentoCard href="/writing/how-to-thrive-in-a-crisis" className="p-5 flex flex-col rounded-lg">
       <div className="flex items-center gap-2 mb-3">
-        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-xs font-mono bg-terminal-accent/10 text-terminal-accent border border-terminal-accent/20 rounded">
-          <span className="w-1 h-1 rounded-full bg-terminal-accent animate-pulse" />
-          {project.status.toUpperCase()}
-        </span>
-        <span className="text-xs font-mono text-neutral-500">{project.category}</span>
+        <span className="px-2 py-0.5 text-xs font-mono bg-neutral-800 text-neutral-400 rounded">Essay</span>
+        <span className="text-xs font-mono text-neutral-600">Jan 2025</span>
       </div>
 
-      {/* Fourth Turning Preview */}
-      <FourthTurningPreview />
-
-      <h3 className="text-base font-medium text-white mb-2 group-hover:text-terminal-accent transition-colors">
-        {project.title}
+      <h3 className="text-base font-medium text-white mb-2 group-hover:text-terminal-accent transition-colors leading-tight">
+        How to Thrive in a Crisis
       </h3>
-      <p className="text-sm text-neutral-400 line-clamp-2 mb-3">
-        {project.description}
+      <p className="text-xs text-neutral-500 line-clamp-2 mb-auto">
+        My investment strategy for the next 5 years. Sovereignty and scarcity.
       </p>
 
-      <div className="mt-auto">
-        <div className="text-xs font-mono text-neutral-500">{project.metrics.label}</div>
-        <div className="text-sm font-mono text-terminal-accent">{project.metrics.value}</div>
+      <div className="mt-4 pt-3 border-t border-neutral-800">
+        <span className="text-xs font-mono text-terminal-accent">Read essay →</span>
       </div>
     </BentoCard>
   );
 }
 
+// Writing Card - ZEC Article
+function ZecArticleCard() {
+  return (
+    <BentoCard href="/writing/invisible-bitcoin-zec" className="col-span-2 p-5 flex flex-col rounded-lg">
+      <div className="flex items-center gap-2 mb-3">
+        <span className="px-2 py-0.5 text-xs font-mono bg-neutral-800 text-neutral-400 rounded">Thesis</span>
+        <span className="text-xs font-mono text-neutral-600">Oct 2025</span>
+      </div>
+
+      <h3 className="text-lg font-medium text-white mb-2 group-hover:text-terminal-accent transition-colors">
+        Invisible Bitcoin: A ZEC Investment Thesis
+      </h3>
+      <p className="text-sm text-neutral-400 line-clamp-2">
+        Why Crypto's Most Overlooked Asset Might Be Its Most Important. Privacy as infrastructure.
+      </p>
+
+      <div className="mt-4 flex items-center justify-between">
+        <div className="flex gap-2">
+          <span className="px-2 py-0.5 text-xs font-mono bg-neutral-800/50 text-neutral-500 rounded">Crypto</span>
+          <span className="px-2 py-0.5 text-xs font-mono bg-neutral-800/50 text-neutral-500 rounded">Privacy</span>
+        </div>
+        <span className="text-xs font-mono text-terminal-accent">Read thesis →</span>
+      </div>
+    </BentoCard>
+  );
+}
+
+// Newsletter Card
 function NewsletterCard() {
   return (
-    <BentoCard 
-      href={socialLinks.newsletter.href} 
-      external 
-      className="p-5 flex flex-col"
-    >
+    <BentoCard href={socialLinks.newsletter.href} external className="p-5 flex flex-col rounded-lg">
       <div className="flex items-center gap-2 mb-3">
         <Mail className="w-4 h-4 text-neutral-500" />
         <span className="text-xs font-mono text-neutral-500">NEWSLETTER</span>
       </div>
-      
+
       <h3 className="text-base font-medium text-white mb-2 group-hover:text-terminal-accent transition-colors">
-        {socialLinks.newsletter.label}
+        MoneyVerse
       </h3>
-      <p className="text-sm text-neutral-400">
+      <p className="text-xs text-neutral-400 mb-auto">
         {socialLinks.newsletter.description}
       </p>
-      
-      <div className="mt-auto pt-3">
+
+      <div className="mt-4 pt-3 border-t border-neutral-800">
         <span className="text-xs font-mono text-terminal-accent">Subscribe →</span>
       </div>
     </BentoCard>
   );
 }
 
+// Social Card
 function SocialCard() {
   return (
-    <BentoCard className="p-5">
+    <BentoCard className="p-5 rounded-lg">
       <div className="flex items-center gap-2 mb-4">
         <Layers className="w-4 h-4 text-neutral-500" />
         <span className="text-xs font-mono text-neutral-500">CONNECT</span>
       </div>
-      
-      <div className="space-y-3">
-        <a 
+
+      <div className="space-y-2">
+        <a
           href={socialLinks.github.href}
           target="_blank"
           rel="noopener noreferrer"
@@ -284,14 +218,14 @@ function SocialCard() {
         >
           <div className="flex items-center gap-2">
             <Github className="w-4 h-4 text-neutral-400" />
-            <span className="text-sm text-neutral-300">{socialLinks.github.label}</span>
+            <span className="text-sm text-neutral-300">GitHub</span>
           </div>
           <span className="text-xs font-mono text-neutral-500 group-hover/link:text-terminal-accent transition-colors">
             {socialLinks.github.username}
           </span>
         </a>
-        
-        <a 
+
+        <a
           href={socialLinks.twitter.href}
           target="_blank"
           rel="noopener noreferrer"
@@ -301,7 +235,7 @@ function SocialCard() {
             <svg className="w-4 h-4 text-neutral-400" viewBox="0 0 24 24" fill="currentColor">
               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
             </svg>
-            <span className="text-sm text-neutral-300">{socialLinks.twitter.label}</span>
+            <span className="text-sm text-neutral-300">X</span>
           </div>
           <span className="text-xs font-mono text-neutral-500 group-hover/link:text-terminal-accent transition-colors">
             {socialLinks.twitter.username}
@@ -318,22 +252,33 @@ export default function BentoGrid() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3"
     >
+      {/* Row 1: TruValue (2x2) + Fourth Turning + Crisis Article */}
       <motion.div variants={itemVariants} className="lg:col-span-2 lg:row-span-2">
-        <FeaturedProject />
+        <TruValueCard />
       </motion.div>
-      
+
       <motion.div variants={itemVariants}>
-        <SecondaryProject />
+        <FourthTurningCard />
       </motion.div>
-      
+
+      <motion.div variants={itemVariants}>
+        <CrisisArticleCard />
+      </motion.div>
+
+      {/* Row 2: Newsletter + Social */}
       <motion.div variants={itemVariants}>
         <NewsletterCard />
       </motion.div>
-      
-      <motion.div variants={itemVariants} className="lg:col-span-2">
+
+      <motion.div variants={itemVariants}>
         <SocialCard />
+      </motion.div>
+
+      {/* Row 3: ZEC Article (spans 2) */}
+      <motion.div variants={itemVariants} className="lg:col-span-2">
+        <ZecArticleCard />
       </motion.div>
     </motion.div>
   );
