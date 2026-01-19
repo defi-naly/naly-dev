@@ -43,111 +43,88 @@ function BentoCard({ children, className = '', href, external = false }) {
   return content;
 }
 
-// TruValue - Hero card (minimal)
+// TruValue - Branded splash card
 function TruValueCard() {
   return (
-    <BentoCard href="/projects/real-terms" className="h-full p-6 flex flex-col justify-between">
-      <div>
-        <div className="flex items-center gap-3 mb-6">
-          <div className="w-12 h-12 rounded-xl bg-terminal-accent/10 border border-terminal-accent/20 flex items-center justify-center">
-            <svg className="w-6 h-6 text-terminal-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-            </svg>
-          </div>
-          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-mono bg-terminal-accent/20 text-terminal-accent rounded-full">
-            <span className="w-1 h-1 rounded-full bg-terminal-accent animate-pulse" />
-            LIVE
-          </span>
-        </div>
-
-        <h3 className="text-2xl font-medium text-white mb-2 group-hover:text-terminal-accent transition-colors">
-          TruValue
-        </h3>
-        <p className="text-neutral-400">
-          See assets in their true value. Strip away inflation noise.
-        </p>
+    <BentoCard href="/projects/real-terms" className="h-full flex flex-col items-center justify-center text-center p-6 bg-gradient-to-br from-terminal-surface to-neutral-900">
+      <div className="absolute top-4 right-4">
+        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-mono bg-terminal-accent/20 text-terminal-accent rounded-full">
+          <span className="w-1 h-1 rounded-full bg-terminal-accent animate-pulse" />
+          LIVE
+        </span>
       </div>
 
-      <div className="pt-6 border-t border-neutral-800 mt-6">
-        <div className="flex items-center justify-between text-sm">
-          <span className="font-mono text-neutral-500">truvalue.lovable.app</span>
-          <span className="font-mono text-terminal-accent">View →</span>
-        </div>
+      <div className="w-16 h-16 rounded-2xl bg-terminal-accent/10 border border-terminal-accent/30 flex items-center justify-center mb-6">
+        <span className="text-3xl font-light text-terminal-accent">$</span>
+      </div>
+
+      <h3 className="text-2xl font-medium tracking-tight text-white mb-2 group-hover:text-terminal-accent transition-colors">
+        TruValue
+      </h3>
+      <p className="text-sm text-neutral-500 font-mono">
+        See assets in their true value
+      </p>
+
+      <div className="absolute bottom-4 left-0 right-0 px-6">
+        <div className="h-px bg-gradient-to-r from-transparent via-neutral-700 to-transparent" />
+        <p className="text-[10px] font-mono text-neutral-600 mt-3">truvalue.lovable.app</p>
       </div>
     </BentoCard>
   );
 }
 
-// Fourth Turning - Minimal card
+// Fourth Turning - Branded splash card
 function FourthTurningCard() {
   return (
-    <BentoCard href="/projects/fourth-turning" className="h-full p-5 flex flex-col justify-between">
-      <div>
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-10 h-10 rounded-lg bg-terminal-accent/10 border border-terminal-accent/20 flex items-center justify-center">
-            <svg className="w-5 h-5 text-terminal-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
-            </svg>
-          </div>
-          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-mono bg-terminal-accent/20 text-terminal-accent rounded-full">
-            <span className="w-1 h-1 rounded-full bg-terminal-accent animate-pulse" />
-            LIVE
-          </span>
-        </div>
-
-        <h3 className="text-xl font-medium text-white mb-2 group-hover:text-terminal-accent transition-colors">
-          The Fourth Turning
-        </h3>
-        <p className="text-sm text-neutral-400">
-          Economic cycles &amp; historical patterns
-        </p>
+    <BentoCard href="/projects/fourth-turning" className="h-full flex flex-col items-center justify-center text-center p-5 bg-gradient-to-br from-terminal-surface to-neutral-900">
+      <div className="absolute top-4 right-4">
+        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-mono bg-terminal-accent/20 text-terminal-accent rounded-full">
+          <span className="w-1 h-1 rounded-full bg-terminal-accent animate-pulse" />
+          LIVE
+        </span>
       </div>
 
-      <div className="flex items-center gap-4 pt-4 border-t border-neutral-800 mt-4">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-terminal-accent/50" />
-          <span className="font-mono text-xs text-neutral-500">Spring</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-terminal-accent/50" />
-          <span className="font-mono text-xs text-neutral-500">Summer</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-terminal-accent/50" />
-          <span className="font-mono text-xs text-neutral-500">Fall</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-terminal-accent" />
-          <span className="font-mono text-xs text-terminal-accent">Winter</span>
-        </div>
+      <div className="w-14 h-14 rounded-xl bg-terminal-accent/10 border border-terminal-accent/30 flex items-center justify-center mb-4">
+        <svg className="w-7 h-7 text-terminal-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+        </svg>
+      </div>
+
+      <h3 className="text-xl font-medium tracking-tight text-white mb-1 group-hover:text-terminal-accent transition-colors">
+        Saeculum
+      </h3>
+      <p className="text-xs text-neutral-500 font-mono mb-4">
+        cycle indicator
+      </p>
+
+      <div className="flex items-center gap-1">
+        <span className="w-2 h-2 rounded-full bg-neutral-700" title="Spring" />
+        <span className="w-2 h-2 rounded-full bg-neutral-700" title="Summer" />
+        <span className="w-2 h-2 rounded-full bg-neutral-700" title="Fall" />
+        <span className="w-2 h-2 rounded-full bg-terminal-accent animate-pulse" title="Winter" />
       </div>
     </BentoCard>
   );
 }
 
-// Time Machine - Tool card (minimal)
+// Time Machine - Branded splash card (horizontal)
 function TimeMachineCard() {
   return (
-    <BentoCard href="/tools/time-machine" className="h-full p-4 flex items-center gap-4">
+    <BentoCard href="/tools/time-machine" className="h-full flex items-center justify-center gap-4 p-4 bg-gradient-to-r from-terminal-surface to-neutral-900">
       <div className="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center flex-shrink-0">
         <svg className="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
         </svg>
       </div>
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2 mb-1">
-          <h3 className="text-sm font-medium text-white group-hover:text-terminal-accent transition-colors">
-            Time Machine
-          </h3>
-          <span className="px-1.5 py-0.5 text-[9px] font-mono bg-amber-500/20 text-amber-400 rounded">
-            TOOL
-          </span>
-        </div>
-        <p className="text-xs text-neutral-500">Your dollar's life story</p>
+      <div className="text-left">
+        <h3 className="text-sm font-medium tracking-tight text-white group-hover:text-terminal-accent transition-colors">
+          Decay
+        </h3>
+        <p className="text-[10px] text-neutral-500 font-mono">time machine</p>
       </div>
-      <div className="text-right flex-shrink-0">
-        <div className="font-mono text-xs text-neutral-500">$100 →</div>
-        <div className="font-mono text-sm text-amber-400">~$17</div>
+      <div className="h-6 w-px bg-neutral-800 mx-2" />
+      <div className="font-mono text-xs text-neutral-500">
+        <span className="text-terminal-accent">$100</span> → <span className="text-amber-400">$17</span>
       </div>
     </BentoCard>
   );
