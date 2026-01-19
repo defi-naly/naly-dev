@@ -81,7 +81,7 @@ function FourthTurningCard() {
   return (
     <BentoCard href="/projects/fourth-turning" className="h-full flex flex-col">
       <div className="flex-1 relative min-h-[180px] overflow-hidden bg-neutral-950">
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice">
+        <svg className="absolute inset-0 w-full h-full p-4" viewBox="0 0 400 180" preserveAspectRatio="xMidYMid meet">
           {/* Cycle backgrounds */}
           <rect x="0" y="0" width="50" height="200" fill="#1a1a1a" />
           <rect x="50" y="0" width="50" height="200" fill="#0d0d0d" />
