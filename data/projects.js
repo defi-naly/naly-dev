@@ -53,7 +53,7 @@ export const writing = [
     title: 'How to Thrive in a Crisis',
     description: 'My investment strategy for the next 5 years.',
     date: '2025-01-19',
-    href: 'https://moneyverse.substack.com/p/how-to-thrive-in-a-crisis',
+    href: '/writing/how-to-thrive-in-a-crisis',
     tags: ['Strategy', 'Investing'],
   },
   {
@@ -61,7 +61,7 @@ export const writing = [
     title: 'The Jackpot Age',
     description: 'Hyper-gamble your way to freedom and retire your bloodline.',
     date: '2025-11-16',
-    href: 'https://moneyverse.substack.com/p/the-jackpot-age',
+    href: '/writing/the-jackpot-age',
     tags: ['Markets', 'Culture'],
   },
   {
@@ -69,7 +69,7 @@ export const writing = [
     title: 'Invisible Bitcoin: A ZEC Investment Thesis',
     description: "Why Crypto's Most Overlooked Asset Might Be Its Most Important.",
     date: '2025-10-12',
-    href: 'https://moneyverse.substack.com/p/invisible-bitcoin-a-zec-investment',
+    href: '/writing/invisible-bitcoin-zec',
     tags: ['Crypto', 'Zcash'],
   },
 ];

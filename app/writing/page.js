@@ -2,6 +2,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { writing } from '@/data/projects';
 import { ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
 
 export const metadata = {
   title: 'Writing | naly.dev',
@@ -43,11 +44,9 @@ export default function WritingPage() {
           {/* Articles list */}
           <div className="space-y-4">
             {writing.map((article) => (
-              <a
+              <Link
                 key={article.id}
                 href={article.href}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="group block p-6 bg-terminal-surface border border-neutral-800 rounded-lg hover:border-neutral-700 hover:bg-neutral-900/50 transition-all"
               >
                 <div className="flex items-start justify-between gap-4">
@@ -79,7 +78,7 @@ export default function WritingPage() {
 
                   <ArrowUpRight className="w-5 h-5 text-neutral-600 group-hover:text-terminal-accent transition-colors flex-shrink-0 mt-1" />
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
 
