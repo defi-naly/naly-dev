@@ -145,6 +145,68 @@ function FourthTurningCard() {
   );
 }
 
+// Time Machine - Tool card with decay visualization
+function TimeMachineCard() {
+  return (
+    <BentoCard href="/tools/time-machine" className="h-full flex flex-col">
+      <div className="flex-1 relative min-h-[120px] overflow-hidden bg-neutral-950">
+        <svg className="absolute inset-0 w-full h-full p-4" viewBox="0 0 300 120" preserveAspectRatio="xMidYMid meet">
+          {/* Grid lines */}
+          <line x1="0" y1="30" x2="300" y2="30" stroke="#262626" strokeWidth="0.5" />
+          <line x1="0" y1="60" x2="300" y2="60" stroke="#262626" strokeWidth="0.5" />
+          <line x1="0" y1="90" x2="300" y2="90" stroke="#262626" strokeWidth="0.5" />
+
+          {/* $100 label */}
+          <text x="10" y="25" fill="#22c55e" fontSize="11" fontFamily="monospace" opacity="0.9">$100</text>
+
+          {/* Decay curve */}
+          <defs>
+            <linearGradient id="decayGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#22c55e" />
+              <stop offset="100%" stopColor="#ef4444" />
+            </linearGradient>
+            <filter id="glowDecay">
+              <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+              <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <path
+            d="M20,30 Q60,32 100,45 T180,70 T260,95 T290,100"
+            fill="none"
+            stroke="url(#decayGradient)"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            filter="url(#glowDecay)"
+          />
+          <circle cx="290" cy="100" r="4" fill="#ef4444" filter="url(#glowDecay)" />
+
+          {/* End value */}
+          <text x="260" y="115" fill="#ef4444" fontSize="10" fontFamily="monospace" opacity="0.9">~$17</text>
+
+          {/* Year labels */}
+          <text x="20" y="115" fill="#525252" fontSize="8" fontFamily="monospace">1970</text>
+          <text x="280" y="75" fill="#525252" fontSize="8" fontFamily="monospace" textAnchor="end">2024</text>
+        </svg>
+
+        <div className="absolute inset-0 bg-gradient-to-t from-terminal-surface via-transparent to-transparent" />
+
+        <div className="absolute top-3 left-3">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded-full backdrop-blur-sm">
+            TOOL
+          </span>
+        </div>
+      </div>
+
+      <div className="p-4">
+        <h3 className="text-lg font-medium text-white group-hover:text-terminal-accent transition-colors">
+          Time Machine
+        </h3>
+        <p className="text-sm text-neutral-400 mt-1">Your dollar's life story</p>
+      </div>
+    </BentoCard>
+  );
+}
+
 // Compact writing card
 function WritingCard({ title, href, tag }) {
   return (
@@ -218,9 +280,14 @@ export default function BentoGrid() {
         <TruValueCard />
       </motion.div>
 
-      {/* Fourth Turning - Medium (3x2) */}
-      <motion.div variants={itemVariants} className="col-span-4 lg:col-span-3 row-span-2">
+      {/* Fourth Turning - Medium (2x2) */}
+      <motion.div variants={itemVariants} className="col-span-4 lg:col-span-2 row-span-2">
         <FourthTurningCard />
+      </motion.div>
+
+      {/* Time Machine - Tool (1x2) */}
+      <motion.div variants={itemVariants} className="col-span-4 lg:col-span-1 row-span-2">
+        <TimeMachineCard />
       </motion.div>
 
       {/* Writing: Crisis - Small */}
