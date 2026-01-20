@@ -133,7 +133,7 @@ export default function PrinterViz({ onComplete }: PrinterVizProps) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="flex flex-col h-[450px]"
+      className="flex flex-col"
     >
       <div className="text-center mb-2">
         <p className="text-zinc-500 font-mono text-xs uppercase tracking-wider">

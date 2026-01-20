@@ -78,7 +78,7 @@ export default function ChapterWrapper({
       </div>
 
       {/* Chapter Content */}
-      <div className="mt-8 min-h-[300px]">
+      <div className="mt-8 mb-8">
         {children}
       </div>
 

@@ -2,32 +2,31 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { AlertTriangle } from 'lucide-react';
-import { CoinIcon, VaultIcon, PersonIcon } from '@/components/icons/GameIcons';
+import { AlertTriangle, Play } from 'lucide-react';
+import { CoinIcon, VaultIcon } from '@/components/icons/GameIcons';
 
 interface FractionalReserveProps {
   onComplete: () => void;
 }
 
-type Phase = 'deposit' | 'flywheel' | 'reveal' | 'bankrun';
+type Phase = 'intro' | 'lending' | 'reveal' | 'bankrun';
 
 const RESERVE_RATIO = 0.1;
 const INITIAL_DEPOSIT = 100;
-const NUM_ROUNDS = 6;
-const ROUND_DELAY = 2000;
+const NUM_ROUNDS = 5;
 
 const calculateRounds = () => {
-  const rounds: { deposit: number; kept: number; lent: number; totalDeposits: number; totalReserves: number }[] = [];
+  const rounds: { round: number; deposit: number; kept: number; lent: number; totalClaims: number; totalReserves: number }[] = [];
   let currentDeposit = INITIAL_DEPOSIT;
-  let totalDeposits = 0;
+  let totalClaims = 0;
   let totalReserves = 0;
 
   for (let i = 0; i < NUM_ROUNDS; i++) {
     const kept = currentDeposit * RESERVE_RATIO;
     const lent = currentDeposit * (1 - RESERVE_RATIO);
-    totalDeposits += currentDeposit;
+    totalClaims += currentDeposit;
     totalReserves += kept;
-    rounds.push({ deposit: currentDeposit, kept, lent, totalDeposits, totalReserves });
+    rounds.push({ round: i + 1, deposit: currentDeposit, kept, lent, totalClaims, totalReserves });
     currentDeposit = lent;
   }
 
@@ -35,24 +34,24 @@ const calculateRounds = () => {
 };
 
 const ROUNDS = calculateRounds();
-const FINAL_DEPOSITS = Math.round(ROUNDS[ROUNDS.length - 1].totalDeposits);
+const FINAL_CLAIMS = Math.round(ROUNDS[ROUNDS.length - 1].totalClaims);
 const FINAL_RESERVES = Math.round(ROUNDS[ROUNDS.length - 1].totalReserves);
 
 export default function FractionalReserve({ onComplete }: FractionalReserveProps) {
-  const [phase, setPhase] = useState<Phase>('deposit');
-  const [currentRound, setCurrentRound] = useState(-1);
+  const [phase, setPhase] = useState<Phase>('intro');
+  const [currentRound, setCurrentRound] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
-    if (phase === 'flywheel' && currentRound < NUM_ROUNDS - 1) {
+    if (phase === 'lending' && currentRound < NUM_ROUNDS) {
       const timer = setTimeout(() => {
         setCurrentRound(prev => prev + 1);
-      }, ROUND_DELAY);
+      }, 1200);
       return () => clearTimeout(timer);
-    } else if (phase === 'flywheel' && currentRound === NUM_ROUNDS - 1) {
+    } else if (phase === 'lending' && currentRound === NUM_ROUNDS) {
       const timer = setTimeout(() => {
         setPhase('reveal');
-      }, ROUND_DELAY);
+      }, 1000);
       return () => clearTimeout(timer);
     }
   }, [phase, currentRound]);
@@ -67,358 +66,275 @@ export default function FractionalReserve({ onComplete }: FractionalReserveProps
     }
   }, [phase, isComplete, onComplete]);
 
-  const handleDeposit = useCallback(() => {
-    setPhase('flywheel');
-    setCurrentRound(0);
+  const handleStart = useCallback(() => {
+    setPhase('lending');
+    setCurrentRound(1);
   }, []);
 
   const handleWithdraw = useCallback(() => {
     setPhase('bankrun');
   }, []);
 
-  const currentData = currentRound >= 0 ? ROUNDS[currentRound] : null;
+  const currentData = currentRound > 0 ? ROUNDS[currentRound - 1] : null;
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="flex flex-col h-[450px]"
+      className="flex flex-col"
     >
-      <div className="flex-1 flex flex-col justify-center">
-        <AnimatePresence mode="wait">
-          {/* PHASE 1: Deposit */}
-          {phase === 'deposit' && (
-            <motion.div
-              key="deposit"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-center space-y-6"
+      <AnimatePresence mode="wait">
+        {/* INTRO */}
+        {phase === 'intro' && (
+          <motion.div
+            key="intro"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="text-center space-y-6"
+          >
+            <div className="flex items-center justify-center gap-4">
+              <div className="w-16 h-16 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center">
+                <CoinIcon className="w-8 h-8 text-amber-500" />
+              </div>
+              <div className="text-left">
+                <p className="text-white font-mono text-lg font-medium">100 Gold</p>
+                <p className="text-zinc-500 font-mono text-xs">Your life savings</p>
+              </div>
+            </div>
+
+            <p className="text-zinc-400 font-mono text-sm max-w-sm mx-auto">
+              You deposit it with the bank for safekeeping. They promise it's always available.
+            </p>
+
+            <motion.button
+              onClick={handleStart}
+              className="flex items-center gap-2 bg-amber-500 text-zinc-900 font-mono text-sm font-medium px-6 py-3 rounded hover:bg-amber-400 transition-colors mx-auto"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <p className="text-neutral-400 font-mono text-sm">
-                You deposit 100 gold with the bank for safekeeping.
-              </p>
+              <Play className="w-4 h-4" />
+              DEPOSIT
+            </motion.button>
+          </motion.div>
+        )}
 
-              <div className="flex items-center justify-center gap-6">
-                <div className="text-center">
-                  <div className="w-16 h-16 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mx-auto mb-2">
-                    <PersonIcon className="w-8 h-8 text-amber-500" />
-                  </div>
-                  <p className="text-zinc-400 font-mono text-xs">YOU</p>
-                </div>
+        {/* LENDING VISUALIZATION */}
+        {phase === 'lending' && currentData && (
+          <motion.div
+            key="lending"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="space-y-6"
+          >
+            <p className="text-zinc-500 font-mono text-xs text-center uppercase tracking-wider">
+              "They won't all withdraw at once..."
+            </p>
 
+            {/* Money multiplication bars */}
+            <div className="space-y-2 max-w-md mx-auto">
+              {ROUNDS.slice(0, currentRound).map((round, idx) => (
                 <motion.div
-                  className="flex items-center gap-1"
-                  animate={{ x: [0, 8, 0] }}
-                  transition={{ repeat: Infinity, duration: 1.5 }}
+                  key={round.round}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="flex items-center gap-3"
                 >
-                  <CoinIcon className="w-5 h-5 text-amber-500" />
-                  <span className="text-amber-500 font-mono text-sm">100</span>
-                  <span className="text-zinc-600">→</span>
-                </motion.div>
+                  <span className="text-zinc-600 font-mono text-xs w-6">{round.round}.</span>
 
-                <div className="text-center">
-                  <div className="w-16 h-16 rounded-xl bg-zinc-800 border border-zinc-700 flex items-center justify-center mx-auto mb-2">
-                    <VaultIcon className="w-8 h-8 text-zinc-400" />
-                  </div>
-                  <p className="text-zinc-400 font-mono text-xs">BANK</p>
-                </div>
-              </div>
-
-              <motion.button
-                onClick={handleDeposit}
-                className="flex items-center gap-2 bg-amber-500 text-zinc-900 font-mono text-sm font-medium px-6 py-3 rounded hover:bg-amber-400 transition-colors mx-auto"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <CoinIcon className="w-4 h-4" />
-                DEPOSIT GOLD
-              </motion.button>
-            </motion.div>
-          )}
-
-          {/* PHASE 2: Flywheel */}
-          {phase === 'flywheel' && currentData && (
-            <motion.div
-              key="flywheel"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="space-y-4"
-            >
-              <p className="text-neutral-400 font-mono text-sm text-center">
-                "They won't all withdraw at once..."
-              </p>
-
-              {/* Flywheel SVG */}
-              <svg viewBox="0 0 360 200" className="w-full max-w-sm mx-auto">
-                {/* Bank node - top center */}
-                <g transform="translate(180, 30)">
-                  <motion.rect
-                    x="-40" y="-18"
-                    width="80" height="36"
-                    rx="4"
-                    fill="#18181b"
-                    stroke="#f59e0b"
-                    strokeWidth="1.5"
-                    initial={{ opacity: 0.5 }}
-                    animate={{ opacity: 1 }}
-                  />
-                  <text x="0" y="-2" textAnchor="middle" fill="#fafafa" className="font-mono text-[10px]">
-                    BANK
-                  </text>
-                  <text x="0" y="10" textAnchor="middle" fill="#f59e0b" className="font-mono text-[9px]">
-                    Vault: {Math.round(currentData.kept)}
-                  </text>
-                </g>
-
-                {/* Borrower node - right */}
-                <g transform="translate(300, 100)">
-                  <motion.rect
-                    x="-35" y="-14"
-                    width="70" height="28"
-                    rx="4"
-                    fill="#18181b"
-                    stroke="#3f3f46"
-                    strokeWidth="1.5"
-                    initial={{ opacity: 0.3 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.3 }}
-                  />
-                  <text x="0" y="4" textAnchor="middle" fill="#a1a1aa" className="font-mono text-[10px]">
-                    BORROWER
-                  </text>
-                </g>
-
-                {/* Merchant node - bottom center */}
-                <g transform="translate(180, 170)">
-                  <motion.rect
-                    x="-35" y="-14"
-                    width="70" height="28"
-                    rx="4"
-                    fill="#18181b"
-                    stroke="#3f3f46"
-                    strokeWidth="1.5"
-                    initial={{ opacity: 0.3 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.6 }}
-                  />
-                  <text x="0" y="4" textAnchor="middle" fill="#a1a1aa" className="font-mono text-[10px]">
-                    MERCHANT
-                  </text>
-                </g>
-
-                {/* Flow paths */}
-                {/* Bank to Borrower */}
-                <motion.path
-                  d="M 220 42 Q 280 60 280 86"
-                  fill="none"
-                  stroke="#f59e0b"
-                  strokeWidth="2"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{ pathLength: 1, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                />
-                <motion.text
-                  x="260" y="55"
-                  fill="#f59e0b"
-                  className="font-mono text-[9px]"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                >
-                  Lends {Math.round(currentData.lent)}
-                </motion.text>
-
-                {/* Borrower to Merchant */}
-                <motion.path
-                  d="M 280 114 Q 280 140 230 156"
-                  fill="none"
-                  stroke="#52525b"
-                  strokeWidth="1.5"
-                  strokeDasharray="4 4"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{ pathLength: 1, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.5 }}
-                />
-                <motion.text
-                  x="265" y="140"
-                  fill="#71717a"
-                  className="font-mono text-[8px]"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.6 }}
-                >
-                  spends
-                </motion.text>
-
-                {/* Merchant back to Bank */}
-                <motion.path
-                  d="M 145 160 Q 60 140 80 80 Q 100 40 140 30"
-                  fill="none"
-                  stroke="#52525b"
-                  strokeWidth="1.5"
-                  strokeDasharray="4 4"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{ pathLength: 1, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.8 }}
-                />
-                <motion.text
-                  x="70" y="100"
-                  fill="#71717a"
-                  className="font-mono text-[8px]"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.9 }}
-                >
-                  deposits
-                </motion.text>
-
-                {/* Animated coin */}
-                <motion.g
-                  initial={{ opacity: 0 }}
-                  animate={{
-                    opacity: [0, 1, 1, 1, 0],
-                  }}
-                  transition={{
-                    duration: 1.8,
-                    times: [0, 0.1, 0.5, 0.9, 1],
-                    repeat: Infinity,
-                  }}
-                >
-                  <motion.circle
-                    cx="0" cy="0" r="6"
-                    fill="#f59e0b"
-                    animate={{
-                      cx: [220, 280, 280, 180, 140],
-                      cy: [42, 80, 130, 156, 30],
-                    }}
-                    transition={{
-                      duration: 1.8,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  />
-                </motion.g>
-              </svg>
-
-              {/* Stats */}
-              <div className="grid grid-cols-2 gap-3 max-w-xs mx-auto">
-                <div className="p-3 bg-zinc-900 border border-zinc-800 rounded-lg text-center">
-                  <p className="text-zinc-500 font-mono text-[10px] uppercase">Real Gold</p>
-                  <p className="text-amber-500 font-mono text-lg font-bold">{INITIAL_DEPOSIT}</p>
-                </div>
-                <div className="p-3 bg-zinc-900 border border-zinc-800 rounded-lg text-center">
-                  <p className="text-zinc-500 font-mono text-[10px] uppercase">Total Deposits</p>
-                  <motion.p
-                    className="text-emerald-500 font-mono text-lg font-bold"
-                    key={currentData.totalDeposits}
-                    initial={{ scale: 1.1 }}
-                    animate={{ scale: 1 }}
-                  >
-                    {Math.round(currentData.totalDeposits)}
-                  </motion.p>
-                </div>
-              </div>
-
-              {/* Round indicator */}
-              <div className="text-center">
-                <p className="text-zinc-600 font-mono text-xs mb-2">
-                  Round {currentRound + 1}: Bank keeps {Math.round(currentData.kept)}, lends {Math.round(currentData.lent)}
-                </p>
-                <div className="flex justify-center gap-1">
-                  {ROUNDS.map((_, i) => (
+                  {/* Kept (reserve) */}
+                  <div className="flex-1 flex items-center gap-1">
                     <motion.div
-                      key={i}
-                      className={`w-2 h-2 rounded-full ${
-                        i <= currentRound ? 'bg-amber-500' : 'bg-zinc-700'
-                      }`}
-                      initial={{ scale: 0.8 }}
-                      animate={{ scale: i === currentRound ? 1.3 : 1 }}
-                    />
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          )}
+                      className="h-8 bg-amber-500/20 border border-amber-500/40 rounded flex items-center justify-center"
+                      style={{ width: `${(round.kept / INITIAL_DEPOSIT) * 100}%`, minWidth: '40px' }}
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
+                    >
+                      <span className="text-amber-500 font-mono text-[10px] font-medium">
+                        {Math.round(round.kept)}
+                      </span>
+                    </motion.div>
 
-          {/* PHASE 3: Reveal */}
-          {phase === 'reveal' && (
-            <motion.div
-              key="reveal"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-center space-y-6"
-            >
-              <div className="flex items-center justify-center gap-4">
-                <div className="p-4 bg-zinc-900 border border-amber-500/30 rounded-lg">
-                  <CoinIcon className="w-8 h-8 text-amber-500 mx-auto mb-2" />
-                  <p className="text-zinc-500 font-mono text-[10px] uppercase">Real Gold</p>
-                  <p className="text-amber-500 font-mono text-2xl font-bold">{INITIAL_DEPOSIT}</p>
-                </div>
-                <span className="text-zinc-600 font-mono text-xl">→</span>
-                <div className="p-4 bg-zinc-900 border border-emerald-500/30 rounded-lg">
-                  <div className="flex justify-center mb-2">
-                    <CoinIcon className="w-6 h-6 text-emerald-500" />
-                    <CoinIcon className="w-6 h-6 text-emerald-500 -ml-2" />
-                    <CoinIcon className="w-6 h-6 text-emerald-500 -ml-2" />
+                    {/* Lent out */}
+                    <motion.div
+                      className="h-8 bg-zinc-800 border border-zinc-700 rounded flex items-center justify-center px-2"
+                      style={{ width: `${(round.lent / INITIAL_DEPOSIT) * 100}%` }}
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: 1 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      <span className="text-zinc-400 font-mono text-[10px]">
+                        {Math.round(round.lent)} lent →
+                      </span>
+                    </motion.div>
                   </div>
-                  <p className="text-zinc-500 font-mono text-[10px] uppercase">Total "Balances"</p>
-                  <p className="text-emerald-500 font-mono text-2xl font-bold">{FINAL_DEPOSITS}</p>
-                </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Running totals */}
+            <div className="flex justify-center gap-6 pt-4 border-t border-zinc-800">
+              <div className="text-center">
+                <p className="text-zinc-600 font-mono text-[10px] uppercase">Real Gold</p>
+                <p className="text-amber-500 font-mono text-xl font-bold">{INITIAL_DEPOSIT}</p>
+              </div>
+              <div className="w-px bg-zinc-800" />
+              <div className="text-center">
+                <p className="text-zinc-600 font-mono text-[10px] uppercase">Total Claims</p>
+                <motion.p
+                  key={currentData.totalClaims}
+                  className="text-emerald-400 font-mono text-xl font-bold"
+                  initial={{ scale: 1.2 }}
+                  animate={{ scale: 1 }}
+                >
+                  {Math.round(currentData.totalClaims)}
+                </motion.p>
+              </div>
+              <div className="w-px bg-zinc-800" />
+              <div className="text-center">
+                <p className="text-zinc-600 font-mono text-[10px] uppercase">In Vault</p>
+                <p className="text-zinc-400 font-mono text-xl font-bold">{Math.round(currentData.totalReserves)}</p>
+              </div>
+            </div>
+
+            {/* Progress dots */}
+            <div className="flex justify-center gap-1.5">
+              {ROUNDS.map((_, i) => (
+                <motion.div
+                  key={i}
+                  className={`w-2 h-2 rounded-full ${
+                    i < currentRound ? 'bg-amber-500' : 'bg-zinc-700'
+                  }`}
+                  animate={{ scale: i === currentRound - 1 ? 1.3 : 1 }}
+                />
+              ))}
+            </div>
+          </motion.div>
+        )}
+
+        {/* REVEAL */}
+        {phase === 'reveal' && (
+          <motion.div
+            key="reveal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="space-y-6"
+          >
+            {/* The problem visualized */}
+            <div className="flex items-center justify-center gap-4">
+              <div className="p-4 bg-zinc-900 border border-zinc-700 rounded-lg text-center">
+                <VaultIcon className="w-8 h-8 text-zinc-400 mx-auto mb-2" />
+                <p className="text-zinc-500 font-mono text-[10px] uppercase">In Vault</p>
+                <p className="text-zinc-300 font-mono text-2xl font-bold">{FINAL_RESERVES}</p>
               </div>
 
-              <p className="text-zinc-400 font-mono text-sm max-w-xs mx-auto">
-                The same 100 gold now backs {FINAL_DEPOSITS} in account balances.
-                Money was created from thin air.
+              <div className="text-zinc-600 font-mono text-lg">vs</div>
+
+              <div className="p-4 bg-zinc-900 border border-emerald-500/30 rounded-lg text-center">
+                <div className="flex justify-center mb-2">
+                  <CoinIcon className="w-6 h-6 text-emerald-400" />
+                  <CoinIcon className="w-6 h-6 text-emerald-400 -ml-2" />
+                  <CoinIcon className="w-6 h-6 text-emerald-400 -ml-2" />
+                </div>
+                <p className="text-zinc-500 font-mono text-[10px] uppercase">Total Owed</p>
+                <p className="text-emerald-400 font-mono text-2xl font-bold">{FINAL_CLAIMS}</p>
+              </div>
+            </div>
+
+            {/* Ratio visualization */}
+            <div className="max-w-sm mx-auto">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-zinc-500 font-mono text-xs">Coverage:</span>
+                <span className="text-red-400 font-mono text-xs font-medium">
+                  {Math.round((FINAL_RESERVES / FINAL_CLAIMS) * 100)}%
+                </span>
+              </div>
+              <div className="h-3 bg-zinc-800 rounded-full overflow-hidden">
+                <motion.div
+                  className="h-full bg-gradient-to-r from-red-500 to-amber-500 rounded-full"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${(FINAL_RESERVES / FINAL_CLAIMS) * 100}%` }}
+                  transition={{ duration: 0.8, ease: 'easeOut' }}
+                />
+              </div>
+              <p className="text-zinc-600 font-mono text-[10px] mt-2 text-center">
+                {FINAL_CLAIMS - FINAL_RESERVES} gold exists only as numbers in a ledger
+              </p>
+            </div>
+
+            <motion.button
+              onClick={handleWithdraw}
+              className="flex items-center gap-2 bg-amber-500 text-zinc-900 font-mono text-sm font-medium px-6 py-3 rounded hover:bg-amber-400 transition-colors mx-auto"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              TRY TO WITHDRAW YOUR 100
+            </motion.button>
+          </motion.div>
+        )}
+
+        {/* BANK RUN */}
+        {phase === 'bankrun' && (
+          <motion.div
+            key="bankrun"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="space-y-6"
+          >
+            <div className="p-6 bg-zinc-900 border border-red-500/30 rounded-lg max-w-sm mx-auto text-center">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: 'spring', damping: 10 }}
+              >
+                <AlertTriangle className="w-12 h-12 text-red-400 mx-auto mb-4" />
+              </motion.div>
+
+              <p className="text-white font-mono text-sm mb-4">
+                "I'd like my 100 gold back, please."
               </p>
 
-              <motion.button
-                onClick={handleWithdraw}
-                className="flex items-center gap-2 bg-amber-500 text-zinc-900 font-mono text-sm font-medium px-6 py-3 rounded hover:bg-amber-400 transition-colors mx-auto"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                TRY TO WITHDRAW
-              </motion.button>
-            </motion.div>
-          )}
-
-          {/* PHASE 4: Bank Run */}
-          {phase === 'bankrun' && (
-            <motion.div
-              key="bankrun"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-center space-y-6"
-            >
-              <div className="p-6 bg-zinc-900 border border-red-500/30 rounded-lg max-w-sm mx-auto">
-                <AlertTriangle className="w-10 h-10 text-red-400 mx-auto mb-4" />
-                <p className="text-white font-mono text-sm mb-3">
-                  "I'd like my 100 gold back."
-                </p>
-                <div className="p-3 bg-zinc-800 rounded-lg">
-                  <p className="text-zinc-400 font-mono text-sm">
-                    Bank: "We only have <span className="text-red-400 font-bold">{FINAL_RESERVES}</span> in the vault right now.
-                    Come back next week?"
-                  </p>
-                </div>
-              </div>
-
-              <motion.p
+              <motion.div
+                className="p-3 bg-zinc-800/50 rounded-lg"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 1 }}
-                className="text-zinc-500 font-mono text-xs"
+                transition={{ delay: 0.5 }}
               >
-                This is fractional reserve banking.
-              </motion.p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+                <p className="text-zinc-400 font-mono text-sm">
+                  Bank: "We only have{' '}
+                  <span className="text-red-400 font-bold">{FINAL_RESERVES}</span>{' '}
+                  in the vault right now."
+                </p>
+                <p className="text-zinc-500 font-mono text-xs mt-2">
+                  "The rest is... out on loan."
+                </p>
+              </motion.div>
+            </div>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2 }}
+              className="text-center text-zinc-500 font-mono text-xs"
+            >
+              This is fractional reserve banking.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.8 }}
+              className="text-center text-zinc-600 font-mono text-[10px] max-w-xs mx-auto"
+            >
+              It works—until everyone wants their money at once.
+            </motion.p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }

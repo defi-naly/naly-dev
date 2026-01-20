@@ -6,7 +6,10 @@
       "WebFetch(domain:moneyverse.substack.com)",
       "Bash(git push)",
       "Bash(curl:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(npx tsc:*)",
+      "Bash(timeout 10 npm run dev:*)",
+      "Bash(find:*)"
     ]
   }
 }

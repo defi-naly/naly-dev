@@ -185,10 +185,10 @@ function TheLineCard() {
       </div>
 
       {/* Full chart */}
-      <div className="flex-1 w-full">
+      <div className="flex-1 w-full flex items-center">
         <svg
-          viewBox="0 0 800 200"
-          className="w-full h-full"
+          viewBox="0 30 800 160"
+          className="w-full h-auto"
           preserveAspectRatio="xMidYMid meet"
         >
           {/* Background grid */}
