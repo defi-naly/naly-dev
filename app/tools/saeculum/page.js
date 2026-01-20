@@ -32,7 +32,7 @@ export default function SaeculumPage() {
             </h1>
 
             {/* About this tool */}
-            <div className="bg-neutral-900/50 border border-neutral-800 rounded-lg p-4 max-w-2xl">
+            <div className="bg-neutral-900/50 border border-neutral-800 rounded-lg p-4">
               <h2 className="text-xs font-mono text-neutral-500 uppercase tracking-wider mb-2">About this tool</h2>
               <p className="text-neutral-400 text-sm leading-relaxed">
                 Based on Strauss-Howe generational theory, this visualization tracks the ~80-year cycle of

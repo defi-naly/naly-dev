@@ -38,12 +38,12 @@ export default function TruValuePage() {
             </h1>
 
             {/* About this tool */}
-            <div className="bg-neutral-900/50 border border-neutral-800 rounded-lg p-4 max-w-2xl">
+            <div className="bg-neutral-900/50 border border-neutral-800 rounded-lg p-4">
               <h2 className="text-xs font-mono text-neutral-500 uppercase tracking-wider mb-2">About this tool</h2>
               <p className="text-neutral-400 text-sm leading-relaxed">
-                See assets in their true value. Prices are adjusted for M2 money supply expansion—showing what
-                things actually cost in real purchasing power. Since 1971, the money supply has grown 31x.
-                That $100 bill? Worth about $17 in real terms.
+                See assets in their true value. Prices are measured against inflation, gold, and house prices
+                to reveal how much an asset is really worth. Strip away the noise of currency debasement
+                and see what things actually cost in real purchasing power.
               </p>
             </div>
           </div>

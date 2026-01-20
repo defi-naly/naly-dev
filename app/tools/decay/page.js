@@ -26,7 +26,7 @@ export default function DecayPage() {
             </h1>
 
             {/* About this tool */}
-            <div className="bg-neutral-900/50 border border-neutral-800 rounded-lg p-4 max-w-2xl">
+            <div className="bg-neutral-900/50 border border-neutral-800 rounded-lg p-4">
               <h2 className="text-xs font-mono text-neutral-500 uppercase tracking-wider mb-2">About this tool</h2>
               <p className="text-neutral-400 text-sm leading-relaxed">
                 Enter your birth year and watch $100 decay in real-time. See how purchasing power erodes
