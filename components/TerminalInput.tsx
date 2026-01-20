@@ -21,6 +21,7 @@ const COMMANDS: Command[] = [
   { name: 'saeculum', path: '/tools/saeculum', description: 'Cycle analysis' },
   { name: 'echo', path: '/tools/echo', description: 'Pattern finder' },
   { name: 'the-line', path: '/tools/the-line', description: 'SPX/GOLD regime' },
+  { name: 'the-fork', path: '/tools/the-fork', description: 'Debt crisis options' },
 ];
 
 interface TerminalInputProps {

@@ -110,6 +110,19 @@ export const tools = [
       value: '6',
     },
   },
+  {
+    id: 'the-fork',
+    title: 'The Fork',
+    description: 'Governments in debt crises have two options: Print or Restructure. See the historical impact on assets.',
+    category: 'Dashboard',
+    status: 'live',
+    href: '/tools/the-fork',
+    tags: ['History', 'Debt', 'Assets'],
+    metrics: {
+      label: 'Scenarios',
+      value: '4',
+    },
+  },
 ];
 
 export const siteConfig = {
