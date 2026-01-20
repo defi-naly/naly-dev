@@ -8,6 +8,8 @@ import TitleScreen from '@/components/learn/TitleScreen';
 import ChapterWrapper from '@/components/learn/ChapterWrapper';
 import EndScreen from '@/components/learn/EndScreen';
 import PlaceholderChapter from '@/components/learn/chapters/PlaceholderChapter';
+import BarterGame from '@/components/learn/chapters/BarterGame';
+import GoldComparison from '@/components/learn/chapters/GoldComparison';
 import { chapters, TOTAL_CHAPTERS, getChapter } from '@/data/chapters';
 
 type GameState = 'title' | 'playing' | 'end';
@@ -62,13 +64,14 @@ export default function GamePage() {
   const renderChapterContent = () => {
     if (!chapter) return null;
 
-    // For now, all chapters use PlaceholderChapter
-    // Will be replaced with actual components in Sprint 2-4
     switch (chapter.tool) {
+      case 'barter':
+        return <BarterGame onComplete={handleChapterComplete} />;
+      case 'gold-comparison':
+        return <GoldComparison onComplete={handleChapterComplete} />;
       case 'truvalue':
       case 'decay':
       case 'scoreboard':
-        // These exist but need integration
         return (
           <PlaceholderChapter
             chapter={chapter}
