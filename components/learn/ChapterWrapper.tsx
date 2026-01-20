@@ -69,7 +69,7 @@ export default function ChapterWrapper({
         <span className="text-amber-500 font-mono text-xs uppercase tracking-wider">
           Chapter {chapter.id}
         </span>
-        <h2 className="text-2xl font-mono font-medium text-white mt-2">
+        <h2 className="text-xl sm:text-2xl font-mono font-medium text-white mt-2">
           {chapter.title}
         </h2>
         <p className="text-neutral-400 font-mono text-sm mt-4 max-w-xl leading-relaxed">

@@ -1,7 +1,8 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Check, ArrowRight } from 'lucide-react';
+import { Check, ArrowRight, Share2, Link2, Twitter } from 'lucide-react';
 import Link from 'next/link';
 
 interface EndScreenProps {
@@ -33,7 +34,36 @@ const summaryItems = [
   'Scarce assets outpace cash over time',
 ];
 
+const SHARE_URL = 'https://naly.dev/learn/game';
+const SHARE_TEXT = 'Just finished The Money Game - 8 chapters on how money really works. Worth the 20 minutes.';
+
 export default function EndScreen({ onRestart }: EndScreenProps) {
+  const [copied, setCopied] = useState(false);
+  const [showShareMenu, setShowShareMenu] = useState(false);
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(SHARE_URL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Fallback for older browsers
+      const textarea = document.createElement('textarea');
+      textarea.value = SHARE_URL;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  const handleShareTwitter = () => {
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(SHARE_TEXT)}&url=${encodeURIComponent(SHARE_URL)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <motion.div
       variants={containerVariants}
@@ -84,7 +114,7 @@ export default function EndScreen({ onRestart }: EndScreenProps) {
         </ul>
       </motion.div>
 
-      {/* Buttons */}
+      {/* Action Buttons */}
       <motion.div
         variants={itemVariants}
         className="mt-8 flex flex-col sm:flex-row gap-3"
@@ -109,13 +139,52 @@ export default function EndScreen({ onRestart }: EndScreenProps) {
         </motion.button>
       </motion.div>
 
-      {/* Share Link (placeholder for Sprint 4) */}
-      <motion.p
+      {/* Share Section */}
+      <motion.div
         variants={itemVariants}
-        className="mt-6 text-neutral-600 font-mono text-xs cursor-not-allowed"
+        className="mt-8 relative"
       >
-        Share what you learned →
-      </motion.p>
+        <motion.button
+          onClick={() => setShowShareMenu(!showShareMenu)}
+          className="flex items-center gap-2 text-neutral-500 hover:text-amber-500 font-mono text-xs transition-colors"
+          whileHover={{ scale: 1.02 }}
+        >
+          <Share2 className="w-4 h-4" />
+          Share what you learned
+        </motion.button>
+
+        {/* Share Menu */}
+        {showShareMenu && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 p-2 bg-neutral-900 border border-neutral-800 rounded-lg flex gap-2"
+          >
+            <motion.button
+              onClick={handleShareTwitter}
+              className="p-2 bg-neutral-800 hover:bg-neutral-700 rounded transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              title="Share on X"
+            >
+              <Twitter className="w-4 h-4 text-neutral-300" />
+            </motion.button>
+            <motion.button
+              onClick={handleCopyLink}
+              className="p-2 bg-neutral-800 hover:bg-neutral-700 rounded transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              title="Copy link"
+            >
+              {copied ? (
+                <Check className="w-4 h-4 text-emerald-500" />
+              ) : (
+                <Link2 className="w-4 h-4 text-neutral-300" />
+              )}
+            </motion.button>
+          </motion.div>
+        )}
+      </motion.div>
     </motion.div>
   );
 }

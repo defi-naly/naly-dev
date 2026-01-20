@@ -104,8 +104,8 @@ export default function GoldComparison({ onComplete }: GoldComparisonProps) {
       </div>
 
       {/* Comparison Table */}
-      <div className="overflow-x-auto">
-        <table className="w-full font-mono text-sm">
+      <div className="overflow-x-auto -mx-4 px-4">
+        <table className="w-full font-mono text-xs sm:text-sm min-w-[400px]">
           <thead>
             <tr className="border-b border-neutral-800">
               <th className="p-3 text-left text-neutral-500 font-normal">Property</th>
