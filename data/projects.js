@@ -57,10 +57,6 @@ export const tools = [
       label: 'Data Points',
       value: '10K+',
     },
-    chapterPairing: {
-      chapter: 8,
-      title: 'The Scoreboard',
-    },
   },
   {
     id: 'saeculum',
@@ -86,10 +82,6 @@ export const tools = [
     metrics: {
       label: 'Years of Data',
       value: '50+',
-    },
-    chapterPairing: {
-      chapter: 6,
-      title: 'Inflation',
     },
   },
   {

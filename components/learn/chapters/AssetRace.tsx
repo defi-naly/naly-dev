@@ -2,37 +2,71 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, ExternalLink, Trophy } from 'lucide-react';
+import { Play, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
+import { TrophyIcon, ChartUpIcon, HouseIcon, GoldBarIcon, DollarIcon } from '@/components/icons/GameIcons';
 
 interface AssetRaceProps {
   onComplete: () => void;
 }
 
-// Asset performance data (inflation-adjusted, 1974 = 100)
-// Sources: S&P 500, Case-Shiller, Gold prices, CPI
 interface Asset {
+  id: string;
   name: string;
   color: string;
-  finalValue: number;
-  emoji: string;
+  bgColor: string;
+  startValue: number;
+  endValue: number;
+  icon: React.ReactNode;
 }
 
 const ASSETS: Asset[] = [
-  { name: 'S&P 500', color: 'emerald', finalValue: 340, emoji: '📈' },
-  { name: 'Housing', color: 'blue', finalValue: 180, emoji: '🏠' },
-  { name: 'Gold', color: 'amber', finalValue: 100, emoji: '🥇' },
-  { name: 'Cash', color: 'red', finalValue: 18, emoji: '💵' },
+  {
+    id: 'sp500',
+    name: 'S&P 500',
+    color: '#10b981',
+    bgColor: 'bg-emerald-500/10',
+    startValue: 100,
+    endValue: 2100,
+    icon: <ChartUpIcon className="w-4 h-4" />,
+  },
+  {
+    id: 'gold',
+    name: 'Gold',
+    color: '#f59e0b',
+    bgColor: 'bg-amber-500/10',
+    startValue: 100,
+    endValue: 890,
+    icon: <GoldBarIcon className="w-4 h-4" />,
+  },
+  {
+    id: 'housing',
+    name: 'Housing',
+    color: '#3b82f6',
+    bgColor: 'bg-blue-500/10',
+    startValue: 100,
+    endValue: 650,
+    icon: <HouseIcon className="w-4 h-4" />,
+  },
+  {
+    id: 'cash',
+    name: 'Cash',
+    color: '#ef4444',
+    bgColor: 'bg-red-500/10',
+    startValue: 100,
+    endValue: 18,
+    icon: <DollarIcon className="w-4 h-4" />,
+  },
 ];
 
 const START_YEAR = 1974;
 const END_YEAR = 2024;
-const ANIMATION_DURATION = 6000;
+const ANIMATION_DURATION = 10000;
 
-type Phase = 'setup' | 'racing' | 'reveal';
+type Phase = 'intro' | 'racing' | 'complete';
 
 export default function AssetRace({ onComplete }: AssetRaceProps) {
-  const [phase, setPhase] = useState<Phase>('setup');
+  const [phase, setPhase] = useState<Phase>('intro');
   const [currentYear, setCurrentYear] = useState(START_YEAR);
   const [progress, setProgress] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
@@ -41,7 +75,6 @@ export default function AssetRace({ onComplete }: AssetRaceProps) {
     setPhase('racing');
   };
 
-  // Animate the race
   useEffect(() => {
     if (phase !== 'racing') return;
 
@@ -51,8 +84,7 @@ export default function AssetRace({ onComplete }: AssetRaceProps) {
       const elapsed = Date.now() - startTime;
       const rawProgress = Math.min(elapsed / ANIMATION_DURATION, 1);
 
-      // Eased progress
-      const easedProgress = 1 - Math.pow(1 - rawProgress, 3);
+      const easedProgress = 1 - Math.pow(1 - rawProgress, 2);
 
       setProgress(easedProgress);
       setCurrentYear(Math.floor(START_YEAR + (END_YEAR - START_YEAR) * easedProgress));
@@ -60,16 +92,15 @@ export default function AssetRace({ onComplete }: AssetRaceProps) {
       if (rawProgress < 1) {
         requestAnimationFrame(animate);
       } else {
-        setPhase('reveal');
+        setPhase('complete');
       }
     };
 
     requestAnimationFrame(animate);
   }, [phase]);
 
-  // Complete chapter after reveal
   useEffect(() => {
-    if (phase === 'reveal' && !isComplete) {
+    if (phase === 'complete' && !isComplete) {
       const timer = setTimeout(() => {
         setIsComplete(true);
         onComplete();
@@ -78,16 +109,13 @@ export default function AssetRace({ onComplete }: AssetRaceProps) {
     }
   }, [phase, isComplete, onComplete]);
 
-  // Calculate current value for each asset (exponential interpolation)
   const getCurrentValue = (asset: Asset): number => {
-    const startValue = 100;
-    const endValue = asset.finalValue;
-    // Use exponential interpolation for more realistic growth curves
+    const startValue = asset.startValue;
+    const endValue = asset.endValue;
     return startValue * Math.pow(endValue / startValue, progress);
   };
 
-  // Find max value for scaling
-  const maxValue = Math.max(...ASSETS.map(a => getCurrentValue(a)));
+  const maxValue = Math.max(...ASSETS.map(a => a.endValue));
 
   return (
     <motion.div
@@ -95,33 +123,42 @@ export default function AssetRace({ onComplete }: AssetRaceProps) {
       animate={{ opacity: 1, y: 0 }}
       className="flex flex-col h-[450px]"
     >
-      {/* Header */}
-      <div className="text-center mb-4">
-        <p className="text-neutral-500 font-mono text-xs uppercase tracking-wider">
-          Assets vs Cash (Inflation-Adjusted, 1974 = 100)
-        </p>
-      </div>
-
-      {/* Main Content */}
       <div className="flex-1 flex flex-col justify-center">
         <AnimatePresence mode="wait">
-          {/* PHASE 1: Setup */}
-          {phase === 'setup' && (
+          {phase === 'intro' && (
             <motion.div
-              key="setup"
+              key="intro"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="text-center space-y-6"
             >
-              <div className="p-6 bg-neutral-900 border border-neutral-800 rounded-lg">
-                <Trophy className="w-12 h-12 text-amber-500 mx-auto mb-4" />
-                <p className="text-neutral-300 font-mono text-sm">
-                  So what wins long-term?
+              <div>
+                <h3 className="text-lg text-zinc-100 font-mono">
+                  Let's race $100 across 50 years.
+                </h3>
+                <p className="text-zinc-500 font-mono text-sm mt-2">
+                  Same starting amount. Different stores of value.
                 </p>
-                <p className="text-neutral-500 font-mono text-sm mt-2">
-                  Let's race 50 years of data. Not in dollars. In real terms.
+              </div>
+
+              <div className="bg-zinc-900 border border-zinc-700 rounded-lg p-5 text-left max-w-sm mx-auto">
+                <p className="font-mono text-xs text-zinc-500 uppercase tracking-wider mb-4">
+                  $100 in 1974 invested in:
                 </p>
+                <div className="space-y-3">
+                  {ASSETS.map((asset) => (
+                    <div key={asset.id} className="flex items-center gap-3">
+                      <div
+                        className="w-4 h-1 rounded-full"
+                        style={{ backgroundColor: asset.color }}
+                      />
+                      <span className="font-mono text-sm text-zinc-300">
+                        {asset.name}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <motion.button
@@ -131,60 +168,61 @@ export default function AssetRace({ onComplete }: AssetRaceProps) {
                 whileTap={{ scale: 0.98 }}
               >
                 <Play className="w-4 h-4" />
-                START RACE
+                START THE RACE
               </motion.button>
             </motion.div>
           )}
 
-          {/* PHASE 2 & 3: Racing and Reveal */}
-          {(phase === 'racing' || phase === 'reveal') && (
+          {(phase === 'racing' || phase === 'complete') && (
             <motion.div
               key="race"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="space-y-4"
             >
-              {/* Year Display */}
               <div className="text-center">
+                <span className="font-mono text-xs text-zinc-500">
+                  $100 in 1974 → Today (Inflation-Adjusted)
+                </span>
+              </div>
+
+              <div className="text-center mb-2">
                 <span className="text-amber-500 font-mono text-2xl font-bold">
                   {currentYear}
                 </span>
               </div>
 
-              {/* Race Bars */}
-              <div className="p-4 bg-neutral-900 border border-neutral-800 rounded-lg space-y-3">
+              <div className="p-4 bg-zinc-900 border border-zinc-800 rounded-lg space-y-3">
                 {ASSETS.map((asset) => {
                   const currentValue = getCurrentValue(asset);
                   const barWidth = (currentValue / maxValue) * 100;
-                  const isWinner = phase === 'reveal' && asset.finalValue === Math.max(...ASSETS.map(a => a.finalValue));
-                  const isLoser = phase === 'reveal' && asset.finalValue === Math.min(...ASSETS.map(a => a.finalValue));
+                  const isWinner = phase === 'complete' && asset.id === 'sp500';
+                  const isLoser = phase === 'complete' && asset.id === 'cash';
 
                   return (
-                    <div key={asset.name} className="space-y-1">
+                    <div key={asset.id} className="space-y-1">
                       <div className="flex justify-between items-center">
-                        <span className="text-neutral-400 font-mono text-xs flex items-center gap-2">
-                          <span>{asset.emoji}</span>
+                        <span className="text-zinc-400 font-mono text-xs flex items-center gap-2">
+                          <span style={{ color: asset.color }}>{asset.icon}</span>
                           {asset.name}
-                          {isWinner && <Trophy className="w-3 h-3 text-amber-500" />}
+                          {isWinner && (
+                            <TrophyIcon className="w-3 h-3 text-amber-500" />
+                          )}
                         </span>
-                        <span className={`font-mono text-xs font-bold ${
-                          asset.color === 'emerald' ? 'text-emerald-500' :
-                          asset.color === 'blue' ? 'text-blue-400' :
-                          asset.color === 'amber' ? 'text-amber-500' :
-                          'text-red-400'
-                        }`}>
-                          {Math.round(currentValue)}
+                        <span
+                          className="font-mono text-xs font-bold"
+                          style={{ color: asset.color }}
+                        >
+                          ${Math.round(currentValue).toLocaleString()}
                         </span>
                       </div>
-                      <div className="h-6 bg-neutral-800 rounded overflow-hidden">
+                      <div className="h-5 bg-zinc-800 rounded overflow-hidden">
                         <motion.div
-                          className={`h-full rounded flex items-center justify-end pr-2 ${
-                            asset.color === 'emerald' ? 'bg-emerald-500' :
-                            asset.color === 'blue' ? 'bg-blue-500' :
-                            asset.color === 'amber' ? 'bg-amber-500' :
-                            'bg-red-500'
-                          } ${isLoser ? 'opacity-50' : ''}`}
-                          style={{ width: `${Math.max(barWidth, 5)}%` }}
+                          className={`h-full rounded ${isLoser ? 'opacity-50' : ''}`}
+                          style={{
+                            backgroundColor: asset.color,
+                            width: `${Math.max(barWidth, 2)}%`,
+                          }}
                           transition={{ duration: 0.1 }}
                         />
                       </div>
@@ -193,20 +231,18 @@ export default function AssetRace({ onComplete }: AssetRaceProps) {
                 })}
               </div>
 
-              {/* Progress bar */}
               <div className="flex items-center gap-2">
-                <span className="text-neutral-600 font-mono text-xs">{START_YEAR}</span>
-                <div className="flex-1 h-1 bg-neutral-800 rounded overflow-hidden">
+                <span className="text-zinc-600 font-mono text-xs">{START_YEAR}</span>
+                <div className="flex-1 h-1 bg-zinc-800 rounded overflow-hidden">
                   <motion.div
-                    className="h-full bg-amber-500"
+                    className="h-full bg-zinc-600"
                     style={{ width: `${progress * 100}%` }}
                   />
                 </div>
-                <span className="text-neutral-600 font-mono text-xs">{END_YEAR}</span>
+                <span className="text-zinc-600 font-mono text-xs">{END_YEAR}</span>
               </div>
 
-              {/* Reveal Stats */}
-              {phase === 'reveal' && (
+              {phase === 'complete' && (
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -214,10 +250,10 @@ export default function AssetRace({ onComplete }: AssetRaceProps) {
                 >
                   <div className="p-4 bg-amber-500/10 border border-amber-500/30 rounded-lg text-center">
                     <p className="text-amber-500 font-mono text-sm font-medium">
-                      S&P 500: 340. Cash: 18.
+                      S&P 500: $2,100. Cash: $18.
                     </p>
                     <p className="text-neutral-400 font-mono text-xs mt-2">
-                      Cash lost 82% of its purchasing power. The rich don't hold cash. Now you know why.
+                      Cash lost 82% of its purchasing power. The rich don't hold cash.
                     </p>
                   </div>
 
