@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
-import TerminalNav from './TerminalNav';
+import { Terminal } from 'lucide-react';
 
 const navItems = [
   { label: 'Home', href: '/home' },
@@ -20,8 +20,14 @@ export default function Header() {
       <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
           {/* Logo */}
-          <Link href="/home" className="font-mono text-sm text-white hover:text-amber-500 transition-colors">
-            naly.dev
+          <Link
+            href="/home"
+            className="flex items-center gap-2 text-white hover:text-terminal-accent transition-colors"
+          >
+            <Terminal className="w-5 h-5" />
+            <span className="font-mono text-sm font-medium tracking-tight">
+              naly<span className="text-terminal-accent">.dev</span>
+            </span>
           </Link>
 
           {/* Navigation */}
@@ -53,8 +59,6 @@ export default function Header() {
             })}
           </ul>
 
-          {/* Terminal Navigation */}
-          <TerminalNav />
         </div>
       </nav>
     </header>

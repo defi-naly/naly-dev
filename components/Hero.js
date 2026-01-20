@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import TerminalInput from './TerminalInput';
 
 export default function Hero() {
   return (
@@ -10,12 +11,9 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
-        {/* Terminal-style prefix */}
-        <div className="flex items-center gap-2 mb-6">
-          <span className="font-mono text-sm text-terminal-accent">~/naly</span>
-          <span className="font-mono text-sm text-neutral-500">$</span>
-          <span className="font-mono text-sm text-neutral-400">cat README.md</span>
-          <span className="w-2 h-4 bg-terminal-accent animate-blink" />
+        {/* Interactive terminal input */}
+        <div className="mb-6">
+          <TerminalInput placeholder="cat README.md" size="sm" />
         </div>
 
         {/* Main headline */}

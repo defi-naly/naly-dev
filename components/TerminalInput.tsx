@@ -20,19 +20,23 @@ const COMMANDS: Command[] = [
   { name: 'decay', path: '/tools/decay', description: 'Purchasing power' },
   { name: 'saeculum', path: '/tools/saeculum', description: 'Cycle analysis' },
   { name: 'echo', path: '/tools/echo', description: 'Pattern finder' },
+  { name: 'the-line', path: '/tools/the-line', description: 'SPX/GOLD regime' },
 ];
 
 interface TerminalInputProps {
   autoFocus?: boolean;
   placeholder?: string;
   className?: string;
+  size?: 'sm' | 'lg';
 }
 
 export default function TerminalInput({
   autoFocus = false,
   placeholder = '',
-  className = ''
+  className = '',
+  size = 'lg'
 }: TerminalInputProps) {
+  const textSize = size === 'sm' ? 'text-sm' : 'text-lg';
   const router = useRouter();
   const [input, setInput] = useState('');
   const [isFocused, setIsFocused] = useState(false);
@@ -133,8 +137,8 @@ export default function TerminalInput({
         className="flex items-center gap-2 cursor-text"
         onClick={() => inputRef.current?.focus()}
       >
-        <span className="font-mono text-lg text-emerald-500">~/naly</span>
-        <span className="font-mono text-lg text-zinc-500">$</span>
+        <span className={`font-mono ${textSize} text-emerald-500`}>~/naly</span>
+        <span className={`font-mono ${textSize} text-zinc-500`}>$</span>
         <div className="relative flex items-center">
           <input
             ref={inputRef}
@@ -152,12 +156,12 @@ export default function TerminalInput({
             }}
             onKeyDown={handleKeyDown}
             placeholder={placeholder}
-            className="bg-transparent font-mono text-lg text-zinc-100 outline-none w-48 placeholder-zinc-700"
+            className={`bg-transparent font-mono ${textSize} text-zinc-100 outline-none w-48 placeholder-zinc-700`}
             aria-label="Terminal navigation"
           />
           {/* Cursor */}
           <span
-            className={`font-mono text-lg select-none ${
+            className={`font-mono ${textSize} select-none ${
               isFocused ? 'text-amber-500 animate-pulse' : 'text-zinc-600'
             }`}
           >

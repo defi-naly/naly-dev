@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Clock, TrendingDown, Radio } from 'lucide-react';
+import { ArrowUpRight, Clock, TrendingDown, Radio, TrendingUp } from 'lucide-react';
 
 const statusColors = {
   live: 'bg-terminal-accent/10 text-terminal-accent border-terminal-accent/20',
@@ -128,6 +128,62 @@ function DecayPreview() {
   );
 }
 
+// The Line Preview - SPX/GOLD regime indicator
+function TheLinePreview() {
+  return (
+    <div className="relative h-48 overflow-hidden bg-neutral-950 rounded-t-lg">
+      <svg className="absolute inset-0 w-full h-full p-6" viewBox="0 0 400 160" preserveAspectRatio="xMidYMid meet">
+        {/* Grid */}
+        <line x1="40" y1="20" x2="40" y2="140" stroke="#262626" strokeWidth="1" />
+        <line x1="40" y1="140" x2="380" y2="140" stroke="#262626" strokeWidth="1" />
+
+        {/* Threshold line (THE LINE at 1.50) */}
+        <line x1="40" y1="70" x2="380" y2="70" stroke="#ef4444" strokeWidth="1.5" strokeDasharray="5,5" />
+        <text x="375" y="65" fill="#ef4444" fontSize="8" fontFamily="monospace" textAnchor="end">1.50</text>
+
+        {/* Breach zones */}
+        <rect x="80" y="70" width="60" height="60" fill="#ef4444" opacity="0.1" />
+        <rect x="240" y="70" width="50" height="45" fill="#ef4444" opacity="0.1" />
+
+        {/* Gradient fill area */}
+        <defs>
+          <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#22c55e" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="#22c55e" stopOpacity="0" />
+          </linearGradient>
+          <filter id="glowLine">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        {/* Data line - SPX/GOLD ratio over time */}
+        <path
+          d="M50,50 Q70,55 90,90 T130,110 T170,80 T210,40 T250,85 T290,95 T330,60 T370,55"
+          fill="none"
+          stroke="#22c55e"
+          strokeWidth="2"
+          strokeLinecap="round"
+          filter="url(#glowLine)"
+        />
+
+        {/* Current point */}
+        <circle cx="370" cy="55" r="4" fill="#22c55e" filter="url(#glowLine)" />
+
+        {/* Year labels */}
+        <text x="50" y="155" fill="#525252" fontSize="8" fontFamily="monospace">1970</text>
+        <text x="210" y="155" fill="#525252" fontSize="8" fontFamily="monospace">1995</text>
+        <text x="360" y="155" fill="#525252" fontSize="8" fontFamily="monospace">2024</text>
+
+        {/* Breach labels */}
+        <text x="110" y="135" fill="#ef4444" fontSize="7" fontFamily="monospace" textAnchor="middle" opacity="0.7">1973</text>
+        <text x="265" y="120" fill="#ef4444" fontSize="7" fontFamily="monospace" textAnchor="middle" opacity="0.7">2008</text>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-terminal-surface via-transparent to-transparent" />
+    </div>
+  );
+}
+
 // Echo Preview - historical pattern matching visualization
 function EchoPreview() {
   return (
@@ -192,6 +248,7 @@ export default function ToolCard({ tool, index }) {
       <Link href={tool.href}>
         <article className="group relative h-full bg-terminal-surface border border-neutral-800 rounded-lg overflow-hidden transition-all duration-300 hover:border-neutral-600">
           {/* Visual Preview */}
+          {tool.id === 'the-line' && <TheLinePreview />}
           {tool.id === 'truvalue' && <TruValuePreview />}
           {tool.id === 'saeculum' && <SaeculumPreview />}
           {tool.id === 'decay' && <DecayPreview />}

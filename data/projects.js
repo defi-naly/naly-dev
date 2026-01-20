@@ -46,6 +46,19 @@ export const writing = [
 
 export const tools = [
   {
+    id: 'the-line',
+    title: 'The Line',
+    description: 'SPX/GOLD regime indicator. Tracks equity strength relative to hard money. Only 2 breaches in 50+ years.',
+    category: 'Dashboard',
+    status: 'live',
+    href: '/tools/the-line',
+    tags: ['Equities', 'Gold', 'Regime'],
+    metrics: {
+      label: 'Signal Accuracy',
+      value: '100%',
+    },
+  },
+  {
     id: 'truvalue',
     title: 'TruValue',
     description: 'See assets in their true value. Interactive visualization of inflation-adjusted economic data.',

@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, TrendingUp } from 'lucide-react';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -153,6 +153,95 @@ function EchoCard() {
   );
 }
 
+// The Line - SPX/GOLD Regime Indicator (full-width)
+function TheLineCard() {
+  return (
+    <BentoCard href="/tools/the-line" className="h-full p-5 bg-gradient-to-br from-terminal-surface via-neutral-900 to-terminal-surface overflow-hidden relative">
+      {/* LIVE Badge */}
+      <div className="absolute top-4 right-4">
+        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-mono bg-terminal-accent/20 text-terminal-accent rounded-full">
+          <span className="w-1 h-1 rounded-full bg-terminal-accent animate-pulse" />
+          LIVE
+        </span>
+      </div>
+
+      <div className="flex items-start justify-between h-full">
+        {/* Left side - Info */}
+        <div className="flex flex-col justify-between h-full max-w-[200px]">
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-8 h-8 rounded-lg bg-terminal-accent/10 border border-terminal-accent/30 flex items-center justify-center">
+                <TrendingUp className="w-4 h-4 text-terminal-accent" />
+              </div>
+              <h3 className="text-lg font-medium tracking-tight text-white group-hover:text-terminal-accent transition-colors">
+                The Line
+              </h3>
+            </div>
+            <p className="text-xs text-neutral-500 font-mono leading-relaxed">
+              SPX/GOLD regime indicator. Only 2 breaches in 50+ years.
+            </p>
+          </div>
+
+          {/* Status indicator */}
+          <div className="flex items-center gap-2 mt-3">
+            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-mono bg-terminal-accent/10 text-terminal-accent rounded">
+              ↗ ABOVE LINE
+            </span>
+            <span className="text-[10px] font-mono text-neutral-600">1.50 threshold</span>
+          </div>
+        </div>
+
+        {/* Right side - Mini sparkline visualization */}
+        <div className="flex-1 max-w-[280px] h-full flex items-center justify-end">
+          <svg
+            viewBox="0 0 200 60"
+            className="w-full h-[60px]"
+            preserveAspectRatio="none"
+          >
+            {/* Grid lines */}
+            <line x1="0" y1="30" x2="200" y2="30" stroke="#262626" strokeWidth="0.5" strokeDasharray="2 2" />
+
+            {/* Threshold line */}
+            <line x1="0" y1="35" x2="200" y2="35" stroke="#ef4444" strokeWidth="1" strokeDasharray="4 4" opacity="0.6" />
+
+            {/* Breach zone 1 (1973-1983) */}
+            <rect x="20" y="35" width="30" height="20" fill="#ef4444" opacity="0.1" />
+
+            {/* Breach zone 2 (2008-2013) */}
+            <rect x="120" y="35" width="25" height="15" fill="#ef4444" opacity="0.1" />
+
+            {/* Gradient definition */}
+            <defs>
+              <linearGradient id="lineGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#22c55e" stopOpacity="0.3" />
+                <stop offset="100%" stopColor="#22c55e" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+
+            {/* Area fill */}
+            <path
+              d="M0,20 Q10,18 20,25 T40,50 T60,48 T80,30 T100,15 T120,25 T140,45 T160,30 T180,25 T200,22 L200,60 L0,60 Z"
+              fill="url(#lineGradient)"
+            />
+
+            {/* Main line - represents SPX/GOLD ratio over time */}
+            <path
+              d="M0,20 Q10,18 20,25 T40,50 T60,48 T80,30 T100,15 T120,25 T140,45 T160,30 T180,25 T200,22"
+              fill="none"
+              stroke="#22c55e"
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+
+            {/* Current point */}
+            <circle cx="200" cy="22" r="3" fill="#22c55e" />
+          </svg>
+        </div>
+      </div>
+    </BentoCard>
+  );
+}
+
 // Compact writing card
 function WritingCard({ title, href, tag }) {
   return (
@@ -221,6 +310,11 @@ export default function BentoGrid() {
       animate="visible"
       className="grid grid-cols-4 lg:grid-cols-6 gap-3 auto-rows-[140px]"
     >
+      {/* The Line - Full width featured (6x1) */}
+      <motion.div variants={itemVariants} className="col-span-4 lg:col-span-6 row-span-1">
+        <TheLineCard />
+      </motion.div>
+
       {/* TruValue - Large hero (3x2) */}
       <motion.div variants={itemVariants} className="col-span-4 lg:col-span-3 row-span-3">
         <TruValueCard />
