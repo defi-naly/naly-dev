@@ -185,18 +185,21 @@ export default function TheLinePage() {
                 <span className="w-1 h-1 rounded-full bg-terminal-accent animate-pulse" />
                 LIVE
               </span>
-              <span className="text-xs font-mono text-neutral-500">Dashboard</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl font-medium tracking-tight text-white mb-4">
               The Line
             </h1>
-            <p className="text-neutral-400 max-w-2xl font-mono text-sm">
-              ~/the-line $ check --regime
-            </p>
-            <p className="text-neutral-500 max-w-2xl mt-2">
-              SPX/GOLD regime indicator. Tracks equity strength relative to hard money.
-            </p>
+
+            {/* About this tool */}
+            <div className="bg-neutral-900/50 border border-neutral-800 rounded-lg p-4 max-w-2xl">
+              <h2 className="text-xs font-mono text-neutral-500 uppercase tracking-wider mb-2">About this tool</h2>
+              <p className="text-neutral-400 text-sm leading-relaxed">
+                The SPX/GOLD ratio measures equity strength relative to hard money. When the ratio drops below 1.50,
+                it signals a regime shift—historically preceding major market corrections. Only 2 breaches in 50+ years,
+                both followed by significant drawdowns.
+              </p>
+            </div>
           </div>
 
           {/* Controls Bar */}

@@ -31,15 +31,21 @@ export default function TruValuePage() {
                 <span className="w-1 h-1 rounded-full bg-terminal-accent animate-pulse" />
                 LIVE
               </span>
-              <span className="text-xs font-mono text-neutral-500">Dashboard</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl font-medium tracking-tight text-white mb-4">
+            <h1 className="text-3xl sm:text-4xl font-medium tracking-tight text-white mb-6">
               TruValue
             </h1>
-            <p className="text-neutral-400 max-w-2xl">
-              See assets in their true value. Interactive visualization of inflation-adjusted economic data.
-            </p>
+
+            {/* About this tool */}
+            <div className="bg-neutral-900/50 border border-neutral-800 rounded-lg p-4 max-w-2xl">
+              <h2 className="text-xs font-mono text-neutral-500 uppercase tracking-wider mb-2">About this tool</h2>
+              <p className="text-neutral-400 text-sm leading-relaxed">
+                See assets in their true value. Prices are adjusted for M2 money supply expansion—showing what
+                things actually cost in real purchasing power. Since 1971, the money supply has grown 31x.
+                That $100 bill? Worth about $17 in real terms.
+              </p>
+            </div>
           </div>
 
           {/* Dashboard iframe */}

@@ -21,19 +21,19 @@ export default function DecayPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Page header */}
           <div className="mb-12">
-            <div className="flex items-center gap-2 mb-6">
-              <span className="font-mono text-sm text-terminal-accent">~/tools</span>
-              <span className="font-mono text-sm text-neutral-600">/</span>
-              <span className="font-mono text-sm text-neutral-400">decay</span>
-            </div>
-
-            <h1 className="text-4xl sm:text-5xl font-medium tracking-tight text-white mb-4">
+            <h1 className="text-4xl sm:text-5xl font-medium tracking-tight text-white mb-6">
               Decay
             </h1>
-            <p className="text-neutral-500 max-w-xl font-mono text-sm">
-              Enter your birth year. Visualize $100 purchasing power erosion
-              against gold, equities, housing, and energy.
-            </p>
+
+            {/* About this tool */}
+            <div className="bg-neutral-900/50 border border-neutral-800 rounded-lg p-4 max-w-2xl">
+              <h2 className="text-xs font-mono text-neutral-500 uppercase tracking-wider mb-2">About this tool</h2>
+              <p className="text-neutral-400 text-sm leading-relaxed">
+                Enter your birth year and watch $100 decay in real-time. See how purchasing power erodes
+                against gold, equities, housing, and energy over your lifetime. The dollar in your pocket
+                isn&apos;t the same dollar from 20 years ago.
+              </p>
+            </div>
           </div>
 
           {/* Time Machine Component */}
