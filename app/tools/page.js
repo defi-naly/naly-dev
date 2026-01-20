@@ -1,9 +1,11 @@
-'use client';
-
-import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
+
+export const metadata = {
+  title: 'Tools | naly.dev',
+  description: 'Interactive financial tools for understanding economic data and historical patterns.',
+};
 
 const tools = [
   { name: 'TruValue', slug: 'truvalue', description: 'inflation-adjusted', metric: '$100 → $17' },
@@ -13,46 +15,7 @@ const tools = [
   { name: 'Echo', slug: 'echo', description: 'historical rhymes', metric: 'Find yours' },
 ];
 
-const THRESHOLD = 1.5;
-
-function getStatus(ratio) {
-  if (ratio < THRESHOLD) return { label: 'CROSSED', color: 'red' };
-  if (ratio < THRESHOLD * 1.1) return { label: 'Near', color: 'amber' };
-  return { label: 'Safe', color: 'emerald' };
-}
-
-function getBarPosition(ratio) {
-  // Map ratio to position: 0 = 0%, 1.5 = 33%, 3.0 = 66%, 4.5+ = 100%
-  const minRatio = 0;
-  const maxRatio = 4.5;
-  const position = ((ratio - minRatio) / (maxRatio - minRatio)) * 100;
-  return Math.max(0, Math.min(100, position));
-}
-
 export default function ToolsPage() {
-  const [lineData, setLineData] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchLineData() {
-      try {
-        const response = await fetch('/api/the-line?range=1y');
-        if (response.ok) {
-          const data = await response.json();
-          setLineData(data);
-        }
-      } catch (error) {
-        console.error('Failed to fetch Line data:', error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchLineData();
-  }, []);
-
-  const ratio = lineData?.current?.ratio ?? null;
-  const status = ratio ? getStatus(ratio) : null;
-  const barPosition = ratio ? getBarPosition(ratio) : 38;
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -82,9 +45,7 @@ export default function ToolsPage() {
             {/* Metrics - Desktop */}
             <div className="hidden sm:flex items-end justify-between mb-6">
               <div>
-                <div className="text-4xl font-mono font-semibold text-zinc-100">
-                  {loading ? '—' : ratio?.toFixed(2) ?? '—'}
-                </div>
+                <div className="text-4xl font-mono font-semibold text-zinc-100">1.64</div>
                 <div className="text-xs text-zinc-500 mt-1">current ratio</div>
               </div>
               <div className="text-center">
@@ -93,18 +54,8 @@ export default function ToolsPage() {
               </div>
               <div className="text-right">
                 <div className="flex items-center gap-2 justify-end">
-                  <span className={`w-2 h-2 rounded-full ${
-                    status?.color === 'red' ? 'bg-red-500' :
-                    status?.color === 'amber' ? 'bg-amber-500' :
-                    status?.color === 'emerald' ? 'bg-emerald-500' : 'bg-zinc-500'
-                  }`} />
-                  <span className={`text-lg ${
-                    status?.color === 'red' ? 'text-red-500' :
-                    status?.color === 'amber' ? 'text-amber-500' :
-                    status?.color === 'emerald' ? 'text-emerald-500' : 'text-zinc-500'
-                  }`}>
-                    {loading ? '—' : status?.label ?? '—'}
-                  </span>
+                  <span className="w-2 h-2 rounded-full bg-amber-500" />
+                  <span className="text-lg text-amber-500">Near</span>
                 </div>
                 <div className="text-xs text-zinc-500 mt-1">status</div>
               </div>
@@ -114,25 +65,13 @@ export default function ToolsPage() {
             <div className="sm:hidden mb-6">
               <div className="flex items-end justify-between mb-4">
                 <div>
-                  <div className="text-3xl font-mono font-semibold text-zinc-100">
-                    {loading ? '—' : ratio?.toFixed(2) ?? '—'}
-                  </div>
+                  <div className="text-3xl font-mono font-semibold text-zinc-100">1.64</div>
                   <div className="text-xs text-zinc-500 mt-1">current ratio</div>
                 </div>
                 <div className="text-right">
                   <div className="flex items-center gap-2 justify-end">
-                    <span className={`w-2 h-2 rounded-full ${
-                      status?.color === 'red' ? 'bg-red-500' :
-                      status?.color === 'amber' ? 'bg-amber-500' :
-                      status?.color === 'emerald' ? 'bg-emerald-500' : 'bg-zinc-500'
-                    }`} />
-                    <span className={`text-lg ${
-                      status?.color === 'red' ? 'text-red-500' :
-                      status?.color === 'amber' ? 'text-amber-500' :
-                      status?.color === 'emerald' ? 'text-emerald-500' : 'text-zinc-500'
-                    }`}>
-                      {loading ? '—' : status?.label ?? '—'}
-                    </span>
+                    <span className="w-2 h-2 rounded-full bg-amber-500" />
+                    <span className="text-lg text-amber-500">Near</span>
                   </div>
                   <div className="text-xs text-zinc-500 mt-1">status</div>
                 </div>
@@ -148,11 +87,8 @@ export default function ToolsPage() {
               <div className="absolute left-0 top-0 bottom-0 w-1/3 bg-red-500/10 rounded-l-full" />
               <div className="absolute top-0 bottom-0 w-px bg-red-500/50" style={{ left: '33%' }} />
               <div
-                className={`absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-zinc-950 ${
-                  status?.color === 'red' ? 'bg-red-500' :
-                  status?.color === 'amber' ? 'bg-amber-500' : 'bg-emerald-500'
-                }`}
-                style={{ left: `${barPosition}%` }}
+                className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-amber-500 rounded-full border-2 border-zinc-950"
+                style={{ left: '38%' }}
               />
             </div>
 
