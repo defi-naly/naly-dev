@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowUpRight, TrendingUp } from 'lucide-react';
@@ -279,7 +280,50 @@ function TheForkCard() {
 }
 
 // The Line - SPX/GOLD Regime Indicator
+const THRESHOLD = 1.5;
+
+function getLineStatus(ratio) {
+  if (ratio < THRESHOLD) return { label: 'CROSSED', color: 'red' };
+  if (ratio < THRESHOLD * 1.1) return { label: 'Near', color: 'amber' };
+  return { label: 'Safe', color: 'emerald' };
+}
+
 function TheLineCard() {
+  const [lineData, setLineData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchLineData() {
+      try {
+        const response = await fetch('/api/the-line?range=1y');
+        if (response.ok) {
+          const data = await response.json();
+          setLineData(data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch Line data:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchLineData();
+  }, []);
+
+  const ratio = lineData?.current?.ratio ?? null;
+  const status = ratio ? getLineStatus(ratio) : null;
+
+  const statusBgClass = status?.color === 'red' ? 'bg-red-500/10 border-red-500/30' :
+    status?.color === 'amber' ? 'bg-amber-500/10 border-amber-500/30' :
+    status?.color === 'emerald' ? 'bg-emerald-500/10 border-emerald-500/30' : 'bg-neutral-500/10 border-neutral-500/30';
+
+  const statusDotClass = status?.color === 'red' ? 'bg-red-400' :
+    status?.color === 'amber' ? 'bg-amber-400' :
+    status?.color === 'emerald' ? 'bg-emerald-400' : 'bg-neutral-400';
+
+  const statusTextClass = status?.color === 'red' ? 'text-red-400' :
+    status?.color === 'amber' ? 'text-amber-400' :
+    status?.color === 'emerald' ? 'text-emerald-400' : 'text-neutral-400';
+
   return (
     <BentoCard href="/tools/the-line" className="h-full p-4 sm:p-6 bg-gradient-to-br from-terminal-surface to-neutral-900 flex flex-col justify-between">
       {/* Top section */}
@@ -311,8 +355,10 @@ function TheLineCard() {
           <div className="text-center flex-1">
             <p className="text-neutral-600 font-mono text-[10px] uppercase tracking-wider mb-1 sm:mb-2">Ratio</p>
             <div className="relative inline-block">
-              <span className="text-2xl sm:text-4xl font-mono font-light text-white">1.64</span>
-              <span className="absolute -top-1 -right-4 sm:-right-6 text-amber-400 text-sm sm:text-lg">→</span>
+              <span className="text-2xl sm:text-4xl font-mono font-light text-white">
+                {loading ? '—' : ratio?.toFixed(2) ?? '—'}
+              </span>
+              <span className={`absolute -top-1 -right-4 sm:-right-6 text-sm sm:text-lg ${statusTextClass}`}>→</span>
             </div>
           </div>
 
@@ -331,9 +377,11 @@ function TheLineCard() {
           {/* Status */}
           <div className="text-center flex-1">
             <p className="text-neutral-600 font-mono text-[10px] uppercase tracking-wider mb-1 sm:mb-2">Status</p>
-            <span className="inline-flex items-center gap-1.5 sm:gap-2 px-2 py-1 sm:px-3 sm:py-1.5 bg-amber-500/10 border border-amber-500/30 rounded-lg">
-              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-400" />
-              <span className="font-mono text-xs sm:text-sm text-amber-400">Near</span>
+            <span className={`inline-flex items-center gap-1.5 sm:gap-2 px-2 py-1 sm:px-3 sm:py-1.5 border rounded-lg ${statusBgClass}`}>
+              <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${statusDotClass}`} />
+              <span className={`font-mono text-xs sm:text-sm ${statusTextClass}`}>
+                {loading ? '—' : status?.label ?? '—'}
+              </span>
             </span>
           </div>
         </div>
