@@ -18,12 +18,18 @@ export const metadata = {
   description: 'A digital garden of interactive financial dashboards and economic analysis.',
   keywords: ['finance', 'economics', 'data visualization', 'dashboards', 'analysis'],
   authors: [{ name: 'Naly' }],
+  metadataBase: new URL('https://naly.dev'),
   openGraph: {
     title: 'naly.dev',
     description: 'Decoding money.',
     url: 'https://naly.dev',
     siteName: 'naly.dev',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'naly.dev | Decoding Money',
+    description: 'A digital garden of interactive financial dashboards and economic analysis.',
   },
 };
 
