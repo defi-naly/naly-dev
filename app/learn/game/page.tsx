@@ -10,6 +10,8 @@ import EndScreen from '@/components/learn/EndScreen';
 import PlaceholderChapter from '@/components/learn/chapters/PlaceholderChapter';
 import BarterGame from '@/components/learn/chapters/BarterGame';
 import GoldComparison from '@/components/learn/chapters/GoldComparison';
+import StockToFlowViz from '@/components/learn/chapters/StockToFlowViz';
+import FractionalReserve from '@/components/learn/chapters/FractionalReserve';
 import { chapters, TOTAL_CHAPTERS, getChapter } from '@/data/chapters';
 
 type GameState = 'title' | 'playing' | 'end';
@@ -69,6 +71,10 @@ export default function GamePage() {
         return <BarterGame onComplete={handleChapterComplete} />;
       case 'gold-comparison':
         return <GoldComparison onComplete={handleChapterComplete} />;
+      case 'stock-to-flow':
+        return <StockToFlowViz onComplete={handleChapterComplete} />;
+      case 'fractional-reserve':
+        return <FractionalReserve onComplete={handleChapterComplete} />;
       case 'truvalue':
       case 'decay':
       case 'scoreboard':
