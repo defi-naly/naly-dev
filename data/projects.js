@@ -23,7 +23,7 @@ export const writing = [
     title: 'How to Thrive in a Crisis',
     description: 'My investment strategy for the next 5 years.',
     date: '2025-01-19',
-    href: '/writing/how-to-thrive-in-a-crisis',
+    href: '/research/how-to-thrive-in-a-crisis',
     tags: ['Strategy', 'Investing'],
   },
   {
@@ -31,7 +31,7 @@ export const writing = [
     title: 'The Jackpot Age',
     description: 'Hyper-gamble your way to freedom and retire your bloodline.',
     date: '2025-11-16',
-    href: '/writing/the-jackpot-age',
+    href: '/research/the-jackpot-age',
     tags: ['Markets', 'Culture'],
   },
   {
@@ -39,7 +39,7 @@ export const writing = [
     title: 'Invisible Bitcoin: A ZEC Investment Thesis',
     description: "Why Crypto's Most Overlooked Asset Might Be Its Most Important.",
     date: '2025-10-12',
-    href: '/writing/invisible-bitcoin-zec',
+    href: '/research/invisible-bitcoin-zec',
     tags: ['Crypto', 'Zcash'],
   },
 ];

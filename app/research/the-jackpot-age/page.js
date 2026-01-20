@@ -17,7 +17,7 @@ export default function ArticlePage() {
         <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
           <Link
-            href="/writing"
+            href="/research"
             className="inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors mb-8"
           >
             <ArrowLeft className="w-4 h-4" />

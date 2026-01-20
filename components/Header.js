@@ -10,7 +10,7 @@ const navItems = [
   { label: 'Home', href: '/home' },
   { label: 'Tools', href: '/tools' },
   { label: 'Learn', href: '/learn' },
-  { label: 'Writing', href: '/writing' },
+  { label: 'Research', href: '/research' },
 ];
 
 export default function Header() {

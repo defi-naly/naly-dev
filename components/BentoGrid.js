@@ -446,14 +446,14 @@ export default function BentoGrid() {
       <motion.div variants={itemVariants} className="col-span-2 lg:col-span-1">
         <WritingCard
           title="How to Thrive in a Crisis"
-          href="/writing/how-to-thrive-in-a-crisis"
+          href="/research/how-to-thrive-in-a-crisis"
           tag="Essay"
         />
       </motion.div>
       <motion.div variants={itemVariants} className="col-span-2 lg:col-span-1">
         <WritingCard
           title="Invisible Bitcoin: ZEC"
-          href="/writing/invisible-bitcoin-zec"
+          href="/research/invisible-bitcoin-zec"
           tag="Thesis"
         />
       </motion.div>

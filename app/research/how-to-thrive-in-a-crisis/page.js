@@ -16,7 +16,7 @@ export default function ArticlePage() {
       <main className="flex-1 pt-24 pb-16">
         <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
-            href="/writing"
+            href="/research"
             className="inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
