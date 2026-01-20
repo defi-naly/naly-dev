@@ -471,10 +471,6 @@ export default function TheLinePage() {
                 </div>
               </div>
 
-              {/* Inspired By */}
-              <div className="text-xs text-neutral-600 font-mono">
-                Inspired by Ray Dalio&apos;s Big Cycle thesis and @brett_eth&apos;s SPX/GOLD analysis.
-              </div>
             </div>
           </div>
         </div>

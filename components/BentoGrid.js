@@ -153,90 +153,121 @@ function EchoCard() {
   );
 }
 
-// The Line - SPX/GOLD Regime Indicator (full-width)
+// The Line - SPX/GOLD Regime Indicator (full-width, tall)
 function TheLineCard() {
   return (
     <BentoCard href="/tools/the-line" className="h-full p-5 bg-gradient-to-br from-terminal-surface via-neutral-900 to-terminal-surface overflow-hidden relative">
-      {/* LIVE Badge */}
-      <div className="absolute top-4 right-4">
-        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-mono bg-terminal-accent/20 text-terminal-accent rounded-full">
-          <span className="w-1 h-1 rounded-full bg-terminal-accent animate-pulse" />
-          LIVE
-        </span>
-      </div>
-
-      <div className="flex items-start justify-between h-full">
-        {/* Left side - Info */}
-        <div className="flex flex-col justify-between h-full max-w-[200px]">
+      {/* Header row */}
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-lg bg-terminal-accent/10 border border-terminal-accent/30 flex items-center justify-center">
+            <TrendingUp className="w-5 h-5 text-terminal-accent" />
+          </div>
           <div>
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-8 h-8 rounded-lg bg-terminal-accent/10 border border-terminal-accent/30 flex items-center justify-center">
-                <TrendingUp className="w-4 h-4 text-terminal-accent" />
-              </div>
-              <h3 className="text-lg font-medium tracking-tight text-white group-hover:text-terminal-accent transition-colors">
-                The Line
-              </h3>
-            </div>
-            <p className="text-xs text-neutral-500 font-mono leading-relaxed">
-              SPX/GOLD regime indicator. Only 2 breaches in 50+ years.
+            <h3 className="text-xl font-medium tracking-tight text-white group-hover:text-terminal-accent transition-colors">
+              The Line
+            </h3>
+            <p className="text-xs text-neutral-500 font-mono">
+              SPX/GOLD regime indicator
             </p>
           </div>
+        </div>
 
-          {/* Status indicator */}
-          <div className="flex items-center gap-2 mt-3">
-            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-mono bg-terminal-accent/10 text-terminal-accent rounded">
-              ↗ ABOVE LINE
-            </span>
-            <span className="text-[10px] font-mono text-neutral-600">1.50 threshold</span>
+        <div className="flex items-center gap-3">
+          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-mono bg-terminal-accent/10 text-terminal-accent rounded">
+            ↗ ABOVE LINE
+          </span>
+          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-mono bg-terminal-accent/20 text-terminal-accent rounded-full">
+            <span className="w-1 h-1 rounded-full bg-terminal-accent animate-pulse" />
+            LIVE
+          </span>
+        </div>
+      </div>
+
+      {/* Full chart */}
+      <div className="flex-1 w-full">
+        <svg
+          viewBox="0 0 800 200"
+          className="w-full h-full"
+          preserveAspectRatio="xMidYMid meet"
+        >
+          {/* Background grid */}
+          <line x1="0" y1="50" x2="800" y2="50" stroke="#262626" strokeWidth="0.5" />
+          <line x1="0" y1="100" x2="800" y2="100" stroke="#262626" strokeWidth="0.5" />
+          <line x1="0" y1="150" x2="800" y2="150" stroke="#262626" strokeWidth="0.5" />
+
+          {/* Threshold line at 1.50 (y=120 on this scale where 0=top, 200=bottom, threshold at ~60% from top) */}
+          <line x1="0" y1="120" x2="800" y2="120" stroke="#ef4444" strokeWidth="1.5" strokeDasharray="6 4" />
+          <text x="790" y="115" fill="#ef4444" fontSize="10" fontFamily="monospace" textAnchor="end">1.50</text>
+
+          {/* Breach zone 1: 1973-1996 (roughly x=40 to x=500) */}
+          <rect x="40" y="120" width="460" height="80" fill="#ef4444" opacity="0.08" />
+
+          {/* Breach zone 2: 2008-2013 (roughly x=680 to x=760) */}
+          <rect x="680" y="120" width="80" height="60" fill="#ef4444" opacity="0.08" />
+
+          {/* Gradient definition */}
+          <defs>
+            <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#22c55e" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#22c55e" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+
+          {/* Area fill - SPX/GOLD ratio from 1971-2024 */}
+          {/* Y scale: 0 = ratio 6, 200 = ratio 0. Threshold 1.5 = y=150*(1-1.5/6)=150*0.75=112.5~120 */}
+          {/* Ratio to Y: y = 200 - (ratio/6)*200 = 200*(1 - ratio/6) */}
+          <path
+            d="M0,123 L20,132 L40,169 L80,188 L120,183 L160,173 L200,178 L240,183 L280,188 L320,193 L340,192 L380,185 L420,179 L460,171 L500,163 L520,158 L540,150 L560,136 L580,127 L600,108 L620,75 L640,68 L660,71 L680,87 L700,98 L720,108 L740,119 L760,152 L780,168 L800,120 L800,200 L0,200 Z"
+            fill="url(#chartGradient)"
+          />
+
+          {/* Main line - SPX/GOLD ratio */}
+          <path
+            d="M0,123 L20,132 L40,169 L80,188 L120,183 L160,173 L200,178 L240,183 L280,188 L320,193 L340,192 L380,185 L420,179 L460,171 L500,163 L520,158 L540,150 L560,136 L580,127 L600,108 L620,75 L640,68 L660,71 L680,87 L700,98 L720,108 L740,119 L760,152 L780,168 L800,120"
+            fill="none"
+            stroke="#22c55e"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+
+          {/* Current point */}
+          <circle cx="800" cy="120" r="4" fill="#22c55e" />
+          <circle cx="800" cy="120" r="7" fill="#22c55e" opacity="0.3" />
+
+          {/* Year labels */}
+          <text x="0" y="198" fill="#525252" fontSize="9" fontFamily="monospace">1971</text>
+          <text x="200" y="198" fill="#525252" fontSize="9" fontFamily="monospace">1980</text>
+          <text x="400" y="198" fill="#525252" fontSize="9" fontFamily="monospace">1990</text>
+          <text x="600" y="198" fill="#525252" fontSize="9" fontFamily="monospace">2000</text>
+          <text x="760" y="198" fill="#525252" fontSize="9" fontFamily="monospace">2024</text>
+
+          {/* Ratio labels on left */}
+          <text x="5" y="55" fill="#525252" fontSize="9" fontFamily="monospace">5.0</text>
+          <text x="5" y="105" fill="#525252" fontSize="9" fontFamily="monospace">3.0</text>
+          <text x="5" y="155" fill="#525252" fontSize="9" fontFamily="monospace">1.0</text>
+        </svg>
+      </div>
+
+      {/* Bottom stats row */}
+      <div className="flex items-center justify-between mt-3 pt-3 border-t border-neutral-800">
+        <div className="flex items-center gap-6">
+          <div>
+            <span className="text-[10px] font-mono text-neutral-500 uppercase">Current</span>
+            <span className="text-sm font-mono text-white ml-2">~2.4</span>
+          </div>
+          <div>
+            <span className="text-[10px] font-mono text-neutral-500 uppercase">Threshold</span>
+            <span className="text-sm font-mono text-red-400 ml-2">1.50</span>
+          </div>
+          <div>
+            <span className="text-[10px] font-mono text-neutral-500 uppercase">Breaches</span>
+            <span className="text-sm font-mono text-white ml-2">2</span>
+            <span className="text-[10px] font-mono text-neutral-600 ml-1">in 50+ yrs</span>
           </div>
         </div>
-
-        {/* Right side - Mini sparkline visualization */}
-        <div className="flex-1 max-w-[280px] h-full flex items-center justify-end">
-          <svg
-            viewBox="0 0 200 60"
-            className="w-full h-[60px]"
-            preserveAspectRatio="none"
-          >
-            {/* Grid lines */}
-            <line x1="0" y1="30" x2="200" y2="30" stroke="#262626" strokeWidth="0.5" strokeDasharray="2 2" />
-
-            {/* Threshold line */}
-            <line x1="0" y1="35" x2="200" y2="35" stroke="#ef4444" strokeWidth="1" strokeDasharray="4 4" opacity="0.6" />
-
-            {/* Breach zone 1 (1973-1983) */}
-            <rect x="20" y="35" width="30" height="20" fill="#ef4444" opacity="0.1" />
-
-            {/* Breach zone 2 (2008-2013) */}
-            <rect x="120" y="35" width="25" height="15" fill="#ef4444" opacity="0.1" />
-
-            {/* Gradient definition */}
-            <defs>
-              <linearGradient id="lineGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#22c55e" stopOpacity="0.3" />
-                <stop offset="100%" stopColor="#22c55e" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-
-            {/* Area fill */}
-            <path
-              d="M0,20 Q10,18 20,25 T40,50 T60,48 T80,30 T100,15 T120,25 T140,45 T160,30 T180,25 T200,22 L200,60 L0,60 Z"
-              fill="url(#lineGradient)"
-            />
-
-            {/* Main line - represents SPX/GOLD ratio over time */}
-            <path
-              d="M0,20 Q10,18 20,25 T40,50 T60,48 T80,30 T100,15 T120,25 T140,45 T160,30 T180,25 T200,22"
-              fill="none"
-              stroke="#22c55e"
-              strokeWidth="2"
-              strokeLinecap="round"
-            />
-
-            {/* Current point */}
-            <circle cx="200" cy="22" r="3" fill="#22c55e" />
-          </svg>
-        </div>
+        <span className="text-xs font-mono text-terminal-accent">View Details →</span>
       </div>
     </BentoCard>
   );
@@ -310,8 +341,8 @@ export default function BentoGrid() {
       animate="visible"
       className="grid grid-cols-4 lg:grid-cols-6 gap-3 auto-rows-[140px]"
     >
-      {/* The Line - Full width featured (6x1) */}
-      <motion.div variants={itemVariants} className="col-span-4 lg:col-span-6 row-span-1">
+      {/* The Line - Full width featured (6x2) */}
+      <motion.div variants={itemVariants} className="col-span-4 lg:col-span-6 row-span-2">
         <TheLineCard />
       </motion.div>
 
