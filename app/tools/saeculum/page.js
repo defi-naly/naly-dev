@@ -2,14 +2,14 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import FourthTurningViz from './fourth-turning-viz';
+import SaeculumViz from './saeculum-viz';
 
 export const metadata = {
-  title: 'The Fourth Turning | naly.dev',
+  title: 'Saeculum | naly.dev',
   description: 'Generational cycle analysis and historical pattern recognition.',
 };
 
-export default function FourthTurningPage() {
+export default function SaeculumPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -18,16 +18,16 @@ export default function FourthTurningPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
           <Link
-            href="/projects"
+            href="/tools"
             className="inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Back to Projects</span>
+            <span>Back to Tools</span>
           </Link>
 
           {/* Visualization */}
           <div className="border border-neutral-800 rounded-lg overflow-hidden">
-            <FourthTurningViz />
+            <SaeculumViz />
           </div>
 
           {/* Context section */}

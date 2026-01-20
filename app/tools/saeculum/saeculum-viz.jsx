@@ -282,7 +282,7 @@ const CustomTooltip = ({ active, payload, config }) => {
 // ============================================
 // MAIN COMPONENT
 // ============================================
-export default function FourthTurningViz() {
+export default function SaeculumViz() {
   const [activeMetric, setActiveMetric] = useState("gold");
   const config = metrics[activeMetric];
 

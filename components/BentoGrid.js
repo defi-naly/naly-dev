@@ -46,7 +46,7 @@ function BentoCard({ children, className = '', href, external = false }) {
 // TruValue - Branded splash card
 function TruValueCard() {
   return (
-    <BentoCard href="/projects/real-terms" className="h-full flex flex-col items-center justify-center text-center p-6 bg-gradient-to-br from-terminal-surface to-neutral-900">
+    <BentoCard href="/tools/truvalue" className="h-full flex flex-col items-center justify-center text-center p-6 bg-gradient-to-br from-terminal-surface to-neutral-900">
       <div className="absolute top-4 right-4">
         <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-mono bg-terminal-accent/20 text-terminal-accent rounded-full">
           <span className="w-1 h-1 rounded-full bg-terminal-accent animate-pulse" />
@@ -76,7 +76,7 @@ function TruValueCard() {
 // Fourth Turning - Branded splash card
 function FourthTurningCard() {
   return (
-    <BentoCard href="/projects/fourth-turning" className="h-full flex flex-col items-center justify-center text-center p-5 bg-gradient-to-br from-terminal-surface to-neutral-900">
+    <BentoCard href="/tools/saeculum" className="h-full flex flex-col items-center justify-center text-center p-5 bg-gradient-to-br from-terminal-surface to-neutral-900">
       <div className="absolute top-4 right-4">
         <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-mono bg-terminal-accent/20 text-terminal-accent rounded-full">
           <span className="w-1 h-1 rounded-full bg-terminal-accent animate-pulse" />
@@ -110,7 +110,7 @@ function FourthTurningCard() {
 // Time Machine - Branded splash card (horizontal)
 function TimeMachineCard() {
   return (
-    <BentoCard href="/tools/time-machine" className="h-full flex items-center justify-center gap-4 p-4 bg-gradient-to-r from-terminal-surface to-neutral-900">
+    <BentoCard href="/tools/decay" className="h-full flex items-center justify-center gap-4 p-4 bg-gradient-to-r from-terminal-surface to-neutral-900">
       <div className="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center flex-shrink-0">
         <svg className="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
           <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />

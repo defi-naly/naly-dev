@@ -10,6 +10,74 @@ const statusColors = {
   development: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
 };
 
+// TruValue Preview
+function TruValuePreview() {
+  return (
+    <div className="relative h-48 overflow-hidden bg-neutral-950 rounded-t-lg">
+      <div className="absolute inset-0">
+        <iframe
+          src="https://truvalue.lovable.app/"
+          className="w-[200%] h-[200%] origin-top-left scale-50 border-0 pointer-events-none"
+          title="TruValue Preview"
+        />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-t from-terminal-surface via-transparent to-transparent" />
+    </div>
+  );
+}
+
+// Saeculum Preview
+function SaeculumPreview() {
+  return (
+    <div className="relative h-48 overflow-hidden bg-neutral-950 rounded-t-lg">
+      <svg className="absolute inset-0 w-full h-full p-6" viewBox="0 0 400 160" preserveAspectRatio="xMidYMid meet">
+        {/* Cycle backgrounds */}
+        <rect x="0" y="0" width="50" height="160" fill="#1a1a1a" />
+        <rect x="50" y="0" width="50" height="160" fill="#0d0d0d" />
+        <rect x="100" y="0" width="50" height="160" fill="#0d0d0d" />
+        <rect x="150" y="0" width="50" height="160" fill="#0d0d0d" />
+        <rect x="200" y="0" width="50" height="160" fill="#1a1a1a" />
+        <rect x="250" y="0" width="50" height="160" fill="#0d0d0d" />
+        <rect x="300" y="0" width="50" height="160" fill="#0d0d0d" />
+        <rect x="350" y="0" width="50" height="160" fill="#1a1a1a" />
+
+        {/* Crisis labels */}
+        <text x="25" y="20" fill="#22c55e" fontSize="9" fontFamily="monospace" textAnchor="middle" opacity="0.7">CRISIS</text>
+        <text x="225" y="20" fill="#22c55e" fontSize="9" fontFamily="monospace" textAnchor="middle" opacity="0.7">CRISIS</text>
+        <text x="375" y="20" fill="#22c55e" fontSize="9" fontFamily="monospace" textAnchor="middle" opacity="0.7">CRISIS</text>
+
+        {/* Grid lines */}
+        <line x1="0" y1="50" x2="400" y2="50" stroke="#262626" strokeWidth="0.5" />
+        <line x1="0" y1="80" x2="400" y2="80" stroke="#262626" strokeWidth="0.5" />
+        <line x1="0" y1="110" x2="400" y2="110" stroke="#262626" strokeWidth="0.5" />
+
+        {/* Data line */}
+        <defs>
+          <filter id="glow2">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <path
+          d="M10,120 Q50,110 90,80 T170,65 T250,90 T330,45 T390,35"
+          fill="none"
+          stroke="#22c55e"
+          strokeWidth="2"
+          strokeLinecap="round"
+          filter="url(#glow2)"
+        />
+        <circle cx="390" cy="35" r="4" fill="#22c55e" filter="url(#glow2)" />
+
+        {/* Year labels */}
+        <text x="25" y="150" fill="#525252" fontSize="8" fontFamily="monospace" textAnchor="middle">1860</text>
+        <text x="200" y="150" fill="#525252" fontSize="8" fontFamily="monospace" textAnchor="middle">1940</text>
+        <text x="375" y="150" fill="#525252" fontSize="8" fontFamily="monospace" textAnchor="middle">2024</text>
+      </svg>
+      <div className="absolute inset-0 bg-gradient-to-t from-terminal-surface via-transparent to-transparent" />
+    </div>
+  );
+}
+
 // Decay Preview - purchasing power erosion visualization
 function DecayPreview() {
   return (
@@ -124,6 +192,8 @@ export default function ToolCard({ tool, index }) {
       <Link href={tool.href}>
         <article className="group relative h-full bg-terminal-surface border border-neutral-800 rounded-lg overflow-hidden transition-all duration-300 hover:border-neutral-600">
           {/* Visual Preview */}
+          {tool.id === 'truvalue' && <TruValuePreview />}
+          {tool.id === 'saeculum' && <SaeculumPreview />}
           {tool.id === 'decay' && <DecayPreview />}
           {tool.id === 'echo' && <EchoPreview />}
 

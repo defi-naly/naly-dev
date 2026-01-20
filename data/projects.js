@@ -1,33 +1,3 @@
-export const projects = [
-  {
-    id: 'real-terms',
-    title: 'TruValue',
-    description: 'See assets in their true value. Interactive visualization of inflation-adjusted economic data.',
-    category: 'Dashboard',
-    status: 'live',
-    href: '/projects/real-terms',
-    featured: true,
-    tags: ['React', 'D3.js', 'Economics'],
-    metrics: {
-      label: 'Data Points',
-      value: '10K+',
-    },
-  },
-  {
-    id: 'fourth-turning',
-    title: 'The Fourth Turning',
-    description: 'Generational cycle analysis and historical pattern recognition through data.',
-    category: 'Research',
-    status: 'live',
-    href: '/projects/fourth-turning',
-    featured: false,
-    tags: ['Analysis', 'History', 'Cycles'],
-    metrics: {
-      label: 'Years Analyzed',
-      value: '160+',
-    },
-  },
-];
 
 export const socialLinks = {
   github: {
@@ -76,12 +46,38 @@ export const writing = [
 
 export const tools = [
   {
+    id: 'truvalue',
+    title: 'TruValue',
+    description: 'See assets in their true value. Interactive visualization of inflation-adjusted economic data.',
+    category: 'Dashboard',
+    status: 'live',
+    href: '/tools/truvalue',
+    tags: ['React', 'D3.js', 'Economics'],
+    metrics: {
+      label: 'Data Points',
+      value: '10K+',
+    },
+  },
+  {
+    id: 'saeculum',
+    title: 'Saeculum',
+    description: 'Generational cycle analysis and historical pattern recognition through data.',
+    category: 'Research',
+    status: 'live',
+    href: '/tools/saeculum',
+    tags: ['Analysis', 'History', 'Cycles'],
+    metrics: {
+      label: 'Years Analyzed',
+      value: '160+',
+    },
+  },
+  {
     id: 'decay',
     title: 'Decay',
     description: 'Visualize purchasing power erosion across your lifetime. Track $100 decay against gold, equities, and real assets.',
     category: 'Calculator',
     status: 'live',
-    href: '/tools/time-machine',
+    href: '/tools/decay',
     tags: ['Inflation', 'Purchasing Power', 'Assets'],
     metrics: {
       label: 'Years of Data',

@@ -12,7 +12,7 @@ export const metadata = {
   },
 };
 
-export default function TimeMachinePage() {
+export default function DecayPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />

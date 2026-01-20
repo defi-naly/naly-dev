@@ -17,11 +17,11 @@ export default function TruValuePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
           <Link
-            href="/projects"
+            href="/tools"
             className="inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Back to Projects</span>
+            <span>Back to Tools</span>
           </Link>
 
           {/* Page header */}
