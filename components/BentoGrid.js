@@ -186,8 +186,8 @@ function TheLineCard() {
           <div className="text-center">
             <p className="text-neutral-600 font-mono text-[10px] uppercase tracking-wider mb-2">Current Ratio</p>
             <div className="relative">
-              <span className="text-4xl font-mono font-light text-white">2.4</span>
-              <span className="absolute -top-1 -right-4 text-terminal-accent text-lg">↗</span>
+              <span className="text-4xl font-mono font-light text-white">1.64</span>
+              <span className="absolute -top-1 -right-6 text-amber-400 text-lg">→</span>
             </div>
           </div>
 
@@ -208,9 +208,9 @@ function TheLineCard() {
           {/* Status */}
           <div className="text-center">
             <p className="text-neutral-600 font-mono text-[10px] uppercase tracking-wider mb-2">Status</p>
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-terminal-accent/10 border border-terminal-accent/30 rounded-lg">
-              <span className="w-2 h-2 rounded-full bg-terminal-accent" />
-              <span className="font-mono text-sm text-terminal-accent">Above Line</span>
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+              <span className="w-2 h-2 rounded-full bg-amber-400" />
+              <span className="font-mono text-sm text-amber-400">Near Line</span>
             </span>
           </div>
         </div>
