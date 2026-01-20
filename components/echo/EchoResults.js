@@ -69,6 +69,24 @@ export default function EchoResults({ results, currentMetrics, metricsConfig }) 
           Past performance does not predict future results.
         </p>
       </motion.div>
+
+      {/* Data Sources */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.7 }}
+        className="pt-4 border-t border-neutral-800"
+      >
+        <p className="font-mono text-[10px] text-neutral-600 leading-relaxed">
+          <span className="text-neutral-500">Data Sources:</span>{' '}
+          Debt/GDP from Federal Reserve FRED. CAPE ratio from Robert Shiller.{' '}
+          Unemployment & CPI from Bureau of Labor Statistics.{' '}
+          Fed Funds Rate from Federal Reserve.{' '}
+          Top 1% wealth share from Piketty, Saez & Zucman (World Inequality Database).{' '}
+          Polarization index from DW-NOMINATE congressional voting data.{' '}
+          Gold prices from ICE Benchmark Administration, M2 from Federal Reserve.
+        </p>
+      </motion.div>
     </div>
   );
 }

@@ -147,7 +147,7 @@ function EchoCard() {
       </div>
       <div className="h-6 w-px bg-neutral-800 mx-2" />
       <div className="font-mono text-xs text-neutral-500">
-        TODAY ≈ <span className="text-terminal-accent">1929</span>
+        <span className="text-terminal-accent">Find your echo</span>
       </div>
     </BentoCard>
   );
