@@ -8,6 +8,7 @@ import { Terminal } from 'lucide-react';
 const navItems = [
   { label: 'Home', href: '/' },
   { label: 'Tools', href: '/tools' },
+  { label: 'Learn', href: '/learn' },
   { label: 'Writing', href: '/writing' },
 ];
 
