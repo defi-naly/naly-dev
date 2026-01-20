@@ -61,23 +61,23 @@ export default function StartHereCard() {
 
           <div className="relative flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             {/* Content */}
-            <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center flex-shrink-0">
-                <Play className="w-5 h-5 text-amber-500" />
+            <div className="flex items-start gap-3 sm:gap-4">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center flex-shrink-0">
+                <Play className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
               </div>
 
-              <div>
-                <h3 className="text-xl font-mono font-medium text-white group-hover:text-amber-500 transition-colors">
+              <div className="min-w-0 flex-1">
+                <h3 className="text-lg sm:text-xl font-mono font-medium text-white group-hover:text-amber-500 transition-colors">
                   The Money Game
                 </h3>
-                <p className="text-neutral-400 font-mono text-sm mt-1">
-                  8 chapters. 20 minutes. Understand how money really works.
+                <p className="text-neutral-400 font-mono text-xs sm:text-sm mt-1">
+                  8 chapters. 20 min. Understand how money really works.
                 </p>
 
                 {/* Progress bar */}
                 {mounted && progressPercent > 0 && (
-                  <div className="mt-3 flex items-center gap-3">
-                    <div className="w-32 h-1.5 bg-neutral-800 rounded-full overflow-hidden">
+                  <div className="mt-2 sm:mt-3 flex items-center gap-2 sm:gap-3">
+                    <div className="w-24 sm:w-32 h-1.5 bg-neutral-800 rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${progressPercent}%` }}
@@ -87,7 +87,7 @@ export default function StartHereCard() {
                         }`}
                       />
                     </div>
-                    <span className="text-neutral-500 font-mono text-xs">
+                    <span className="text-neutral-500 font-mono text-[10px] sm:text-xs">
                       {progress?.completed ? 'Complete' : `${progressPercent}%`}
                     </span>
                   </div>
@@ -97,7 +97,7 @@ export default function StartHereCard() {
 
             {/* CTA Button */}
             <motion.div
-              className="flex items-center gap-2 bg-amber-500 text-zinc-900 font-mono text-sm font-medium px-5 py-2.5 rounded-lg group-hover:bg-amber-400 transition-colors whitespace-nowrap"
+              className="flex items-center justify-center gap-2 bg-amber-500 text-zinc-900 font-mono text-xs sm:text-sm font-medium px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg group-hover:bg-amber-400 transition-colors whitespace-nowrap w-full sm:w-auto"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >

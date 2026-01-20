@@ -88,16 +88,10 @@ export default function LearnPage() {
           >
             {/* Hero */}
             <motion.div variants={itemVariants} className="space-y-4">
-              <div className="flex items-center gap-2 mb-4">
-                <span className="font-mono text-sm text-terminal-accent">~/learn</span>
-                <span className="font-mono text-sm text-neutral-500">$</span>
-                <span className="font-mono text-sm text-neutral-400">cat intro.md</span>
-              </div>
-
-              <h1 className="text-3xl sm:text-4xl font-mono font-medium tracking-tight text-white">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-mono font-medium tracking-tight text-white">
                 Decode the money game
               </h1>
-              <p className="text-neutral-400 font-mono text-sm leading-relaxed max-w-2xl">
+              <p className="text-neutral-400 font-mono text-xs sm:text-sm leading-relaxed max-w-2xl">
                 Most people work for money their whole lives without understanding what it is,
                 where it comes from, or why it keeps buying less.
               </p>

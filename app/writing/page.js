@@ -25,17 +25,11 @@ export default function WritingPage() {
       <main className="flex-1 pt-24 pb-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Page header */}
-          <div className="mb-12">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="font-mono text-sm text-terminal-accent">~/naly/writing</span>
-              <span className="font-mono text-sm text-neutral-500">$</span>
-              <span className="font-mono text-sm text-neutral-400">ls *.md</span>
-            </div>
-
-            <h1 className="text-3xl sm:text-4xl font-medium tracking-tight text-white mb-4">
+          <div className="mb-8 sm:mb-12">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-medium tracking-tight text-white mb-4">
               Writing
             </h1>
-            <p className="text-neutral-400 max-w-xl">
+            <p className="text-neutral-400 text-sm sm:text-base max-w-xl">
               Long-form analysis, economic commentary, and explorations
               at the intersection of data and narrative.
             </p>

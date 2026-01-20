@@ -1,9 +1,10 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
-import { Terminal } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Terminal, Menu, X } from 'lucide-react';
 
 const navItems = [
   { label: 'Home', href: '/home' },
@@ -14,6 +15,7 @@ const navItems = [
 
 export default function Header() {
   const pathname = usePathname();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-terminal-bg/80 backdrop-blur-sm border-b border-neutral-800">
@@ -30,7 +32,7 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* Navigation */}
+          {/* Desktop Navigation */}
           <ul className="hidden sm:flex items-center gap-1">
             {navItems.map((item) => {
               const isActive = pathname === item.href ||
@@ -59,8 +61,51 @@ export default function Header() {
             })}
           </ul>
 
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="sm:hidden p-2 text-neutral-400 hover:text-white transition-colors"
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
       </nav>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="sm:hidden bg-terminal-bg border-b border-neutral-800 overflow-hidden"
+          >
+            <nav className="px-4 py-4 space-y-1">
+              {navItems.map((item) => {
+                const isActive = pathname === item.href ||
+                  (item.href !== '/' && pathname.startsWith(item.href));
+
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`block px-3 py-2.5 rounded-lg font-mono text-sm transition-colors ${
+                      isActive
+                        ? 'bg-terminal-accent/10 text-terminal-accent'
+                        : 'text-neutral-400 hover:text-white hover:bg-neutral-800/50'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

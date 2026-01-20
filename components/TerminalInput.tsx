@@ -156,7 +156,7 @@ export default function TerminalInput({
             }}
             onKeyDown={handleKeyDown}
             placeholder={placeholder}
-            className={`bg-transparent font-mono ${textSize} text-zinc-100 outline-none w-48 placeholder-zinc-700`}
+            className={`bg-transparent font-mono ${textSize} text-zinc-100 outline-none w-32 sm:w-48 placeholder-zinc-700`}
             aria-label="Terminal navigation"
           />
           {/* Cursor */}

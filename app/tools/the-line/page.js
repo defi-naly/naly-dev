@@ -203,12 +203,12 @@ export default function TheLinePage() {
           </div>
 
           {/* Controls Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-6 border-b border-neutral-800">
-            <div className="flex flex-wrap items-center gap-6">
+          <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 mb-6 pb-6 border-b border-neutral-800">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-6">
               {/* Time Range */}
               <div className="flex items-center gap-2">
-                <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider">
-                  TIME RANGE
+                <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider hidden sm:inline">
+                  TIME
                 </span>
                 <div className="flex border border-neutral-700 rounded overflow-hidden">
                   {['1y', '5y', '10y', 'max'].map((range) => (
@@ -229,7 +229,7 @@ export default function TheLinePage() {
 
               {/* Scale */}
               <div className="flex items-center gap-2">
-                <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider">
+                <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider hidden sm:inline">
                   SCALE
                 </span>
                 <div className="flex border border-neutral-700 rounded overflow-hidden">
