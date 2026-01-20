@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import TerminalNav from './TerminalNav';
 
 const navItems = [
-  { label: 'Home', href: '/' },
+  { label: 'Home', href: '/home' },
   { label: 'Tools', href: '/tools' },
   { label: 'Learn', href: '/learn' },
   { label: 'Writing', href: '/writing' },

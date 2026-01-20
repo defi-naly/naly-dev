@@ -22,7 +22,17 @@ const COMMANDS: Command[] = [
   { name: 'echo', path: '/tools/echo', description: 'Pattern finder' },
 ];
 
-export default function TerminalNav() {
+interface TerminalInputProps {
+  autoFocus?: boolean;
+  placeholder?: string;
+  className?: string;
+}
+
+export default function TerminalInput({
+  autoFocus = false,
+  placeholder = '',
+  className = ''
+}: TerminalInputProps) {
   const router = useRouter();
   const [input, setInput] = useState('');
   const [isFocused, setIsFocused] = useState(false);
@@ -41,6 +51,13 @@ export default function TerminalNav() {
   useEffect(() => {
     setSelectedIndex(0);
   }, [input]);
+
+  // Auto-focus on mount if enabled
+  useEffect(() => {
+    if (autoFocus && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [autoFocus]);
 
   // Global keyboard shortcut handler
   useEffect(() => {
@@ -110,14 +127,14 @@ export default function TerminalNav() {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative">
+    <div ref={containerRef} className={`relative ${className}`}>
       {/* Terminal prompt */}
       <div
-        className="flex items-center gap-1.5 cursor-text"
+        className="flex items-center gap-2 cursor-text"
         onClick={() => inputRef.current?.focus()}
       >
-        <span className="font-mono text-sm text-emerald-500">~/naly</span>
-        <span className="font-mono text-sm text-zinc-500">$</span>
+        <span className="font-mono text-lg text-emerald-500">~/naly</span>
+        <span className="font-mono text-lg text-zinc-500">$</span>
         <div className="relative flex items-center">
           <input
             ref={inputRef}
@@ -134,25 +151,19 @@ export default function TerminalNav() {
               }, 100);
             }}
             onKeyDown={handleKeyDown}
-            placeholder=""
-            className="bg-transparent font-mono text-sm text-zinc-100 outline-none w-24 sm:w-32"
+            placeholder={placeholder}
+            className="bg-transparent font-mono text-lg text-zinc-100 outline-none w-48 placeholder-zinc-700"
             aria-label="Terminal navigation"
           />
           {/* Cursor */}
           <span
-            className={`font-mono text-sm select-none ${
+            className={`font-mono text-lg select-none ${
               isFocused ? 'text-amber-500 animate-pulse' : 'text-zinc-600'
             }`}
           >
             ▊
           </span>
         </div>
-        {/* Keyboard hint */}
-        {!isFocused && (
-          <span className="hidden sm:inline-flex items-center gap-1 ml-2 text-zinc-600 font-mono text-xs">
-            <kbd className="px-1.5 py-0.5 bg-zinc-800 rounded text-zinc-500 text-[10px]">⌘K</kbd>
-          </span>
-        )}
       </div>
 
       {/* Autocomplete dropdown */}
@@ -163,7 +174,7 @@ export default function TerminalNav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.15 }}
-            className="absolute top-full left-0 mt-2 w-64 bg-zinc-900 border border-zinc-700 rounded-lg shadow-xl overflow-hidden z-50"
+            className="absolute top-full left-0 mt-3 w-72 bg-zinc-900 border border-zinc-700 rounded-lg shadow-xl overflow-hidden z-50"
           >
             <ul className="py-1">
               {filteredCommands.map((command, index) => (
@@ -171,7 +182,7 @@ export default function TerminalNav() {
                   <button
                     onClick={() => handleCommandClick(command)}
                     onMouseEnter={() => setSelectedIndex(index)}
-                    className={`w-full px-3 py-2 flex items-center justify-between transition-colors ${
+                    className={`w-full px-4 py-2.5 flex items-center justify-between transition-colors ${
                       index === selectedIndex
                         ? 'bg-amber-500/10 text-amber-500'
                         : 'text-zinc-300 hover:bg-zinc-800'
