@@ -74,6 +74,35 @@ export const writing = [
   },
 ];
 
+export const tools = [
+  {
+    id: 'decay',
+    title: 'Decay',
+    description: 'Visualize purchasing power erosion across your lifetime. Track $100 decay against gold, equities, and real assets.',
+    category: 'Calculator',
+    status: 'live',
+    href: '/tools/time-machine',
+    tags: ['Inflation', 'Purchasing Power', 'Assets'],
+    metrics: {
+      label: 'Years of Data',
+      value: '50+',
+    },
+  },
+  {
+    id: 'echo',
+    title: 'Echo',
+    description: "History doesn't repeat, but it rhymes. Compare today's economic conditions to historical crises.",
+    category: 'Analysis',
+    status: 'live',
+    href: '/tools/echo',
+    tags: ['History', 'Patterns', 'Crises'],
+    metrics: {
+      label: 'Historical Periods',
+      value: '6',
+    },
+  },
+];
+
 export const siteConfig = {
   name: 'naly.dev',
   tagline: 'Decoding the economy with code.',
