@@ -14,13 +14,13 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: 'naly.dev | Decoding the Economy with Code',
+  title: 'naly.dev | Decoding Money',
   description: 'A digital garden of interactive financial dashboards and economic analysis.',
   keywords: ['finance', 'economics', 'data visualization', 'dashboards', 'analysis'],
   authors: [{ name: 'Naly' }],
   openGraph: {
     title: 'naly.dev',
-    description: 'Decoding the economy with code.',
+    description: 'Decoding money.',
     url: 'https://naly.dev',
     siteName: 'naly.dev',
     type: 'website',

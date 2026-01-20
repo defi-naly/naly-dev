@@ -14,13 +14,13 @@ export default function Hero() {
         <div className="flex items-center gap-2 mb-6">
           <span className="font-mono text-sm text-terminal-accent">~/naly</span>
           <span className="font-mono text-sm text-neutral-500">$</span>
-          <span className="font-mono text-sm text-neutral-400">cat mission.txt</span>
+          <span className="font-mono text-sm text-neutral-400">cat README.md</span>
           <span className="w-2 h-4 bg-terminal-accent animate-blink" />
         </div>
 
         {/* Main headline */}
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight text-white leading-[1.1] mb-6">
-          De<span className="text-neutral-400">code</span>ing the economy.
+          De<span className="text-neutral-400">code</span>ing money.
         </h1>
 
         {/* Subtitle */}
