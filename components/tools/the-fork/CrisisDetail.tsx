@@ -2,17 +2,17 @@
 
 import { motion } from 'framer-motion';
 import { Lightbulb } from 'lucide-react';
-import AssetBarWithChart from './AssetBarWithChart';
+import AssetBar from './AssetBar';
 
-interface ChartData {
-  year: number;
-  value: number;
-}
-
-interface AssetReturn {
+interface AssetProjection {
   return: number | null;
   note: string;
-  chartData?: ChartData[];
+}
+
+interface TimedAssetData {
+  '1y': AssetProjection;
+  '3y': AssetProjection;
+  '5y': AssetProjection;
 }
 
 interface Crisis {
@@ -22,15 +22,29 @@ interface Crisis {
   title: string;
   description: string;
   why: string;
-  assets: Record<string, AssetReturn>;
+  assets: Record<string, TimedAssetData>;
   takeaway: string;
 }
 
+type TimePeriod = '1y' | '3y' | '5y';
+
 interface CrisisDetailProps {
   crisis: Crisis;
+  timePeriod: TimePeriod;
+  onTimePeriodChange: (period: TimePeriod) => void;
 }
 
-export default function CrisisDetail({ crisis }: CrisisDetailProps) {
+const TIME_PERIODS: { value: TimePeriod; label: string }[] = [
+  { value: '1y', label: '1 Year' },
+  { value: '3y', label: '3 Year' },
+  { value: '5y', label: '5 Year' },
+];
+
+export default function CrisisDetail({
+  crisis,
+  timePeriod,
+  onTimePeriodChange,
+}: CrisisDetailProps) {
   const typeColor = crisis.type === 'RESTRUCTURE' ? 'amber' : 'emerald';
 
   return (
@@ -83,19 +97,43 @@ export default function CrisisDetail({ crisis }: CrisisDetailProps) {
 
       {/* Asset Returns */}
       <div className="mb-6">
-        <h3 className="text-xs font-mono text-zinc-500 uppercase tracking-wider mb-4">
-          5-Year Asset Returns
-        </h3>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+          <h3 className="text-xs font-mono text-zinc-500 uppercase tracking-wider">
+            Asset Returns
+          </h3>
+
+          {/* Time Period Toggle */}
+          <div className="flex items-center gap-1 bg-zinc-800/50 rounded-lg p-1">
+            {TIME_PERIODS.map(({ value, label }) => (
+              <button
+                key={value}
+                onClick={() => onTimePeriodChange(value)}
+                className={`px-3 py-1.5 text-xs font-mono rounded-md transition-all ${
+                  timePeriod === value
+                    ? crisis.type === 'PRINT'
+                      ? 'bg-emerald-500/20 text-emerald-400'
+                      : 'bg-amber-500/20 text-amber-400'
+                    : 'text-zinc-500 hover:text-zinc-300'
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="space-y-1">
-          {Object.entries(crisis.assets).map(([name, data]) => (
-            <AssetBarWithChart
-              key={name}
-              name={name.charAt(0).toUpperCase() + name.slice(1)}
-              returnPct={data.return}
-              note={data.note}
-              chartData={data.chartData}
-            />
-          ))}
+          {Object.entries(crisis.assets).map(([name, timedData]) => {
+            const data = timedData[timePeriod];
+            return (
+              <AssetBar
+                key={`${crisis.id}-${name}-${timePeriod}`}
+                name={name.charAt(0).toUpperCase() + name.slice(1)}
+                returnPct={data.return}
+                note={data.note}
+              />
+            );
+          })}
         </div>
       </div>
 

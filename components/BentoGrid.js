@@ -418,22 +418,31 @@ export default function BentoGrid() {
       animate="visible"
       className="grid grid-cols-4 lg:grid-cols-6 gap-3 auto-rows-[140px]"
     >
-      {/* The Line - Full width featured (6x2) */}
+      {/* Row 1-2: The Line - Full width featured */}
       <motion.div variants={itemVariants} className="col-span-4 lg:col-span-6 row-span-2">
         <TheLineCard />
       </motion.div>
 
-      {/* TruValue - Large hero (3x2) */}
-      <motion.div variants={itemVariants} className="col-span-4 lg:col-span-3 row-span-3">
+      {/* Row 3-4: TruValue + Fourth Turning */}
+      <motion.div variants={itemVariants} className="col-span-4 lg:col-span-3 row-span-2">
         <TruValueCard />
       </motion.div>
-
-      {/* Fourth Turning - Medium (3x2) */}
       <motion.div variants={itemVariants} className="col-span-4 lg:col-span-3 row-span-2">
         <FourthTurningCard />
       </motion.div>
 
-      {/* Writing: Crisis - Small */}
+      {/* Row 5-6: The Fork + smaller tools */}
+      <motion.div variants={itemVariants} className="col-span-4 lg:col-span-2 row-span-2">
+        <TheForkCard />
+      </motion.div>
+      <motion.div variants={itemVariants} className="col-span-2 lg:col-span-2">
+        <TimeMachineCard />
+      </motion.div>
+      <motion.div variants={itemVariants} className="col-span-2 lg:col-span-2">
+        <EchoCard />
+      </motion.div>
+
+      {/* Row 6: Writing + Newsletter + Social */}
       <motion.div variants={itemVariants} className="col-span-2 lg:col-span-1">
         <WritingCard
           title="How to Thrive in a Crisis"
@@ -441,8 +450,6 @@ export default function BentoGrid() {
           tag="Essay"
         />
       </motion.div>
-
-      {/* Writing: ZEC - Small */}
       <motion.div variants={itemVariants} className="col-span-2 lg:col-span-1">
         <WritingCard
           title="Invisible Bitcoin: ZEC"
@@ -450,28 +457,9 @@ export default function BentoGrid() {
           tag="Thesis"
         />
       </motion.div>
-
-      {/* Newsletter - Small */}
-      <motion.div variants={itemVariants} className="col-span-2 lg:col-span-1">
+      <motion.div variants={itemVariants} className="col-span-2 lg:col-span-2">
         <NewsletterMini />
       </motion.div>
-
-      {/* Time Machine - Tool (horizontal) */}
-      <motion.div variants={itemVariants} className="col-span-2 lg:col-span-2">
-        <TimeMachineCard />
-      </motion.div>
-
-      {/* Echo - Tool (horizontal) */}
-      <motion.div variants={itemVariants} className="col-span-2 lg:col-span-2">
-        <EchoCard />
-      </motion.div>
-
-      {/* The Fork - Tool card */}
-      <motion.div variants={itemVariants} className="col-span-2 lg:col-span-2 row-span-2">
-        <TheForkCard />
-      </motion.div>
-
-      {/* Social - Small split */}
       <motion.div variants={itemVariants} className="col-span-2 lg:col-span-2">
         <SocialMini />
       </motion.div>

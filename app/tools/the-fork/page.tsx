@@ -21,52 +21,24 @@ const CRISES = [
     why: 'Debt deflation crushing the economy. Banks failing. 25% unemployment.',
     assets: {
       gold: {
-        return: 69,
-        note: 'Revaluation',
-        chartData: [
-          { year: 0, value: 100 },
-          { year: 1, value: 169 },
-          { year: 2, value: 169 },
-          { year: 3, value: 169 },
-          { year: 4, value: 169 },
-          { year: 5, value: 169 },
-        ],
+        '1y': { return: 69, note: 'Instant reval' },
+        '3y': { return: 69, note: 'Fixed price' },
+        '5y': { return: 69, note: 'Revaluation' },
       },
       stocks: {
-        return: 105,
-        note: 'Volatile recovery',
-        chartData: [
-          { year: 0, value: 100 },
-          { year: 1, value: 55 },
-          { year: 2, value: 85 },
-          { year: 3, value: 120 },
-          { year: 4, value: 165 },
-          { year: 5, value: 205 },
-        ],
+        '1y': { return: -45, note: 'Crash' },
+        '3y': { return: 20, note: 'Recovery' },
+        '5y': { return: 105, note: 'Volatile recovery' },
       },
       bonds: {
-        return: 20,
-        note: 'Nominal gains',
-        chartData: [
-          { year: 0, value: 100 },
-          { year: 1, value: 104 },
-          { year: 2, value: 108 },
-          { year: 3, value: 112 },
-          { year: 4, value: 116 },
-          { year: 5, value: 120 },
-        ],
+        '1y': { return: 8, note: 'Safe haven' },
+        '3y': { return: 15, note: 'Nominal gains' },
+        '5y': { return: 20, note: 'Nominal gains' },
       },
       cash: {
-        return: -40,
-        note: 'Dollar devalued',
-        chartData: [
-          { year: 0, value: 100 },
-          { year: 1, value: 60 },
-          { year: 2, value: 60 },
-          { year: 3, value: 60 },
-          { year: 4, value: 60 },
-          { year: 5, value: 60 },
-        ],
+        '1y': { return: -40, note: 'Devalued' },
+        '3y': { return: -40, note: 'Flat after' },
+        '5y': { return: -40, note: 'Dollar devalued' },
       },
     },
     takeaway: 'Hard assets won. Cash holders lost 40% overnight.',
@@ -80,52 +52,24 @@ const CRISES = [
     why: "Couldn't raise taxes enough. Couldn't default. Inflate it away.",
     assets: {
       gold: {
-        return: 0,
-        note: 'Fixed at $35',
-        chartData: [
-          { year: 0, value: 100 },
-          { year: 1, value: 100 },
-          { year: 2, value: 100 },
-          { year: 3, value: 100 },
-          { year: 4, value: 100 },
-          { year: 5, value: 100 },
-        ],
+        '1y': { return: 0, note: 'Fixed' },
+        '3y': { return: 0, note: 'Fixed' },
+        '5y': { return: 0, note: 'Fixed at $35' },
       },
       stocks: {
-        return: 60,
-        note: '+25% real',
-        chartData: [
-          { year: 0, value: 100 },
-          { year: 1, value: 108 },
-          { year: 2, value: 120 },
-          { year: 3, value: 135 },
-          { year: 4, value: 148 },
-          { year: 5, value: 160 },
-        ],
+        '1y': { return: 12, note: 'War boost' },
+        '3y': { return: 35, note: 'Growing' },
+        '5y': { return: 60, note: '+25% real' },
       },
       bonds: {
-        return: -15,
-        note: 'Real terms',
-        chartData: [
-          { year: 0, value: 100 },
-          { year: 1, value: 97 },
-          { year: 2, value: 94 },
-          { year: 3, value: 91 },
-          { year: 4, value: 88 },
-          { year: 5, value: 85 },
-        ],
+        '1y': { return: -3, note: 'Real loss' },
+        '3y': { return: -8, note: 'Eroding' },
+        '5y': { return: -15, note: 'Real terms' },
       },
       cash: {
-        return: -30,
-        note: 'Real terms',
-        chartData: [
-          { year: 0, value: 100 },
-          { year: 1, value: 94 },
-          { year: 2, value: 88 },
-          { year: 3, value: 82 },
-          { year: 4, value: 76 },
-          { year: 5, value: 70 },
-        ],
+        '1y': { return: -6, note: 'Inflation' },
+        '3y': { return: -15, note: 'Eroding' },
+        '5y': { return: -30, note: 'Real terms' },
       },
     },
     takeaway: 'Slow bleed. Savers crushed over a decade. Asset owners kept pace.',
@@ -139,52 +83,24 @@ const CRISES = [
     why: "Foreign nations redeeming dollars for gold. US didn't have enough gold.",
     assets: {
       gold: {
-        return: 257,
-        note: '$35 → $125',
-        chartData: [
-          { year: 0, value: 100 },
-          { year: 1, value: 145 },
-          { year: 2, value: 210 },
-          { year: 3, value: 280 },
-          { year: 4, value: 320 },
-          { year: 5, value: 357 },
-        ],
+        '1y': { return: 45, note: 'Unpegged' },
+        '3y': { return: 150, note: 'Soaring' },
+        '5y': { return: 257, note: '$35 → $125' },
       },
       stocks: {
-        return: 45,
-        note: '0% real',
-        chartData: [
-          { year: 0, value: 100 },
-          { year: 1, value: 115 },
-          { year: 2, value: 95 },
-          { year: 3, value: 75 },
-          { year: 4, value: 110 },
-          { year: 5, value: 145 },
-        ],
+        '1y': { return: 15, note: 'Initial pop' },
+        '3y': { return: -5, note: 'Bear market' },
+        '5y': { return: 45, note: '0% real' },
       },
       bonds: {
-        return: -20,
-        note: 'Real terms',
-        chartData: [
-          { year: 0, value: 100 },
-          { year: 1, value: 96 },
-          { year: 2, value: 92 },
-          { year: 3, value: 88 },
-          { year: 4, value: 84 },
-          { year: 5, value: 80 },
-        ],
+        '1y': { return: -5, note: 'Inflation' },
+        '3y': { return: -12, note: 'Eroding' },
+        '5y': { return: -20, note: 'Real terms' },
       },
       cash: {
-        return: -35,
-        note: 'Real terms',
-        chartData: [
-          { year: 0, value: 100 },
-          { year: 1, value: 93 },
-          { year: 2, value: 85 },
-          { year: 3, value: 78 },
-          { year: 4, value: 72 },
-          { year: 5, value: 65 },
-        ],
+        '1y': { return: -8, note: 'Weakening' },
+        '3y': { return: -20, note: 'Falling' },
+        '5y': { return: -35, note: 'Real terms' },
       },
     },
     takeaway: 'Gold exploded. Stocks went nowhere in real terms. Cash destroyed.',
@@ -198,54 +114,30 @@ const CRISES = [
     why: 'Banking system collapsing. Deflation risk. "Too big to fail."',
     assets: {
       gold: {
-        return: 30,
-        note: 'Steady rise',
-        chartData: [
-          { year: 0, value: 100 },
-          { year: 1, value: 125 },
-          { year: 2, value: 140 },
-          { year: 3, value: 130 },
-          { year: 4, value: 120 },
-          { year: 5, value: 130 },
-        ],
+        '1y': { return: 25, note: 'Safe haven' },
+        '3y': { return: 40, note: 'Peak 2011' },
+        '5y': { return: 30, note: 'Steady rise' },
       },
       stocks: {
-        return: 180,
-        note: '+160% real',
-        chartData: [
-          { year: 0, value: 100 },
-          { year: 1, value: 55 },
-          { year: 2, value: 85 },
-          { year: 3, value: 140 },
-          { year: 4, value: 200 },
-          { year: 5, value: 280 },
-        ],
+        '1y': { return: -45, note: 'Crash' },
+        '3y': { return: 40, note: 'Recovery' },
+        '5y': { return: 180, note: '+160% real' },
       },
       bonds: {
-        return: 25,
-        note: 'QE boost',
-        chartData: [
-          { year: 0, value: 100 },
-          { year: 1, value: 105 },
-          { year: 2, value: 110 },
-          { year: 3, value: 115 },
-          { year: 4, value: 120 },
-          { year: 5, value: 125 },
-        ],
+        '1y': { return: 10, note: 'Flight' },
+        '3y': { return: 18, note: 'QE boost' },
+        '5y': { return: 25, note: 'QE boost' },
       },
       cash: {
-        return: -10,
-        note: 'Real terms',
-        chartData: [
-          { year: 0, value: 100 },
-          { year: 1, value: 98 },
-          { year: 2, value: 96 },
-          { year: 3, value: 94 },
-          { year: 4, value: 92 },
-          { year: 5, value: 90 },
-        ],
+        '1y': { return: -2, note: 'Low inflation' },
+        '3y': { return: -5, note: 'Eroding' },
+        '5y': { return: -10, note: 'Real terms' },
       },
-      bitcoin: { return: null, note: '$0 → $300' },
+      bitcoin: {
+        '1y': { return: null, note: 'Born 2009' },
+        '3y': { return: null, note: '$0 → $5' },
+        '5y': { return: null, note: '$0 → $300' },
+      },
     },
     takeaway: 'Everything went up. Cash still lost. QE inflated all assets.',
   },
@@ -330,6 +222,7 @@ export default function TheForkPage() {
   const [selectedCrisis, setSelectedCrisis] = useState<string>('1933');
   const [scenario, setScenario] = useState<'print' | 'restructure'>('print');
   const [timePeriod, setTimePeriod] = useState<'1y' | '3y' | '5y'>('5y');
+  const [historicalTimePeriod, setHistoricalTimePeriod] = useState<'1y' | '3y' | '5y'>('5y');
 
   const currentCrisis = CRISES.find(c => c.id === selectedCrisis);
 
@@ -387,7 +280,12 @@ export default function TheForkPage() {
           <div className="mb-12">
             <AnimatePresence mode="wait">
               {currentCrisis && (
-                <CrisisDetail key={currentCrisis.id} crisis={currentCrisis} />
+                <CrisisDetail
+                  key={currentCrisis.id}
+                  crisis={currentCrisis}
+                  timePeriod={historicalTimePeriod}
+                  onTimePeriodChange={setHistoricalTimePeriod}
+                />
               )}
             </AnimatePresence>
           </div>

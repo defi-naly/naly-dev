@@ -232,6 +232,43 @@ function EchoPreview() {
   );
 }
 
+// The Fork Preview - debt crisis paths visualization
+function TheForkPreview() {
+  return (
+    <div className="relative h-48 overflow-hidden bg-neutral-950 rounded-t-lg">
+      <div className="absolute inset-0 flex items-center justify-center p-6">
+        <div className="flex items-center gap-6">
+          {/* Print path */}
+          <div className="text-center">
+            <div className="w-16 h-16 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto mb-2">
+              <span className="text-emerald-400 font-mono text-2xl font-light">$</span>
+            </div>
+            <span className="text-xs font-mono text-emerald-400">PRINT</span>
+            <p className="text-[10px] font-mono text-neutral-600 mt-0.5">inflate</p>
+          </div>
+
+          {/* Fork divider */}
+          <div className="flex flex-col items-center gap-1">
+            <div className="w-8 h-px bg-neutral-700" />
+            <span className="text-neutral-500 text-sm font-mono">or</span>
+            <div className="w-8 h-px bg-neutral-700" />
+          </div>
+
+          {/* Restructure path */}
+          <div className="text-center">
+            <div className="w-16 h-16 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mx-auto mb-2">
+              <span className="text-amber-400 font-mono text-2xl font-light">↺</span>
+            </div>
+            <span className="text-xs font-mono text-amber-400">RESET</span>
+            <p className="text-[10px] font-mono text-neutral-600 mt-0.5">restructure</p>
+          </div>
+        </div>
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-t from-terminal-surface via-transparent to-transparent" />
+    </div>
+  );
+}
+
 export default function ToolCard({ tool, index }) {
   const isLive = tool.status === 'live';
 
@@ -253,6 +290,7 @@ export default function ToolCard({ tool, index }) {
           {tool.id === 'saeculum' && <SaeculumPreview />}
           {tool.id === 'decay' && <DecayPreview />}
           {tool.id === 'echo' && <EchoPreview />}
+          {tool.id === 'the-fork' && <TheForkPreview />}
 
           {/* Status badge overlay */}
           <div className="absolute top-3 left-3 z-10">
