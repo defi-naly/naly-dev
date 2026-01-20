@@ -46,28 +46,53 @@ function BentoCard({ children, className = '', href, external = false }) {
 // TruValue - Branded splash card
 function TruValueCard() {
   return (
-    <BentoCard href="/tools/truvalue" className="h-full flex flex-col items-center justify-center text-center p-6 bg-gradient-to-br from-terminal-surface to-neutral-900">
-      <div className="absolute top-4 right-4">
+    <BentoCard href="/tools/truvalue" className="h-full flex flex-col p-6 bg-gradient-to-br from-terminal-surface to-neutral-900">
+      {/* Header */}
+      <div className="flex items-start justify-between mb-6">
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 rounded-xl bg-terminal-accent/10 border border-terminal-accent/30 flex items-center justify-center">
+            <span className="text-2xl font-light text-terminal-accent">$</span>
+          </div>
+          <div>
+            <h3 className="text-xl font-medium tracking-tight text-white group-hover:text-terminal-accent transition-colors">
+              TruValue
+            </h3>
+            <p className="text-xs text-neutral-500 font-mono">
+              inflation-adjusted prices
+            </p>
+          </div>
+        </div>
         <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-mono bg-terminal-accent/20 text-terminal-accent rounded-full">
           <span className="w-1 h-1 rounded-full bg-terminal-accent animate-pulse" />
           LIVE
         </span>
       </div>
 
-      <div className="w-16 h-16 rounded-2xl bg-terminal-accent/10 border border-terminal-accent/30 flex items-center justify-center mb-6">
-        <span className="text-3xl font-light text-terminal-accent">$</span>
+      {/* Key insight */}
+      <div className="flex-1 flex flex-col justify-center items-center text-center">
+        <p className="text-neutral-600 font-mono text-[10px] uppercase tracking-wider mb-3">Since 1971</p>
+        <div className="flex items-center gap-3">
+          <div className="text-center">
+            <span className="text-3xl font-mono font-light text-white">$100</span>
+            <p className="text-[10px] font-mono text-neutral-600 mt-1">nominal</p>
+          </div>
+          <span className="text-neutral-600 text-lg">→</span>
+          <div className="text-center">
+            <span className="text-3xl font-mono font-light text-red-400">$17</span>
+            <p className="text-[10px] font-mono text-neutral-600 mt-1">real value</p>
+          </div>
+        </div>
+        <p className="text-neutral-500 font-mono text-xs mt-4">
+          M2 supply: <span className="text-amber-400">31x</span> since Nixon
+        </p>
       </div>
 
-      <h3 className="text-2xl font-medium tracking-tight text-white mb-2 group-hover:text-terminal-accent transition-colors">
-        TruValue
-      </h3>
-      <p className="text-sm text-neutral-500 font-mono">
-        See assets in their true value
-      </p>
-
-      <div className="absolute bottom-4 left-0 right-0 px-6">
-        <div className="h-px bg-gradient-to-r from-transparent via-neutral-700 to-transparent" />
-        <p className="text-[10px] font-mono text-neutral-600 mt-3">truvalue.lovable.app</p>
+      {/* Footer */}
+      <div className="pt-4 border-t border-neutral-800">
+        <div className="flex items-center justify-between">
+          <span className="text-[10px] font-mono text-neutral-600">See what things really cost</span>
+          <span className="text-xs font-mono text-terminal-accent">Explore →</span>
+        </div>
       </div>
     </BentoCard>
   );
@@ -76,32 +101,69 @@ function TruValueCard() {
 // Fourth Turning - Branded splash card
 function FourthTurningCard() {
   return (
-    <BentoCard href="/tools/saeculum" className="h-full flex flex-col items-center justify-center text-center p-5 bg-gradient-to-br from-terminal-surface to-neutral-900">
-      <div className="absolute top-4 right-4">
-        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-mono bg-terminal-accent/20 text-terminal-accent rounded-full">
-          <span className="w-1 h-1 rounded-full bg-terminal-accent animate-pulse" />
-          LIVE
+    <BentoCard href="/tools/saeculum" className="h-full flex flex-col p-5 bg-gradient-to-br from-terminal-surface to-neutral-900">
+      {/* Header */}
+      <div className="flex items-start justify-between mb-4">
+        <div className="flex items-center gap-3">
+          <div className="w-11 h-11 rounded-xl bg-terminal-accent/10 border border-terminal-accent/30 flex items-center justify-center">
+            <svg className="w-6 h-6 text-terminal-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+            </svg>
+          </div>
+          <div>
+            <h3 className="text-lg font-medium tracking-tight text-white group-hover:text-terminal-accent transition-colors">
+              Saeculum
+            </h3>
+            <p className="text-[10px] text-neutral-500 font-mono">
+              fourth turning cycles
+            </p>
+          </div>
+        </div>
+        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-mono bg-amber-500/20 text-amber-400 rounded-full">
+          <span className="w-1 h-1 rounded-full bg-amber-400 animate-pulse" />
+          CRISIS
         </span>
       </div>
 
-      <div className="w-14 h-14 rounded-xl bg-terminal-accent/10 border border-terminal-accent/30 flex items-center justify-center mb-4">
-        <svg className="w-7 h-7 text-terminal-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
-        </svg>
+      {/* Key metrics */}
+      <div className="flex-1 flex flex-col justify-center">
+        <div className="flex items-center justify-between gap-4">
+          {/* Season indicator */}
+          <div className="text-center flex-1">
+            <p className="text-neutral-600 font-mono text-[10px] uppercase mb-2">Season</p>
+            <div className="flex items-center justify-center gap-1.5 mb-1">
+              <span className="w-2 h-2 rounded-full bg-neutral-700" title="Spring" />
+              <span className="w-2 h-2 rounded-full bg-neutral-700" title="Summer" />
+              <span className="w-2 h-2 rounded-full bg-neutral-700" title="Fall" />
+              <span className="w-2.5 h-2.5 rounded-full bg-amber-400 ring-2 ring-amber-400/30" title="Winter" />
+            </div>
+            <span className="text-xs font-mono text-amber-400">WINTER</span>
+          </div>
+
+          <div className="h-12 w-px bg-neutral-800" />
+
+          {/* Years in crisis */}
+          <div className="text-center flex-1">
+            <p className="text-neutral-600 font-mono text-[10px] uppercase mb-2">Crisis Year</p>
+            <span className="text-2xl font-mono font-light text-white">17</span>
+            <p className="text-[10px] font-mono text-neutral-600">of ~22</p>
+          </div>
+
+          <div className="h-12 w-px bg-neutral-800" />
+
+          {/* Polarization */}
+          <div className="text-center flex-1">
+            <p className="text-neutral-600 font-mono text-[10px] uppercase mb-2">Polarization</p>
+            <span className="text-2xl font-mono font-light text-red-400">0.96</span>
+            <p className="text-[10px] font-mono text-neutral-600">Civil War: 0.94</p>
+          </div>
+        </div>
       </div>
 
-      <h3 className="text-xl font-medium tracking-tight text-white mb-1 group-hover:text-terminal-accent transition-colors">
-        Saeculum
-      </h3>
-      <p className="text-xs text-neutral-500 font-mono mb-4">
-        cycle indicator
-      </p>
-
-      <div className="flex items-center gap-1">
-        <span className="w-2 h-2 rounded-full bg-neutral-700" title="Spring" />
-        <span className="w-2 h-2 rounded-full bg-neutral-700" title="Summer" />
-        <span className="w-2 h-2 rounded-full bg-neutral-700" title="Fall" />
-        <span className="w-2 h-2 rounded-full bg-terminal-accent animate-pulse" title="Winter" />
+      {/* Footer */}
+      <div className="pt-3 border-t border-neutral-800 flex items-center justify-between">
+        <span className="text-[10px] font-mono text-neutral-600">2008–2030 Millennial Crisis</span>
+        <span className="text-xs font-mono text-terminal-accent">Explore →</span>
       </div>
     </BentoCard>
   );
