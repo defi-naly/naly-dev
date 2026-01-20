@@ -95,31 +95,31 @@ export default function LearnPage() {
               </Link>
             </motion.div>
 
-            {/* Resources Teaser */}
+            {/* Resources Link */}
             <motion.div variants={itemVariants}>
-              <div className="border-t border-neutral-800 pt-8">
-                <div className="flex items-start gap-5">
-                  <div className="w-10 h-10 rounded-lg bg-neutral-800 border border-neutral-700 flex items-center justify-center flex-shrink-0">
-                    <BookOpen className="w-4 h-4 text-neutral-500" />
-                  </div>
+              <Link href="/learn/resources">
+                <div className="group border-t border-neutral-800 pt-8">
+                  <div className="flex items-start gap-5">
+                    <div className="w-10 h-10 rounded-lg bg-neutral-800 border border-neutral-700 flex items-center justify-center flex-shrink-0 group-hover:border-amber-500/50 transition-colors">
+                      <BookOpen className="w-4 h-4 text-neutral-500 group-hover:text-amber-500 transition-colors" />
+                    </div>
 
-                  <div className="flex-1">
-                    <h3 className="text-lg font-mono font-medium text-white">
-                      Go deeper
-                    </h3>
-                    <p className="text-neutral-500 font-mono text-sm mt-1">
-                      Books, videos, and tools for those who want to keep learning.
-                    </p>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-mono font-medium text-white group-hover:text-amber-500 transition-colors">
+                        Resources
+                      </h3>
+                      <p className="text-neutral-500 font-mono text-sm mt-1">
+                        Books, videos, and articles to go deeper. Fourth Turning, Ray Dalio, Lyn Alden, and more.
+                      </p>
 
-                    <button
-                      disabled
-                      className="mt-4 inline-flex items-center gap-2 text-neutral-600 font-mono text-sm cursor-not-allowed"
-                    >
-                      COMING SOON
-                    </button>
+                      <span className="mt-4 inline-flex items-center gap-2 text-amber-500 font-mono text-sm group-hover:gap-3 transition-all">
+                        BROWSE RESOURCES
+                        <ArrowRight className="w-4 h-4" />
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             </motion.div>
           </motion.div>
         </div>

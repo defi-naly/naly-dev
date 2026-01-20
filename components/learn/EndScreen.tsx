@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Check, ArrowRight, Share2, Link2, Twitter } from 'lucide-react';
+import { Check, ArrowRight, Share2, Link2, Twitter, BookOpen } from 'lucide-react';
 import Link from 'next/link';
 
 interface EndScreenProps {
@@ -119,9 +119,19 @@ export default function EndScreen({ onRestart }: EndScreenProps) {
         variants={itemVariants}
         className="mt-8 flex flex-col sm:flex-row gap-3"
       >
-        <Link href="/tools">
+        <Link href="/learn/resources">
           <motion.button
             className="bg-amber-500 text-zinc-900 font-mono text-sm font-medium px-6 py-3 rounded hover:bg-amber-400 transition-colors flex items-center gap-2"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <BookOpen className="w-4 h-4" />
+            GO DEEPER
+          </motion.button>
+        </Link>
+        <Link href="/tools">
+          <motion.button
+            className="bg-neutral-800 border border-neutral-700 text-neutral-300 font-mono text-sm px-6 py-3 rounded hover:border-amber-500 hover:text-amber-500 transition-colors flex items-center gap-2"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
