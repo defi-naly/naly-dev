@@ -5,7 +5,7 @@ export interface Chapter {
   concept: string;
   intro: string;
   takeaway: string;
-  tool: 'barter' | 'gold-comparison' | 'stock-to-flow' | 'fractional-reserve' | 'truvalue' | 'decay' | 'asset-flow' | 'scoreboard';
+  tool: 'barter' | 'gold-comparison' | 'stock-to-flow' | 'fractional-reserve' | 'printer' | 'inflation' | 'cantillon' | 'asset-race';
   status: 'build' | 'exists' | 'placeholder';
 }
 
@@ -56,9 +56,9 @@ export const chapters: Chapter[] = [
     title: 'Printing',
     concept: 'Money supply explosion',
     intro: "Then governments discovered something amazing: if money is just paper, you don't even need the gold.",
-    takeaway: "Since 1971, the dollar hasn't been backed by gold. Since then, the money supply has gone up 50x.",
-    tool: 'truvalue',
-    status: 'exists',
+    takeaway: "Since 1971, the dollar hasn't been backed by gold. Since then, the money supply has gone up 31x.",
+    tool: 'printer',
+    status: 'build',
   },
   {
     id: 6,
@@ -67,8 +67,8 @@ export const chapters: Chapter[] = [
     concept: 'Purchasing power decay',
     intro: "But inflation is only 2-3%, right? That's what they tell us. Let's make it personal.",
     takeaway: "Inflation is a slow thief. 3% per year doesn't feel like much. Over 40 years, you lose over half.",
-    tool: 'decay',
-    status: 'exists',
+    tool: 'inflation',
+    status: 'build',
   },
   {
     id: 7,
@@ -77,7 +77,7 @@ export const chapters: Chapter[] = [
     concept: 'Cantillon Effect',
     intro: 'So where does all that printed money go? Not into your pocket.',
     takeaway: 'New money flows to assets first. By the time it reaches you, prices already went up. This is called the Cantillon Effect.',
-    tool: 'asset-flow',
+    tool: 'cantillon',
     status: 'build',
   },
   {
@@ -87,8 +87,8 @@ export const chapters: Chapter[] = [
     concept: 'Assets vs cash',
     intro: "So what wins? Let's look at 50 years of data. Not in dollars. In real terms.",
     takeaway: "Cash is for spending, not storing. Assets that are scarce outpace money printing. The rich don't save cash. Now you know why.",
-    tool: 'scoreboard',
-    status: 'exists',
+    tool: 'asset-race',
+    status: 'build',
   },
 ];
 

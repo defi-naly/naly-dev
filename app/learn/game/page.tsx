@@ -7,13 +7,15 @@ import Footer from '@/components/Footer';
 import TitleScreen from '@/components/learn/TitleScreen';
 import ChapterWrapper from '@/components/learn/ChapterWrapper';
 import EndScreen from '@/components/learn/EndScreen';
-import PlaceholderChapter from '@/components/learn/chapters/PlaceholderChapter';
 import BarterGame from '@/components/learn/chapters/BarterGame';
 import GoldComparison from '@/components/learn/chapters/GoldComparison';
 import StockToFlowViz from '@/components/learn/chapters/StockToFlowViz';
 import FractionalReserve from '@/components/learn/chapters/FractionalReserve';
-import AssetFlowViz from '@/components/learn/chapters/AssetFlowViz';
-import { chapters, TOTAL_CHAPTERS, getChapter } from '@/data/chapters';
+import PrinterViz from '@/components/learn/chapters/PrinterViz';
+import InflationPersonal from '@/components/learn/chapters/InflationPersonal';
+import CantillonFlow from '@/components/learn/chapters/CantillonFlow';
+import AssetRace from '@/components/learn/chapters/AssetRace';
+import { TOTAL_CHAPTERS, getChapter } from '@/data/chapters';
 
 type GameState = 'title' | 'playing' | 'end';
 
@@ -143,25 +145,16 @@ export default function GamePage() {
         return <StockToFlowViz onComplete={handleChapterComplete} />;
       case 'fractional-reserve':
         return <FractionalReserve onComplete={handleChapterComplete} />;
-      case 'asset-flow':
-        return <AssetFlowViz onComplete={handleChapterComplete} />;
-      case 'truvalue':
-      case 'decay':
-      case 'scoreboard':
-        return (
-          <PlaceholderChapter
-            chapter={chapter}
-            onComplete={handleChapterComplete}
-            existingTool
-          />
-        );
+      case 'printer':
+        return <PrinterViz onComplete={handleChapterComplete} />;
+      case 'inflation':
+        return <InflationPersonal onComplete={handleChapterComplete} />;
+      case 'cantillon':
+        return <CantillonFlow onComplete={handleChapterComplete} />;
+      case 'asset-race':
+        return <AssetRace onComplete={handleChapterComplete} />;
       default:
-        return (
-          <PlaceholderChapter
-            chapter={chapter}
-            onComplete={handleChapterComplete}
-          />
-        );
+        return null;
     }
   };
 
