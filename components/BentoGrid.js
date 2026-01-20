@@ -46,19 +46,19 @@ function BentoCard({ children, className = '', href, external = false }) {
 // TruValue - Branded splash card
 function TruValueCard() {
   return (
-    <BentoCard href="/tools/truvalue" className="h-full flex flex-col p-6 bg-gradient-to-br from-terminal-surface to-neutral-900">
+    <BentoCard href="/tools/truvalue" className="h-full flex flex-col p-4 sm:p-6 bg-gradient-to-br from-terminal-surface to-neutral-900">
       {/* Header */}
-      <div className="flex items-start justify-between mb-6">
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-xl bg-terminal-accent/10 border border-terminal-accent/30 flex items-center justify-center">
-            <span className="text-2xl font-light text-terminal-accent">$</span>
+      <div className="flex items-start justify-between mb-4 sm:mb-6">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-terminal-accent/10 border border-terminal-accent/30 flex items-center justify-center">
+            <span className="text-xl sm:text-2xl font-light text-terminal-accent">$</span>
           </div>
           <div>
-            <h3 className="text-xl font-medium tracking-tight text-white group-hover:text-terminal-accent transition-colors">
+            <h3 className="text-lg sm:text-xl font-medium tracking-tight text-white group-hover:text-terminal-accent transition-colors">
               TruValue
             </h3>
-            <p className="text-xs text-neutral-500 font-mono">
-              inflation-adjusted prices
+            <p className="text-[10px] sm:text-xs text-neutral-500 font-mono">
+              inflation-adjusted
             </p>
           </div>
         </div>
@@ -70,28 +70,29 @@ function TruValueCard() {
 
       {/* Key insight */}
       <div className="flex-1 flex flex-col justify-center items-center text-center">
-        <p className="text-neutral-600 font-mono text-[10px] uppercase tracking-wider mb-3">Since 1971</p>
-        <div className="flex items-center gap-3">
+        <p className="text-neutral-600 font-mono text-[10px] uppercase tracking-wider mb-2 sm:mb-3">Since 1971</p>
+        <div className="flex items-center gap-2 sm:gap-3">
           <div className="text-center">
-            <span className="text-3xl font-mono font-light text-white">$100</span>
+            <span className="text-2xl sm:text-3xl font-mono font-light text-white">$100</span>
             <p className="text-[10px] font-mono text-neutral-600 mt-1">nominal</p>
           </div>
-          <span className="text-neutral-600 text-lg">→</span>
+          <span className="text-neutral-600 text-base sm:text-lg">→</span>
           <div className="text-center">
-            <span className="text-3xl font-mono font-light text-red-400">$17</span>
+            <span className="text-2xl sm:text-3xl font-mono font-light text-red-400">$17</span>
             <p className="text-[10px] font-mono text-neutral-600 mt-1">real value</p>
           </div>
         </div>
-        <p className="text-neutral-500 font-mono text-xs mt-4">
+        <p className="text-neutral-500 font-mono text-[10px] sm:text-xs mt-3 sm:mt-4">
           M2 supply: <span className="text-amber-400">31x</span> since Nixon
         </p>
       </div>
 
       {/* Footer */}
-      <div className="pt-4 border-t border-neutral-800">
+      <div className="pt-3 sm:pt-4 border-t border-neutral-800">
         <div className="flex items-center justify-between">
-          <span className="text-[10px] font-mono text-neutral-600">See what things really cost</span>
-          <span className="text-xs font-mono text-terminal-accent">Explore →</span>
+          <span className="text-[10px] font-mono text-neutral-600 hidden sm:inline">See what things really cost</span>
+          <span className="text-[10px] font-mono text-neutral-600 sm:hidden">Real purchasing power</span>
+          <span className="text-[10px] sm:text-xs font-mono text-terminal-accent">Explore →</span>
         </div>
       </div>
     </BentoCard>
@@ -101,25 +102,25 @@ function TruValueCard() {
 // Fourth Turning - Branded splash card
 function FourthTurningCard() {
   return (
-    <BentoCard href="/tools/saeculum" className="h-full flex flex-col p-5 bg-gradient-to-br from-terminal-surface to-neutral-900">
+    <BentoCard href="/tools/saeculum" className="h-full flex flex-col p-4 sm:p-5 bg-gradient-to-br from-terminal-surface to-neutral-900">
       {/* Header */}
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex items-center gap-3">
-          <div className="w-11 h-11 rounded-xl bg-terminal-accent/10 border border-terminal-accent/30 flex items-center justify-center">
-            <svg className="w-6 h-6 text-terminal-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+      <div className="flex items-start justify-between mb-3 sm:mb-4">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-terminal-accent/10 border border-terminal-accent/30 flex items-center justify-center">
+            <svg className="w-5 h-5 sm:w-6 sm:h-6 text-terminal-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
               <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
             </svg>
           </div>
           <div>
-            <h3 className="text-lg font-medium tracking-tight text-white group-hover:text-terminal-accent transition-colors">
+            <h3 className="text-base sm:text-lg font-medium tracking-tight text-white group-hover:text-terminal-accent transition-colors">
               Saeculum
             </h3>
             <p className="text-[10px] text-neutral-500 font-mono">
-              fourth turning cycles
+              fourth turning
             </p>
           </div>
         </div>
-        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-mono bg-amber-500/20 text-amber-400 rounded-full">
+        <span className="inline-flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-2 py-0.5 text-[10px] font-mono bg-amber-500/20 text-amber-400 rounded-full">
           <span className="w-1 h-1 rounded-full bg-amber-400 animate-pulse" />
           CRISIS
         </span>
@@ -127,43 +128,43 @@ function FourthTurningCard() {
 
       {/* Key metrics */}
       <div className="flex-1 flex flex-col justify-center">
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center justify-between gap-2 sm:gap-4">
           {/* Season indicator */}
           <div className="text-center flex-1">
-            <p className="text-neutral-600 font-mono text-[10px] uppercase mb-2">Season</p>
-            <div className="flex items-center justify-center gap-1.5 mb-1">
-              <span className="w-2 h-2 rounded-full bg-neutral-700" title="Spring" />
-              <span className="w-2 h-2 rounded-full bg-neutral-700" title="Summer" />
-              <span className="w-2 h-2 rounded-full bg-neutral-700" title="Fall" />
-              <span className="w-2.5 h-2.5 rounded-full bg-amber-400 ring-2 ring-amber-400/30" title="Winter" />
+            <p className="text-neutral-600 font-mono text-[10px] uppercase mb-1 sm:mb-2">Season</p>
+            <div className="flex items-center justify-center gap-1 sm:gap-1.5 mb-1">
+              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-neutral-700" title="Spring" />
+              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-neutral-700" title="Summer" />
+              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-neutral-700" title="Fall" />
+              <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-amber-400 ring-2 ring-amber-400/30" title="Winter" />
             </div>
-            <span className="text-xs font-mono text-amber-400">WINTER</span>
+            <span className="text-[10px] sm:text-xs font-mono text-amber-400">WINTER</span>
           </div>
 
-          <div className="h-12 w-px bg-neutral-800" />
+          <div className="h-10 sm:h-12 w-px bg-neutral-800" />
 
           {/* Years in crisis */}
           <div className="text-center flex-1">
-            <p className="text-neutral-600 font-mono text-[10px] uppercase mb-2">Crisis Year</p>
-            <span className="text-2xl font-mono font-light text-white">17</span>
+            <p className="text-neutral-600 font-mono text-[10px] uppercase mb-1 sm:mb-2">Year</p>
+            <span className="text-xl sm:text-2xl font-mono font-light text-white">17</span>
             <p className="text-[10px] font-mono text-neutral-600">of ~22</p>
           </div>
 
-          <div className="h-12 w-px bg-neutral-800" />
+          <div className="h-10 sm:h-12 w-px bg-neutral-800" />
 
           {/* Polarization */}
           <div className="text-center flex-1">
-            <p className="text-neutral-600 font-mono text-[10px] uppercase mb-2">Polarization</p>
-            <span className="text-2xl font-mono font-light text-red-400">0.96</span>
-            <p className="text-[10px] font-mono text-neutral-600">Civil War: 0.94</p>
+            <p className="text-neutral-600 font-mono text-[10px] uppercase mb-1 sm:mb-2">Polar.</p>
+            <span className="text-xl sm:text-2xl font-mono font-light text-red-400">0.96</span>
+            <p className="text-[10px] font-mono text-neutral-600 hidden sm:block">Civil War: 0.94</p>
           </div>
         </div>
       </div>
 
       {/* Footer */}
-      <div className="pt-3 border-t border-neutral-800 flex items-center justify-between">
-        <span className="text-[10px] font-mono text-neutral-600">2008–2030 Millennial Crisis</span>
-        <span className="text-xs font-mono text-terminal-accent">Explore →</span>
+      <div className="pt-2 sm:pt-3 border-t border-neutral-800 flex items-center justify-between">
+        <span className="text-[10px] font-mono text-neutral-600">2008–2030 Crisis</span>
+        <span className="text-[10px] sm:text-xs font-mono text-terminal-accent">Explore →</span>
       </div>
     </BentoCard>
   );
@@ -218,74 +219,70 @@ function EchoCard() {
 // The Line - SPX/GOLD Regime Indicator
 function TheLineCard() {
   return (
-    <BentoCard href="/tools/the-line" className="h-full p-6 bg-gradient-to-br from-terminal-surface to-neutral-900 flex flex-col justify-between">
+    <BentoCard href="/tools/the-line" className="h-full p-4 sm:p-6 bg-gradient-to-br from-terminal-surface to-neutral-900 flex flex-col justify-between">
       {/* Top section */}
       <div className="flex items-start justify-between">
-        <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-xl bg-terminal-accent/10 border border-terminal-accent/30 flex items-center justify-center">
-            <TrendingUp className="w-7 h-7 text-terminal-accent" />
+        <div className="flex items-center gap-3 sm:gap-4">
+          <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl bg-terminal-accent/10 border border-terminal-accent/30 flex items-center justify-center">
+            <TrendingUp className="w-5 h-5 sm:w-7 sm:h-7 text-terminal-accent" />
           </div>
           <div>
-            <h3 className="text-2xl font-medium tracking-tight text-white group-hover:text-terminal-accent transition-colors">
+            <h3 className="text-lg sm:text-2xl font-medium tracking-tight text-white group-hover:text-terminal-accent transition-colors">
               The Line
             </h3>
-            <p className="text-sm text-neutral-500 font-mono">
-              SPX/GOLD regime indicator
+            <p className="text-xs sm:text-sm text-neutral-500 font-mono">
+              SPX/GOLD regime
             </p>
           </div>
         </div>
 
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-mono bg-terminal-accent/20 text-terminal-accent rounded-full">
-          <span className="w-1.5 h-1.5 rounded-full bg-terminal-accent animate-pulse" />
+        <span className="inline-flex items-center gap-1.5 px-2 py-0.5 sm:px-2.5 sm:py-1 text-[10px] font-mono bg-terminal-accent/20 text-terminal-accent rounded-full">
+          <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-terminal-accent animate-pulse" />
           LIVE
         </span>
       </div>
 
       {/* Middle - Key insight */}
-      <div className="flex-1 flex items-center justify-center py-4">
-        <div className="flex items-center gap-8">
+      <div className="flex-1 flex items-center justify-center py-3 sm:py-4">
+        <div className="flex items-center justify-center gap-4 sm:gap-8 w-full">
           {/* Current ratio gauge */}
-          <div className="text-center">
-            <p className="text-neutral-600 font-mono text-[10px] uppercase tracking-wider mb-2">Current Ratio</p>
-            <div className="relative">
-              <span className="text-4xl font-mono font-light text-white">1.64</span>
-              <span className="absolute -top-1 -right-6 text-amber-400 text-lg">→</span>
+          <div className="text-center flex-1">
+            <p className="text-neutral-600 font-mono text-[10px] uppercase tracking-wider mb-1 sm:mb-2">Ratio</p>
+            <div className="relative inline-block">
+              <span className="text-2xl sm:text-4xl font-mono font-light text-white">1.64</span>
+              <span className="absolute -top-1 -right-4 sm:-right-6 text-amber-400 text-sm sm:text-lg">→</span>
             </div>
           </div>
 
           {/* Divider */}
-          <div className="h-16 w-px bg-neutral-800" />
+          <div className="h-10 sm:h-16 w-px bg-neutral-800" />
 
           {/* Threshold indicator */}
-          <div className="text-center">
-            <p className="text-neutral-600 font-mono text-[10px] uppercase tracking-wider mb-2">Danger Zone</p>
-            <div className="flex items-center gap-2">
-              <span className="text-4xl font-mono font-light text-red-400">{'<'}1.5</span>
-            </div>
+          <div className="text-center flex-1">
+            <p className="text-neutral-600 font-mono text-[10px] uppercase tracking-wider mb-1 sm:mb-2">Danger</p>
+            <span className="text-2xl sm:text-4xl font-mono font-light text-red-400">{'<'}1.5</span>
           </div>
 
           {/* Divider */}
-          <div className="h-16 w-px bg-neutral-800" />
+          <div className="h-10 sm:h-16 w-px bg-neutral-800" />
 
           {/* Status */}
-          <div className="text-center">
-            <p className="text-neutral-600 font-mono text-[10px] uppercase tracking-wider mb-2">Status</p>
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-amber-500/10 border border-amber-500/30 rounded-lg">
-              <span className="w-2 h-2 rounded-full bg-amber-400" />
-              <span className="font-mono text-sm text-amber-400">Near Line</span>
+          <div className="text-center flex-1">
+            <p className="text-neutral-600 font-mono text-[10px] uppercase tracking-wider mb-1 sm:mb-2">Status</p>
+            <span className="inline-flex items-center gap-1.5 sm:gap-2 px-2 py-1 sm:px-3 sm:py-1.5 bg-amber-500/10 border border-amber-500/30 rounded-lg">
+              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-400" />
+              <span className="font-mono text-xs sm:text-sm text-amber-400">Near</span>
             </span>
           </div>
         </div>
       </div>
 
       {/* Bottom stats */}
-      <div className="flex items-center justify-between pt-4 border-t border-neutral-800">
-        <div className="flex items-center gap-6 text-neutral-500 font-mono text-xs">
-          <span>Only <span className="text-white">2 breaches</span> in 50+ years</span>
-          <span className="text-neutral-700">•</span>
-          <span>Last breach: <span className="text-white">2008-2011</span></span>
-        </div>
-        <span className="text-xs font-mono text-terminal-accent">Explore →</span>
+      <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-neutral-800">
+        <p className="text-neutral-500 font-mono text-[10px] sm:text-xs">
+          <span className="hidden sm:inline">Only </span><span className="text-white">2 breaches</span> in 50+ yrs
+        </p>
+        <span className="text-[10px] sm:text-xs font-mono text-terminal-accent">Explore →</span>
       </div>
     </BentoCard>
   );
