@@ -19,8 +19,10 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-terminal-bg/80 backdrop-blur-sm border-b border-neutral-800">
       <nav className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
-          {/* Terminal Navigation */}
-          <TerminalNav />
+          {/* Logo */}
+          <Link href="/home" className="font-mono text-sm text-white hover:text-amber-500 transition-colors">
+            naly.dev
+          </Link>
 
           {/* Navigation */}
           <ul className="hidden sm:flex items-center gap-1">
@@ -51,11 +53,8 @@ export default function Header() {
             })}
           </ul>
 
-          {/* LIVE indicator */}
-          <div className="flex items-center gap-2 text-xs font-mono text-neutral-500">
-            <span className="w-1.5 h-1.5 rounded-full bg-terminal-accent animate-pulse" />
-            <span>LIVE</span>
-          </div>
+          {/* Terminal Navigation */}
+          <TerminalNav />
         </div>
       </nav>
     </header>
