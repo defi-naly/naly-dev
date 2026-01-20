@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Clock, TrendingDown, Radio } from 'lucide-react';
+import { ArrowUpRight, Clock, TrendingDown, Radio, Gamepad2 } from 'lucide-react';
 
 const statusColors = {
   live: 'bg-terminal-accent/10 text-terminal-accent border-terminal-accent/20',
@@ -198,12 +198,20 @@ export default function ToolCard({ tool, index }) {
           {tool.id === 'echo' && <EchoPreview />}
 
           {/* Status badge overlay */}
-          <div className="absolute top-3 left-3 z-10">
+          <div className="absolute top-3 left-3 z-10 flex flex-col gap-2">
             <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono border rounded-full backdrop-blur-sm ${statusColors[tool.status]}`}>
               {isLive && <span className="w-1.5 h-1.5 rounded-full bg-terminal-accent animate-pulse" />}
               {!isLive && <Clock className="w-3 h-3" />}
               {tool.status.toUpperCase()}
             </span>
+            {tool.chapterPairing && (
+              <Link href="/learn/game" onClick={(e) => e.stopPropagation()}>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono bg-amber-500/10 text-amber-500 border border-amber-500/20 rounded-full backdrop-blur-sm hover:bg-amber-500/20 transition-colors">
+                  <Gamepad2 className="w-3 h-3" />
+                  Ch. {tool.chapterPairing.chapter}
+                </span>
+              </Link>
+            )}
           </div>
 
           {/* Arrow overlay */}

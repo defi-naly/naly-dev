@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Check, ArrowRight, Share2, Link2, Twitter, BookOpen } from 'lucide-react';
+import { Check, ArrowRight, Share2, Link2, Twitter, BookOpen, TrendingUp, Clock } from 'lucide-react';
 import Link from 'next/link';
 
 interface EndScreenProps {
@@ -114,10 +114,62 @@ export default function EndScreen({ onRestart }: EndScreenProps) {
         </ul>
       </motion.div>
 
+      {/* Tool Recommendations */}
+      <motion.div
+        variants={itemVariants}
+        className="mt-6 max-w-md w-full"
+      >
+        <h3 className="text-neutral-500 font-mono text-xs uppercase tracking-wider mb-3 text-center">
+          Explore the Tools
+        </h3>
+        <div className="grid grid-cols-2 gap-3">
+          <Link href="/tools/truvalue">
+            <motion.div
+              className="p-4 bg-neutral-900 border border-neutral-800 rounded-lg hover:border-emerald-500/50 transition-all group"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <div className="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-3">
+                <TrendingUp className="w-5 h-5 text-emerald-500" />
+              </div>
+              <h4 className="text-white font-mono text-sm font-medium group-hover:text-emerald-500 transition-colors">
+                TruValue
+              </h4>
+              <p className="text-neutral-500 font-mono text-xs mt-1">
+                Full Dashboard
+              </p>
+              <span className="inline-flex items-center gap-1 text-amber-500/70 font-mono text-[10px] mt-2">
+                Ch. 8 deep dive
+              </span>
+            </motion.div>
+          </Link>
+          <Link href="/tools/decay">
+            <motion.div
+              className="p-4 bg-neutral-900 border border-neutral-800 rounded-lg hover:border-amber-500/50 transition-all group"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <div className="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-3">
+                <Clock className="w-5 h-5 text-amber-500" />
+              </div>
+              <h4 className="text-white font-mono text-sm font-medium group-hover:text-amber-500 transition-colors">
+                Decay
+              </h4>
+              <p className="text-neutral-500 font-mono text-xs mt-1">
+                Time Machine
+              </p>
+              <span className="inline-flex items-center gap-1 text-amber-500/70 font-mono text-[10px] mt-2">
+                Ch. 6 deep dive
+              </span>
+            </motion.div>
+          </Link>
+        </div>
+      </motion.div>
+
       {/* Action Buttons */}
       <motion.div
         variants={itemVariants}
-        className="mt-8 flex flex-col sm:flex-row gap-3"
+        className="mt-6 flex flex-col sm:flex-row gap-3"
       >
         <Link href="/learn/resources">
           <motion.button
@@ -127,16 +179,6 @@ export default function EndScreen({ onRestart }: EndScreenProps) {
           >
             <BookOpen className="w-4 h-4" />
             GO DEEPER
-          </motion.button>
-        </Link>
-        <Link href="/tools">
-          <motion.button
-            className="bg-neutral-800 border border-neutral-700 text-neutral-300 font-mono text-sm px-6 py-3 rounded hover:border-amber-500 hover:text-amber-500 transition-colors flex items-center gap-2"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            EXPLORE TOOLS
-            <ArrowRight className="w-4 h-4" />
           </motion.button>
         </Link>
         <motion.button

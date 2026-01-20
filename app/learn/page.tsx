@@ -1,10 +1,19 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { ArrowRight, Play, BookOpen } from 'lucide-react';
+import { ArrowRight, Play, BookOpen, Check, Circle, ChevronRight } from 'lucide-react';
+import { chapters } from '@/data/chapters';
+
+const STORAGE_KEY = 'money-game-progress';
+
+interface SavedProgress {
+  chapter: number;
+  completed: boolean;
+}
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -23,7 +32,48 @@ const itemVariants = {
   },
 };
 
+type ChapterStatus = 'complete' | 'current' | 'locked';
+
+function getChapterStatus(chapterNum: number, progress: SavedProgress | null): ChapterStatus {
+  if (!progress) {
+    return chapterNum === 1 ? 'current' : 'locked';
+  }
+  if (progress.completed) {
+    return 'complete';
+  }
+  if (chapterNum < progress.chapter) {
+    return 'complete';
+  }
+  if (chapterNum === progress.chapter) {
+    return 'current';
+  }
+  return 'locked';
+}
+
 export default function LearnPage() {
+  const [progress, setProgress] = useState<SavedProgress | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved) as SavedProgress;
+        if (parsed.chapter > 1 || parsed.completed) {
+          setProgress(parsed);
+        }
+      }
+    } catch {
+      // Ignore localStorage errors
+    }
+  }, []);
+
+  const getButtonText = () => {
+    if (!progress) return 'START';
+    if (progress.completed) return 'PLAY AGAIN';
+    return `CONTINUE FROM CHAPTER ${progress.chapter}`;
+  };
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -82,7 +132,7 @@ export default function LearnPage() {
 
                       <div className="flex items-center gap-4 mt-4">
                         <span className="inline-flex items-center gap-2 text-amber-500 font-mono text-sm font-medium group-hover:gap-3 transition-all">
-                          START
+                          {mounted ? getButtonText() : 'START'}
                           <ArrowRight className="w-4 h-4" />
                         </span>
                         <span className="text-neutral-600 font-mono text-xs">
@@ -93,6 +143,66 @@ export default function LearnPage() {
                   </div>
                 </div>
               </Link>
+            </motion.div>
+
+            {/* Chapter List */}
+            <motion.div variants={itemVariants}>
+              <div className="border-t border-neutral-800 pt-6">
+                <h3 className="text-neutral-500 font-mono text-xs uppercase tracking-wider mb-4">
+                  Chapter List
+                </h3>
+                <div className="space-y-1">
+                  {chapters.map((chapter) => {
+                    const status = mounted ? getChapterStatus(chapter.id, progress) : (chapter.id === 1 ? 'current' : 'locked');
+
+                    return (
+                      <div
+                        key={chapter.id}
+                        className={`flex items-center justify-between py-2 px-3 rounded transition-colors ${
+                          status === 'current'
+                            ? 'bg-amber-500/10 border border-amber-500/20'
+                            : status === 'complete'
+                            ? 'bg-neutral-900/50'
+                            : ''
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className={`font-mono text-xs w-5 ${
+                            status === 'complete' ? 'text-emerald-500' :
+                            status === 'current' ? 'text-amber-500' :
+                            'text-neutral-600'
+                          }`}>
+                            {chapter.id}.
+                          </span>
+                          <span className={`font-mono text-sm ${
+                            status === 'complete' ? 'text-neutral-400' :
+                            status === 'current' ? 'text-white' :
+                            'text-neutral-600'
+                          }`}>
+                            {chapter.title}
+                          </span>
+                          {status === 'current' && (
+                            <span className="text-amber-500/60 font-mono text-xs">
+                              {chapter.concept}
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex items-center">
+                          {status === 'complete' && (
+                            <Check className="w-4 h-4 text-emerald-500" />
+                          )}
+                          {status === 'current' && (
+                            <ChevronRight className="w-4 h-4 text-amber-500" />
+                          )}
+                          {status === 'locked' && (
+                            <Circle className="w-3 h-3 text-neutral-700" />
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             </motion.div>
 
             {/* Resources Link */}
