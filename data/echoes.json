@@ -1,0 +1,308 @@
+{
+  "metrics": {
+    "debtGDP": {
+      "label": "Debt/GDP",
+      "unit": "%",
+      "min": 15,
+      "max": 150,
+      "description": "Federal debt as percentage of GDP"
+    },
+    "cape": {
+      "label": "CAPE Ratio",
+      "unit": "",
+      "min": 5,
+      "max": 45,
+      "description": "Cyclically adjusted price-to-earnings ratio"
+    },
+    "unemployment": {
+      "label": "Unemployment",
+      "unit": "%",
+      "min": 2,
+      "max": 25,
+      "description": "Civilian unemployment rate"
+    },
+    "inflation": {
+      "label": "Inflation (YoY)",
+      "unit": "%",
+      "min": -15,
+      "max": 20,
+      "description": "Year-over-year CPI change"
+    },
+    "fedRate": {
+      "label": "Fed Funds Rate",
+      "unit": "%",
+      "min": 0,
+      "max": 20,
+      "description": "Federal Reserve target rate"
+    },
+    "top1Share": {
+      "label": "Top 1% Wealth",
+      "unit": "%",
+      "min": 20,
+      "max": 55,
+      "description": "Share of wealth held by top 1%"
+    },
+    "goldM2": {
+      "label": "Gold/M2 Ratio",
+      "unit": "",
+      "min": 0.01,
+      "max": 0.25,
+      "description": "Gold price relative to money supply"
+    },
+    "polarization": {
+      "label": "Polarization",
+      "unit": "",
+      "min": 0.3,
+      "max": 1.0,
+      "description": "Political polarization index (DW-NOMINATE)"
+    }
+  },
+  "weights": {
+    "debtGDP": 1.0,
+    "cape": 1.0,
+    "unemployment": 0.8,
+    "inflation": 0.8,
+    "fedRate": 0.6,
+    "top1Share": 0.7,
+    "goldM2": 0.5,
+    "polarization": 0.6
+  },
+  "periods": {
+    "1929": {
+      "name": "Great Depression",
+      "year": 1929,
+      "type": "debt_bubble",
+      "metrics": {
+        "debtGDP": 16,
+        "cape": 32.6,
+        "unemployment": 3.2,
+        "inflation": 0.0,
+        "fedRate": 5.0,
+        "top1Share": 48,
+        "goldM2": 0.18,
+        "polarization": 0.65
+      },
+      "outcome": {
+        "marketDrawdown": -89,
+        "recoveryYears": 25,
+        "peakUnemployment": 25,
+        "monthsToBottom": 34,
+        "narrative": "Market fell 89% over 34 months. Unemployment hit 25%. Full recovery took 25 years.",
+        "policyResponse": "Initially tight monetary policy, later New Deal spending programs"
+      },
+      "echoBreakerReasons": [
+        "Fed willing to print aggressively (unlike 1929)",
+        "No gold standard constraint today",
+        "FDIC prevents bank runs",
+        "Global policy coordination"
+      ]
+    },
+    "1937": {
+      "name": "Depression Relapse",
+      "year": 1937,
+      "type": "policy_error",
+      "metrics": {
+        "debtGDP": 43,
+        "cape": 21.5,
+        "unemployment": 14.3,
+        "inflation": 3.6,
+        "fedRate": 1.0,
+        "top1Share": 44,
+        "goldM2": 0.15,
+        "polarization": 0.58
+      },
+      "outcome": {
+        "marketDrawdown": -54,
+        "recoveryYears": 4,
+        "peakUnemployment": 19,
+        "monthsToBottom": 13,
+        "narrative": "Premature tightening caused double-dip. Market fell 54%, unemployment surged to 19%.",
+        "policyResponse": "Fed tightened too soon, then reversed course"
+      },
+      "echoBreakerReasons": [
+        "Fed has learned from 1937 mistake",
+        "More fiscal stimulus tools available",
+        "Better economic data for decision-making"
+      ]
+    },
+    "1973": {
+      "name": "Stagflation Crisis",
+      "year": 1973,
+      "type": "inflation_shock",
+      "metrics": {
+        "debtGDP": 32,
+        "cape": 18.7,
+        "unemployment": 4.9,
+        "inflation": 8.7,
+        "fedRate": 9.0,
+        "top1Share": 27,
+        "goldM2": 0.08,
+        "polarization": 0.52
+      },
+      "outcome": {
+        "marketDrawdown": -48,
+        "recoveryYears": 7,
+        "peakUnemployment": 9,
+        "monthsToBottom": 21,
+        "narrative": "Oil embargo + inflation. Market fell 48%, stagflation persisted for years.",
+        "policyResponse": "Nixon price controls failed, eventually Volcker's rate hikes"
+      },
+      "echoBreakerReasons": [
+        "US is now net energy producer",
+        "Fed has clearer inflation mandate",
+        "More diversified energy sources"
+      ]
+    },
+    "1980": {
+      "name": "Volcker Shock",
+      "year": 1980,
+      "type": "rate_shock",
+      "metrics": {
+        "debtGDP": 31,
+        "cape": 9.0,
+        "unemployment": 7.1,
+        "inflation": 14.8,
+        "fedRate": 17.6,
+        "top1Share": 25,
+        "goldM2": 0.22,
+        "polarization": 0.48
+      },
+      "outcome": {
+        "marketDrawdown": -27,
+        "recoveryYears": 2,
+        "peakUnemployment": 10.8,
+        "monthsToBottom": 20,
+        "narrative": "Volcker raised rates to 20% to break inflation. Short sharp recession, then boom.",
+        "policyResponse": "Aggressive rate hikes broke inflation expectations"
+      },
+      "echoBreakerReasons": [
+        "Debt levels much higher today (harder to sustain high rates)",
+        "Asset prices more rate-sensitive",
+        "Political tolerance for pain is lower"
+      ]
+    },
+    "1987": {
+      "name": "Black Monday",
+      "year": 1987,
+      "type": "flash_crash",
+      "metrics": {
+        "debtGDP": 48,
+        "cape": 18.3,
+        "unemployment": 6.0,
+        "inflation": 4.4,
+        "fedRate": 6.7,
+        "top1Share": 33,
+        "goldM2": 0.07,
+        "polarization": 0.55
+      },
+      "outcome": {
+        "marketDrawdown": -34,
+        "recoveryYears": 2,
+        "peakUnemployment": 6.3,
+        "monthsToBottom": 0,
+        "narrative": "Single-day 22% crash. Fed provided liquidity, market recovered in 2 years.",
+        "policyResponse": "Greenspan flooded system with liquidity"
+      },
+      "echoBreakerReasons": [
+        "Circuit breakers now exist",
+        "Fed response playbook established",
+        "Portfolio insurance strategies updated"
+      ]
+    },
+    "2000": {
+      "name": "Dot-com Crash",
+      "year": 2000,
+      "type": "valuation_bubble",
+      "metrics": {
+        "debtGDP": 55,
+        "cape": 44.2,
+        "unemployment": 4.0,
+        "inflation": 3.4,
+        "fedRate": 6.5,
+        "top1Share": 38,
+        "goldM2": 0.05,
+        "polarization": 0.72
+      },
+      "outcome": {
+        "marketDrawdown": -49,
+        "recoveryYears": 7,
+        "peakUnemployment": 6.3,
+        "monthsToBottom": 31,
+        "narrative": "Tech bubble popped. NASDAQ fell 78%, S&P fell 49%. Mild recession.",
+        "policyResponse": "Fed cut rates aggressively, fueled housing bubble"
+      },
+      "echoBreakerReasons": [
+        "Today's tech has actual earnings",
+        "AI productivity gains may be real",
+        "Tech is more embedded in economy"
+      ]
+    },
+    "2008": {
+      "name": "Financial Crisis",
+      "year": 2008,
+      "type": "credit_crisis",
+      "metrics": {
+        "debtGDP": 68,
+        "cape": 27.3,
+        "unemployment": 5.0,
+        "inflation": 3.8,
+        "fedRate": 2.0,
+        "top1Share": 42,
+        "goldM2": 0.04,
+        "polarization": 0.82
+      },
+      "outcome": {
+        "marketDrawdown": -57,
+        "recoveryYears": 5.5,
+        "peakUnemployment": 10,
+        "monthsToBottom": 17,
+        "narrative": "Subprime collapse triggered global crisis. Market fell 57%, required massive intervention.",
+        "policyResponse": "TARP, QE, zero rates - 'whatever it takes'"
+      },
+      "echoBreakerReasons": [
+        "Banks better capitalized (Dodd-Frank)",
+        "Fed has QE playbook ready",
+        "Subprime exposure much lower today"
+      ]
+    },
+    "2020": {
+      "name": "COVID Crash",
+      "year": 2020,
+      "type": "exogenous_shock",
+      "metrics": {
+        "debtGDP": 107,
+        "cape": 31.1,
+        "unemployment": 3.5,
+        "inflation": 2.3,
+        "fedRate": 1.5,
+        "top1Share": 45,
+        "goldM2": 0.06,
+        "polarization": 0.91
+      },
+      "outcome": {
+        "marketDrawdown": -34,
+        "recoveryYears": 0.4,
+        "peakUnemployment": 14.7,
+        "monthsToBottom": 1,
+        "narrative": "Fastest crash and recovery in history. 34% down in one month, new highs in 5 months.",
+        "policyResponse": "Unlimited QE, direct stimulus checks, PPP loans"
+      },
+      "echoBreakerReasons": [
+        "Exogenous shock vs. structural problem",
+        "Massive fiscal response possible",
+        "Different: economy was fundamentally sound pre-COVID"
+      ]
+    }
+  },
+  "currentDefaults": {
+    "debtGDP": 123,
+    "cape": 33,
+    "unemployment": 4.1,
+    "inflation": 3.0,
+    "fedRate": 4.5,
+    "top1Share": 50,
+    "goldM2": 0.08,
+    "polarization": 0.96,
+    "lastUpdated": "2025-01"
+  }
+}

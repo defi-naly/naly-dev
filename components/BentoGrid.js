@@ -130,6 +130,29 @@ function TimeMachineCard() {
   );
 }
 
+// Echo - Historical pattern finder card (horizontal)
+function EchoCard() {
+  return (
+    <BentoCard href="/tools/echo" className="h-full flex items-center justify-center gap-4 p-4 bg-gradient-to-r from-terminal-surface to-neutral-900">
+      <div className="w-10 h-10 rounded-lg bg-terminal-accent/10 border border-terminal-accent/20 flex items-center justify-center flex-shrink-0">
+        <svg className="w-5 h-5 text-terminal-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9.348 14.652a3.75 3.75 0 0 1 0-5.304m5.304 0a3.75 3.75 0 0 1 0 5.304m-7.425 2.121a6.75 6.75 0 0 1 0-9.546m9.546 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.807-3.808-9.98 0-13.788m13.788 0c3.808 3.807 3.808 9.98 0 13.788" />
+        </svg>
+      </div>
+      <div className="text-left">
+        <h3 className="text-sm font-medium tracking-tight text-white group-hover:text-terminal-accent transition-colors">
+          Echo
+        </h3>
+        <p className="text-[10px] text-neutral-500 font-mono">pattern finder</p>
+      </div>
+      <div className="h-6 w-px bg-neutral-800 mx-2" />
+      <div className="font-mono text-xs text-neutral-500">
+        TODAY ≈ <span className="text-terminal-accent">1929</span>
+      </div>
+    </BentoCard>
+  );
+}
+
 // Compact writing card
 function WritingCard({ title, href, tag }) {
   return (
@@ -232,12 +255,17 @@ export default function BentoGrid() {
       </motion.div>
 
       {/* Time Machine - Tool (horizontal) */}
-      <motion.div variants={itemVariants} className="col-span-4 lg:col-span-2">
+      <motion.div variants={itemVariants} className="col-span-2 lg:col-span-2">
         <TimeMachineCard />
       </motion.div>
 
+      {/* Echo - Tool (horizontal) */}
+      <motion.div variants={itemVariants} className="col-span-2 lg:col-span-2">
+        <EchoCard />
+      </motion.div>
+
       {/* Social - Small split */}
-      <motion.div variants={itemVariants} className="col-span-2 lg:col-span-1">
+      <motion.div variants={itemVariants} className="col-span-2 lg:col-span-2">
         <SocialMini />
       </motion.div>
     </motion.div>
