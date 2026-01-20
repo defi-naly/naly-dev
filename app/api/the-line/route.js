@@ -1,78 +1,54 @@
 import { NextResponse } from 'next/server';
 
 // Historical SPX/GOLD ratio data (pre-2004, before GLD ETF existed)
-// Data compiled from Federal Reserve FRED, Yahoo Finance, and historical records
+// SPX/GOLD = S&P 500 Index Value / Gold Price per Ounce
+// Sources: FRED, Yahoo Finance historical, MacroTrends
 const HISTORICAL_DATA = [
   // 1970s - End of Bretton Woods, Oil Crisis
-  { date: '1971-01-01', ratio: 2.45 },
-  { date: '1972-01-01', ratio: 1.95 },
-  { date: '1973-01-01', ratio: 1.48 }, // BREACH - Oil crisis begins
-  { date: '1974-01-01', ratio: 0.59 }, // Deep breach - S&P crashes
-  { date: '1975-01-01', ratio: 0.56 },
-  { date: '1976-01-01', ratio: 0.76 },
-  { date: '1977-01-01', ratio: 0.63 },
-  { date: '1978-01-01', ratio: 0.52 },
-  { date: '1979-01-01', ratio: 0.38 },
-  { date: '1980-01-01', ratio: 0.18 }, // Gold peaks at $850
-  { date: '1980-06-01', ratio: 0.20 },
-  { date: '1981-01-01', ratio: 0.29 },
-  { date: '1982-01-01', ratio: 0.35 },
-  { date: '1983-01-01', ratio: 0.42 },
-  { date: '1984-01-01', ratio: 0.52 },
+  { date: '1971-01-01', ratio: 2.30 },  // SPX ~92, Gold $40
+  { date: '1972-01-01', ratio: 2.05 },  // SPX ~119, Gold $58
+  { date: '1973-01-01', ratio: 0.92 },  // BREACH - SPX ~97, Gold $106
+  { date: '1974-01-01', ratio: 0.37 },  // Deep breach - SPX ~68, Gold $183
+  { date: '1975-01-01', ratio: 0.52 },  // SPX ~86, Gold $165
+  { date: '1976-01-01', ratio: 0.80 },  // SPX ~103, Gold $129
+  { date: '1977-01-01', ratio: 0.65 },  // SPX ~98, Gold $150
+  { date: '1978-01-01', ratio: 0.52 },  // SPX ~96, Gold $185
+  { date: '1979-01-01', ratio: 0.35 },  // SPX ~104, Gold $300
+  { date: '1980-01-01', ratio: 0.22 },  // Gold peaks at $615 avg, SPX ~136
+  { date: '1980-06-01', ratio: 0.21 },
+  { date: '1981-01-01', ratio: 0.28 },  // SPX ~130, Gold $460
+  { date: '1982-01-01', ratio: 0.32 },  // SPX ~120, Gold $376
+  { date: '1983-01-01', ratio: 0.38 },  // SPX ~145, Gold $380
+  { date: '1984-01-01', ratio: 0.44 },  // SPX ~165, Gold $375
 
   // 1980s - Recovery
-  { date: '1985-01-01', ratio: 0.59 },
-  { date: '1986-01-01', ratio: 0.66 },
-  { date: '1987-01-01', ratio: 0.65 },
-  { date: '1988-01-01', ratio: 0.71 },
-  { date: '1989-01-01', ratio: 0.85 },
+  { date: '1985-01-01', ratio: 0.67 },  // SPX ~212, Gold $317
+  { date: '1986-01-01', ratio: 0.62 },  // SPX ~242, Gold $390
+  { date: '1987-01-01', ratio: 0.65 },  // SPX ~286, Gold $440
+  { date: '1988-01-01', ratio: 0.63 },  // SPX ~265, Gold $420
+  { date: '1989-01-01', ratio: 0.88 },  // SPX ~323, Gold $367
 
-  // 1990s - Bull market
-  { date: '1990-01-01', ratio: 0.92 },
-  { date: '1991-01-01', ratio: 1.08 },
-  { date: '1992-01-01', ratio: 1.25 },
-  { date: '1993-01-01', ratio: 1.32 },
-  { date: '1994-01-01', ratio: 1.21 },
-  { date: '1995-01-01', ratio: 1.45 },
-  { date: '1996-01-01', ratio: 1.72 },
-  { date: '1997-01-01', ratio: 2.22 },
-  { date: '1998-01-01', ratio: 2.85 },
-  { date: '1999-01-01', ratio: 4.92 },
-  { date: '2000-01-01', ratio: 5.05 }, // Dot-com peak
+  // 1990s - Bull market begins
+  { date: '1990-01-01', ratio: 0.85 },  // SPX ~330, Gold $386
+  { date: '1991-01-01', ratio: 0.91 },  // SPX ~330, Gold $362
+  { date: '1992-01-01', ratio: 1.22 },  // SPX ~417, Gold $342
+  { date: '1993-01-01', ratio: 1.26 },  // SPX ~447, Gold $355
+  { date: '1994-01-01', ratio: 1.19 },  // SPX ~460, Gold $386
+  { date: '1995-01-01', ratio: 1.27 },  // SPX ~487, Gold $384
+  { date: '1996-01-01', ratio: 1.60 },  // SPX ~616, Gold $385
+  { date: '1997-01-01', ratio: 2.18 },  // SPX ~766, Gold $352
+  { date: '1998-01-01', ratio: 3.24 },  // SPX ~963, Gold $297
+  { date: '1999-01-01', ratio: 4.57 },  // SPX ~1279, Gold $280
+  { date: '2000-01-01', ratio: 5.26 },  // Dot-com peak - SPX ~1469, Gold $279
 
   // 2000s - Dot-com bust, recovery, GFC
-  { date: '2001-01-01', ratio: 4.55 },
-  { date: '2002-01-01', ratio: 3.25 },
-  { date: '2003-01-01', ratio: 2.62 },
-  { date: '2004-01-01', ratio: 2.78 },
-  { date: '2005-01-01', ratio: 2.65 },
-  { date: '2006-01-01', ratio: 2.08 },
-  { date: '2007-01-01', ratio: 2.25 },
-  { date: '2007-10-01', ratio: 2.10 },
-  { date: '2008-01-01', ratio: 1.52 },
-  { date: '2008-03-01', ratio: 1.40 }, // BREACH - Bear Stearns
-  { date: '2008-09-01', ratio: 1.28 }, // Lehman collapse
-  { date: '2008-11-01', ratio: 1.05 },
-  { date: '2009-03-01', ratio: 0.72 }, // S&P low
-  { date: '2009-06-01', ratio: 0.98 },
-  { date: '2009-12-01', ratio: 1.03 },
-
-  // 2010s - Recovery and bull market
-  { date: '2010-01-01', ratio: 1.05 },
-  { date: '2010-06-01', ratio: 0.88 },
-  { date: '2010-12-01', ratio: 0.92 },
-  { date: '2011-01-01', ratio: 0.92 },
-  { date: '2011-06-01', ratio: 0.85 },
-  { date: '2011-09-01', ratio: 0.65 }, // Gold near peak
-  { date: '2012-01-01', ratio: 0.79 },
-  { date: '2012-06-01', ratio: 0.84 },
-  { date: '2012-12-01', ratio: 0.85 },
-  { date: '2013-01-01', ratio: 0.93 },
-  { date: '2013-06-01', ratio: 1.25 }, // Gold crash
-  { date: '2013-12-01', ratio: 1.53 }, // Above line again
+  { date: '2001-01-01', ratio: 4.80 },  // SPX ~1320, Gold $275
+  { date: '2002-01-01', ratio: 3.68 },  // SPX ~1130, Gold $307
+  { date: '2003-01-01', ratio: 2.46 },  // SPX ~880, Gold $358
+  { date: '2004-01-01', ratio: 2.71 },  // SPX ~1112, Gold $410
 ];
 
-// Threshold value
+// Threshold value - below this signals regime shift
 const THRESHOLD = 1.50;
 
 // Yahoo Finance API endpoint
@@ -146,13 +122,13 @@ export async function GET(request) {
     const gldMap = new Map(gldData.map(d => [d.date, d.price]));
 
     // Calculate ratio for each date where we have both prices
+    // SPY and GLD both trade at ~1/10th of their underlying (SPX and Gold)
+    // So SPY/GLD ≈ SPX/GOLD (the scaling factors cancel out)
     const liveHistory = spyData
       .filter(spy => gldMap.has(spy.date))
       .map(spy => {
         const gldPrice = gldMap.get(spy.date);
-        // GLD is 1/10th of gold price, so multiply by 10 for actual gold equivalent
-        // Then SPY/GLD * 10 gives us SPX/GOLD equivalent
-        const ratio = spy.price / (gldPrice * 10);
+        const ratio = spy.price / gldPrice;
         return {
           date: spy.date,
           ratio: Math.round(ratio * 100) / 100,
@@ -237,8 +213,7 @@ export async function GET(request) {
       status: current.ratio >= THRESHOLD ? 'above' : 'breached',
       history: HISTORICAL_DATA,
       breachPeriods: [
-        { start: '1973-01-01', end: '1983-01-01' },
-        { start: '2008-03-01', end: '2013-06-01' },
+        { start: '1973-01-01', end: '1992-01-01' },
       ],
       breachCount: 2,
       avgDrawdownAfterBreach: -52,

@@ -19,10 +19,10 @@ import {
 
 const THRESHOLD = 1.50;
 
-// Breach periods for shading
+// Breach periods for shading (ratio below 1.50)
 const BREACH_ZONES = [
-  { start: '1973-01-01', end: '1983-01-01', label: '1973 Breach' },
-  { start: '2008-03-01', end: '2013-06-01', label: '2008 Breach' },
+  { start: '1973-01-01', end: '1996-01-01', label: '1973-1996 Breach' },
+  { start: '2008-01-01', end: '2013-12-01', label: '2008 Breach' },
 ];
 
 function CustomTooltip({ active, payload }) {
