@@ -216,24 +216,63 @@ function EchoCard() {
   );
 }
 
-// The Fork - Debt crisis options card (horizontal)
+// The Fork - Debt crisis options card
 function TheForkCard() {
   return (
-    <BentoCard href="/tools/the-fork" className="h-full flex items-center justify-center gap-4 p-4 bg-gradient-to-r from-terminal-surface to-neutral-900">
-      <div className="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center flex-shrink-0">
-        <svg className="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
-        </svg>
+    <BentoCard href="/tools/the-fork" className="h-full flex flex-col p-4 sm:p-5 bg-gradient-to-br from-terminal-surface to-neutral-900">
+      {/* Header */}
+      <div className="flex items-start justify-between mb-3 sm:mb-4">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center">
+            <svg className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+            </svg>
+          </div>
+          <div>
+            <h3 className="text-base sm:text-lg font-medium tracking-tight text-white group-hover:text-terminal-accent transition-colors">
+              The Fork
+            </h3>
+            <p className="text-[10px] text-neutral-500 font-mono">
+              debt crisis paths
+            </p>
+          </div>
+        </div>
       </div>
-      <div className="text-left">
-        <h3 className="text-sm font-medium tracking-tight text-white group-hover:text-terminal-accent transition-colors">
-          The Fork
-        </h3>
-        <p className="text-[10px] text-neutral-500 font-mono">debt crisis options</p>
+
+      {/* Two paths visualization */}
+      <div className="flex-1 flex items-center justify-center">
+        <div className="flex items-center gap-3 sm:gap-4">
+          {/* Print path */}
+          <div className="text-center">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center mx-auto mb-2">
+              <span className="text-emerald-400 font-mono text-lg sm:text-xl font-light">$</span>
+            </div>
+            <span className="text-[10px] sm:text-xs font-mono text-emerald-400">PRINT</span>
+            <p className="text-[10px] font-mono text-neutral-600 mt-0.5">inflate</p>
+          </div>
+
+          {/* Fork divider */}
+          <div className="flex flex-col items-center gap-1">
+            <div className="w-6 h-px bg-neutral-700" />
+            <span className="text-neutral-600 text-xs">or</span>
+            <div className="w-6 h-px bg-neutral-700" />
+          </div>
+
+          {/* Restructure path */}
+          <div className="text-center">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mx-auto mb-2">
+              <span className="text-amber-400 font-mono text-lg sm:text-xl font-light">↺</span>
+            </div>
+            <span className="text-[10px] sm:text-xs font-mono text-amber-400">RESET</span>
+            <p className="text-[10px] font-mono text-neutral-600 mt-0.5">restructure</p>
+          </div>
+        </div>
       </div>
-      <div className="h-6 w-px bg-neutral-800 mx-2" />
-      <div className="font-mono text-xs text-neutral-500">
-        <span className="text-amber-400">Print</span> or <span className="text-emerald-400">Reset</span>
+
+      {/* Footer */}
+      <div className="pt-2 sm:pt-3 border-t border-neutral-800 flex items-center justify-between">
+        <span className="text-[10px] font-mono text-neutral-600">Same choice. Every crisis.</span>
+        <span className="text-[10px] sm:text-xs font-mono text-terminal-accent">Explore →</span>
       </div>
     </BentoCard>
   );
@@ -427,8 +466,8 @@ export default function BentoGrid() {
         <EchoCard />
       </motion.div>
 
-      {/* The Fork - Tool (horizontal) */}
-      <motion.div variants={itemVariants} className="col-span-2 lg:col-span-2">
+      {/* The Fork - Tool card */}
+      <motion.div variants={itemVariants} className="col-span-2 lg:col-span-2 row-span-2">
         <TheForkCard />
       </motion.div>
 

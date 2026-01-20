@@ -2,11 +2,17 @@
 
 import { motion } from 'framer-motion';
 import { Lightbulb } from 'lucide-react';
-import AssetBar from './AssetBar';
+import AssetBarWithChart from './AssetBarWithChart';
+
+interface ChartData {
+  year: number;
+  value: number;
+}
 
 interface AssetReturn {
   return: number | null;
   note: string;
+  chartData?: ChartData[];
 }
 
 interface Crisis {
@@ -82,11 +88,12 @@ export default function CrisisDetail({ crisis }: CrisisDetailProps) {
         </h3>
         <div className="space-y-1">
           {Object.entries(crisis.assets).map(([name, data]) => (
-            <AssetBar
+            <AssetBarWithChart
               key={name}
               name={name.charAt(0).toUpperCase() + name.slice(1)}
               returnPct={data.return}
               note={data.note}
+              chartData={data.chartData}
             />
           ))}
         </div>
