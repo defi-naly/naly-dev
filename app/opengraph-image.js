@@ -28,42 +28,21 @@ export default function Image() {
           style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            width: 120,
-            height: 120,
-            borderRadius: 16,
-            background: '#111',
-            marginBottom: 40,
-          }}
-        >
-          <span
-            style={{
-              fontSize: 72,
-              fontWeight: 'bold',
-              color: '#22c55e',
-            }}
-          >
-            N
-          </span>
-        </div>
-        <h1
-          style={{
             fontSize: 64,
             fontWeight: 'bold',
-            color: '#ffffff',
-            margin: 0,
           }}
         >
-          naly.dev
-        </h1>
+          <span style={{ color: '#22c55e' }}>&gt;_</span>
+          <span style={{ color: '#ffffff', marginLeft: 16 }}>naly.dev</span>
+        </div>
         <p
           style={{
-            fontSize: 32,
-            color: '#22c55e',
-            marginTop: 16,
+            fontSize: 28,
+            color: '#737373',
+            marginTop: 24,
           }}
         >
-          Decoding Money
+          Decoding money.
         </p>
       </div>
     ),
