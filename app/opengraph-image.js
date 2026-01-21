@@ -32,7 +32,7 @@ export default function Image() {
             fontWeight: 'bold',
           }}
         >
-          <span style={{ color: '#22c55e' }}>&gt;_</span>
+          <span style={{ color: '#f59e0b' }}>N</span>
           <span style={{ color: '#ffffff', marginLeft: 16 }}>naly.dev</span>
         </div>
         <p
