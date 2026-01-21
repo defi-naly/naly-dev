@@ -5,7 +5,7 @@ const TICKERS = [
   { symbol: 'GC=F', name: 'GOLD', displaySymbol: 'XAU' },
   { symbol: 'SI=F', name: 'SILVER', displaySymbol: 'XAG' },
   { symbol: 'URA', name: 'URA', displaySymbol: 'URA' },
-  { symbol: '^GSPC', name: 'S&P 500', displaySymbol: 'SPX' },
+  { symbol: 'SPY', name: 'S&P 500', displaySymbol: 'SPX', multiplier: 10 },
   { symbol: 'BTC-USD', name: 'BITCOIN', displaySymbol: 'BTC' },
 ];
 
@@ -65,10 +65,15 @@ export async function GET() {
     const results = await Promise.all(
       TICKERS.map(async (ticker) => {
         const data = await fetchYahooQuote(ticker.symbol);
+        // Apply multiplier if present (e.g., SPY * 10 ≈ SPX)
+        const multiplier = ticker.multiplier || 1;
         return {
           symbol: ticker.displaySymbol,
           name: ticker.name,
-          ...data,
+          price: data?.price ? data.price * multiplier : null,
+          change: data?.change ? data.change * multiplier : null,
+          changePercent: data?.changePercent,
+          previousClose: data?.previousClose,
         };
       })
     );

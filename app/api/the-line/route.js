@@ -202,16 +202,20 @@ export async function GET(request) {
   } catch (error) {
     console.error('Error fetching The Line data:', error);
 
-    // Return historical data as fallback
-    const current = HISTORICAL_DATA[HISTORICAL_DATA.length - 1];
+    // Return fallback with estimated current ratio
+    // As of Jan 2025: SPX ~6000, Gold ~$2700, ratio ≈ 2.22
+    const fallbackCurrent = {
+      ratio: 2.22,
+      date: new Date().toISOString().split('T')[0],
+      spy: 600,
+      gld: 270,
+    };
+
     return NextResponse.json({
-      current: {
-        ratio: current.ratio,
-        date: current.date,
-      },
+      current: fallbackCurrent,
       threshold: THRESHOLD,
-      status: current.ratio >= THRESHOLD ? 'above' : 'breached',
-      history: HISTORICAL_DATA,
+      status: fallbackCurrent.ratio >= THRESHOLD ? 'above' : 'breached',
+      history: [...HISTORICAL_DATA, fallbackCurrent],
       breachPeriods: [
         { start: '1973-01-01', end: '1992-01-01' },
       ],
@@ -222,7 +226,7 @@ export async function GET(request) {
         '2008': { drawdown: -57, duration: '17 months', context: 'Global Financial Crisis' },
       },
       lastUpdated: new Date().toISOString(),
-      error: 'Using cached data - live fetch failed',
+      error: 'Using fallback data - live fetch failed',
     });
   }
 }
