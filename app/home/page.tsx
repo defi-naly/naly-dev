@@ -5,11 +5,10 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
 import purchasingPowerData from '@/data/purchasing-power.json';
+import echoesData from '@/data/echoes.json';
 
 const STORAGE_KEY = 'money-game-progress';
 const THRESHOLD = 1.5;
-const CRISIS_START = 2008;
-const CRISIS_END = 2030;
 
 interface SavedProgress {
   chapter: number;
@@ -29,6 +28,41 @@ function calculateDecaySince1971(): number {
   return Math.round((cpi1971 / currentCPI) * 100 - 100);
 }
 
+function calculateTopEchoMatch(currentMetrics: Record<string, number>) {
+  const periods = echoesData.periods as Record<string, any>;
+  const metricsConfig = echoesData.metrics as Record<string, any>;
+  const weights = echoesData.weights as Record<string, number>;
+
+  let bestMatch = { year: '', name: '', similarity: 0 };
+
+  for (const [year, period] of Object.entries(periods)) {
+    let totalScore = 0;
+    let totalWeight = 0;
+
+    for (const [key, weight] of Object.entries(weights)) {
+      const config = metricsConfig[key];
+      if (!config || period.metrics[key] === undefined) continue;
+
+      const currentVal = currentMetrics[key];
+      const periodVal = period.metrics[key];
+      const maxDiff = config.max - config.min;
+
+      const diff = Math.abs(currentVal - periodVal) / maxDiff;
+      const similarity = Math.max(0, 1 - diff);
+
+      totalScore += similarity * weight;
+      totalWeight += weight;
+    }
+
+    const normalizedScore = totalWeight > 0 ? (totalScore / totalWeight) * 100 : 0;
+    if (normalizedScore > bestMatch.similarity) {
+      bestMatch = { year, name: period.name, similarity: Math.round(normalizedScore) };
+    }
+  }
+
+  return bestMatch;
+}
+
 function Timestamp() {
   const now = new Date();
   const formatted = now.toLocaleDateString('en-US', {
@@ -42,6 +76,8 @@ function Timestamp() {
 export default function Home() {
   const [lineData, setLineData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [echoMatch, setEchoMatch] = useState<{ year: string; name: string; similarity: number } | null>(null);
+  const [echoLoading, setEchoLoading] = useState(true);
   const [gameProgress, setGameProgress] = useState<SavedProgress | null>(null);
   const [mounted, setMounted] = useState(false);
 
@@ -63,6 +99,28 @@ export default function Home() {
       }
     }
     fetchLineData();
+
+    // Fetch Echo metrics
+    async function fetchEchoData() {
+      try {
+        const response = await fetch('/api/echo-metrics');
+        const defaults = echoesData.currentDefaults as unknown as Record<string, number>;
+        if (response.ok) {
+          const data = await response.json();
+          const metrics = { ...defaults, ...data.metrics };
+          setEchoMatch(calculateTopEchoMatch(metrics));
+        } else {
+          setEchoMatch(calculateTopEchoMatch(defaults));
+        }
+      } catch (error) {
+        console.error('Failed to fetch Echo data:', error);
+        const defaults = echoesData.currentDefaults as unknown as Record<string, number>;
+        setEchoMatch(calculateTopEchoMatch(defaults));
+      } finally {
+        setEchoLoading(false);
+      }
+    }
+    fetchEchoData();
 
     // Check game progress
     try {
@@ -90,9 +148,6 @@ export default function Home() {
     status?.color === 'emerald' ? 'text-emerald-400' : 'text-zinc-500';
 
   const decay = calculateDecaySince1971();
-  const saeculumYear = new Date().getFullYear() - CRISIS_START;
-  const saeculumTotal = CRISIS_END - CRISIS_START;
-  const progressPercent = (saeculumYear / saeculumTotal) * 100;
 
   // Game progress
   const gameProgressPercent = gameProgress
@@ -158,15 +213,16 @@ export default function Home() {
                 </div>
               </Link>
 
-              {/* SAECULUM */}
-              <Link href="/tools/saeculum" className="block p-4 hover:bg-zinc-900/50 transition-colors">
-                <div className="text-[10px] font-mono text-zinc-600 mb-2">SAECULUM</div>
-                <div className="text-2xl font-mono text-white mb-1">Year {saeculumYear}</div>
+              {/* ECHO */}
+              <Link href="/tools/echo" className="block p-4 hover:bg-zinc-900/50 transition-colors">
+                <div className="text-[10px] font-mono text-zinc-600 mb-2">ECHO</div>
+                <div className="text-2xl font-mono text-white mb-1">
+                  {echoLoading ? '—' : echoMatch?.year ?? '—'}
+                </div>
                 <div className="flex items-center gap-2">
-                  <div className="flex-1 h-1 bg-zinc-800 max-w-[80px]">
-                    <div className="h-full bg-blue-500" style={{ width: `${progressPercent}%` }} />
-                  </div>
-                  <span className="text-xs font-mono text-blue-400">WINTER</span>
+                  <span className={`text-xs font-mono ${echoLoading ? 'text-zinc-600' : 'text-amber-400'}`}>
+                    {echoLoading ? '—' : `${echoMatch?.similarity}% match`}
+                  </span>
                 </div>
               </Link>
 
