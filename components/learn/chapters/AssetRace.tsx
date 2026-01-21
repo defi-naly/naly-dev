@@ -121,7 +121,7 @@ export default function AssetRace({ onComplete }: AssetRaceProps) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="flex flex-col h-[450px]"
+      className="flex flex-col min-h-[400px]"
     >
       <div className="flex-1 flex flex-col justify-center">
         <AnimatePresence mode="wait">

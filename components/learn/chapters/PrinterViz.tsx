@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
 
 interface PrinterVizProps {
@@ -91,7 +91,7 @@ function MoneyCounter({ onReveal }: { onReveal: () => void }) {
   const percentComplete = (count / TARGET) * 100;
 
   return (
-    <div className="min-h-[80vh] flex flex-col justify-center items-center px-4 py-12">
+    <div className="flex flex-col justify-center items-center px-4 py-8">
       <h2 className="text-xl md:text-2xl font-medium text-zinc-100 mb-2 text-center">
         How much is $23 trillion?
       </h2>
@@ -182,7 +182,7 @@ function MoneyCounter({ onReveal }: { onReveal: () => void }) {
 // Screen 2: Time Reveal
 function TimeReveal() {
   return (
-    <div className="min-h-[80vh] flex flex-col justify-center px-4 py-12 max-w-lg mx-auto">
+    <div className="flex flex-col justify-center px-4 py-8 max-w-lg mx-auto">
       <h2 className="text-lg md:text-xl font-medium text-zinc-100 mb-10 text-center">
         Counting at $1 per second
       </h2>
@@ -240,7 +240,7 @@ function TimeReveal() {
 // Screen 3: Acceleration Chart
 function AccelerationChart() {
   return (
-    <div className="min-h-[80vh] flex flex-col justify-center px-4 py-12 max-w-lg mx-auto">
+    <div className="flex flex-col justify-center px-4 py-8 max-w-lg mx-auto">
       <h2 className="text-lg md:text-xl font-medium text-zinc-100 mb-10 text-center">
         When did they print it?
       </h2>
@@ -313,92 +313,87 @@ function AccelerationChart() {
   );
 }
 
-// Screen 4: Moon Stack (Scroll-driven)
+// Screen 4: Moon Stack (Animated on view)
 function MoonStack() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const stackHeight = useTransform(scrollYProgress, [0.3, 0.7], ['5%', '95%']);
-  const progressWidth = useTransform(scrollYProgress, [0.3, 0.7], ['0%', '100%']);
-
   return (
-    <div ref={containerRef} className="min-h-[150vh] relative">
-      <div className="sticky top-0 h-screen flex flex-col justify-center items-center px-4 py-12">
-        <h2 className="text-lg md:text-xl font-medium text-zinc-100 mb-1 text-center">
-          Still can't picture it?
-        </h2>
-        <p className="text-zinc-500 text-sm mb-8 text-center">
-          Stack $23 trillion in $1 bills
-        </p>
+    <div className="flex flex-col justify-center items-center px-4 py-8">
+      <h2 className="text-lg md:text-xl font-medium text-zinc-100 mb-1 text-center">
+        Still can't picture it?
+      </h2>
+      <p className="text-zinc-500 text-sm mb-6 text-center">
+        Stack $23 trillion in $1 bills
+      </p>
 
-        {/* Moon visualization */}
-        <div className="relative w-full max-w-[200px] h-64 mb-6">
-          {/* Moon */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 text-3xl">
-            🌙
-          </div>
-
-          {/* Moon line */}
-          <div className="absolute top-10 left-0 right-0 border-t border-dashed border-zinc-700">
-            <span className="absolute -top-3 right-0 text-[10px] text-zinc-600 font-mono">
-              MOON
-            </span>
-          </div>
-
-          {/* Stack container */}
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-6 h-48 flex items-end">
-            <motion.div
-              className="w-full bg-gradient-to-t from-amber-600 to-amber-400 rounded-t"
-              style={{ height: stackHeight }}
-            />
-          </div>
-
-          {/* Earth */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 text-2xl">
-            🌍
-          </div>
+      {/* Moon visualization */}
+      <div className="relative w-full max-w-[180px] h-56 mb-4">
+        {/* Moon */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 text-2xl">
+          🌙
         </div>
 
-        {/* Timeline */}
-        <div className="w-full max-w-xs">
-          <div className="flex justify-between text-xs mb-2">
-            <div className="text-left">
-              <p className="text-zinc-500">1944</p>
-              <p className="text-zinc-400 font-mono">$150B</p>
-              <p className="text-zinc-600 text-[10px]">London → NYC</p>
-            </div>
-            <div className="text-right">
-              <p className="text-zinc-500">2026</p>
-              <p className="text-amber-500 font-mono">$23T</p>
-              <p className="text-amber-500/70 text-[10px]">3.3× to the Moon</p>
-            </div>
-          </div>
-
-          {/* Progress bar */}
-          <div className="h-1.5 bg-zinc-800 rounded-full overflow-hidden">
-            <motion.div
-              className="h-full bg-amber-500 rounded-full"
-              style={{ width: progressWidth }}
-            />
-          </div>
+        {/* Moon line */}
+        <div className="absolute top-8 left-0 right-0 border-t border-dashed border-zinc-700">
+          <span className="absolute -top-3 right-0 text-[10px] text-zinc-600 font-mono">
+            MOON
+          </span>
         </div>
 
-        {/* Bottom text */}
-        <motion.p
-          className="mt-8 text-zinc-500 text-sm text-center max-w-xs"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          viewport={{ once: true }}
-        >
-          That's not growth.
-          <br />
-          <span className="text-zinc-100">That's a different system entirely.</span>
-        </motion.p>
+        {/* Stack container */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 w-5 h-40 flex items-end">
+          <motion.div
+            className="w-full bg-gradient-to-t from-amber-600 to-amber-400 rounded-t"
+            initial={{ height: '5%' }}
+            whileInView={{ height: '95%' }}
+            transition={{ duration: 2, ease: 'easeOut' }}
+            viewport={{ once: true }}
+          />
+        </div>
+
+        {/* Earth */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 text-xl">
+          🌍
+        </div>
       </div>
+
+      {/* Timeline */}
+      <div className="w-full max-w-xs">
+        <div className="flex justify-between text-xs mb-2">
+          <div className="text-left">
+            <p className="text-zinc-500">1944</p>
+            <p className="text-zinc-400 font-mono">$150B</p>
+            <p className="text-zinc-600 text-[10px]">London → NYC</p>
+          </div>
+          <div className="text-right">
+            <p className="text-zinc-500">2026</p>
+            <p className="text-amber-500 font-mono">$23T</p>
+            <p className="text-amber-500/70 text-[10px]">3.3× to the Moon</p>
+          </div>
+        </div>
+
+        {/* Progress bar */}
+        <div className="h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+          <motion.div
+            className="h-full bg-amber-500 rounded-full"
+            initial={{ width: '0%' }}
+            whileInView={{ width: '100%' }}
+            transition={{ duration: 2, ease: 'easeOut' }}
+            viewport={{ once: true }}
+          />
+        </div>
+      </div>
+
+      {/* Bottom text */}
+      <motion.p
+        className="mt-6 text-zinc-500 text-sm text-center max-w-xs"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+        viewport={{ once: true }}
+      >
+        That's not growth.
+        <br />
+        <span className="text-zinc-100">That's a different system entirely.</span>
+      </motion.p>
     </div>
   );
 }
@@ -408,7 +403,7 @@ function Punchline({ onComplete }: { onComplete: () => void }) {
   const [hasTriggered, setHasTriggered] = useState(false);
 
   return (
-    <div className="min-h-[80vh] flex flex-col justify-center items-center px-4 py-12 text-center">
+    <div className="flex flex-col justify-center items-center px-4 py-8 text-center">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
