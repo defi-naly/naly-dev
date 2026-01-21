@@ -24,9 +24,8 @@ function calculateDecay() {
   return { decayPercent: Math.round(decayPercent), realValue };
 }
 
-// Calculate top echo match using maxDiff normalization
-function getTopEchoMatch() {
-  const current = echoesData.currentDefaults;
+// Calculate top echo match using weighted similarity
+function calculateEchoMatches(currentMetrics) {
   const periods = echoesData.periods;
   const metricsConfig = echoesData.metrics;
   const weights = echoesData.weights;
@@ -35,22 +34,25 @@ function getTopEchoMatch() {
 
   for (const [year, period] of Object.entries(periods)) {
     let totalScore = 0;
+    let totalWeight = 0;
 
     for (const [metricKey, weight] of Object.entries(weights)) {
       const config = metricsConfig[metricKey];
       if (!config || period.metrics[metricKey] === undefined) continue;
 
-      const currentVal = current[metricKey];
+      const currentVal = currentMetrics[metricKey];
       const periodVal = period.metrics[metricKey];
-      const maxDiff = config.maxDiff || (config.max - config.min);
+      const maxDiff = config.max - config.min;
 
       const diff = Math.abs(currentVal - periodVal) / maxDiff;
       const similarity = Math.max(0, 1 - diff);
 
       totalScore += similarity * weight;
+      totalWeight += weight;
     }
 
-    matches.push({ year, name: period.name, similarity: Math.round(totalScore * 100) });
+    const normalizedScore = totalWeight > 0 ? (totalScore / totalWeight) * 100 : 0;
+    matches.push({ year, name: period.name, similarity: Math.round(normalizedScore) });
   }
 
   matches.sort((a, b) => b.similarity - a.similarity);
@@ -174,8 +176,33 @@ function MarketSignals() {
 
 // ANALYSIS TOOLS Section
 function AnalysisTools() {
-  const topMatches = getTopEchoMatch();
-  const current = echoesData.currentDefaults;
+  const [currentMetrics, setCurrentMetrics] = useState(echoesData.currentDefaults);
+  const [topMatches, setTopMatches] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchLiveMetrics() {
+      try {
+        const response = await fetch('/api/echo-metrics');
+        if (response.ok) {
+          const data = await response.json();
+          const liveMetrics = { ...echoesData.currentDefaults, ...data.metrics };
+          setCurrentMetrics(liveMetrics);
+          setTopMatches(calculateEchoMatches(liveMetrics));
+        } else {
+          setTopMatches(calculateEchoMatches(echoesData.currentDefaults));
+        }
+      } catch (error) {
+        console.error('Failed to fetch live metrics:', error);
+        setTopMatches(calculateEchoMatches(echoesData.currentDefaults));
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchLiveMetrics();
+  }, []);
+
+  const current = currentMetrics;
 
   return (
     <div className="border border-zinc-800">
@@ -219,24 +246,28 @@ function AnalysisTools() {
           <div className="text-[10px] font-mono text-zinc-500 mb-3">Current conditions match:</div>
 
           <div className="space-y-1 mb-4">
-            {topMatches.map((match, i) => (
-              <div key={match.year} className="flex items-center justify-between">
-                <span className="font-mono text-sm text-white">{match.year}</span>
-                <span className={`font-mono text-sm ${i === 0 ? 'text-terminal-accent' : 'text-zinc-400'}`}>
-                  {match.similarity}% similarity
-                </span>
-              </div>
-            ))}
+            {loading ? (
+              <div className="text-zinc-600 font-mono text-sm">Loading...</div>
+            ) : (
+              topMatches.map((match, i) => (
+                <div key={match.year} className="flex items-center justify-between">
+                  <span className="font-mono text-sm text-white">{match.year}</span>
+                  <span className={`font-mono text-sm ${i === 0 ? 'text-terminal-accent' : 'text-zinc-400'}`}>
+                    {match.similarity}% similarity
+                  </span>
+                </div>
+              ))
+            )}
           </div>
 
           <div className="border-t border-zinc-800 pt-3 space-y-1">
             <div className="flex justify-between text-[10px] font-mono">
-              <span className="text-zinc-600">S&P/Gold:</span>
-              <span className="text-zinc-400">{current.spToGold}</span>
+              <span className="text-zinc-600">CAPE:</span>
+              <span className="text-zinc-400">{current.cape}</span>
             </div>
             <div className="flex justify-between text-[10px] font-mono">
               <span className="text-zinc-600">debt/gdp:</span>
-              <span className="text-zinc-400">{current.debtToGdp}%</span>
+              <span className="text-zinc-400">{current.debtGDP}%</span>
             </div>
           </div>
         </Link>

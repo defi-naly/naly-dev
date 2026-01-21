@@ -51,14 +51,62 @@ export default function EchoResults({ results, currentMetrics, metricsConfig }) 
         <div className="text-sm text-zinc-300 mb-1">
           {topMatch.name}
         </div>
-        <div className="text-sm text-zinc-500 mb-4">
-          {topMatch.context}
+        <div className="text-[10px] font-mono text-zinc-600 mb-4">
+          {topMatch.type?.replace('_', ' ').toUpperCase()}
         </div>
-        <div className="pt-4 border-t border-zinc-800">
-          <div className="text-xs text-zinc-500 mb-1">What happened:</div>
-          <div className="text-sm text-zinc-300">{topMatch.outcome}</div>
+
+        {/* Outcome Stats */}
+        {topMatch.outcome && (
+          <div className="grid grid-cols-3 gap-4 mb-4 p-3 bg-zinc-950 rounded border border-zinc-800">
+            <div>
+              <div className="text-xs text-zinc-600 font-mono">drawdown</div>
+              <div className="text-lg font-mono text-red-400">{topMatch.outcome.marketDrawdown}%</div>
+            </div>
+            <div>
+              <div className="text-xs text-zinc-600 font-mono">recovery</div>
+              <div className="text-lg font-mono text-zinc-300">{topMatch.outcome.recoveryYears}y</div>
+            </div>
+            <div>
+              <div className="text-xs text-zinc-600 font-mono">peak unemp</div>
+              <div className="text-lg font-mono text-zinc-300">{topMatch.outcome.peakUnemployment}%</div>
+            </div>
+          </div>
+        )}
+
+        <div className="text-sm text-zinc-400 mb-4">
+          {topMatch.outcome?.narrative || topMatch.context}
         </div>
+
+        {/* Resolution */}
+        {topMatch.resolution && (
+          <div className="pt-4 border-t border-zinc-800">
+            <div className="text-xs text-zinc-500 font-mono uppercase mb-2">How it resolved:</div>
+            <div className="text-sm text-zinc-300">{topMatch.resolution}</div>
+          </div>
+        )}
       </motion.div>
+
+      {/* Why This Time Might Be Different */}
+      {topMatch.echoBreakerReasons && topMatch.echoBreakerReasons.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.05 }}
+          className="bg-zinc-900 border border-zinc-800 rounded-lg p-6"
+        >
+          <div className="text-xs text-zinc-500 font-mono uppercase tracking-wide mb-4">
+            Why This Time Might Be Different
+          </div>
+          <ul className="space-y-2">
+            {topMatch.echoBreakerReasons.map((reason, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-zinc-400">
+                <span className="text-emerald-500 mt-0.5">+</span>
+                <span>{reason}</span>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+      )}
 
       {/* Matching Factors */}
       <motion.div

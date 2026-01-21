@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MetricsPanel from './MetricsPanel';
 import EchoLoading from './EchoLoading';
@@ -8,11 +8,12 @@ import EchoResults from './EchoResults';
 import echoesData from '@/data/echoes.json';
 
 // Calculate similarity between current metrics and a historical period
-// Uses maxDiff for each metric to normalize differences
+// Uses weights and normalized differences
 function calculateSimilarity(current, historical) {
   const weights = echoesData.weights;
   const metricsConfig = echoesData.metrics;
   let totalScore = 0;
+  let totalWeight = 0;
 
   for (const [key, weight] of Object.entries(weights)) {
     if (current[key] === undefined || historical[key] === undefined) continue;
@@ -22,17 +23,19 @@ function calculateSimilarity(current, historical) {
 
     const currentVal = current[key];
     const historicalVal = historical[key];
-    const maxDiff = config.maxDiff || (config.max - config.min);
+    const maxDiff = config.max - config.min;
 
     // Normalize difference (0 = identical, 1 = very different)
     const diff = Math.abs(currentVal - historicalVal) / maxDiff;
     const similarity = Math.max(0, 1 - diff);
 
     totalScore += similarity * weight;
+    totalWeight += weight;
   }
 
-  // Return as percentage
-  return Math.round(totalScore * 100);
+  // Return as percentage, normalized by total weight
+  if (totalWeight === 0) return 0;
+  return Math.round((totalScore / totalWeight) * 100);
 }
 
 // Find all matching periods sorted by similarity
@@ -57,8 +60,31 @@ function findEchoes(currentMetrics, n = 5) {
 export default function Echo() {
   const [metrics, setMetrics] = useState(echoesData.currentDefaults);
   const [isLoading, setIsLoading] = useState(false);
+  const [isFetchingLive, setIsFetchingLive] = useState(true);
   const [results, setResults] = useState(null);
   const [hasSearched, setHasSearched] = useState(false);
+
+  // Fetch live metrics on mount
+  useEffect(() => {
+    async function fetchLiveMetrics() {
+      try {
+        const response = await fetch('/api/echo-metrics');
+        if (response.ok) {
+          const data = await response.json();
+          setMetrics(prev => ({
+            ...prev,
+            ...data.metrics,
+          }));
+        }
+      } catch (error) {
+        console.error('Failed to fetch live metrics:', error);
+        // Keep using defaults on error
+      } finally {
+        setIsFetchingLive(false);
+      }
+    }
+    fetchLiveMetrics();
+  }, []);
 
   const handleMetricChange = useCallback((key, value) => {
     setMetrics(prev => ({ ...prev, [key]: value }));
