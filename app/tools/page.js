@@ -24,7 +24,9 @@ function calculateDecay() {
   return { decayPercent: Math.round(decayPercent), realValue };
 }
 
-// Calculate top echo match
+// Calculate top echo match (only from completed cycles pre-2008)
+const HISTORICAL_CUTOFF = 2008;
+
 function getTopEchoMatch() {
   const current = echoesData.currentDefaults;
   const periods = echoesData.periods;
@@ -34,6 +36,9 @@ function getTopEchoMatch() {
   let matches = [];
 
   for (const [year, period] of Object.entries(periods)) {
+    // Only match against completed cycles (pre-2008)
+    if (parseInt(year) >= HISTORICAL_CUTOFF) continue;
+
     let totalWeight = 0;
     let weightedSimilarity = 0;
 

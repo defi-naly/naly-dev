@@ -30,9 +30,14 @@ export default function EchoResults({ results, currentMetrics, metricsConfig }) 
       {/* Section Header */}
       <div className="flex items-center gap-4">
         <span className="font-mono text-xs text-neutral-500 uppercase tracking-wider">
-          Historical Echoes
+          Historical Matches (pre-2008)
         </span>
         <div className="flex-1 h-px bg-neutral-800" />
+      </div>
+
+      {/* Explanation */}
+      <div className="text-xs font-mono text-neutral-600">
+        Matching against completed cycles only. See how similar conditions resolved historically.
       </div>
 
       {/* Results Cards */}

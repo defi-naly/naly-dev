@@ -7,6 +7,10 @@ import EchoLoading from './EchoLoading';
 import EchoResults from './EchoResults';
 import echoesData from '@/data/echoes.json';
 
+// CRITICAL: Only match against completed cycles (pre-2008)
+// We're still IN the 2008+ cycle — matching against it tells us nothing
+const HISTORICAL_CUTOFF = 2008;
+
 // Normalize a metric value to 0-1 scale
 function normalize(value, metricKey) {
   const meta = echoesData.metrics[metricKey];
@@ -34,11 +38,14 @@ function calculateSimilarity(current, historical) {
   return Math.max(0, Math.round((1 - distance) * 100));
 }
 
-// Find top N matching periods
+// Find top N matching periods (only from completed cycles)
 function findEchoes(currentMetrics, n = 3) {
   const results = [];
 
   for (const [year, period] of Object.entries(echoesData.periods)) {
+    // CRITICAL: Only match against completed cycles
+    if (parseInt(year) >= HISTORICAL_CUTOFF) continue;
+
     const similarity = calculateSimilarity(currentMetrics, period.metrics);
     results.push({
       year,

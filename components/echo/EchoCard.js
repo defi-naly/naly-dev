@@ -27,7 +27,7 @@ export default function EchoCard({
 }) {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
 
-  const { year, name, similarity, outcome, echoBreakerReasons } = result;
+  const { year, name, similarity, outcome, echoBreakerReasons, resolution } = result;
   const similarityColor = getSimilarityColor(similarity);
   const similarityBg = getSimilarityBg(similarity);
 
@@ -49,6 +49,11 @@ export default function EchoCard({
               <span className="text-neutral-400">—</span>
               <span className="text-neutral-300">{name}</span>
             </div>
+            {resolution && (
+              <p className="text-xs text-neutral-500 mt-1 max-w-md">
+                Resolved: {resolution}
+              </p>
+            )}
           </div>
         </div>
 

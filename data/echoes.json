@@ -72,6 +72,7 @@
       "name": "Great Depression",
       "year": 1929,
       "type": "debt_bubble",
+      "resolution": "Gold revaluation + New Deal. Dollar devalued 40% vs gold in 1933.",
       "metrics": {
         "debtGDP": 16,
         "cape": 32.6,
@@ -101,6 +102,7 @@
       "name": "Depression Relapse",
       "year": 1937,
       "type": "policy_error",
+      "resolution": "Fed reversed tightening + WW2 spending. War economy ended depression.",
       "metrics": {
         "debtGDP": 43,
         "cape": 21.5,
@@ -129,6 +131,7 @@
       "name": "Stagflation Crisis",
       "year": 1973,
       "type": "inflation_shock",
+      "resolution": "Volcker rate hikes in 1979-82. Recession broke inflation expectations.",
       "metrics": {
         "debtGDP": 32,
         "cape": 18.7,
@@ -157,6 +160,7 @@
       "name": "Volcker Shock",
       "year": 1980,
       "type": "rate_shock",
+      "resolution": "20% rates broke inflation. Short recession, then 20-year boom followed.",
       "metrics": {
         "debtGDP": 31,
         "cape": 9.0,
@@ -185,6 +189,7 @@
       "name": "Black Monday",
       "year": 1987,
       "type": "flash_crash",
+      "resolution": "Fed liquidity injection. Market recovered in 2 years. No recession.",
       "metrics": {
         "debtGDP": 48,
         "cape": 18.3,
@@ -213,6 +218,7 @@
       "name": "Dot-com Crash",
       "year": 2000,
       "type": "valuation_bubble",
+      "resolution": "Fed rate cuts fueled housing bubble. Tech took 15 years to recover.",
       "metrics": {
         "debtGDP": 55,
         "cape": 44.2,
