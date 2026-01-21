@@ -10,7 +10,7 @@ function MetricSlider({ metricKey, value, config, onChange, disabled }) {
   const percentage = ((value - min) / (max - min)) * 100;
 
   // Format display value
-  const displayValue = unit === '%' ? `${value}%` : value.toFixed(2);
+  const displayValue = unit === '%' ? `${value}%` : (Number.isInteger(value) ? value : value.toFixed(2));
 
   return (
     <div className="group">

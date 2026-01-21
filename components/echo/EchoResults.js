@@ -25,71 +25,111 @@ export default function EchoResults({ results, currentMetrics, metricsConfig }) 
     return null;
   }
 
+  const topMatch = results[0];
+  const otherMatches = results.slice(1);
+
   return (
     <div className="space-y-6">
-      {/* Section Header */}
-      <div className="flex items-center gap-4">
-        <span className="font-mono text-xs text-neutral-500 uppercase tracking-wider">
-          Historical Matches (pre-2008)
-        </span>
-        <div className="flex-1 h-px bg-neutral-800" />
-      </div>
-
-      {/* Explanation */}
-      <div className="text-xs font-mono text-neutral-600">
-        Matching against completed cycles only. See how similar conditions resolved historically.
-      </div>
-
-      {/* Results Cards */}
+      {/* Top Match - Featured */}
       <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="space-y-4"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="bg-zinc-900 border border-zinc-800 rounded-lg p-6"
       >
-        {results.map((result, index) => (
-          <motion.div key={result.year} variants={itemVariants}>
-            <EchoCard
-              result={result}
-              rank={index + 1}
-              currentMetrics={currentMetrics}
-              metricsConfig={metricsConfig}
-              defaultExpanded={index === 0}
-            />
-          </motion.div>
-        ))}
+        <div className="text-xs text-zinc-500 font-mono uppercase tracking-wide mb-4">
+          Strongest Match
+        </div>
+        <div className="flex items-end justify-between mb-4">
+          <div className="text-5xl font-mono font-semibold text-amber-500">
+            {topMatch.year}
+          </div>
+          <div className="text-right">
+            <div className="text-2xl font-mono text-zinc-100">{topMatch.similarity}%</div>
+            <div className="text-xs text-zinc-500">similarity</div>
+          </div>
+        </div>
+        <div className="text-sm text-zinc-300 mb-1">
+          {topMatch.name}
+        </div>
+        <div className="text-sm text-zinc-500 mb-4">
+          {topMatch.context}
+        </div>
+        <div className="pt-4 border-t border-zinc-800">
+          <div className="text-xs text-zinc-500 mb-1">What happened:</div>
+          <div className="text-sm text-zinc-300">{topMatch.outcome}</div>
+        </div>
       </motion.div>
+
+      {/* Matching Factors */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        className="bg-zinc-900 border border-zinc-800 rounded-lg p-6"
+      >
+        <div className="text-xs text-zinc-500 font-mono uppercase tracking-wide mb-4">
+          Matching Factors
+        </div>
+        <div className="space-y-3">
+          {Object.entries(metricsConfig).map(([key, config]) => {
+            const currentVal = currentMetrics[key];
+            const historicalVal = topMatch.metrics[key];
+            if (currentVal === undefined || historicalVal === undefined) return null;
+
+            return (
+              <div key={key} className="flex items-center justify-between">
+                <div className="text-sm text-zinc-400">{config.description}</div>
+                <div className="flex items-center gap-3 font-mono text-sm">
+                  <span className="text-zinc-500">
+                    Now: {config.unit === '%' ? `${currentVal}%` : currentVal}
+                  </span>
+                  <span className="text-zinc-600">→</span>
+                  <span className="text-amber-500">
+                    {topMatch.year}: {config.unit === '%' ? `${historicalVal}%` : historicalVal}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </motion.div>
+
+      {/* Other Matches */}
+      {otherMatches.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="bg-zinc-900 border border-zinc-800 rounded-lg p-6"
+        >
+          <div className="text-xs text-zinc-500 font-mono uppercase tracking-wide mb-4">
+            Other Matches
+          </div>
+          <div className="space-y-2">
+            {otherMatches.map((match) => (
+              <div key={match.year} className="flex items-center justify-between py-2 border-b border-zinc-800 last:border-0">
+                <div>
+                  <span className="text-zinc-100 font-mono">{match.year}</span>
+                  <span className="text-zinc-500 ml-3">{match.name}</span>
+                </div>
+                <span className="text-sm font-mono text-zinc-400">{match.similarity}%</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      )}
 
       {/* Disclaimer */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
-        className="border border-neutral-800 bg-neutral-900/50 rounded-lg p-4"
+        transition={{ delay: 0.4 }}
+        className="border border-zinc-800 bg-zinc-900/50 rounded-lg p-4"
       >
-        <p className="font-mono text-xs text-neutral-500 leading-relaxed">
-          <span className="text-neutral-400">Disclaimer:</span> Historical patterns are not predictive.
+        <p className="font-mono text-xs text-zinc-500 leading-relaxed">
+          <span className="text-zinc-400">Disclaimer:</span> Historical patterns are not predictive.
           Markets, policy tools, and global conditions have changed significantly.
           This tool identifies structural similarities, not guaranteed outcomes.
-          Past performance does not predict future results.
-        </p>
-      </motion.div>
-
-      {/* Data Sources */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.7 }}
-        className="pt-4 border-t border-neutral-800"
-      >
-        <p className="font-mono text-[10px] text-neutral-600 leading-relaxed">
-          <span className="text-neutral-500">Data Sources:</span>{' '}
-          Debt/GDP from Federal Reserve FRED. CAPE ratio from Robert Shiller.{' '}
-          Unemployment & CPI from Bureau of Labor Statistics.{' '}
-          Fed Funds Rate from Federal Reserve.{' '}
-          Top 1% wealth share from Piketty, Saez & Zucman (World Inequality Database).{' '}
-          Polarization index from DW-NOMINATE congressional voting data.{' '}
-          Gold prices from ICE Benchmark Administration, M2 from Federal Reserve.
         </p>
       </motion.div>
     </div>

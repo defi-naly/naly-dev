@@ -24,41 +24,33 @@ function calculateDecay() {
   return { decayPercent: Math.round(decayPercent), realValue };
 }
 
-// Calculate top echo match (only from completed cycles pre-2008)
-const HISTORICAL_CUTOFF = 2008;
-
+// Calculate top echo match using maxDiff normalization
 function getTopEchoMatch() {
   const current = echoesData.currentDefaults;
   const periods = echoesData.periods;
-  const metrics = echoesData.metrics;
+  const metricsConfig = echoesData.metrics;
   const weights = echoesData.weights;
 
   let matches = [];
 
   for (const [year, period] of Object.entries(periods)) {
-    // Only match against completed cycles (pre-2008)
-    if (parseInt(year) >= HISTORICAL_CUTOFF) continue;
-
-    let totalWeight = 0;
-    let weightedSimilarity = 0;
+    let totalScore = 0;
 
     for (const [metricKey, weight] of Object.entries(weights)) {
-      const metricConfig = metrics[metricKey];
-      if (!metricConfig || !period.metrics[metricKey]) continue;
+      const config = metricsConfig[metricKey];
+      if (!config || period.metrics[metricKey] === undefined) continue;
 
       const currentVal = current[metricKey];
       const periodVal = period.metrics[metricKey];
-      const range = metricConfig.max - metricConfig.min;
+      const maxDiff = config.maxDiff || (config.max - config.min);
 
-      const normalizedDiff = Math.abs(currentVal - periodVal) / range;
-      const similarity = Math.max(0, 1 - normalizedDiff);
+      const diff = Math.abs(currentVal - periodVal) / maxDiff;
+      const similarity = Math.max(0, 1 - diff);
 
-      weightedSimilarity += similarity * weight;
-      totalWeight += weight;
+      totalScore += similarity * weight;
     }
 
-    const avgSimilarity = totalWeight > 0 ? (weightedSimilarity / totalWeight) * 100 : 0;
-    matches.push({ year, name: period.name, similarity: Math.round(avgSimilarity) });
+    matches.push({ year, name: period.name, similarity: Math.round(totalScore * 100) });
   }
 
   matches.sort((a, b) => b.similarity - a.similarity);
@@ -239,12 +231,12 @@ function AnalysisTools() {
 
           <div className="border-t border-zinc-800 pt-3 space-y-1">
             <div className="flex justify-between text-[10px] font-mono">
-              <span className="text-zinc-600">polarization:</span>
-              <span className="text-zinc-400">{current.polarization}</span>
+              <span className="text-zinc-600">S&P/Gold:</span>
+              <span className="text-zinc-400">{current.spToGold}</span>
             </div>
             <div className="flex justify-between text-[10px] font-mono">
               <span className="text-zinc-600">debt/gdp:</span>
-              <span className="text-zinc-400">{current.debtGDP}%</span>
+              <span className="text-zinc-400">{current.debtToGdp}%</span>
             </div>
           </div>
         </Link>

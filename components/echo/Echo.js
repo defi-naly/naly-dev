@@ -7,45 +7,39 @@ import EchoLoading from './EchoLoading';
 import EchoResults from './EchoResults';
 import echoesData from '@/data/echoes.json';
 
-// CRITICAL: Only match against completed cycles (pre-2008)
-// We're still IN the 2008+ cycle — matching against it tells us nothing
-const HISTORICAL_CUTOFF = 2008;
-
-// Normalize a metric value to 0-1 scale
-function normalize(value, metricKey) {
-  const meta = echoesData.metrics[metricKey];
-  if (!meta) return 0;
-  return (value - meta.min) / (meta.max - meta.min);
-}
-
 // Calculate similarity between current metrics and a historical period
+// Uses maxDiff for each metric to normalize differences
 function calculateSimilarity(current, historical) {
   const weights = echoesData.weights;
-  let weightedSum = 0;
-  let totalWeight = 0;
+  const metricsConfig = echoesData.metrics;
+  let totalScore = 0;
 
-  for (const key of Object.keys(weights)) {
-    if (current[key] !== undefined && historical[key] !== undefined) {
-      const diff = normalize(current[key], key) - normalize(historical[key], key);
-      weightedSum += weights[key] * diff * diff;
-      totalWeight += weights[key];
-    }
+  for (const [key, weight] of Object.entries(weights)) {
+    if (current[key] === undefined || historical[key] === undefined) continue;
+
+    const config = metricsConfig[key];
+    if (!config) continue;
+
+    const currentVal = current[key];
+    const historicalVal = historical[key];
+    const maxDiff = config.maxDiff || (config.max - config.min);
+
+    // Normalize difference (0 = identical, 1 = very different)
+    const diff = Math.abs(currentVal - historicalVal) / maxDiff;
+    const similarity = Math.max(0, 1 - diff);
+
+    totalScore += similarity * weight;
   }
 
-  if (totalWeight === 0) return 0;
-
-  const distance = Math.sqrt(weightedSum / totalWeight);
-  return Math.max(0, Math.round((1 - distance) * 100));
+  // Return as percentage
+  return Math.round(totalScore * 100);
 }
 
-// Find top N matching periods (only from completed cycles)
-function findEchoes(currentMetrics, n = 3) {
+// Find all matching periods sorted by similarity
+function findEchoes(currentMetrics, n = 5) {
   const results = [];
 
   for (const [year, period] of Object.entries(echoesData.periods)) {
-    // CRITICAL: Only match against completed cycles
-    if (parseInt(year) >= HISTORICAL_CUTOFF) continue;
-
     const similarity = calculateSimilarity(currentMetrics, period.metrics);
     results.push({
       year,
