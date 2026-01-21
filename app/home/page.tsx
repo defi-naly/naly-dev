@@ -188,7 +188,7 @@ export default function Home() {
                 Decoding money.
               </h1>
               <p className="text-zinc-500 font-mono text-sm">
-                Interactive tools for understanding the signals that matter — inflation, cycles, debt, and regime shifts.
+                Learn the game. Read the signals. Position before the shift.
               </p>
             </div>
           </div>
