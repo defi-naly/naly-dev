@@ -10,6 +10,14 @@ import echoesData from '@/data/echoes.json';
 const STORAGE_KEY = 'money-game-progress';
 const THRESHOLD = 1.5;
 
+interface Ticker {
+  symbol: string;
+  name: string;
+  price: string;
+  change: number;
+  changePercent: number;
+}
+
 interface SavedProgress {
   chapter: number;
   completed: boolean;
@@ -80,9 +88,27 @@ export default function Home() {
   const [echoLoading, setEchoLoading] = useState(true);
   const [gameProgress, setGameProgress] = useState<SavedProgress | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [tickers, setTickers] = useState<Ticker[]>([]);
+  const [tickersLoading, setTickersLoading] = useState(true);
 
   useEffect(() => {
     setMounted(true);
+
+    // Fetch tickers data
+    async function fetchTickers() {
+      try {
+        const response = await fetch('/api/tickers');
+        if (response.ok) {
+          const data = await response.json();
+          setTickers(data.tickers);
+        }
+      } catch (error) {
+        console.error('Failed to fetch tickers:', error);
+      } finally {
+        setTickersLoading(false);
+      }
+    }
+    fetchTickers();
 
     // Fetch Line data
     async function fetchLineData() {
@@ -309,6 +335,38 @@ export default function Home() {
                 <div className="text-[10px] font-mono text-zinc-600 mb-1">subscribe</div>
                 <div className="text-sm font-mono text-zinc-300">Newsletter →</div>
               </a>
+            </div>
+          </div>
+
+          {/* Tickers */}
+          <div className="border border-zinc-800 border-t-0">
+            <div className="px-4 py-2 border-b border-zinc-800 flex items-center justify-between">
+              <span className="text-xs font-mono uppercase tracking-wider text-zinc-500">Market</span>
+              <span className="text-[10px] font-mono text-zinc-600">24h</span>
+            </div>
+            <div className="grid grid-cols-5 divide-x divide-zinc-800">
+              {tickersLoading ? (
+                Array.from({ length: 5 }).map((_, i) => (
+                  <div key={i} className="p-3 text-center">
+                    <div className="text-[10px] font-mono text-zinc-600 mb-1">—</div>
+                    <div className="text-sm font-mono text-zinc-500">—</div>
+                    <div className="text-[10px] font-mono text-zinc-600">—</div>
+                  </div>
+                ))
+              ) : (
+                tickers.map((ticker) => (
+                  <div key={ticker.symbol} className="p-3 text-center">
+                    <div className="text-[10px] font-mono text-zinc-500 mb-1">{ticker.symbol}</div>
+                    <div className="text-sm font-mono text-zinc-100 tabular-nums">{ticker.price}</div>
+                    <div className={`text-[10px] font-mono tabular-nums ${
+                      ticker.changePercent > 0 ? 'text-emerald-400' :
+                      ticker.changePercent < 0 ? 'text-red-400' : 'text-zinc-500'
+                    }`}>
+                      {ticker.changePercent > 0 ? '+' : ''}{ticker.changePercent.toFixed(2)}%
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </div>
