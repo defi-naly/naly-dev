@@ -1,553 +1,1351 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useEffect, useRef } from "react"
+import { useEffect, useState, useRef } from "react";
 
-// Logo component with TIP + Zcash Z symbol
-function Logo({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 240 72"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{ width: "auto", height: "100%" }}
-    >
-      <text
-        x="0"
-        y="56"
-        fontFamily="Inter, system-ui, -apple-system, sans-serif"
-        fontSize="60"
-        fontWeight="600"
-        fill="#FFFFFF"
-        letterSpacing="-0.02em"
-      >
-        TIP
-      </text>
-      <g transform="translate(142, 8)">
-        <path
-          d="M0 6 L48 6 L48 12 L16 12 L48 44 L48 50 L0 50 L0 44 L32 44 L0 12 Z"
-          fill="#F4B728"
-        />
-        <rect x="-6" y="18" width="60" height="4" fill="#F4B728"/>
-        <rect x="-6" y="34" width="60" height="4" fill="#F4B728"/>
-      </g>
-    </svg>
-  )
+// Color palette
+const colors = {
+  bg: "#0A0A0A",
+  surface: "#1A1A1A",
+  surfaceLight: "#222222",
+  primary: "#F5A623",
+  primaryHover: "#FFB84D",
+  success: "#00FF00",
+  error: "#FF4444",
+  muted: "#888888",
+  border: "#333333",
+  text: "#E0E0E0",
+  textBright: "#FFFFFF",
+};
+
+const chapters = [
+  { id: "problem", num: "01", title: "THE PROBLEM" },
+  { id: "micropayments", num: "02", title: "MICROPAYMENTS" },
+  { id: "surveillance", num: "03", title: "SURVEILLANCE" },
+  { id: "solution", num: "04", title: "THE SOLUTION" },
+  { id: "any-token", num: "05", title: "ANY TOKEN" },
+  { id: "how-it-works", num: "06", title: "HOW IT WORKS" },
+  { id: "why-it-matters", num: "07", title: "WHY IT MATTERS" },
+  { id: "join", num: "08", title: "JOIN" },
+];
+
+// Check for reduced motion preference
+function usePrefersReducedMotion() {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
+
+  return prefersReducedMotion;
 }
 
-// Scroll indicator arrow
-function ScrollIndicator() {
-  return (
-    <div className="scroll-indicator">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M12 5v14M5 12l7 7 7-7"/>
-      </svg>
-    </div>
-  )
+// Typing effect hook
+function useTypingEffect(text: string, speed: number = 50, delay: number = 0) {
+  const [displayText, setDisplayText] = useState("");
+  const [isComplete, setIsComplete] = useState(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      setDisplayText(text);
+      setIsComplete(true);
+      return;
+    }
+
+    let index = 0;
+    setDisplayText("");
+    setIsComplete(false);
+
+    const startTimer = setTimeout(() => {
+      const timer = setInterval(() => {
+        if (index < text.length) {
+          setDisplayText(text.slice(0, index + 1));
+          index++;
+        } else {
+          setIsComplete(true);
+          clearInterval(timer);
+        }
+      }, speed);
+
+      return () => clearInterval(timer);
+    }, delay);
+
+    return () => clearTimeout(startTimer);
+  }, [text, speed, delay, prefersReducedMotion]);
+
+  return { displayText, isComplete };
 }
 
-// Tweet mockup component with hover interaction
-function TweetMockup() {
-  return (
-    <div style={{
-      backgroundColor: "#000",
-      border: "1px solid #1a1a1a",
-      borderRadius: "16px",
-      padding: "16px",
-      maxWidth: "400px",
-      width: "100%",
-      transition: "border-color 200ms ease, box-shadow 200ms ease",
-    }}
-    className="tweet-mockup"
-    >
-      {/* Tweet header */}
-      <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "12px" }}>
-        <div style={{
-          width: "48px",
-          height: "48px",
-          borderRadius: "50%",
-          background: "linear-gradient(135deg, #1a1a1a 0%, #333 100%)",
-        }}/>
-        <div>
-          <div style={{ fontWeight: 600, fontSize: "15px" }}>Creator Name</div>
-          <div style={{ color: "#888", fontSize: "14px" }}>@creator</div>
-        </div>
-      </div>
-
-      {/* Tweet content */}
-      <p style={{
-        fontSize: "15px",
-        lineHeight: "1.5",
-        marginBottom: "16px",
-        color: "#e7e9ea"
-      }}>
-        This thread changed how I think about building products. The key insight is...
-      </p>
-
-      {/* Tweet actions */}
-      <div style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        paddingTop: "12px",
-        borderTop: "1px solid #1a1a1a",
-      }}>
-        <div style={{ display: "flex", gap: "24px", color: "#888" }}>
-          <span style={{ fontSize: "14px" }}>42</span>
-          <span style={{ fontSize: "14px" }}>128</span>
-          <span style={{ fontSize: "14px" }}>1.2K</span>
-        </div>
-        <button
-          className="tip-button"
-          style={{
-            backgroundColor: "#F4B728",
-            color: "#000",
-            border: "none",
-            borderRadius: "20px",
-            padding: "8px 20px",
-            fontSize: "14px",
-            fontWeight: "600",
-            cursor: "pointer",
-            boxShadow: "0 0 20px rgba(244, 183, 40, 0.3)",
-            transition: "transform 200ms ease, box-shadow 200ms ease, background-color 200ms ease",
-          }}>
-          TIP
-        </button>
-      </div>
-      <style jsx>{`
-        .tweet-mockup:hover {
-          border-color: #333;
-        }
-        .tip-button:hover {
-          transform: scale(1.05);
-          box-shadow: 0 0 30px rgba(244, 183, 40, 0.5);
-          background-color: #fcd34d;
-        }
-        .tip-button:active {
-          transform: scale(0.98);
-        }
-      `}</style>
-    </div>
-  )
-}
-
-// Step card component with hover effects
-function StepCard({
-  number,
-  title,
-  icon
-}: {
-  number: number
-  title: string
-  icon: React.ReactNode
-}) {
-  return (
-    <div
-      className="step-card"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "16px",
-        padding: "32px",
-        border: "1px solid #1a1a1a",
-        borderRadius: "16px",
-        minWidth: "180px",
-        flex: 1,
-        transition: "border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease",
-        cursor: "default",
-      }}>
-      <div
-        className="step-icon"
-        style={{
-          width: "48px",
-          height: "48px",
-          borderRadius: "12px",
-          backgroundColor: "rgba(244, 183, 40, 0.1)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "#F4B728",
-          transition: "background-color 200ms ease, transform 200ms ease",
-        }}>
-        {icon}
-      </div>
-      <div style={{ textAlign: "center" }}>
-        <div style={{
-          fontSize: "14px",
-          color: "#F4B728",
-          fontWeight: 500,
-          marginBottom: "4px"
-        }}>
-          Step {number}
-        </div>
-        <div style={{ fontSize: "18px", fontWeight: 500 }}>{title}</div>
-      </div>
-      <style jsx>{`
-        .step-card:hover {
-          border-color: rgba(244, 183, 40, 0.3);
-          transform: translateY(-4px);
-          box-shadow: 0 8px 30px rgba(244, 183, 40, 0.1);
-        }
-        .step-card:hover .step-icon {
-          background-color: rgba(244, 183, 40, 0.2);
-          transform: scale(1.1);
-        }
-      `}</style>
-    </div>
-  )
-}
-
-// Stack item component with hover effects
-function StackItem({
-  icon,
-  title,
-  description
-}: {
-  icon: React.ReactNode
-  title: string
-  description: string
-}) {
-  return (
-    <div
-      className="stack-item"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "16px",
-        textAlign: "center",
-        flex: 1,
-        minWidth: "200px",
-        padding: "24px",
-        borderRadius: "16px",
-        transition: "background-color 200ms ease, transform 200ms ease",
-        cursor: "default",
-      }}>
-      <div
-        className="stack-icon"
-        style={{
-          fontSize: "48px",
-          lineHeight: 1,
-          transition: "transform 300ms ease",
-        }}>
-        {icon}
-      </div>
-      <div>
-        <div style={{ fontSize: "20px", fontWeight: 600, marginBottom: "8px" }}>{title}</div>
-        <div style={{ fontSize: "16px", color: "#888" }}>{description}</div>
-      </div>
-      <style jsx>{`
-        .stack-item:hover {
-          background-color: rgba(244, 183, 40, 0.03);
-        }
-        .stack-item:hover .stack-icon {
-          transform: scale(1.1) rotate(3deg);
-        }
-      `}</style>
-    </div>
-  )
-}
-
-// Icons
-const KeyIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
-  </svg>
-)
-
-const CheckIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-    <polyline points="22,4 12,14.01 9,11.01"/>
-  </svg>
-)
-
-const ShieldIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-  </svg>
-)
-
-// Zcash Z icon for stack
-const ZcashIcon = () => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-    <circle cx="24" cy="24" r="23" stroke="#F4B728" strokeWidth="2"/>
-    <g transform="translate(12, 12)">
-      <path d="M0 4 L24 4 L24 7 L8 7 L24 17 L24 20 L0 20 L0 17 L16 17 L0 7 Z" fill="#F4B728"/>
-      <rect x="-2" y="9" width="28" height="2" fill="#F4B728"/>
-    </g>
-  </svg>
-)
-
-export default function HomePage() {
-  const sectionsRef = useRef<HTMLDivElement[]>([])
+// Intersection Observer hook for scroll animations
+function useInView(threshold = 0.2) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible")
-          }
-        })
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
       },
-      { threshold: 0.1 }
-    )
+      { threshold }
+    );
 
-    sectionsRef.current.forEach((section) => {
-      if (section) observer.observe(section)
-    })
-
-    return () => observer.disconnect()
-  }, [])
-
-  const addToRefs = (el: HTMLDivElement | null) => {
-    if (el && !sectionsRef.current.includes(el)) {
-      sectionsRef.current.push(el)
+    if (ref.current) {
+      observer.observe(ref.current);
     }
-  }
+
+    return () => observer.disconnect();
+  }, [threshold]);
+
+  return { ref, isInView };
+}
+
+// Typing effect that triggers on view
+function useTypingOnView(text: string, speed: number = 35) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(false);
+  const [displayText, setDisplayText] = useState("");
+  const [isComplete, setIsComplete] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isInView || hasStarted) return;
+
+    if (prefersReducedMotion) {
+      setDisplayText(text);
+      setIsComplete(true);
+      setHasStarted(true);
+      return;
+    }
+
+    setHasStarted(true);
+    let index = 0;
+
+    const timer = setInterval(() => {
+      if (index < text.length) {
+        setDisplayText(text.slice(0, index + 1));
+        index++;
+      } else {
+        setIsComplete(true);
+        clearInterval(timer);
+      }
+    }, speed);
+
+    return () => clearInterval(timer);
+  }, [isInView, hasStarted, text, speed, prefersReducedMotion]);
+
+  return { ref, displayText, isComplete, hasStarted };
+}
+
+// Typing heading component for chapter titles
+function TypingHeading({
+  prefix,
+  prefixColor,
+  text,
+  suffix,
+  suffixColor,
+  style,
+}: {
+  prefix?: string;
+  prefixColor?: string;
+  text: string;
+  suffix?: string;
+  suffixColor?: string;
+  style?: React.CSSProperties;
+}) {
+  const { ref, displayText, isComplete, hasStarted } = useTypingOnView(text, 35);
+  const [cursorVisible, setCursorVisible] = useState(true);
+
+  useEffect(() => {
+    if (!hasStarted || isComplete) return;
+    const interval = setInterval(() => setCursorVisible(v => !v), 530);
+    return () => clearInterval(interval);
+  }, [hasStarted, isComplete]);
+
+  // Show full text if not started yet (before intersection), or show typing progress
+  // Only switch to displayText once it has content to prevent flash on animation start
+  const showText = hasStarted && displayText.length > 0 ? displayText : text;
+  const showCursor = hasStarted && !isComplete;
+  const showSuffix = !hasStarted || isComplete;
 
   return (
-    <main>
-      {/* Section 1: Hero */}
-      <section className="section" style={{ position: "relative", overflow: "hidden" }}>
-        {/* Hero glow background */}
-        <div className="hero-glow" aria-hidden="true" />
+    <h2
+      ref={ref as React.RefObject<HTMLHeadingElement>}
+      style={{
+        fontSize: "32px",
+        fontWeight: 600,
+        marginBottom: "32px",
+        lineHeight: 1.3,
+        ...style,
+      }}
+    >
+      {prefix && <span style={{ color: prefixColor || colors.success }}>{prefix}</span>}
+      {prefix && " "}
+      {showText}
+      {showCursor && (
+        <span style={{ color: colors.primary, opacity: cursorVisible ? 1 : 0 }}>█</span>
+      )}
+      {showSuffix && suffix && (
+        <span style={{ color: suffixColor || colors.primary }}>{suffix}</span>
+      )}
+    </h2>
+  );
+}
 
-        <div
-          ref={addToRefs}
-          className="fade-in"
+// Hook to track current chapter
+function useCurrentChapter() {
+  const [currentChapter, setCurrentChapter] = useState(0);
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    chapters.forEach((chapter, index) => {
+      const element = document.getElementById(chapter.id);
+      if (!element) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+            setCurrentChapter(index);
+          }
+        },
+        { threshold: 0.5 }
+      );
+
+      observer.observe(element);
+      observers.push(observer);
+    });
+
+    return () => observers.forEach(obs => obs.disconnect());
+  }, []);
+
+  return currentChapter;
+}
+
+// Terminal-style reveal component
+function TerminalReveal({
+  children,
+  delay = 0,
+  showCursor = false,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  showCursor?: boolean;
+}) {
+  const { ref, isInView } = useInView(0.15);
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const [visible, setVisible] = useState(false);
+  const [cursorVisible, setCursorVisible] = useState(true);
+
+  useEffect(() => {
+    if (!isInView) return;
+    if (prefersReducedMotion) {
+      setVisible(true);
+      return;
+    }
+    const timer = setTimeout(() => setVisible(true), delay);
+    return () => clearTimeout(timer);
+  }, [isInView, delay, prefersReducedMotion]);
+
+  useEffect(() => {
+    if (!showCursor || !visible) return;
+    const interval = setInterval(() => setCursorVisible(v => !v), 530);
+    return () => clearInterval(interval);
+  }, [showCursor, visible]);
+
+  const shouldAnimate = !prefersReducedMotion;
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        opacity: shouldAnimate ? (visible ? 1 : 0) : 1,
+        transform: shouldAnimate ? (visible ? "translateY(0)" : "translateY(12px)") : "none",
+        transition: shouldAnimate ? "opacity 0.4s ease-out, transform 0.4s ease-out" : "none",
+      }}
+    >
+      {children}
+      {showCursor && visible && (
+        <span style={{ color: colors.primary, opacity: cursorVisible ? 1 : 0, marginLeft: "2px" }}>_</span>
+      )}
+    </div>
+  );
+}
+
+// Code block line-by-line reveal
+function CodeBlockReveal({
+  lines,
+  isInView,
+  lineDelay = 60,
+}: {
+  lines: string[];
+  isInView: boolean;
+  lineDelay?: number;
+}) {
+  const [visibleLines, setVisibleLines] = useState<number>(0);
+  const [cursorLine, setCursorLine] = useState<number>(0);
+  const [cursorVisible, setCursorVisible] = useState(true);
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  useEffect(() => {
+    if (!isInView) return;
+    if (prefersReducedMotion) {
+      setVisibleLines(lines.length);
+      return;
+    }
+
+    let currentLine = 0;
+    const timer = setInterval(() => {
+      if (currentLine < lines.length) {
+        currentLine++;
+        setVisibleLines(currentLine);
+        setCursorLine(currentLine - 1);
+      } else {
+        clearInterval(timer);
+      }
+    }, lineDelay);
+
+    return () => clearInterval(timer);
+  }, [isInView, lines.length, lineDelay, prefersReducedMotion]);
+
+  useEffect(() => {
+    const interval = setInterval(() => setCursorVisible(v => !v), 530);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <pre
+      style={{
+        fontSize: "11px",
+        color: colors.muted,
+        lineHeight: 1.6,
+        margin: 0,
+        fontFamily: "'JetBrains Mono', monospace",
+      }}
+    >
+      {lines.slice(0, visibleLines).map((line, i) => (
+        <div key={i}>
+          {line}
+          {i === cursorLine && visibleLines < lines.length && (
+            <span style={{ color: colors.primary, opacity: cursorVisible ? 1 : 0 }}>_</span>
+          )}
+        </div>
+      ))}
+    </pre>
+  );
+}
+
+// Cursor component
+function Cursor({ visible }: { visible: boolean }) {
+  const [show, setShow] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => setShow((s) => !s), 530);
+    return () => clearInterval(interval);
+  }, []);
+
+  if (!visible) return null;
+  return <span style={{ color: colors.primary, opacity: show ? 1 : 0 }}>█</span>;
+}
+
+// Chapter Indicator
+function ChapterIndicator({ currentChapter }: { currentChapter: number }) {
+  return (
+    <div
+      style={{
+        position: "fixed",
+        right: "32px",
+        top: "50%",
+        transform: "translateY(-50%)",
+        zIndex: 50,
+        display: "flex",
+        flexDirection: "column",
+        gap: "12px",
+      }}
+    >
+      {chapters.map((chapter, index) => (
+        <a
+          key={chapter.id}
+          href={`#${chapter.id}`}
           style={{
             display: "flex",
-            flexDirection: "column",
             alignItems: "center",
-            gap: "32px",
-            textAlign: "center",
-            maxWidth: "800px",
-            zIndex: 1,
+            gap: "8px",
+            textDecoration: "none",
+            transition: "all 0.3s ease-out",
           }}
         >
-          <div style={{ height: "80px" }}>
-            <Logo />
-          </div>
+          <span
+            style={{
+              fontSize: "10px",
+              color: index === currentChapter ? colors.primary : colors.muted,
+              opacity: index === currentChapter ? 1 : 0,
+              transition: "opacity 0.3s ease-out",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {chapter.num}
+          </span>
+          <div
+            style={{
+              width: index === currentChapter ? "24px" : "8px",
+              height: "2px",
+              backgroundColor: index === currentChapter ? colors.primary : colors.border,
+              transition: "all 0.3s ease-out",
+            }}
+          />
+        </a>
+      ))}
+    </div>
+  );
+}
 
-          <h1 style={{
-            fontSize: "clamp(24px, 4vw, 32px)",
-            fontWeight: 400,
-            color: "#888",
-            letterSpacing: "-0.01em",
-          }}>
-            Private tips. Any asset. Zero trace.
-          </h1>
+// Section wrapper with smooth scroll snap
+function SnapSection({
+  children,
+  id,
+  style,
+}: {
+  children: React.ReactNode;
+  id: string;
+  style?: React.CSSProperties;
+}) {
+  return (
+    <section
+      id={id}
+      style={{
+        minHeight: "100vh",
+        scrollSnapAlign: "start",
+        scrollSnapStop: "normal",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        ...style,
+      }}
+    >
+      {children}
+    </section>
+  );
+}
 
-          <Link href="/register" className="btn btn--primary">
-            Get Started
-          </Link>
-        </div>
-        <ScrollIndicator />
-      </section>
+// Staggered items component
+function StaggeredItems({
+  items,
+  renderItem,
+  baseDelay = 100,
+}: {
+  items: { step: string; title: string; desc: string }[];
+  renderItem: (item: { step: string; title: string; desc: string }, visible: boolean, index: number) => React.ReactNode;
+  baseDelay?: number;
+}) {
+  const { ref, isInView } = useInView(0.15);
+  const [visibleItems, setVisibleItems] = useState<boolean[]>(new Array(items.length).fill(false));
+  const prefersReducedMotion = usePrefersReducedMotion();
 
-      {/* Section 2: Tip Anyone */}
-      <section className="section">
-        <div
-          ref={addToRefs}
-          className="fade-in"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "80px",
-            maxWidth: "1200px",
-            width: "100%",
-            flexWrap: "wrap",
-          }}
-        >
-          {/* Left: Text */}
-          <div style={{
-            flex: "1 1 400px",
-            maxWidth: "500px",
-          }}>
-            <h2 className="heading-section" style={{ marginBottom: "24px" }}>
-              Tip anyone on X.<br/>
-              <span style={{ color: "#888" }}>Pay with any token.</span>
-            </h2>
-            <p className="body-text" style={{ fontSize: "20px", lineHeight: "1.6" }}>
-              One click. Pick amount. Done.
-            </p>
-          </div>
+  useEffect(() => {
+    if (!isInView) return;
 
-          {/* Right: Tweet mockup */}
-          <div style={{ flex: "1 1 400px", display: "flex", justifyContent: "center" }}>
-            <TweetMockup />
-          </div>
-        </div>
-      </section>
+    if (prefersReducedMotion) {
+      setVisibleItems(new Array(items.length).fill(true));
+      return;
+    }
 
-      {/* Section 3: Receive Privately */}
-      <section className="section">
-        <div
-          ref={addToRefs}
-          className="fade-in"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "64px",
-            maxWidth: "1000px",
-            width: "100%",
-          }}
-        >
-          <div style={{ textAlign: "center" }}>
-            <h2 className="heading-section" style={{ marginBottom: "16px" }}>
-              Creators get ZEC.<br/>
-              <span style={{ color: "#888" }}>Address stays hidden.</span>
-            </h2>
-          </div>
+    const timers: NodeJS.Timeout[] = [];
+    for (let i = 0; i < items.length; i++) {
+      const timer = setTimeout(() => {
+        setVisibleItems(prev => {
+          const next = [...prev];
+          next[i] = true;
+          return next;
+        });
+      }, i * baseDelay);
+      timers.push(timer);
+    }
 
-          {/* Steps */}
-          <div style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "24px",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            width: "100%",
-          }}>
-            <StepCard number={1} title="Link address" icon={<KeyIcon />} />
+    return () => timers.forEach(t => clearTimeout(t));
+  }, [isInView, items.length, baseDelay, prefersReducedMotion]);
 
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F4B728" strokeWidth="2" style={{ flexShrink: 0 }}>
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
+  return (
+    <div
+      ref={ref}
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(3, 1fr)",
+        gap: "32px",
+      }}
+    >
+      {items.map((item, i) => renderItem(item, visibleItems[i], i))}
+    </div>
+  );
+}
 
-            <StepCard number={2} title="Verify tweet" icon={<CheckIcon />} />
+export default function HomePage() {
+  const heroText = "Creators are getting screwed.";
+  const { displayText, isComplete } = useTypingEffect(heroText, 35);
+  const [mounted, setMounted] = useState(false);
+  const currentChapter = useCurrentChapter();
+  const { ref: codeRef1, isInView: codeInView1 } = useInView(0.15);
 
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F4B728" strokeWidth="2" style={{ flexShrink: 0 }}>
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-            <StepCard number={3} title="Receive privately" icon={<ShieldIcon />} />
-          </div>
+  const contentPadding: React.CSSProperties = {
+    padding: "0 48px",
+    maxWidth: "900px",
+    margin: "0 auto",
+    width: "100%",
+  };
 
-          <p className="body-text" style={{ textAlign: "center" }}>
-            No public address. No transaction trail.
-          </p>
-        </div>
-      </section>
+  const publicBlockchainLines = [
+    "Sender:   0x7a2f...4e3d",
+    "Receiver: 0x9b1c...8f2a",
+    "Amount:   $50.00 USDC",
+    "Time:     2024-01-15 14:32:01",
+    "Status:   PUBLIC ❌",
+  ];
 
-      {/* Section 4: The Stack */}
-      <section className="section section--half">
-        <div
-          ref={addToRefs}
-          className="fade-in"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "48px",
-            maxWidth: "1000px",
-            width: "100%",
-          }}
-        >
-          <h2 style={{
-            fontSize: "20px",
-            fontWeight: 400,
-            color: "#888",
-            letterSpacing: "0.05em",
-            textTransform: "uppercase",
-          }}>
-            Powered by
-          </h2>
 
-          <div style={{
-            display: "flex",
-            gap: "64px",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            width: "100%",
-          }}>
-            <StackItem
-              icon={<ZcashIcon />}
-              title="Zcash Shielded"
-              description="Private by default"
-            />
-            <StackItem
-              icon={
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <circle cx="24" cy="24" r="23" stroke="#F4B728" strokeWidth="2"/>
-                  <text x="24" y="30" textAnchor="middle" fill="#F4B728" fontSize="18" fontWeight="600">N</text>
-                </svg>
-              }
-              title="NEAR Intents"
-              description="Any-to-ZEC conversion"
-            />
-            <StackItem
-              icon={
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <circle cx="24" cy="24" r="23" stroke="#F4B728" strokeWidth="2"/>
-                  <path d="M24 10 L24 38 M18 16 L24 10 L30 16" stroke="#F4B728" strokeWidth="2" fill="none"/>
-                </svg>
-              }
-              title="Instant Swaps"
-              description="<$0.01 fees"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Section 5: Final CTA */}
-      <section className="section section--half" style={{ borderTop: "1px solid #1a1a1a" }}>
-        <div
-          ref={addToRefs}
-          className="fade-in"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "32px",
-            textAlign: "center",
-          }}
-        >
-          <h2 style={{
-            fontSize: "clamp(36px, 6vw, 56px)",
-            fontWeight: 600,
-            letterSpacing: "-0.02em",
-          }}>
-            Ready?
-          </h2>
-
-          <div style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "16px",
-          }}>
-            <Link href="/register" className="btn btn--primary">
-              Register as Creator
-            </Link>
-            <a
-              href="#"
-              className="btn btn--text"
-            >
-              Install Extension
-            </a>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <footer style={{
-          position: "absolute",
-          bottom: "24px",
+  return (
+    <div
+      style={{
+        minHeight: "100vh",
+        backgroundColor: colors.bg,
+        color: colors.text,
+        fontFamily: "'JetBrains Mono', monospace",
+        overflowY: "auto",
+        scrollSnapType: "y proximity",
+        scrollBehavior: "smooth",
+        height: "100vh",
+      }}
+    >
+      {/* Fixed Header */}
+      <header style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: `${colors.bg}ee`,
+        backdropFilter: "blur(8px)",
+        zIndex: 100,
+        borderBottom: `1px solid ${colors.border}`,
+      }}>
+        <div style={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+          padding: "20px 48px",
           display: "flex",
-          gap: "24px",
-          fontSize: "14px",
+          justifyContent: "space-between",
+          alignItems: "center",
         }}>
-          <a href="#" className="footer-link">Privacy</a>
-          <a href="#" className="footer-link">Terms</a>
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="footer-link">GitHub</a>
-        </footer>
-      </section>
-    </main>
-  )
+          <a href="/" style={{ display: "flex", alignItems: "center", gap: "16px", textDecoration: "none" }}>
+            <span style={{ color: colors.primary, fontWeight: 700, fontSize: "16px" }}>[TIPZ]</span>
+            <span style={{ color: colors.muted, fontSize: "11px" }}>v0.1.0-beta</span>
+          </a>
+          <nav style={{ display: "flex", gap: "32px" }}>
+            <a href="/manifesto" style={{ color: colors.muted, textDecoration: "none", fontSize: "12px" }}>MANIFESTO</a>
+            <a href="/docs" style={{ color: colors.muted, textDecoration: "none", fontSize: "12px" }}>DOCS</a>
+            <a href="/register" style={{ color: colors.primary, textDecoration: "none", fontSize: "12px", fontWeight: 600 }}>REGISTER</a>
+          </nav>
+        </div>
+      </header>
+
+      {/* Chapter Indicator */}
+      <ChapterIndicator currentChapter={currentChapter} />
+
+      {/* Chapter 1: The Problem */}
+      <SnapSection id="problem" style={{ textAlign: "center", padding: "0 48px" }}>
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+          <TerminalReveal delay={0}>
+            <div style={{
+              fontSize: "11px",
+              color: colors.muted,
+              letterSpacing: "2px",
+              marginBottom: "32px",
+            }}>
+              CHAPTER 01: THE PROBLEM
+            </div>
+          </TerminalReveal>
+
+          <div style={{ marginBottom: "64px" }}>
+            <span style={{ color: colors.error, fontSize: "32px" }}>{">"}</span>{" "}
+            <span style={{ fontSize: "40px", fontWeight: 600 }}>
+              {mounted ? displayText : heroText}
+              <Cursor visible={mounted && !isComplete} />
+            </span>
+          </div>
+
+          <div style={{
+            maxWidth: "700px",
+            color: colors.muted,
+            fontSize: "18px",
+            lineHeight: 1.8,
+            margin: "0 auto",
+          }}>
+            <TerminalReveal delay={1200}>
+              <p style={{ marginBottom: "32px" }}>
+                30% platform fees. Payout delays. Chargebacks.
+              </p>
+            </TerminalReveal>
+            <TerminalReveal delay={1500}>
+              <p style={{ marginBottom: "32px" }}>
+                Deplatformed without warning. Income gone overnight.
+              </p>
+            </TerminalReveal>
+            <TerminalReveal delay={1800}>
+              <p style={{ color: colors.text }}>
+                You build the audience. You create the content.
+                <br />They take the cut. <span style={{ color: colors.error }}>The creator economy is broken.</span>
+              </p>
+            </TerminalReveal>
+          </div>
+
+          <TerminalReveal delay={2200}>
+            <div style={{
+              marginTop: "64px",
+              color: colors.muted,
+              fontSize: "12px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "8px",
+            }}>
+              <span>Scroll to continue</span>
+              <span style={{ animation: "bounce 2s infinite" }}>↓</span>
+            </div>
+          </TerminalReveal>
+        </div>
+      </SnapSection>
+
+      {/* Chapter 2: Micropayments */}
+      <SnapSection id="micropayments" style={{ padding: "0 48px" }}>
+        <div style={contentPadding}>
+          <TerminalReveal delay={0}>
+            <div style={{
+              fontSize: "11px",
+              color: colors.muted,
+              letterSpacing: "2px",
+              marginBottom: "32px",
+            }}>
+              CHAPTER 02: MICROPAYMENTS SHOULD JUST WORK
+            </div>
+          </TerminalReveal>
+
+          <TypingHeading
+            prefix=">"
+            prefixColor={colors.success}
+            text="What if you could tip $1—and the creator actually got "
+            suffix="$1?"
+            suffixColor={colors.primary}
+            style={{ fontSize: "40px" }}
+          />
+
+          <div style={{
+            color: colors.muted,
+            fontSize: "18px",
+            lineHeight: 1.8,
+          }}>
+            <TerminalReveal delay={200}>
+              <p style={{ marginBottom: "32px" }}>
+                No fees. No middleman. No minimums. No delays.
+              </p>
+            </TerminalReveal>
+            <TerminalReveal delay={350}>
+              <p style={{ marginBottom: "32px" }}>
+                Crypto was supposed to fix this.
+                <br />
+                Peer-to-peer payments. Instant settlement. Self-custody.
+              </p>
+            </TerminalReveal>
+            <TerminalReveal delay={500} showCursor>
+              <p style={{ color: colors.text }}>
+                But there&apos;s a catch.
+              </p>
+            </TerminalReveal>
+          </div>
+        </div>
+      </SnapSection>
+
+      {/* Chapter 3: The Surveillance Problem */}
+      <SnapSection id="surveillance" style={{ padding: "0 48px" }}>
+        <div style={contentPadding}>
+          <TerminalReveal delay={0}>
+            <div style={{
+              fontSize: "11px",
+              color: colors.muted,
+              letterSpacing: "2px",
+              marginBottom: "32px",
+            }}>
+              CHAPTER 03: THE SURVEILLANCE PROBLEM
+            </div>
+          </TerminalReveal>
+
+          <TypingHeading
+            prefix="{}"
+            prefixColor={colors.error}
+            text="Every crypto tip you send is public."
+          />
+
+          <TerminalReveal delay={200}>
+            <p style={{
+              color: colors.muted,
+              fontSize: "18px",
+              lineHeight: 1.8,
+              marginBottom: "32px",
+            }}>
+              Your wallet. Their wallet. The amount. The timestamp.
+              <br />All indexed. Forever. Visible to anyone.
+            </p>
+          </TerminalReveal>
+
+          <div
+            ref={codeRef1}
+            style={{
+              backgroundColor: colors.bg,
+              border: `1px solid ${colors.error}`,
+              padding: "24px",
+              marginBottom: "32px",
+            }}
+          >
+            <div style={{ color: colors.error, fontWeight: 600, marginBottom: "16px", fontSize: "12px" }}>
+              PUBLIC BLOCKCHAIN DATA
+            </div>
+            <CodeBlockReveal lines={publicBlockchainLines} isInView={codeInView1} lineDelay={80} />
+          </div>
+
+          <TerminalReveal delay={700}>
+            <p style={{
+              color: colors.text,
+              fontSize: "18px",
+              lineHeight: 1.8,
+            }}>
+              Competitors track creator income. Stalkers profile supporters.
+              <br />
+              <span style={{ color: colors.error }}>This isn&apos;t freedom. It&apos;s surveillance with extra steps.</span>
+            </p>
+          </TerminalReveal>
+        </div>
+      </SnapSection>
+
+      {/* Chapter 4: The Solution */}
+      <SnapSection id="solution" style={{ padding: "0 48px" }}>
+        <div style={contentPadding}>
+          <TerminalReveal delay={0}>
+            <div style={{
+              fontSize: "11px",
+              color: colors.muted,
+              letterSpacing: "2px",
+              marginBottom: "32px",
+            }}>
+              CHAPTER 04: THE SOLUTION
+            </div>
+          </TerminalReveal>
+
+          <TypingHeading
+            prefix=">"
+            prefixColor={colors.success}
+            text="TIPZ—Tips that "
+            suffix="actually work."
+            suffixColor={colors.primary}
+            style={{ fontSize: "40px" }}
+          />
+
+          <TerminalReveal delay={200}>
+            <p style={{
+              color: colors.muted,
+              fontSize: "18px",
+              lineHeight: 1.8,
+              marginBottom: "48px",
+            }}>
+              See the tip button. Click. Send. <span style={{ color: colors.success }}>Private.</span>
+            </p>
+          </TerminalReveal>
+
+          {/* Visual Flow: Tweet → Popup → Sent */}
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "1fr auto 1fr auto 1fr",
+            gap: "16px",
+            alignItems: "center",
+            marginTop: "32px",
+          }}>
+            {/* Step 1: Mock Tweet */}
+            <TerminalReveal delay={300}>
+              <div style={{
+                backgroundColor: colors.surface,
+                border: `1px solid ${colors.border}`,
+                padding: "20px",
+                borderRadius: "4px",
+              }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "12px" }}>
+                  <div style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    backgroundColor: colors.primary,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "16px",
+                    fontWeight: 700,
+                    color: colors.bg,
+                  }}>
+                    S
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 600, fontSize: "14px" }}>Satoshi Nakamoto</div>
+                    <div style={{ color: colors.muted, fontSize: "12px" }}>@satoshi</div>
+                  </div>
+                </div>
+                <p style={{ fontSize: "14px", lineHeight: 1.5, marginBottom: "16px" }}>
+                  If you don&apos;t believe me or don&apos;t get it, I don&apos;t have time to try to convince you, sorry.
+                </p>
+                <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                  <span style={{ color: colors.muted, fontSize: "12px" }}>♡ 42.1K</span>
+                  <span style={{ color: colors.muted, fontSize: "12px" }}>↻ 12.8K</span>
+                  <span style={{
+                    backgroundColor: colors.primary,
+                    color: colors.bg,
+                    padding: "4px 12px",
+                    fontSize: "11px",
+                    fontWeight: 600,
+                  }}>
+                    [TIP]
+                  </span>
+                </div>
+              </div>
+            </TerminalReveal>
+
+            {/* Arrow 1 */}
+            <TerminalReveal delay={500}>
+              <span style={{ color: colors.primary, fontSize: "24px" }}>→</span>
+            </TerminalReveal>
+
+            {/* Step 2: Popup Modal */}
+            <TerminalReveal delay={600}>
+              <div style={{
+                backgroundColor: colors.surface,
+                border: `1px solid ${colors.primary}`,
+                padding: "20px",
+              }}>
+                <div style={{ fontSize: "12px", color: colors.primary, fontWeight: 600, marginBottom: "16px" }}>
+                  TIP @satoshi
+                </div>
+                <div style={{
+                  backgroundColor: colors.bg,
+                  padding: "12px",
+                  marginBottom: "12px",
+                  textAlign: "center",
+                }}>
+                  <span style={{ fontSize: "32px", fontWeight: 700 }}>$5</span>
+                  <span style={{ color: colors.muted, fontSize: "12px", marginLeft: "8px" }}>USDC</span>
+                </div>
+                <div style={{ fontSize: "11px", color: colors.muted, marginBottom: "16px", textAlign: "center" }}>
+                  Wallet: 0x7a2f...4e3d
+                </div>
+                <div style={{
+                  backgroundColor: colors.primary,
+                  color: colors.bg,
+                  padding: "10px",
+                  textAlign: "center",
+                  fontWeight: 600,
+                  fontSize: "12px",
+                }}>
+                  SEND TIP →
+                </div>
+              </div>
+            </TerminalReveal>
+
+            {/* Arrow 2 */}
+            <TerminalReveal delay={800}>
+              <span style={{ color: colors.success, fontSize: "24px" }}>→</span>
+            </TerminalReveal>
+
+            {/* Step 3: Sent Confirmation */}
+            <TerminalReveal delay={900}>
+              <div style={{
+                backgroundColor: colors.surface,
+                border: `1px solid ${colors.success}`,
+                padding: "20px",
+                textAlign: "center",
+              }}>
+                <div style={{
+                  fontSize: "48px",
+                  marginBottom: "12px",
+                }}>
+                  ✓
+                </div>
+                <div style={{ color: colors.success, fontWeight: 600, fontSize: "14px", marginBottom: "8px" }}>
+                  TIP SENT
+                </div>
+                <div style={{ fontSize: "11px", color: colors.muted, lineHeight: 1.6 }}>
+                  <div>Sender: <span style={{ color: colors.success }}>[PRIVATE]</span></div>
+                  <div>Amount: <span style={{ color: colors.success }}>[ENCRYPTED]</span></div>
+                  <div>Receiver: <span style={{ color: colors.success }}>[SHIELDED]</span></div>
+                </div>
+              </div>
+            </TerminalReveal>
+          </div>
+
+          <TerminalReveal delay={1100}>
+            <p style={{
+              color: colors.text,
+              fontSize: "14px",
+              textAlign: "center",
+              marginTop: "32px",
+            }}>
+              No trace. No trail. <span style={{ color: colors.success }}>Just support.</span>
+            </p>
+          </TerminalReveal>
+        </div>
+      </SnapSection>
+
+      {/* Chapter 5: Any Token */}
+      <SnapSection id="any-token" style={{ padding: "0 48px" }}>
+        <div style={contentPadding}>
+          <TerminalReveal delay={0}>
+            <div style={{
+              fontSize: "11px",
+              color: colors.muted,
+              letterSpacing: "2px",
+              marginBottom: "32px",
+            }}>
+              CHAPTER 05: ANY TOKEN
+            </div>
+          </TerminalReveal>
+
+          <TypingHeading
+            prefix="{}"
+            prefixColor={colors.primary}
+            text="Use whatever crypto you have."
+          />
+
+          <TerminalReveal delay={200}>
+            <p style={{
+              color: colors.muted,
+              fontSize: "18px",
+              lineHeight: 1.8,
+              marginBottom: "48px",
+            }}>
+              TIPZ auto-swaps any token to private delivery. No extra steps.
+            </p>
+          </TerminalReveal>
+
+          <TerminalReveal delay={350}>
+            <div style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "32px",
+              padding: "32px",
+              backgroundColor: colors.bg,
+              border: `1px solid ${colors.border}`,
+            }}>
+              <div style={{ textAlign: "center" }}>
+                <div style={{
+                  fontSize: "24px",
+                  marginBottom: "8px",
+                }}>
+                  ETH / USDC / SOL
+                </div>
+                <div style={{ fontSize: "11px", color: colors.muted }}>Your token</div>
+              </div>
+
+              <div style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "12px",
+                color: colors.primary,
+              }}>
+                <span>→</span>
+                <div style={{
+                  padding: "8px 16px",
+                  border: `1px solid ${colors.primary}`,
+                  fontSize: "11px",
+                }}>
+                  AUTO-SWAP
+                </div>
+                <span>→</span>
+              </div>
+
+              <div style={{ textAlign: "center" }}>
+                <div style={{
+                  fontSize: "24px",
+                  marginBottom: "8px",
+                  color: colors.success,
+                }}>
+                  Private Delivery
+                </div>
+                <div style={{ fontSize: "11px", color: colors.muted }}>Shielded transfer</div>
+              </div>
+            </div>
+          </TerminalReveal>
+        </div>
+      </SnapSection>
+
+      {/* Chapter 6: How It Works */}
+      <SnapSection id="how-it-works" style={{ padding: "0 48px" }}>
+        <div style={contentPadding}>
+          <TerminalReveal delay={0}>
+            <div style={{
+              fontSize: "11px",
+              color: colors.muted,
+              letterSpacing: "2px",
+              marginBottom: "32px",
+            }}>
+              CHAPTER 06: HOW IT WORKS
+            </div>
+          </TerminalReveal>
+
+          <TypingHeading
+            text="Two minutes to set up."
+            style={{ marginBottom: "48px" }}
+          />
+
+          {/* For Creators */}
+          <div style={{ marginBottom: "48px" }}>
+            <TerminalReveal delay={200}>
+              <h3 style={{
+                color: colors.primary,
+                fontSize: "12px",
+                letterSpacing: "1px",
+                marginBottom: "24px",
+              }}>
+                // FOR_CREATORS
+              </h3>
+            </TerminalReveal>
+
+            <StaggeredItems
+              baseDelay={120}
+              items={[
+                {
+                  step: "01",
+                  title: "Get a wallet",
+                  desc: "Download Zashi and copy your shielded address",
+                },
+                {
+                  step: "02",
+                  title: "Register",
+                  desc: "Paste your address at tipz.cash. Verify with a tweet.",
+                },
+                {
+                  step: "03",
+                  title: "Receive tips",
+                  desc: "Tip button appears on your posts.",
+                },
+              ]}
+              renderItem={(item, visible) => (
+                <div
+                  key={item.step}
+                  style={{
+                    backgroundColor: colors.surface,
+                    border: `1px solid ${colors.border}`,
+                    padding: "20px",
+                    opacity: visible ? 1 : 0,
+                    transform: visible ? "translateY(0)" : "translateY(12px)",
+                    transition: "opacity 0.4s ease-out, transform 0.4s ease-out",
+                  }}
+                >
+                  <div style={{
+                    color: colors.primary,
+                    fontSize: "24px",
+                    fontWeight: 700,
+                    marginBottom: "8px",
+                  }}>
+                    {item.step}
+                  </div>
+                  <h4 style={{ fontSize: "13px", fontWeight: 600, marginBottom: "6px" }}>
+                    {item.title}
+                  </h4>
+                  <p style={{ fontSize: "12px", color: colors.muted, margin: 0, lineHeight: 1.4 }}>
+                    {item.desc}
+                  </p>
+                </div>
+              )}
+            />
+          </div>
+
+          {/* For Tippers */}
+          <div>
+            <TerminalReveal delay={500}>
+              <h3 style={{
+                color: colors.primary,
+                fontSize: "12px",
+                letterSpacing: "1px",
+                marginBottom: "24px",
+              }}>
+                // FOR_TIPPERS
+              </h3>
+            </TerminalReveal>
+
+            <StaggeredItems
+              baseDelay={120}
+              items={[
+                {
+                  step: "01",
+                  title: "Install extension",
+                  desc: "Add TIPZ to Chrome. No sign-up required.",
+                },
+                {
+                  step: "02",
+                  title: "Browse X",
+                  desc: "See [TIP] buttons on registered creators.",
+                },
+                {
+                  step: "03",
+                  title: "Tip privately",
+                  desc: "Connect wallet, confirm. No trace.",
+                },
+              ]}
+              renderItem={(item, visible) => (
+                <div
+                  key={item.step}
+                  style={{
+                    backgroundColor: colors.surface,
+                    border: `1px solid ${colors.border}`,
+                    padding: "20px",
+                    opacity: visible ? 1 : 0,
+                    transform: visible ? "translateY(0)" : "translateY(12px)",
+                    transition: "opacity 0.4s ease-out, transform 0.4s ease-out",
+                  }}
+                >
+                  <div style={{
+                    color: colors.primary,
+                    fontSize: "24px",
+                    fontWeight: 700,
+                    marginBottom: "8px",
+                  }}>
+                    {item.step}
+                  </div>
+                  <h4 style={{ fontSize: "13px", fontWeight: 600, marginBottom: "6px" }}>
+                    {item.title}
+                  </h4>
+                  <p style={{ fontSize: "12px", color: colors.muted, margin: 0, lineHeight: 1.4 }}>
+                    {item.desc}
+                  </p>
+                </div>
+              )}
+            />
+          </div>
+        </div>
+      </SnapSection>
+
+      {/* Chapter 7: Why It Matters */}
+      <SnapSection id="why-it-matters" style={{ padding: "0 48px" }}>
+        <div style={contentPadding}>
+          <TerminalReveal delay={0}>
+            <div style={{
+              fontSize: "11px",
+              color: colors.muted,
+              letterSpacing: "2px",
+              marginBottom: "32px",
+            }}>
+              CHAPTER 07: WHY IT MATTERS
+            </div>
+          </TerminalReveal>
+
+          <TypingHeading
+            text="Built for creators. Designed for freedom."
+            style={{ marginBottom: "48px" }}
+          />
+
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: "32px",
+          }}>
+            <TerminalReveal delay={200}>
+              <div>
+                <h3 style={{
+                  color: colors.primary,
+                  fontSize: "14px",
+                  fontWeight: 600,
+                  marginBottom: "16px",
+                }}>
+                  For creators
+                </h3>
+                <ul style={{
+                  listStyle: "none",
+                  padding: 0,
+                  margin: 0,
+                  color: colors.muted,
+                  fontSize: "14px",
+                  lineHeight: 2,
+                }}>
+                  <li>→ Keep 100%—zero platform fees</li>
+                  <li>→ Get paid instantly—no payout delays</li>
+                  <li>→ Own your income—no deplatforming risk</li>
+                  <li>→ Stay private—no public wallet balances</li>
+                </ul>
+              </div>
+            </TerminalReveal>
+
+            <TerminalReveal delay={350}>
+              <div>
+                <h3 style={{
+                  color: colors.primary,
+                  fontSize: "14px",
+                  fontWeight: 600,
+                  marginBottom: "16px",
+                }}>
+                  For supporters
+                </h3>
+                <ul style={{
+                  listStyle: "none",
+                  padding: 0,
+                  margin: 0,
+                  color: colors.muted,
+                  fontSize: "14px",
+                  lineHeight: 2,
+                }}>
+                  <li>→ Tip $1 and it actually arrives as $1</li>
+                  <li>→ Use any crypto you have</li>
+                  <li>→ Support without surveillance</li>
+                  <li>→ No account, no signup, no KYC</li>
+                </ul>
+              </div>
+            </TerminalReveal>
+          </div>
+        </div>
+      </SnapSection>
+
+      {/* Chapter 8: CTA */}
+      <SnapSection id="join" style={{ textAlign: "center", padding: "0 48px" }}>
+        <div style={{ maxWidth: "600px", margin: "0 auto" }}>
+          <TerminalReveal delay={0}>
+            <div style={{
+              fontSize: "11px",
+              color: colors.muted,
+              letterSpacing: "2px",
+              marginBottom: "32px",
+            }}>
+              CHAPTER 08: JOIN THE MOVEMENT
+            </div>
+          </TerminalReveal>
+
+          <TypingHeading
+            text="The creator economy needs an upgrade."
+            style={{ fontSize: "48px", lineHeight: 1.2 }}
+          />
+
+          <TerminalReveal delay={200}>
+            <p style={{
+              color: colors.muted,
+              fontSize: "18px",
+              marginBottom: "48px",
+            }}>
+              Zero fees. Instant payments. Private by default.
+              <br />Be part of the fix.
+            </p>
+          </TerminalReveal>
+
+          <TerminalReveal delay={350}>
+            <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
+              <a
+                href="/register"
+                style={{
+                  backgroundColor: colors.primary,
+                  color: colors.bg,
+                  padding: "18px 40px",
+                  fontWeight: 600,
+                  fontSize: "16px",
+                  textDecoration: "none",
+                  fontFamily: "'JetBrains Mono', monospace",
+                  transition: "background-color 0.2s ease-out",
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = colors.primaryHover}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = colors.primary}
+              >
+                I&apos;m a Creator
+              </a>
+              <a
+                href="https://chromewebstore.google.com/detail/tipz"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  backgroundColor: "transparent",
+                  color: colors.text,
+                  padding: "18px 40px",
+                  border: `1px solid ${colors.border}`,
+                  fontWeight: 500,
+                  fontSize: "16px",
+                  textDecoration: "none",
+                  fontFamily: "'JetBrains Mono', monospace",
+                  transition: "all 0.2s ease-out",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = colors.primary;
+                  e.currentTarget.style.color = colors.primary;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = colors.border;
+                  e.currentTarget.style.color = colors.text;
+                }}
+              >
+                I Want to Tip
+              </a>
+            </div>
+          </TerminalReveal>
+        </div>
+      </SnapSection>
+
+      {/* Footer */}
+      <footer style={{
+        padding: "32px 48px",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        borderTop: `1px solid ${colors.border}`,
+        fontSize: "12px",
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+          <span style={{ color: colors.primary, fontWeight: 700 }}>[TIPZ]</span>
+          <span style={{ color: colors.muted }}>v0.1.0-beta</span>
+        </div>
+        <div style={{ display: "flex", gap: "32px" }}>
+          <a href="/manifesto" style={{ color: colors.muted, textDecoration: "none" }}>Manifesto</a>
+          <a href="/docs" style={{ color: colors.muted, textDecoration: "none" }}>Docs</a>
+          <a href="https://github.com/tipz-app" target="_blank" rel="noopener noreferrer" style={{ color: colors.muted, textDecoration: "none" }}>GitHub</a>
+          <a href="https://x.com/tipz_cash" target="_blank" rel="noopener noreferrer" style={{ color: colors.muted, textDecoration: "none" }}>X</a>
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "8px", color: colors.muted }}>
+          <span style={{ color: colors.success }}>●</span>
+          <span>Private by default</span>
+        </div>
+      </footer>
+
+      {/* Animations */}
+      <style>{`
+        @keyframes bounce {
+          0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+          40% { transform: translateY(-10px); }
+          60% { transform: translateY(-5px); }
+        }
+      `}</style>
+    </div>
+  );
 }
