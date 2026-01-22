@@ -10,7 +10,8 @@
       "Bash(npx tsc:*)",
       "Bash(timeout 10 npm run dev:*)",
       "Bash(find:*)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(npm run dev:*)"
     ]
   }
 }

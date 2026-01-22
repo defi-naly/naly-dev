@@ -103,22 +103,29 @@ TIPZ: 0% platform fee, self-custody, private by default.
 
 ## Launch Tweet Thread (10 tweets)
 
+**FINAL VERSION - READY TO POST**
+
+*URL: tipz.cash | Optimal posting time: Tuesday-Thursday, 9am PT*
+
 ### Tweet 1 (Hook)
 ```
 Every crypto tip you've ever sent is public.
 
 Your wallet. Their wallet. The amount. The timestamp.
 
-All of it. Indexed forever.
+All indexed. Forever.
 
 What if it didn't have to be?
 
 Introducing TIPZ.
+
+tipz.cash
 ```
+*Characters: 197*
 
 ### Tweet 2 (Problem)
 ```
-The problem with crypto tips today:
+The problem with crypto tips:
 
 Send $5 to a creator? Now everyone knows:
 - Your wallet address
@@ -131,6 +138,7 @@ Stalkers profile supporters.
 
 This isn't tipping. It's surveillance.
 ```
+*Characters: 268*
 
 ### Tweet 3 (Solution)
 ```
@@ -140,8 +148,9 @@ Your tip goes in. The creator gets paid.
 
 No trace. No trail. No tracking.
 
-Like cash in an envelope. But for the internet.
+Like cash in an envelope—but for the internet.
 ```
+*Characters: 173*
 
 ### Tweet 4 (Any Token)
 ```
@@ -149,74 +158,88 @@ Like cash in an envelope. But for the internet.
 
 You don't need it.
 
-TIPZ uses @NEARProtocol Intents to swap any token automatically.
+TIPZ swaps any token automatically:
 
 ETH → ZEC
 USDC → ZEC
 SOL → ZEC
 
-You tip in whatever you hold. They receive in private.
+Connect your existing wallet. Tip in whatever you hold.
+
+They receive it privately.
 ```
+*Characters: 193*
 
 ### Tweet 5 (How It Works - Creators)
 ```
 Creator setup takes 2 minutes:
 
-1. Get a Zcash shielded address
-2. Post a tweet with it
-3. Register at tipz.app
+1. Get a Zcash shielded address (we recommend Zashi wallet)
+2. Post a tweet with your address
+3. Register at tipz.cash
 
-Done. You're now tippable from anywhere your content lives.
+Done.
+
+You're now tippable from every post on X.
 ```
+*Characters: 213*
 
 ### Tweet 6 (How It Works - Tippers)
 ```
 For tippers:
 
-1. Install the TIPZ extension
-2. Browse X or Substack
-3. Click the tip button on any registered creator
-4. Confirm in your wallet
+1. Install the TIPZ Chrome extension
+2. Browse X (Twitter)
+3. See a tip button on registered creators
+4. Click, confirm, done
 
-Private tip sent. No one else knows.
+Private tip sent.
+
+No one else knows. Not even us.
 ```
+*Characters: 198*
 
 ### Tweet 7 (Why It Matters)
 ```
 Why private tipping matters:
 
-Creators:
-→ Competitors can't see your income
-→ No doxxing from public balances
+For creators:
+→ Competitors can't track your income
+→ No doxxing from public wallet balances
 → Financial privacy by default
 
-Tippers:
+For tippers:
 → Support without surveillance
-→ No wallet tracking
+→ No wallet profiling
 → Give without judgment
 ```
+*Characters: 262*
 
 ### Tweet 8 (Tech Stack)
 ```
-The stack:
+Built on proven infrastructure:
 
-@Zcash shielded addresses for privacy
-@NEARProtocol Intents for any-token swaps
+@zcaboratories shielded addresses for privacy
+Cross-chain swaps for any-token support
 @THORChain for deep liquidity
 
-The most private tipping infrastructure ever built.
+Zero platform fees. Non-custodial. Private by default.
+
+The tipping layer crypto deserves.
 ```
+*Characters: 252*
 
 ### Tweet 9 (Call to Action - Creators)
 ```
-Creators: Register at tipz.app
+Creators: Register now at tipz.cash
 
-Free. 2 minutes. Zero platform fees.
+Free forever. 2-minute setup. Zero platform fees.
 
 Your audience wants to support you privately.
 
 Let them.
 ```
+*Characters: 147*
 
 ### Tweet 10 (Call to Action - Everyone)
 ```
@@ -224,12 +247,23 @@ Privacy isn't a feature. It's a right.
 
 TIPZ brings that right to creator support.
 
-→ Creators: tipz.app
-→ Tippers: Get the extension
+→ Creators: tipz.cash
+→ Tippers: Chrome extension live now
 → Everyone: RT if tips should be private
 
-One tip at a time.
+Let's build a more private internet. One tip at a time.
 ```
+*Characters: 253*
+
+---
+
+### Thread Posting Instructions
+
+1. Post Tweet 1, wait 60 seconds for initial engagement
+2. Post remaining tweets as replies, 30-45 seconds apart
+3. Pin Tweet 1 to @tipz profile after thread is complete
+4. Post demo GIF as a reply 3 hours after thread goes live
+5. Monitor and respond to all engagement in real-time
 
 ---
 
@@ -290,7 +324,7 @@ TIPZ is building that future.
 
 ### Get Started
 
-Creators: Register at tipz.app - it takes 2 minutes.
+Creators: Register at tipz.cash - it takes 2 minutes.
 Tippers: Install the extension and start supporting creators privately.
 
 Privacy isn't paranoia. It's a right. Let's build a more private internet together.
@@ -315,14 +349,14 @@ Privacy isn't paranoia. It's a right. Let's build a more private internet togeth
 ## Social Media Copy Bank
 
 ### Short Announcements
-- "TIPZ is live. Private tips for creators. Any token. Zero trace. tipz.app"
-- "Finally: a way to tip creators without surveillance. tipz.app"
-- "Your tips. Your privacy. Your control. tipz.app"
+- "TIPZ is live. Private tips for creators. Any token. Zero trace. tipz.cash"
+- "Finally: a way to tip creators without surveillance. tipz.cash"
+- "Your tips. Your privacy. Your control. tipz.cash"
 
 ### Feature Highlights
 - "Tip in ETH, receive in ZEC. Shielded by default. That's TIPZ."
 - "No more public tip amounts. No more wallet tracking. Just private support."
-- "2-minute creator setup. Zero platform fees. 100% private. tipz.app"
+- "2-minute creator setup. Zero platform fees. 100% private. tipz.cash"
 
 ### Engagement Posts
 - "If you could tip your favorite creator without anyone knowing... would you? 👀"
