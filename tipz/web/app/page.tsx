@@ -872,7 +872,7 @@ export default function HomePage() {
                 {/* Tweet Content */}
                 <div style={{ marginBottom: "16px" }}>
                   <p style={{ fontSize: "15px", lineHeight: 1.5, color: "#FFFFFF", margin: 0 }}>
-                    Just mass a 50-part thread on how to build your first mass app.
+                    Just made a 50-part thread on how to build your first SaaS app.
                   </p>
                   <p style={{ fontSize: "15px", lineHeight: 1.5, color: "#FFFFFF", margin: "8px 0 0 0" }}>
                     3 years of learnings, condensed into actionable steps.
@@ -990,7 +990,7 @@ export default function HomePage() {
                   fontSize: "11px",
                   color: colors.success,
                 }}>
-                  <span>🔒</span> 100% Private Transaction
+                  <span>🔒</span> Private
                 </div>
               </div>
             </TerminalReveal>
@@ -1084,97 +1084,8 @@ export default function HomePage() {
             </div>
           </TerminalReveal>
 
-          {/* Privacy Flow Visualization */}
-          <TerminalReveal delay={1000}>
-            <div style={{
-              backgroundColor: colors.surface,
-              border: `1px solid ${colors.border}`,
-              borderRadius: "8px",
-              padding: "24px",
-              marginBottom: "32px",
-            }}>
-              <div style={{ fontSize: "11px", color: colors.muted, letterSpacing: "1px", marginBottom: "16px" }}>
-                HOW PRIVACY WORKS
-              </div>
-
-              {/* Flow Diagram */}
-              <div style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "12px",
-                marginBottom: "20px",
-                flexWrap: "wrap",
-              }}>
-                {/* Your Wallet */}
-                <div style={{
-                  backgroundColor: colors.bg,
-                  border: `1px solid ${colors.border}`,
-                  borderRadius: "6px",
-                  padding: "12px 16px",
-                  textAlign: "center",
-                }}>
-                  <div style={{ fontSize: "10px", color: colors.muted, marginBottom: "4px" }}>YOUR WALLET</div>
-                  <div style={{ fontSize: "12px", color: colors.text }}>ETH / USDC</div>
-                </div>
-
-                <span style={{ color: colors.primary, fontSize: "20px" }}>→</span>
-
-                {/* Swap */}
-                <div style={{
-                  backgroundColor: colors.primary,
-                  borderRadius: "6px",
-                  padding: "12px 16px",
-                  textAlign: "center",
-                }}>
-                  <div style={{ fontSize: "10px", color: colors.bg, marginBottom: "4px", fontWeight: 600 }}>SWAP</div>
-                  <div style={{ fontSize: "12px", color: colors.bg, fontWeight: 700 }}>→ ZEC</div>
-                </div>
-
-                <span style={{ color: colors.primary, fontSize: "20px" }}>→</span>
-
-                {/* Shield */}
-                <div style={{
-                  backgroundColor: colors.success,
-                  borderRadius: "6px",
-                  padding: "12px 16px",
-                  textAlign: "center",
-                }}>
-                  <div style={{ fontSize: "10px", color: colors.bg, marginBottom: "4px", fontWeight: 600 }}>SHIELD</div>
-                  <div style={{ fontSize: "12px", color: colors.bg, fontWeight: 700 }}>🔒</div>
-                </div>
-
-                <span style={{ color: colors.success, fontSize: "20px" }}>→</span>
-
-                {/* Creator */}
-                <div style={{
-                  backgroundColor: colors.bg,
-                  border: `1px solid ${colors.success}`,
-                  borderRadius: "6px",
-                  padding: "12px 16px",
-                  textAlign: "center",
-                }}>
-                  <div style={{ fontSize: "10px", color: colors.success, marginBottom: "4px" }}>CREATOR</div>
-                  <div style={{ fontSize: "12px", color: colors.success }}>Shielded</div>
-                </div>
-              </div>
-
-              {/* Privacy Labels */}
-              <div style={{
-                display: "flex",
-                justifyContent: "center",
-                gap: "24px",
-                fontSize: "11px",
-              }}>
-                <span>Sender: <span style={{ color: colors.success }}>[ENCRYPTED]</span></span>
-                <span>Amount: <span style={{ color: colors.success }}>[ENCRYPTED]</span></span>
-                <span>Receiver: <span style={{ color: colors.success }}>[SHIELDED]</span></span>
-              </div>
-            </div>
-          </TerminalReveal>
-
           {/* Closing Tagline */}
-          <TerminalReveal delay={1200}>
+          <TerminalReveal delay={1000}>
             <p style={{
               color: colors.text,
               fontSize: "18px",
