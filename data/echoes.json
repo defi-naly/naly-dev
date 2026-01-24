@@ -312,5 +312,43 @@
     "goldM2": 0.08,
     "polarization": 0.96,
     "lastUpdated": "2025-01"
+  },
+  "marketSections": {
+    "commodities": {
+      "label": "Commodities",
+      "tickers": [
+        { "symbol": "GC=F", "name": "Gold", "description": "Gold futures" },
+        { "symbol": "SI=F", "name": "Silver", "description": "Silver futures" },
+        { "symbol": "HG=F", "name": "Copper", "description": "Copper futures" },
+        { "symbol": "URA", "name": "Uranium", "description": "Global X Uranium ETF" }
+      ]
+    },
+    "stocks": {
+      "label": "Stocks",
+      "tickers": [
+        { "symbol": "AAPL", "name": "Apple", "description": "Apple Inc." },
+        { "symbol": "MSFT", "name": "Microsoft", "description": "Microsoft Corporation" },
+        { "symbol": "GOOGL", "name": "Google", "description": "Alphabet Inc." },
+        { "symbol": "NVDA", "name": "NVIDIA", "description": "NVIDIA Corporation" }
+      ]
+    },
+    "indices": {
+      "label": "Indices",
+      "tickers": [
+        { "symbol": "^GSPC", "name": "S&P 500", "description": "Standard & Poor's 500" },
+        { "symbol": "^NDX", "name": "NASDAQ", "description": "NASDAQ-100 Index" },
+        { "symbol": "^DJI", "name": "Dow Jones", "description": "Dow Jones Industrial Average" },
+        { "symbol": "MAGS", "name": "Mag 7", "description": "Roundhill Magnificent Seven ETF" }
+      ]
+    },
+    "crypto": {
+      "label": "Crypto",
+      "tickers": [
+        { "symbol": "BTC-USD", "name": "Bitcoin", "description": "Bitcoin" },
+        { "symbol": "ETH-USD", "name": "Ethereum", "description": "Ethereum" },
+        { "symbol": "SOL-USD", "name": "Solana", "description": "Solana" },
+        { "symbol": "ZEC-USD", "name": "Zcash", "description": "Zcash" }
+      ]
+    }
   }
 }

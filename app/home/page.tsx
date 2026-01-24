@@ -18,6 +18,15 @@ interface Ticker {
   changePercent: number;
 }
 
+interface MarketPrice {
+  price: number;
+  change: number;
+}
+
+interface MarketPrices {
+  [symbol: string]: MarketPrice;
+}
+
 interface SavedProgress {
   chapter: number;
   completed: boolean;
@@ -88,27 +97,27 @@ export default function Home() {
   const [echoLoading, setEchoLoading] = useState(true);
   const [gameProgress, setGameProgress] = useState<SavedProgress | null>(null);
   const [mounted, setMounted] = useState(false);
-  const [tickers, setTickers] = useState<Ticker[]>([]);
-  const [tickersLoading, setTickersLoading] = useState(true);
+  const [marketPrices, setMarketPrices] = useState<MarketPrices>({});
+  const [marketLoading, setMarketLoading] = useState(true);
 
   useEffect(() => {
     setMounted(true);
 
-    // Fetch tickers data
-    async function fetchTickers() {
+    // Fetch market prices
+    async function fetchMarketPrices() {
       try {
-        const response = await fetch('/api/tickers');
+        const response = await fetch('/api/market-prices');
         if (response.ok) {
           const data = await response.json();
-          setTickers(data.tickers);
+          setMarketPrices(data.prices || {});
         }
       } catch (error) {
-        console.error('Failed to fetch tickers:', error);
+        console.error('Failed to fetch market prices:', error);
       } finally {
-        setTickersLoading(false);
+        setMarketLoading(false);
       }
     }
-    fetchTickers();
+    fetchMarketPrices();
 
     // Fetch Line data
     async function fetchLineData() {
@@ -338,36 +347,55 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Tickers */}
+          {/* Markets */}
           <div className="border border-zinc-800 border-t-0">
             <div className="px-4 py-2 border-b border-zinc-800 flex items-center justify-between">
-              <span className="text-xs font-mono uppercase tracking-wider text-zinc-500">Market</span>
+              <span className="text-xs font-mono uppercase tracking-wider text-zinc-500">Markets</span>
               <span className="text-[10px] font-mono text-zinc-600">24h</span>
             </div>
-            <div className="grid grid-cols-5 divide-x divide-zinc-800">
-              {tickersLoading ? (
-                Array.from({ length: 5 }).map((_, i) => (
-                  <div key={i} className="p-3 text-center">
-                    <div className="text-[10px] font-mono text-zinc-600 mb-1">—</div>
-                    <div className="text-sm font-mono text-zinc-500">—</div>
-                    <div className="text-[10px] font-mono text-zinc-600">—</div>
-                  </div>
-                ))
-              ) : (
-                tickers.map((ticker) => (
-                  <div key={ticker.symbol} className="p-3 text-center">
-                    <div className="text-[10px] font-mono text-zinc-500 mb-1">{ticker.symbol}</div>
-                    <div className="text-sm font-mono text-zinc-100 tabular-nums">{ticker.price}</div>
-                    <div className={`text-[10px] font-mono tabular-nums ${
-                      ticker.changePercent > 0 ? 'text-emerald-400' :
-                      ticker.changePercent < 0 ? 'text-red-400' : 'text-zinc-500'
-                    }`}>
-                      {ticker.changePercent > 0 ? '+' : ''}{ticker.changePercent.toFixed(2)}%
-                    </div>
-                  </div>
-                ))
-              )}
-            </div>
+            {echoesData.marketSections && Object.entries(echoesData.marketSections as Record<string, { label: string; tickers: Array<{ symbol: string; name: string }> }>).map(([key, section], sectionIdx) => (
+              <div key={key} className={sectionIdx > 0 ? 'border-t border-zinc-800' : ''}>
+                <div className="px-4 py-1.5 bg-zinc-900/30">
+                  <span className="text-[10px] font-mono text-zinc-600">{section.label}</span>
+                </div>
+                <div className="grid grid-cols-4 divide-x divide-zinc-800">
+                  {section.tickers.map((ticker) => {
+                    const data = marketPrices[ticker.symbol];
+                    const formatPrice = (price: number) => {
+                      if (price >= 10000) return price.toLocaleString('en-US', { maximumFractionDigits: 0 });
+                      if (price >= 1) return price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                      return price.toFixed(4);
+                    };
+                    return (
+                      <div key={ticker.symbol} className="p-3 text-center">
+                        <div className="text-[10px] font-mono text-zinc-500 mb-1">{ticker.name}</div>
+                        {marketLoading ? (
+                          <>
+                            <div className="text-sm font-mono text-zinc-500">—</div>
+                            <div className="text-[10px] font-mono text-zinc-600">—</div>
+                          </>
+                        ) : data ? (
+                          <>
+                            <div className="text-sm font-mono text-zinc-100 tabular-nums">${formatPrice(data.price)}</div>
+                            <div className={`text-[10px] font-mono tabular-nums ${
+                              data.change > 0 ? 'text-emerald-400' :
+                              data.change < 0 ? 'text-red-400' : 'text-zinc-500'
+                            }`}>
+                              {data.change > 0 ? '+' : ''}{data.change.toFixed(2)}%
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div className="text-sm font-mono text-zinc-500">—</div>
+                            <div className="text-[10px] font-mono text-zinc-600">—</div>
+                          </>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </main>
