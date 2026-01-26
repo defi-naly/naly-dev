@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 // Fallback historical data for resilience
 const FALLBACK_DATA = [
   { date: '2017-01-01', cryptoIndex: 100, commoditiesIndex: 100, spread: 0 },

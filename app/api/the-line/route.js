@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 // Historical SPX/GOLD ratio data (pre-2004, before GLD ETF existed)
 // SPX/GOLD = S&P 500 Index Value / Gold Price per Ounce
 // Sources: FRED, Yahoo Finance historical, MacroTrends
