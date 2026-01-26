@@ -5,56 +5,53 @@ import { motion } from 'framer-motion';
 
 type TimeRange = '1Y' | '3Y' | '5Y' | 'MAX';
 
-// Client-side fallback data when API fails
+// Client-side fallback data when API fails (market cap ratio format)
 const FALLBACK_DATA: AlchemyData = {
   history: [
-    { date: '2017-01-01', cryptoIndex: 100, commoditiesIndex: 100, spread: 0, spreadPercent: 0 },
-    { date: '2017-12-01', cryptoIndex: 1400, commoditiesIndex: 108, spread: 1292, spreadPercent: 1196 },
-    { date: '2018-12-01', cryptoIndex: 200, commoditiesIndex: 102, spread: 98, spreadPercent: 96 },
-    { date: '2019-12-01', cryptoIndex: 450, commoditiesIndex: 118, spread: 332, spreadPercent: 281 },
-    { date: '2020-12-01', cryptoIndex: 1100, commoditiesIndex: 135, spread: 965, spreadPercent: 715 },
-    { date: '2021-11-01', cryptoIndex: 2700, commoditiesIndex: 140, spread: 2560, spreadPercent: 1829 },
-    { date: '2022-12-01', cryptoIndex: 400, commoditiesIndex: 145, spread: 255, spreadPercent: 176 },
-    { date: '2023-12-01', cryptoIndex: 900, commoditiesIndex: 160, spread: 740, spreadPercent: 463 },
-    { date: '2024-12-01', cryptoIndex: 1800, commoditiesIndex: 175, spread: 1625, spreadPercent: 929 },
+    { date: '2017-01-01', cryptoMarketCap: 16.7, metalsMarketCap: 8591, ratio: 0.19 },
+    { date: '2017-12-01', cryptoMarketCap: 275, metalsMarketCap: 8914, ratio: 3.09 },
+    { date: '2018-12-01', cryptoMarketCap: 79, metalsMarketCap: 8958, ratio: 0.88 },
+    { date: '2019-12-01', cryptoMarketCap: 144, metalsMarketCap: 10302, ratio: 1.40 },
+    { date: '2020-12-01', cryptoMarketCap: 625, metalsMarketCap: 13333, ratio: 4.69 },
+    { date: '2021-11-01', cryptoMarketCap: 1760, metalsMarketCap: 12628, ratio: 13.94 },
+    { date: '2022-12-01', cryptoMarketCap: 465, metalsMarketCap: 12779, ratio: 3.64 },
+    { date: '2023-12-01', cryptoMarketCap: 1095, metalsMarketCap: 14359, ratio: 7.62 },
+    { date: '2024-12-01', cryptoMarketCap: 2260, metalsMarketCap: 18238, ratio: 12.39 },
   ],
   current: {
-    spread: 1625,
-    spreadPercent: 929,
-    cryptoIndex: 1800,
-    commoditiesIndex: 175,
-    regime: 'crypto',
+    ratio: 12.39,
+    cryptoMarketCap: 2260,
+    metalsMarketCap: 18238,
+    regime: 'expansion',
   },
   bands: {
-    upper2SD: 2200,
-    upper1SD: 1400,
-    mean: 600,
-    lower1SD: -200,
-    lower2SD: -1000,
+    upper2SD: 15,
+    upper1SD: 10,
+    mean: 5,
+    lower1SD: 0,
+    lower2SD: -5,
   },
   extremes: [
-    { date: '2017-12-01', spread: 1292, label: 'Crypto Mania' },
-    { date: '2021-11-01', spread: 2560, label: 'Crypto ATH' },
+    { date: '2017-12-01', ratio: 3.09, label: 'Crypto Mania' },
+    { date: '2021-11-01', ratio: 13.94, label: 'Crypto ATH' },
   ],
   lastUpdated: new Date().toISOString(),
 };
 
 interface HistoryPoint {
   date: string;
-  cryptoIndex: number;
-  commoditiesIndex: number;
-  spread: number;
-  spreadPercent: number;
+  cryptoMarketCap: number;    // in billions
+  metalsMarketCap: number;    // in billions
+  ratio: number;              // crypto as % of metals
 }
 
 interface AlchemyData {
   history: HistoryPoint[];
   current: {
-    spread: number;
-    spreadPercent: number;
-    cryptoIndex: number;
-    commoditiesIndex: number;
-    regime: 'crypto' | 'commodities' | 'neutral';
+    ratio: number;
+    cryptoMarketCap: number;
+    metalsMarketCap: number;
+    regime: 'expansion' | 'contraction' | 'neutral';
   };
   bands: {
     upper2SD: number;
@@ -63,7 +60,7 @@ interface AlchemyData {
     lower1SD: number;
     lower2SD: number;
   };
-  extremes: { date: string; spread: number; label: string }[];
+  extremes: { date: string; ratio: number; label: string }[];
   lastUpdated: string;
   error?: string;
 }
@@ -110,18 +107,18 @@ export default function AlchemyChart() {
     if (!data?.history?.length) return null;
 
     const history = data.history;
-    const spreads = history.map(h => h.spread);
-    const minSpread = Math.min(...spreads, data.bands.lower2SD);
-    const maxSpread = Math.max(...spreads, data.bands.upper2SD);
-    const range = maxSpread - minSpread || 1;
+    const ratios = history.map(h => h.ratio);
+    const minRatio = Math.min(...ratios, data.bands.lower2SD, 0);
+    const maxRatio = Math.max(...ratios, data.bands.upper2SD);
+    const range = maxRatio - minRatio || 1;
 
     const scaleX = (index: number) => (index / (history.length - 1)) * chartWidth;
-    const scaleY = (value: number) => chartHeight - ((value - minSpread) / range) * chartHeight;
+    const scaleY = (value: number) => chartHeight - ((value - minRatio) / range) * chartHeight;
 
-    // Generate path for spread line
+    // Generate path for ratio line
     const pathPoints = history.map((point, i) => {
       const x = scaleX(i);
-      const y = scaleY(point.spread);
+      const y = scaleY(point.ratio);
       return `${i === 0 ? 'M' : 'L'}${x},${y}`;
     }).join(' ');
 
@@ -142,8 +139,8 @@ export default function AlchemyChart() {
       lower2SDY,
       scaleX,
       scaleY,
-      minSpread,
-      maxSpread,
+      minRatio,
+      maxRatio,
     };
   }, [data, chartWidth, chartHeight]);
 
@@ -170,8 +167,8 @@ export default function AlchemyChart() {
   };
 
   const regime = data?.current?.regime;
-  const regimeColor = regime === 'crypto' ? 'amber' : regime === 'commodities' ? 'emerald' : 'zinc';
-  const regimeLabel = regime === 'crypto' ? 'DIGITAL LEADING' : regime === 'commodities' ? 'PHYSICAL LEADING' : 'NEUTRAL';
+  const regimeColor = regime === 'expansion' ? 'amber' : regime === 'contraction' ? 'emerald' : 'zinc';
+  const regimeLabel = regime === 'expansion' ? 'EXPANSION' : regime === 'contraction' ? 'CONTRACTION' : 'EQUILIBRIUM';
 
   return (
     <div>
@@ -179,24 +176,24 @@ export default function AlchemyChart() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
           <p className="text-xs font-mono text-zinc-500 uppercase tracking-wider mb-1">
-            Current Spread
+            Crypto as % of Metals Market Cap
           </p>
           <div className="flex items-baseline gap-3">
             <span className={`text-4xl sm:text-5xl font-mono font-light ${
-              regime === 'crypto' ? 'text-amber-500' : regime === 'commodities' ? 'text-emerald-500' : 'text-white'
+              regime === 'expansion' ? 'text-amber-500' : regime === 'contraction' ? 'text-emerald-500' : 'text-white'
             }`}>
-              {loading ? '—' : data?.current?.spread?.toFixed(0) ?? '—'}
+              {loading ? '—' : `${data?.current?.ratio?.toFixed(1)}%`}
             </span>
             <span className="text-sm font-mono text-zinc-500">
-              ({loading ? '—' : `${data?.current?.spreadPercent > 0 ? '+' : ''}${data?.current?.spreadPercent?.toFixed(1)}%`})
+              {loading ? '' : `$${(data?.current?.cryptoMarketCap / 1000).toFixed(1)}T / $${(data?.current?.metalsMarketCap / 1000).toFixed(1)}T`}
             </span>
           </div>
           <div className="flex items-center gap-2 mt-2">
             <span className={`w-2 h-2 rounded-full ${
-              regime === 'crypto' ? 'bg-amber-400' : regime === 'commodities' ? 'bg-emerald-400' : 'bg-zinc-400'
+              regime === 'expansion' ? 'bg-amber-400' : regime === 'contraction' ? 'bg-emerald-400' : 'bg-zinc-400'
             }`} />
             <span className={`text-xs font-mono ${
-              regime === 'crypto' ? 'text-amber-400' : regime === 'commodities' ? 'text-emerald-400' : 'text-zinc-400'
+              regime === 'expansion' ? 'text-amber-400' : regime === 'contraction' ? 'text-emerald-400' : 'text-zinc-400'
             }`}>
               {loading ? '—' : regimeLabel}
             </span>
@@ -407,9 +404,9 @@ export default function AlchemyChart() {
                 <g>
                   <circle
                     cx={chartData.scaleX(chartData.history.length - 1)}
-                    cy={chartData.scaleY(chartData.history[chartData.history.length - 1].spread)}
+                    cy={chartData.scaleY(chartData.history[chartData.history.length - 1].ratio)}
                     r="6"
-                    fill={regime === 'crypto' ? '#f59e0b' : regime === 'commodities' ? '#10b981' : '#ffffff'}
+                    fill={regime === 'expansion' ? '#f59e0b' : regime === 'contraction' ? '#10b981' : '#ffffff'}
                     filter="url(#glow)"
                   >
                     <animate attributeName="r" values="6;8;6" dur="2s" repeatCount="indefinite" />
@@ -422,8 +419,8 @@ export default function AlchemyChart() {
                 const historyIndex = chartData.history.findIndex(h => h.date === extreme.date);
                 if (historyIndex === -1) return null;
                 const x = chartData.scaleX(historyIndex);
-                const y = chartData.scaleY(extreme.spread);
-                const isAbove = extreme.spread > data.bands.mean;
+                const y = chartData.scaleY(extreme.ratio);
+                const isAbove = extreme.ratio > data.bands.mean;
 
                 return (
                   <g key={`${extreme.date}-${i}`}>
@@ -463,13 +460,13 @@ export default function AlchemyChart() {
             {/* Y-axis labels */}
             <g transform={`translate(${padding.left - 10}, ${padding.top})`}>
               <text x="0" y="5" fill="#71717a" fontSize="10" fontFamily="monospace" textAnchor="end">
-                {chartData.maxSpread.toFixed(0)}
+                {chartData.maxRatio.toFixed(0)}%
               </text>
               <text x="0" y={chartHeight / 2} fill="#71717a" fontSize="10" fontFamily="monospace" textAnchor="end">
-                {((chartData.maxSpread + chartData.minSpread) / 2).toFixed(0)}
+                {((chartData.maxRatio + chartData.minRatio) / 2).toFixed(0)}%
               </text>
               <text x="0" y={chartHeight} fill="#71717a" fontSize="10" fontFamily="monospace" textAnchor="end">
-                {chartData.minSpread.toFixed(0)}
+                {chartData.minRatio.toFixed(0)}%
               </text>
             </g>
 
@@ -498,7 +495,7 @@ export default function AlchemyChart() {
           <div
             className="absolute pointer-events-none bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 shadow-lg z-10"
             style={{
-              left: Math.min(mousePos.x + 10, width - 180),
+              left: Math.min(mousePos.x + 10, width - 200),
               top: mousePos.y - 80,
             }}
           >
@@ -510,10 +507,10 @@ export default function AlchemyChart() {
               })}
             </div>
             <div className="text-sm font-mono text-white mb-1">
-              Spread: {hoveredPoint.spread.toFixed(0)}
+              Ratio: {hoveredPoint.ratio.toFixed(2)}%
             </div>
             <div className="text-xs font-mono text-zinc-500">
-              Crypto: {hoveredPoint.cryptoIndex.toFixed(0)} | Metals: {hoveredPoint.commoditiesIndex.toFixed(0)}
+              Crypto: ${hoveredPoint.cryptoMarketCap.toFixed(0)}B | Metals: ${(hoveredPoint.metalsMarketCap / 1000).toFixed(1)}T
             </div>
           </div>
         )}
@@ -523,23 +520,24 @@ export default function AlchemyChart() {
       <div className="flex flex-wrap items-center justify-center gap-6 mt-4">
         <div className="flex items-center gap-2">
           <span className="w-3 h-0.5 bg-white" />
-          <span className="text-xs font-mono text-zinc-500">Crypto-Commodities Spread</span>
+          <span className="text-xs font-mono text-zinc-500">Market Cap Ratio</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="w-3 h-3 bg-amber-500/20 border border-amber-500/40" />
-          <span className="text-xs font-mono text-zinc-500">Digital Leading</span>
+          <span className="text-xs font-mono text-zinc-500">Expansion</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="w-3 h-3 bg-emerald-500/20 border border-emerald-500/40" />
-          <span className="text-xs font-mono text-zinc-500">Physical Leading</span>
+          <span className="text-xs font-mono text-zinc-500">Contraction</span>
         </div>
       </div>
 
       {/* Methodology */}
       <div className="mt-8 text-[10px] font-mono text-zinc-600 space-y-1">
-        <p>Index methodology: 70% BTC + 30% ETH vs 70% Gold + 30% Silver, normalized to 100 (Jan 2017)</p>
+        <p>Methodology: (BTC + ETH market cap) / (Gold + Silver market cap) × 100</p>
+        <p>Metals supply: Gold 6.33B oz (~$16.6T) + Silver 54.7B oz (~$1.6T) = ~$18T total</p>
         <p>Bands: μ (mean), ±1σ, ±2σ standard deviation thresholds</p>
-        <p>Data: Yahoo Finance (BTC-USD, ETH-USD, GC=F, SI=F)</p>
+        <p>Data: CoinGecko (crypto), Metals.live (spot prices)</p>
       </div>
     </div>
   );
