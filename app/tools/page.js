@@ -73,6 +73,7 @@ function Timestamp() {
 // MARKET SIGNALS Section
 function MarketSignals() {
   const [lineData, setLineData] = useState(null);
+  const [alchemyData, setAlchemyData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const decay = calculateDecay();
@@ -81,20 +82,29 @@ function MarketSignals() {
   const progressPercent = (saeculumYear / saeculumTotal) * 100;
 
   useEffect(() => {
-    async function fetchLineData() {
+    async function fetchData() {
       try {
-        const response = await fetch('/api/the-line?range=1y');
-        if (response.ok) {
-          const data = await response.json();
+        const [lineResponse, alchemyResponse] = await Promise.all([
+          fetch('/api/the-line?range=1y'),
+          fetch('/api/alchemy?range=1y'),
+        ]);
+
+        if (lineResponse.ok) {
+          const data = await lineResponse.json();
           setLineData(data);
         }
+
+        if (alchemyResponse.ok) {
+          const data = await alchemyResponse.json();
+          setAlchemyData(data);
+        }
       } catch (error) {
-        console.error('Failed to fetch Line data:', error);
+        console.error('Failed to fetch market data:', error);
       } finally {
         setLoading(false);
       }
     }
-    fetchLineData();
+    fetchData();
   }, []);
 
   const ratio = lineData?.current?.ratio ?? null;
@@ -108,12 +118,20 @@ function MarketSignals() {
     status?.color === 'amber' ? 'text-amber-400' :
     status?.color === 'emerald' ? 'text-emerald-400' : 'text-zinc-500';
 
+  const alchemyRegime = alchemyData?.current?.regime;
+  const alchemyDotClass = alchemyRegime === 'crypto' ? 'bg-amber-400' :
+    alchemyRegime === 'commodities' ? 'bg-emerald-400' : 'bg-zinc-400';
+  const alchemyTextClass = alchemyRegime === 'crypto' ? 'text-amber-400' :
+    alchemyRegime === 'commodities' ? 'text-emerald-400' : 'text-zinc-400';
+  const alchemyLabel = alchemyRegime === 'crypto' ? 'DIGITAL LEADING' :
+    alchemyRegime === 'commodities' ? 'PHYSICAL LEADING' : 'NEUTRAL';
+
   return (
     <div className="border border-zinc-800">
       <div className="px-4 py-2 border-b border-zinc-800">
         <span className="text-xs font-mono uppercase tracking-wider text-zinc-500">Market Signals</span>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-zinc-800">
+      <div className="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-zinc-800">
         {/* THE LINE */}
         <Link href="/tools/the-line" className="block p-4 hover:bg-zinc-900/50 transition-colors">
           <div className="mb-1">
@@ -130,6 +148,25 @@ function MarketSignals() {
             </span>
           </div>
           <div className="text-[10px] font-mono text-zinc-600 mt-1">threshold &lt;1.50</div>
+        </Link>
+
+        {/* ALCHEMY */}
+        <Link href="/tools/alchemy" className="block p-4 hover:bg-zinc-900/50 transition-colors">
+          <div className="mb-1">
+            <span className="text-xs font-mono uppercase tracking-wider text-zinc-400">Alchemy</span>
+          </div>
+          <div className="text-[10px] font-mono text-zinc-600 mb-3">Digital vs Physical</div>
+          <div className="text-3xl font-mono text-white mb-2">
+            {loading ? '—' : alchemyData?.current?.spreadPercent != null
+              ? `${alchemyData.current.spreadPercent > 0 ? '+' : ''}${alchemyData.current.spreadPercent.toFixed(0)}%`
+              : '—'}
+          </div>
+          <div className="flex items-center gap-2">
+            <span className={`w-1.5 h-1.5 rounded-full ${alchemyDotClass}`} />
+            <span className={`text-xs font-mono ${alchemyTextClass}`}>
+              {loading ? '—' : alchemyLabel}
+            </span>
+          </div>
         </Link>
 
         {/* DECAY (macro) */}
