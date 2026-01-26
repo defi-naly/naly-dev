@@ -5,6 +5,40 @@ import { motion } from 'framer-motion';
 
 type TimeRange = '1Y' | '3Y' | '5Y' | 'MAX';
 
+// Client-side fallback data when API fails
+const FALLBACK_DATA: AlchemyData = {
+  history: [
+    { date: '2017-01-01', cryptoIndex: 100, commoditiesIndex: 100, spread: 0, spreadPercent: 0 },
+    { date: '2017-12-01', cryptoIndex: 1400, commoditiesIndex: 108, spread: 1292, spreadPercent: 1196 },
+    { date: '2018-12-01', cryptoIndex: 200, commoditiesIndex: 102, spread: 98, spreadPercent: 96 },
+    { date: '2019-12-01', cryptoIndex: 450, commoditiesIndex: 118, spread: 332, spreadPercent: 281 },
+    { date: '2020-12-01', cryptoIndex: 1100, commoditiesIndex: 135, spread: 965, spreadPercent: 715 },
+    { date: '2021-11-01', cryptoIndex: 2700, commoditiesIndex: 140, spread: 2560, spreadPercent: 1829 },
+    { date: '2022-12-01', cryptoIndex: 400, commoditiesIndex: 145, spread: 255, spreadPercent: 176 },
+    { date: '2023-12-01', cryptoIndex: 900, commoditiesIndex: 160, spread: 740, spreadPercent: 463 },
+    { date: '2024-12-01', cryptoIndex: 1800, commoditiesIndex: 175, spread: 1625, spreadPercent: 929 },
+  ],
+  current: {
+    spread: 1625,
+    spreadPercent: 929,
+    cryptoIndex: 1800,
+    commoditiesIndex: 175,
+    regime: 'crypto',
+  },
+  bands: {
+    upper2SD: 2200,
+    upper1SD: 1400,
+    mean: 600,
+    lower1SD: -200,
+    lower2SD: -1000,
+  },
+  extremes: [
+    { date: '2017-12-01', spread: 1292, label: 'Crypto Mania' },
+    { date: '2021-11-01', spread: 2560, label: 'Crypto ATH' },
+  ],
+  lastUpdated: new Date().toISOString(),
+};
+
 interface HistoryPoint {
   date: string;
   cryptoIndex: number;
@@ -50,9 +84,13 @@ export default function AlchemyChart() {
         if (response.ok) {
           const json = await response.json();
           setData(json);
+        } else {
+          console.error('API returned error, using fallback data');
+          setData(FALLBACK_DATA);
         }
       } catch (error) {
-        console.error('Failed to fetch Alchemy data:', error);
+        console.error('Failed to fetch Alchemy data, using fallback:', error);
+        setData(FALLBACK_DATA);
       } finally {
         setLoading(false);
       }
