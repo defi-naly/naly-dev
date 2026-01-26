@@ -2,9 +2,12 @@ import { NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 
-// Metals supply constants (above-ground reserves)
-const GOLD_SUPPLY_OZ = 6_334_000_000;   // ~197,000 tonnes = 6.334 billion troy oz
-const SILVER_SUPPLY_OZ = 54_700_000_000; // ~1.7M tonnes = 54.7 billion troy oz
+// Metals market cap reference values (from 8marketcap.com, Jan 2025)
+// These are reference points that we scale based on price changes
+const GOLD_MCAP_REFERENCE_B = 35381;   // $35.381T at reference price
+const GOLD_PRICE_REFERENCE = 2620;      // $/oz at time of reference mcap
+const SILVER_MCAP_REFERENCE_B = 6310;   // $6.31T at reference price
+const SILVER_PRICE_REFERENCE = 30;      // $/oz at time of reference mcap
 
 // Historical data with market caps (in billions USD) and metal prices
 // BTC/ETH market caps from historical records, metal prices for calculating metals market cap
@@ -36,11 +39,12 @@ const HISTORICAL_DATA = [
   { date: '2024-12-01', btcMcap: 1850, ethMcap: 410, gold: 2620, silver: 30.0 },
 ];
 
-// Calculate metals market cap from prices
+// Calculate metals market cap by scaling reference values with price changes
 function calculateMetalsMarketCap(goldPrice: number, silverPrice: number): number {
-  const goldMcap = (goldPrice * GOLD_SUPPLY_OZ) / 1e9; // in billions
-  const silverMcap = (silverPrice * SILVER_SUPPLY_OZ) / 1e9; // in billions
-  return goldMcap + silverMcap;
+  // Scale reference market caps by current price / reference price
+  const goldMcap = GOLD_MCAP_REFERENCE_B * (goldPrice / GOLD_PRICE_REFERENCE);
+  const silverMcap = SILVER_MCAP_REFERENCE_B * (silverPrice / SILVER_PRICE_REFERENCE);
+  return goldMcap + silverMcap; // in billions
 }
 
 // Fetch last 365 days of crypto data from CoinGecko (free tier limit)

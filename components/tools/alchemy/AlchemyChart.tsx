@@ -6,34 +6,35 @@ import { motion } from 'framer-motion';
 type TimeRange = '1Y' | '3Y' | '5Y' | 'MAX';
 
 // Client-side fallback data when API fails (market cap ratio format)
+// Metals mcap based on 8marketcap.com: Gold ~$35T + Silver ~$6.3T = ~$41T
 const FALLBACK_DATA: AlchemyData = {
   history: [
-    { date: '2017-01-01', cryptoMarketCap: 16.7, metalsMarketCap: 8591, ratio: 0.19 },
-    { date: '2017-12-01', cryptoMarketCap: 275, metalsMarketCap: 8914, ratio: 3.09 },
-    { date: '2018-12-01', cryptoMarketCap: 79, metalsMarketCap: 8958, ratio: 0.88 },
-    { date: '2019-12-01', cryptoMarketCap: 144, metalsMarketCap: 10302, ratio: 1.40 },
-    { date: '2020-12-01', cryptoMarketCap: 625, metalsMarketCap: 13333, ratio: 4.69 },
-    { date: '2021-11-01', cryptoMarketCap: 1760, metalsMarketCap: 12628, ratio: 13.94 },
-    { date: '2022-12-01', cryptoMarketCap: 465, metalsMarketCap: 12779, ratio: 3.64 },
-    { date: '2023-12-01', cryptoMarketCap: 1095, metalsMarketCap: 14359, ratio: 7.62 },
-    { date: '2024-12-01', cryptoMarketCap: 2260, metalsMarketCap: 18238, ratio: 12.39 },
+    { date: '2017-01-01', cryptoMarketCap: 16.7, metalsMarketCap: 19270, ratio: 0.09 },
+    { date: '2017-12-01', cryptoMarketCap: 275, metalsMarketCap: 19984, ratio: 1.38 },
+    { date: '2018-12-01', cryptoMarketCap: 79, metalsMarketCap: 20082, ratio: 0.39 },
+    { date: '2019-12-01', cryptoMarketCap: 144, metalsMarketCap: 23098, ratio: 0.62 },
+    { date: '2020-12-01', cryptoMarketCap: 625, metalsMarketCap: 29890, ratio: 2.09 },
+    { date: '2021-11-01', cryptoMarketCap: 1760, metalsMarketCap: 28315, ratio: 6.22 },
+    { date: '2022-12-01', cryptoMarketCap: 465, metalsMarketCap: 28656, ratio: 1.62 },
+    { date: '2023-12-01', cryptoMarketCap: 1095, metalsMarketCap: 32200, ratio: 3.40 },
+    { date: '2024-12-01', cryptoMarketCap: 2260, metalsMarketCap: 41691, ratio: 5.42 },
   ],
   current: {
-    ratio: 12.39,
+    ratio: 5.42,
     cryptoMarketCap: 2260,
-    metalsMarketCap: 18238,
+    metalsMarketCap: 41691,
     regime: 'expansion',
   },
   bands: {
-    upper2SD: 15,
-    upper1SD: 10,
-    mean: 5,
+    upper2SD: 7,
+    upper1SD: 5,
+    mean: 2,
     lower1SD: 0,
-    lower2SD: -5,
+    lower2SD: -2,
   },
   extremes: [
-    { date: '2017-12-01', ratio: 3.09, label: 'Crypto Mania' },
-    { date: '2021-11-01', ratio: 13.94, label: 'Crypto ATH' },
+    { date: '2017-12-01', ratio: 1.38, label: 'Crypto Mania' },
+    { date: '2021-11-01', ratio: 6.22, label: 'Crypto ATH' },
   ],
   lastUpdated: new Date().toISOString(),
 };
@@ -535,7 +536,7 @@ export default function AlchemyChart() {
       {/* Methodology */}
       <div className="mt-8 text-[10px] font-mono text-zinc-600 space-y-1">
         <p>Methodology: (BTC + ETH market cap) / (Gold + Silver market cap) × 100</p>
-        <p>Metals supply: Gold 6.33B oz (~$16.6T) + Silver 54.7B oz (~$1.6T) = ~$18T total</p>
+        <p>Metals market cap: Gold ~$35T + Silver ~$6.3T = ~$41T (via 8marketcap.com)</p>
         <p>Bands: μ (mean), ±1σ, ±2σ standard deviation thresholds</p>
         <p>Data: CoinGecko (crypto), Metals.live (spot prices)</p>
       </div>
