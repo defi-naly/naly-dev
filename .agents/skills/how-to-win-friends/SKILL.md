@@ -1,6 +1,35 @@
 ---
 name: how-to-win-friends
-description: "Apply Dale Carnegie's principles for interpersonal effectiveness, persuasion, and leadership. Use when improving communication, handling difficult conversations, building relationships, influencing others, giving feedback, or when user mentions: win friends, influence people, Dale Carnegie, people skills, likability, persuasion, or handling criticism."
+description: "Dale Carnegie's principles for interpersonal effectiveness, persuasion, and leadership."
+
+dimensions:
+  domain: [communication, leadership, sales, relationships]
+  phase: [relationship-building, conflict-resolution, feedback-delivery, persuasion]
+  problem_type: [influence, likability, difficult-conversations, team-dynamics]
+
+contexts:
+  - situation: "need to give critical feedback"
+    use_when: "delivering criticism without damaging relationships"
+  - situation: "trying to persuade someone"
+    use_when: "using likability and indirect techniques vs logical argument"
+  - situation: "meeting new people"
+    use_when: "building rapport and making good first impressions"
+  - situation: "conflict or disagreement"
+    use_when: "de-escalating and finding common ground"
+  - situation: "leading a team"
+    use_when: "motivating through appreciation rather than criticism"
+
+combines_with:
+  - never-split-the-difference  # negotiation tactics
+  - think-again                 # complementary influence techniques
+  - hard-thing-about-hard-things  # delivering hard feedback
+  - hidden-potential            # coaching and developing others
+
+contrast_with:
+  - skill: think-again
+    distinction: "Carnegie prioritizes RELATIONSHIP and likability; Grant prioritizes TRUTH and intellectual honesty"
+  - skill: never-split-the-difference
+    distinction: "Carnegie is relationship-first influence; Voss is tactical negotiation"
 ---
 
 # How to Win Friends and Influence People

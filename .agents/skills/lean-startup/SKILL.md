@@ -1,6 +1,35 @@
 ---
 name: lean-startup
-description: "Apply Eric Ries's methodology for building products through validated learning and rapid iteration. Use when launching products, testing ideas, building MVPs, measuring progress, pivoting decisions, or when user mentions: lean startup, MVP, minimum viable product, build-measure-learn, pivot, validated learning, or innovation accounting."
+description: "Eric Ries's methodology for building products through validated learning and rapid iteration."
+
+dimensions:
+  domain: [product-development, entrepreneurship, innovation, management]
+  phase: [idea-validation, mvp-building, growth, pivot-decision]
+  problem_type: [product-market-fit, hypothesis-testing, metrics, iteration]
+
+contexts:
+  - situation: "have a product idea"
+    use_when: "need to validate before building; design experiments and MVPs"
+  - situation: "built something but no traction"
+    use_when: "deciding whether to pivot or persevere"
+  - situation: "measuring product success"
+    use_when: "distinguishing vanity metrics from actionable metrics"
+  - situation: "planning product roadmap"
+    use_when: "prioritizing experiments over features"
+  - situation: "startup is growing"
+    use_when: "choosing and optimizing engine of growth"
+
+combines_with:
+  - zero-to-one           # what to build (lean = how to validate it)
+  - founders-at-work      # pattern recognition from successful pivots
+  - playing-to-win        # strategy after finding product-market fit
+  - thinking-fast-and-slow  # avoiding confirmation bias in experiments
+
+contrast_with:
+  - skill: zero-to-one
+    distinction: "Lean Startup is PROCESS for validation; Zero to One is VISION for what's worth building"
+  - skill: playing-to-win
+    distinction: "Lean Startup is for uncertainty/discovery; Playing to Win is for established strategy execution"
 ---
 
 # The Lean Startup Framework

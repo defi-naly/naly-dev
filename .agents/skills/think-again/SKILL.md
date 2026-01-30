@@ -1,6 +1,35 @@
 ---
 name: think-again
-description: "Apply Adam Grant's framework for intellectual humility, rethinking, and updating beliefs. Use when challenging assumptions, changing minds, avoiding bias, improving decisions, or when user mentions: think again, Adam Grant, intellectual humility, rethinking, unlearning, updating beliefs, or being wrong."
+description: "Adam Grant's framework for intellectual humility, rethinking, and updating beliefs."
+
+dimensions:
+  domain: [decision-making, psychology, communication, leadership]
+  phase: [reflection, debate, culture-building, belief-updating]
+  problem_type: [changing-minds, intellectual-humility, productive-disagreement, unlearning]
+
+contexts:
+  - situation: "holding a strong belief"
+    use_when: "need to audit whether belief is still justified by evidence"
+  - situation: "trying to persuade someone"
+    use_when: "need techniques that actually work (questions > arguments)"
+  - situation: "team has groupthink"
+    use_when: "building culture of productive disagreement"
+  - situation: "received information that contradicts your view"
+    use_when: "deciding whether and how to update beliefs"
+  - situation: "debate is becoming adversarial"
+    use_when: "shifting from prosecutor mode to scientist mode"
+
+combines_with:
+  - thinking-fast-and-slow  # diagnose biases before updating
+  - how-to-win-friends      # influence techniques complement persuasion
+  - hard-thing-about-hard-things  # changing minds during crisis
+  - never-split-the-difference    # negotiation with belief-change
+
+contrast_with:
+  - skill: thinking-fast-and-slow
+    distinction: "Think Again is about WILLINGNESS to change; TF&S is about ABILITY to see clearly"
+  - skill: how-to-win-friends
+    distinction: "Carnegie is about likability and influence; Grant is about truth-seeking and intellectual honesty"
 ---
 
 # Think Again: The Power of Knowing What You Don't Know

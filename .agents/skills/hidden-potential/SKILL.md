@@ -1,6 +1,35 @@
 ---
 name: hidden-potential
-description: "Apply Adam Grant's research on achieving greater things through character skills, not just talent. Use when developing skills, building learning systems, overcoming plateaus, coaching others, or when user mentions: hidden potential, Adam Grant, deliberate play, character skills, scaffolding, growth, skill development, or late bloomers."
+description: "Adam Grant's research on achieving greater things through character skills, not just talent."
+
+dimensions:
+  domain: [personal-development, learning, coaching, talent-management]
+  phase: [skill-building, plateau-breaking, team-development, hiring]
+  problem_type: [growth-mindset, learning-systems, motivation, potential-assessment]
+
+contexts:
+  - situation: "hit a learning plateau"
+    use_when: "need strategies to break through stagnation"
+  - situation: "evaluating someone's potential"
+    use_when: "assessing trajectory and character skills, not just current ability"
+  - situation: "building a learning system"
+    use_when: "designing scaffolding, feedback loops, and practice routines"
+  - situation: "perfectionism is blocking progress"
+    use_when: "need to manage high standards without paralysis"
+  - situation: "motivation is fading"
+    use_when: "shifting from deliberate practice to deliberate play"
+
+combines_with:
+  - thinking-fast-and-slow  # for feedback calibration
+  - hard-thing-about-hard-things  # for persistence through difficulty
+  - how-to-win-friends  # for building support scaffolding
+  - understanding-deep-learning  # meta: learning about learning systems
+
+contrast_with:
+  - skill: think-again
+    distinction: "Hidden Potential is about DEVELOPING abilities; Think Again is about UPDATING beliefs"
+  - skill: founders-at-work
+    distinction: "Hidden Potential is individual growth; Founders at Work is startup/team dynamics"
 ---
 
 # Hidden Potential: The Science of Achieving Greater Things

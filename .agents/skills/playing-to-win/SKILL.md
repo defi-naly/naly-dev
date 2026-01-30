@@ -1,6 +1,35 @@
 ---
 name: playing-to-win
-description: "Strategic framework from A.G. Lafley and Roger Martin's 'Playing to Win'. Use when analyzing competitive strategy, making strategic choices, evaluating business positioning, or when user mentions: strategy cascade, where to play, how to win, winning aspiration, strategic choices, competitive advantage, or P&G strategy framework."
+description: "A.G. Lafley and Roger Martin's strategic framework for making integrated strategic choices."
+
+dimensions:
+  domain: [strategy, business, competitive-positioning, leadership]
+  phase: [strategy-formulation, competitive-analysis, business-planning, scaling]
+  problem_type: [strategic-choices, competitive-advantage, market-positioning, capability-building]
+
+contexts:
+  - situation: "defining company/product strategy"
+    use_when: "need structured framework for making integrated strategic choices"
+  - situation: "entering a new market"
+    use_when: "deciding where to play and how to win"
+  - situation: "analyzing competitors"
+    use_when: "reverse-engineering competitor strategy through the cascade"
+  - situation: "strategy feels scattered"
+    use_when: "testing if choices are internally consistent and mutually reinforcing"
+  - situation: "building organizational capabilities"
+    use_when: "identifying what capabilities are required to execute strategy"
+
+combines_with:
+  - good-strategy-bad-strategy  # complementary strategy frameworks
+  - zero-to-one                 # vision before strategy cascade
+  - lean-startup                # validation during strategy execution
+  - hard-thing-about-hard-things  # executing strategy through crisis
+
+contrast_with:
+  - skill: lean-startup
+    distinction: "Playing to Win is STRATEGIC CHOICES; Lean Startup is VALIDATION PROCESS"
+  - skill: good-strategy-bad-strategy
+    distinction: "Playing to Win focuses on CASCADE of choices; Rumelt focuses on KERNEL (diagnosis, policy, actions)"
 ---
 
 # Playing to Win Strategy Framework

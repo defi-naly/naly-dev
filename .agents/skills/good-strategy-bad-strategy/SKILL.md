@@ -1,6 +1,35 @@
 ---
 name: good-strategy-bad-strategy
-description: "Strategic framework from Richard Rumelt's 'Good Strategy Bad Strategy'. Use when evaluating strategy quality, diagnosing strategic challenges, identifying bad strategy patterns, building strategy kernels, or when user mentions: strategy kernel, proximate objectives, bad strategy, fluff, Rumelt, strategic diagnosis, guiding policy, coherent actions."
+description: "Richard Rumelt's framework for crafting and evaluating strategy through diagnosis, guiding policy, and coherent actions."
+
+dimensions:
+  domain: [strategy, business, problem-solving, leadership]
+  phase: [strategy-evaluation, diagnosis, strategy-formulation, problem-solving]
+  problem_type: [strategic-clarity, bad-strategy-detection, challenge-diagnosis, action-coherence]
+
+contexts:
+  - situation: "evaluating an existing strategy"
+    use_when: "testing for hallmarks of bad strategy (fluff, no diagnosis, goals as strategy)"
+  - situation: "facing a complex challenge"
+    use_when: "need to diagnose the crux before choosing a response"
+  - situation: "strategy feels like fluff"
+    use_when: "cutting through jargon to find substance"
+  - situation: "actions feel scattered"
+    use_when: "checking if actions are coherent and mutually reinforcing"
+  - situation: "goals stated without path"
+    use_when: "distinguishing real strategy from aspirations"
+
+combines_with:
+  - playing-to-win              # complementary strategy frameworks
+  - thinking-fast-and-slow      # avoiding cognitive biases in diagnosis
+  - zero-to-one                 # identifying the crux of what to build
+  - hard-thing-about-hard-things  # diagnosing crisis situations
+
+contrast_with:
+  - skill: playing-to-win
+    distinction: "Rumelt focuses on KERNEL (diagnosis, policy, actions); Playing to Win on CASCADE of choices"
+  - skill: lean-startup
+    distinction: "Good Strategy is DIAGNOSIS and COHERENCE; Lean Startup is VALIDATION and ITERATION"
 ---
 
 # Good Strategy Bad Strategy Framework

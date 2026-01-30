@@ -1,6 +1,35 @@
 ---
 name: thinking-fast-and-slow
-description: "Apply Daniel Kahneman's cognitive psychology framework for understanding decision-making, biases, and judgment. Use when analyzing decisions, identifying cognitive biases, evaluating risks, understanding intuition vs deliberation, or when user mentions: System 1, System 2, cognitive bias, heuristics, loss aversion, anchoring, prospect theory, overconfidence, or WYSIATI."
+description: "Daniel Kahneman's cognitive psychology framework for understanding decision-making, biases, and judgment."
+
+dimensions:
+  domain: [decision-making, psychology, risk-assessment]
+  phase: [diagnosis, evaluation, post-mortem, planning]
+  problem_type: [cognitive-bias, overconfidence, prediction, judgment-under-uncertainty]
+
+contexts:
+  - situation: "making a prediction or forecast"
+    use_when: "need to calibrate confidence, check for overconfidence, consider base rates"
+  - situation: "evaluating a past decision"
+    use_when: "identifying which biases may have influenced the outcome"
+  - situation: "assessing risk"
+    use_when: "checking if intuition (System 1) is reliable or if deliberate analysis (System 2) is needed"
+  - situation: "someone is very confident"
+    use_when: "testing whether confidence is justified by evidence or just coherent storytelling"
+  - situation: "planning a project"
+    use_when: "applying reference class forecasting to avoid planning fallacy"
+
+combines_with:
+  - think-again  # for updating beliefs after identifying bias
+  - black-swan   # for tail risk and prediction limits
+  - antifragile  # for building systems that survive prediction failures
+  - skin-in-the-game  # for evaluating whose predictions to trust
+
+contrast_with:
+  - skill: think-again
+    distinction: "TF&S diagnoses HOW we think wrong; Think Again focuses on CHANGING beliefs and intellectual humility"
+  - skill: hidden-potential
+    distinction: "TF&S is about judgment/decisions; Hidden Potential is about growth and skill development"
 ---
 
 # Thinking, Fast and Slow Framework

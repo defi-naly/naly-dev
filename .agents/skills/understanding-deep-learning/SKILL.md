@@ -1,6 +1,32 @@
 ---
 name: understanding-deep-learning
-description: "Apply Simon Prince's comprehensive deep learning framework for understanding neural networks, architectures, and training. Use when building ML models, understanding neural networks, debugging training, choosing architectures, or when user mentions: deep learning, neural networks, transformers, CNNs, backpropagation, loss functions, regularization, or model architecture."
+description: "Simon Prince's comprehensive deep learning framework for understanding neural networks, architectures, and training."
+
+dimensions:
+  domain: [machine-learning, AI, data-science, engineering]
+  phase: [model-design, training, debugging, architecture-selection]
+  problem_type: [neural-networks, optimization, model-selection, technical-implementation]
+
+contexts:
+  - situation: "building a machine learning model"
+    use_when: "need to choose architecture, loss function, or optimization approach"
+  - situation: "model isn't training well"
+    use_when: "debugging training issues (loss not decreasing, NaN, overfitting)"
+  - situation: "choosing between architectures"
+    use_when: "selecting CNN vs RNN vs Transformer for different data types"
+  - situation: "understanding a paper or implementation"
+    use_when: "need reference for attention, backprop, normalization concepts"
+  - situation: "optimizing model performance"
+    use_when: "tuning hyperparameters, regularization, learning rate schedules"
+
+combines_with:
+  - thinking-fast-and-slow  # meta: human vs machine cognition parallels
+  - lean-startup            # experiment design for ML projects
+  - hidden-potential        # learning systems and skill development
+
+contrast_with:
+  - skill: thinking-fast-and-slow
+    distinction: "Deep Learning is MACHINE cognition; TF&S is HUMAN cognition"
 ---
 
 # Understanding Deep Learning

@@ -1,6 +1,35 @@
 ---
 name: founders-at-work
-description: "Lessons from Jessica Livingston's interviews with successful startup founders. Use when starting a company, navigating early-stage challenges, thinking about co-founders, understanding startup patterns, or when user mentions: founders at work, YC, Y Combinator, startup stories, early days, founder lessons, or startup advice."
+description: "Lessons from Jessica Livingston's interviews with successful startup founders."
+
+dimensions:
+  domain: [entrepreneurship, startups, leadership, team-building]
+  phase: [founding, early-stage, pivoting, scaling]
+  problem_type: [co-founder-dynamics, persistence, product-evolution, startup-patterns]
+
+contexts:
+  - situation: "starting a company"
+    use_when: "need patterns and anti-patterns from successful founders"
+  - situation: "choosing co-founders"
+    use_when: "evaluating co-founder fit and relationship dynamics"
+  - situation: "product isn't gaining traction"
+    use_when: "recognizing pivot patterns from successful companies"
+  - situation: "feeling like giving up"
+    use_when: "need perspective on founder persistence and near-death experiences"
+  - situation: "early customer acquisition"
+    use_when: "learning unscalable tactics that worked for successful startups"
+
+combines_with:
+  - lean-startup             # methodology for the patterns observed
+  - hard-thing-about-hard-things  # leadership through the hard moments
+  - zero-to-one              # strategic vision for what to build
+  - how-to-win-friends       # for co-founder and early team relationships
+
+contrast_with:
+  - skill: lean-startup
+    distinction: "Founders at Work is STORIES and patterns; Lean Startup is METHODOLOGY"
+  - skill: hard-thing-about-hard-things
+    distinction: "Founders at Work is early-stage founding; Hard Thing is scaling and crisis management"
 ---
 
 # Founders at Work: Patterns from Startup Origins

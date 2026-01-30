@@ -1,6 +1,35 @@
 ---
 name: hard-thing-about-hard-things
-description: "Apply Ben Horowitz's battle-tested advice for leading through crises, making hard decisions, and building companies. Use when facing layoffs, pivots, management challenges, company crises, or when user mentions: hard thing about hard things, Ben Horowitz, wartime CEO, firing, layoffs, startup management, or leading through crisis."
+description: "Ben Horowitz's battle-tested advice for leading through crises, making hard decisions, and building companies."
+
+dimensions:
+  domain: [leadership, management, entrepreneurship, crisis-management]
+  phase: [crisis, scaling, layoffs, executive-hiring, culture-building]
+  problem_type: [hard-decisions, wartime-leadership, firing, organizational-challenges]
+
+contexts:
+  - situation: "company in crisis"
+    use_when: "need wartime CEO mindset and tactics"
+  - situation: "need to do layoffs"
+    use_when: "how to execute layoffs with dignity and speed"
+  - situation: "executive isn't working out"
+    use_when: "deciding whether and how to fire an executive"
+  - situation: "no good options"
+    use_when: "framework for choosing between bad and worse"
+  - situation: "building company culture"
+    use_when: "defining culture through actions, not words"
+
+combines_with:
+  - founders-at-work        # early stage patterns before scaling challenges
+  - how-to-win-friends      # softer influence techniques to balance
+  - thinking-fast-and-slow  # decision-making under pressure
+  - playing-to-win          # strategy when not in crisis mode
+
+contrast_with:
+  - skill: how-to-win-friends
+    distinction: "Hard Thing is direct/wartime leadership; Carnegie is relationship-first influence"
+  - skill: founders-at-work
+    distinction: "Hard Thing is SCALING and crisis; Founders at Work is FOUNDING and early stage"
 ---
 
 # The Hard Thing About Hard Things
