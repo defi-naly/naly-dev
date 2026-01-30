@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Monorepo containing two projects:
-- **naly.dev** (root) - Interactive financial dashboards, economic analysis, and "The Money Game" educational feature
-- **TIPZ** (`/tipz`) - Private micro-tipping browser extension for X/Substack creators using Zcash
+Two projects:
+- **naly.dev** (this repo) - Interactive financial dashboards, economic analysis, and "The Money Game" educational feature
+- **TIPZ** (separate repo: `defi-naly/tipz`, local at `/tipz`) - Privacy-first micro-tipping for X creators using Zcash (v1)
 
 ## Build Commands
 
@@ -44,9 +44,82 @@ npm run package  # Package for Chrome Web Store
 - `/lib` - Utilities including FRED API integration
 
 ### TIPZ Structure
-- `/tipz/web` - Next.js 16 web app with Supabase backend
-- `/tipz/extension` - Plasmo browser extension with content scripts for X/Substack
+- `/tipz/web` - Next.js 16 web app with Supabase backend (registration, creator profiles, tip pages)
+- `/tipz/extension` - Plasmo browser extension: **creator tool** for monetizing content on X
 - `/tipz/supabase` - Database migrations
+
+### TIPZ Product Direction
+
+**Mission:** Privacy-first micro-tipping for creators using Zcash shielded addresses
+
+**Core Beliefs:**
+- Privacy is a default human right, not something to justify
+- Financial surveillance enables control — every indexed transaction is a data point
+- Creators deserve sovereignty: self-custody, zero intermediaries, no platform capture
+- Support should leave no trace
+
+**Target Users:** X creators who value privacy and direct audience support (v1)
+
+### TIPZ Extension (Creator Tool)
+
+The extension helps **creators** monetize their content. Tippers use the web app instead.
+
+**Key Features:**
+- **Creator Identity Linking:** TIPZ Web Bridge - extension reads verified identity from tipz.cash localStorage
+- **Auto-Stamp:** Automatically embed `tipz.cash/{handle}` links in creator's own X posts
+- **Instant Alerts:** Real-time browser notifications when tips arrive (Supabase Realtime)
+- **Revenue Analytics:** Dashboard showing incoming tips, totals, and trends
+
+**Architecture:**
+- `contents/x.tsx` - Detects X compose box, injects AutoStamp toggle for linked creators
+- `contents/tipz-interceptor.tsx` - Reads localStorage on tipz.cash to capture verified identity
+- `background.ts` - Service worker subscribes to Supabase Realtime for tip notifications
+- `popup.tsx` - Creator dashboard (linked status, revenue stats, recent tips received)
+
+### TIPZ Design System
+
+**Aesthetic:** Dark crypto-terminal with Bloomberg-inspired data density
+
+**Colors:**
+- Background: `#08090a` / Surface: `#12141a`
+- Primary (amber): `#F5A623` with glow effects
+- Success: `#22C55E` / Error: `#EF4444`
+- Text: `#D1D5DB` (muted) / `#F9FAFB` (bright)
+
+**Typography:** JetBrains Mono (code/logo), Inter (body)
+
+**Interactions:** Typing animations, scroll-triggered reveals, glassmorphism cards, respects `prefers-reduced-motion`
+
+### TIPZ Payments (LIVE in Production)
+
+**Status:** Cross-chain payments via NEAR Intents are live and working.
+
+**Supported Payment Methods:**
+- **ETH** (Ethereum mainnet) → ZEC shielded ✅
+- **USDC** (Ethereum, Polygon, Arbitrum, Optimism) → ZEC shielded ✅
+- **USDT** (Ethereum) → ZEC shielded ✅
+- **SOL** (Solana via Phantom) → ZEC shielded ✅
+
+**Wallets Supported:**
+- MetaMask, Rabby, Coinbase Wallet (EVM)
+- Phantom (Solana)
+
+**Flow:** User connects wallet → selects amount/token → sends to NEAR Intents deposit address → NEAR handles cross-chain swap → Creator receives shielded ZEC
+
+**Key Files:**
+- `web/lib/wallet.ts` - Wallet connection, transaction execution
+- `web/lib/near-intents.ts` - NEAR Intents API integration
+- `web/hooks/useTipping.ts` - Tipping state machine with status polling
+- `web/app/api/swap/quote/route.ts` - Quote endpoint
+- `web/app/api/swap/execute/route.ts` - Execute endpoint
+- `web/app/api/swap/status/route.ts` - Status polling endpoint
+
+### TIPZ Web Features (v1)
+
+- **Registration:** X handle + Zcash shielded address + tweet verification
+- **Creator Directory:** Browse registered creators with demo mode fallback
+- **Creator Profiles:** Individual tip pages at `/:handle`
+- **ZEC Price Ticker:** Real-time via CoinGecko
 
 ### The Money Game Architecture
 - Single-page game with state machine: title → playing → end
@@ -57,14 +130,14 @@ npm run package  # Package for Chrome Web Store
 
 ## Tech Stack
 
-- **Frontend**: Next.js 14 (App Router), React 18, TypeScript
+- **Frontend**: Next.js 14/16 (App Router), React 18, TypeScript
 - **Styling**: Tailwind CSS with custom terminal theme
 - **Animations**: Framer Motion
 - **Charts**: Recharts
 - **UI Components**: Radix UI primitives
 - **Database**: Supabase (TIPZ only)
 - **Extension**: Plasmo framework
-- **Web3**: ethers.js, WalletConnect
+- **Web3**: ethers.js, @solana/web3.js, NEAR Intents (cross-chain swaps)
 
 ## Design System
 
