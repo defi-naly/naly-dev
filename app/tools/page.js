@@ -215,38 +215,102 @@ function MarketSignals() {
 function AnalysisTools() {
   const [currentMetrics, setCurrentMetrics] = useState(echoesData.currentDefaults);
   const [topMatches, setTopMatches] = useState([]);
+  const [stackData, setStackData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchLiveMetrics() {
+    async function fetchData() {
       try {
-        const response = await fetch('/api/echo-metrics');
-        if (response.ok) {
-          const data = await response.json();
+        const [metricsResponse, stackResponse] = await Promise.all([
+          fetch('/api/echo-metrics'),
+          fetch('/api/the-stack?range=1y'),
+        ]);
+
+        if (metricsResponse.ok) {
+          const data = await metricsResponse.json();
           const liveMetrics = { ...echoesData.currentDefaults, ...data.metrics };
           setCurrentMetrics(liveMetrics);
           setTopMatches(calculateEchoMatches(liveMetrics));
         } else {
           setTopMatches(calculateEchoMatches(echoesData.currentDefaults));
         }
+
+        if (stackResponse.ok) {
+          const data = await stackResponse.json();
+          setStackData(data);
+        }
       } catch (error) {
-        console.error('Failed to fetch live metrics:', error);
+        console.error('Failed to fetch data:', error);
         setTopMatches(calculateEchoMatches(echoesData.currentDefaults));
       } finally {
         setLoading(false);
       }
     }
-    fetchLiveMetrics();
+    fetchData();
   }, []);
 
   const current = currentMetrics;
+
+  // Stack regime colors
+  const stackLeader = stackData?.regime?.leader;
+  const stackOutperformance = stackData?.regime?.outperformance ?? 0;
+  const stackLeaderColor = stackLeader === 'POWR' ? 'amber' :
+    stackLeader === 'IFRA' ? 'violet' :
+    stackLeader === 'BAI' ? 'emerald' : 'zinc';
+  const stackDotClass = `bg-${stackLeaderColor}-400`;
+  const stackTextClass = `text-${stackLeaderColor}-400`;
 
   return (
     <div className="border border-zinc-800">
       <div className="px-4 py-2 border-b border-zinc-800">
         <span className="text-xs font-mono uppercase tracking-wider text-zinc-500">Analysis Tools</span>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-zinc-800">
+      <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-zinc-800">
+        {/* THE STACK */}
+        <Link href="/tools/the-stack" className="block p-4 hover:bg-zinc-900/50 transition-colors">
+          <div className="mb-1">
+            <span className="text-xs font-mono uppercase tracking-wider text-zinc-400">The AI Stack</span>
+          </div>
+          <div className="text-[10px] font-mono text-zinc-600 mb-4">Physical AI Capital Flow</div>
+
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <div className={`w-1.5 h-1.5 rounded-full ${
+                stackLeader === 'POWR' ? 'bg-amber-400' :
+                stackLeader === 'IFRA' ? 'bg-violet-400' :
+                stackLeader === 'BAI' ? 'bg-emerald-400' : 'bg-zinc-400'
+              }`} />
+              <span className={`text-sm font-mono ${
+                stackLeader === 'POWR' ? 'text-amber-400' :
+                stackLeader === 'IFRA' ? 'text-violet-400' :
+                stackLeader === 'BAI' ? 'text-emerald-400' : 'text-zinc-400'
+              }`}>
+                {loading ? '—' : stackLeader || '—'}
+              </span>
+            </div>
+            <span className={`text-sm font-mono ${stackOutperformance >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+              {loading ? '—' : `${stackOutperformance >= 0 ? '+' : ''}${stackOutperformance.toFixed(1)}%`}
+            </span>
+          </div>
+
+          <div className="flex gap-2 mb-2">
+            <div className="flex items-center gap-1">
+              <div className="w-2 h-0.5 bg-amber-500 rounded" />
+              <span className="text-[10px] font-mono text-zinc-600">POWR</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <div className="w-2 h-0.5 bg-violet-500 rounded" />
+              <span className="text-[10px] font-mono text-zinc-600">IFRA</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <div className="w-2 h-0.5 bg-emerald-500 rounded" />
+              <span className="text-[10px] font-mono text-zinc-600">BAI</span>
+            </div>
+          </div>
+
+          <div className="text-[10px] font-mono text-zinc-600">vs SPY baseline</div>
+        </Link>
+
         {/* THE FORK */}
         <Link href="/tools/the-fork" className="block p-4 hover:bg-zinc-900/50 transition-colors">
           <div className="mb-1">
