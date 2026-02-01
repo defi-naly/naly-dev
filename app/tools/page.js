@@ -184,7 +184,7 @@ function MarketSignals() {
         </Link>
 
         {/* SAECULUM */}
-        <Link href="/tools/saeculum" className="block p-4 hover:bg-zinc-900/50 transition-colors">
+        <Link href="/tools/saeculum" className="block p-4 hover:bg-zinc-900/50 transition-colors overflow-hidden">
           <div className="mb-1">
             <span className="text-xs font-mono uppercase tracking-wider text-zinc-400">Saeculum</span>
           </div>
@@ -200,10 +200,11 @@ function MarketSignals() {
                 style={{ width: `${Math.min(progressPercent, 100)}%` }}
               />
             </div>
-            <span className="text-xs font-mono text-blue-400">WINTER</span>
+            <span className="text-xs font-mono text-blue-400 shrink-0">WINTER</span>
           </div>
-          <div className="text-[10px] font-mono text-zinc-600">
-            2008────────────────────2030
+          <div className="flex justify-between text-[10px] font-mono text-zinc-600">
+            <span>2008</span>
+            <span>2030</span>
           </div>
         </Link>
       </div>
