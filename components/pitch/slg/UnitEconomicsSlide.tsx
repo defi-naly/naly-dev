@@ -24,16 +24,17 @@ const rateSensitivity = [
     highlight: false,
   },
   {
-    env: 'Zero (Target)',
+    env: 'Current',
     snbRate: '0.00%',
     borrowRate: '4.00%',
     supplyRate: '0.50%',
     bankCost: '$0',
     revenue: '$3.50M',
     highlight: false,
+    isCurrent: true,
   },
   {
-    env: 'Current',
+    env: 'Modest Rise',
     snbRate: '0.50%',
     borrowRate: '3.75%',
     supplyRate: '0.75%',
@@ -103,10 +104,10 @@ export default function UnitEconomicsSlide() {
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 + i * 0.04 }}
-                className={`border-b border-gray-100 ${row.highlight ? 'bg-red-50/30' : ''}`}
+                className={`border-b border-gray-100 ${row.highlight ? 'bg-red-50/30' : ''} ${row.isCurrent ? 'bg-emerald-50/50' : ''}`}
               >
                 <td className="px-2 py-1.5">
-                  <span className={`font-medium ${row.highlight ? 'text-[#E53935]' : 'text-gray-700'}`}>
+                  <span className={`font-medium ${row.highlight ? 'text-[#E53935]' : row.isCurrent ? 'text-emerald-600' : 'text-gray-700'}`}>
                     {row.env}
                   </span>
                 </td>
