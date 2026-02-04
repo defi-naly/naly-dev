@@ -3,7 +3,7 @@ export interface Slide {
   slug: string;
   title: string;
   subtitle?: string;
-  component: 'title' | 'problem' | 'value-prop' | 'data-evidence' | 'architecture' | 'hedging-use-case' | 'antifragility' | 'unit-economics' | 'roadmap' | 'summary';
+  component: 'title' | 'problem' | 'value-prop' | 'data-evidence' | 'architecture' | 'hedging-use-case' | 'antifragility' | 'unit-economics' | 'revenue-evolution' | 'roadmap' | 'summary';
 }
 
 export const slides: Slide[] = [
@@ -65,13 +65,20 @@ export const slides: Slide[] = [
   },
   {
     id: 9,
+    slug: 'evolution',
+    title: 'Revenue Evolution',
+    subtitle: 'From Alpha to Utility',
+    component: 'revenue-evolution',
+  },
+  {
+    id: 10,
     slug: 'roadmap',
     title: 'Roadmap',
     subtitle: 'Path to market in 4 phases',
     component: 'roadmap',
   },
   {
-    id: 10,
+    id: 11,
     slug: 'summary',
     title: 'Summary',
     subtitle: 'Key takeaways and next steps',

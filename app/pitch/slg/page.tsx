@@ -17,6 +17,7 @@ import ArchitectureSlide from '@/components/pitch/slg/ArchitectureSlide';
 import UnitEconomicsSlide from '@/components/pitch/slg/UnitEconomicsSlide';
 import HedgingUseCaseSlide from '@/components/pitch/slg/HedgingUseCaseSlide';
 import AntifragilitySlide from '@/components/pitch/slg/AntifragilitySlide';
+import RevenueEvolutionSlide from '@/components/pitch/slg/RevenueEvolutionSlide';
 import RoadmapSlide from '@/components/pitch/slg/RoadmapSlide';
 import SummarySlide from '@/components/pitch/slg/SummarySlide';
 
@@ -29,6 +30,7 @@ const slideComponents: Record<string, React.ComponentType> = {
   'hedging-use-case': HedgingUseCaseSlide,
   'antifragility': AntifragilitySlide,
   'unit-economics': UnitEconomicsSlide,
+  'revenue-evolution': RevenueEvolutionSlide,
   'roadmap': RoadmapSlide,
   'summary': SummarySlide,
 };
