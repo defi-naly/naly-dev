@@ -68,8 +68,8 @@ export default function RevenueEvolutionSlide() {
             transition={{ delay: 0.2 + i * 0.1 }}
             className={`p-3 rounded-lg border ${
               p.color === 'red'
-                ? 'bg-red-50/50 border-[#E53935]/30'
-                : 'bg-emerald-50/50 border-emerald-200'
+                ? 'bg-[#E53935]/5 border-[#E53935]/30'
+                : 'bg-emerald-50 border-emerald-200'
             }`}
           >
             <div className="flex items-center justify-between mb-2">
@@ -137,12 +137,12 @@ export default function RevenueEvolutionSlide() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
-        className="p-3 bg-amber-50 border border-amber-200 rounded-lg"
+        className="p-3 bg-[#E53935]/10 border border-[#E53935]/30 rounded-lg"
       >
-        <p className="text-[10px] font-sans text-amber-700 uppercase tracking-wider font-semibold mb-1">
+        <p className="text-[10px] font-sans text-[#E53935] uppercase tracking-wider font-semibold mb-1">
           The &ldquo;Black Swan&rdquo; Bonus — Antifragile at Scale
         </p>
-        <p className="text-[10px] font-sans text-amber-800 leading-relaxed">
+        <p className="text-[10px] font-sans text-gray-700 leading-relaxed">
           Even at utility scale, the Volatility Harvester logic remains <span className="font-semibold">dormant</span>.
           If SNB returns to -0.75%, the $500M pool instantly reverts to &ldquo;Squeeze&rdquo; mode:
           <span className="font-semibold text-[#E53935]"> $25M+ annualized revenue</span> vs the $2.5M floor we model.
