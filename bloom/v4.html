@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOOM — Brutalist Quantum</title>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fira+Code:wght@300;400;500;600&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0a0a0a;
+            --dark: #121212;
+            --white: #f0f0f0;
+            --gray: #666;
+            --cyan: #00ffff;
+            --magenta: #ff00ff;
+            --accent-rgb: 0, 255, 255;
+        }
+
+        /* Light mode - softer, warmer aesthetic */
+        [data-theme="light"] {
+            --black: #f8f6f3;
+            --dark: #ffffff;
+            --white: #2a2a28;
+            --gray: #6b6b68;
+            --cyan: #c4943f;
+            --magenta: #a67c32;
+            --accent-rgb: 196, 148, 63;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: 'Fira Code', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        ::selection {
+            background: var(--cyan);
+            color: var(--black);
+        }
+
+        /* Grid structure with noise texture */
+        .grid-structure {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Noise texture overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Glitch effect */
+        @keyframes glitch-1 {
+            0%, 100% { clip-path: inset(0 0 90% 0); transform: translate(-2px, 0); }
+            20% { clip-path: inset(30% 0 40% 0); transform: translate(2px, 0); }
+            40% { clip-path: inset(60% 0 20% 0); transform: translate(-1px, 0); }
+            60% { clip-path: inset(80% 0 5% 0); transform: translate(1px, 0); }
+            80% { clip-path: inset(10% 0 70% 0); transform: translate(0, 0); }
+        }
+
+        @keyframes glitch-2 {
+            0%, 100% { clip-path: inset(90% 0 0 0); transform: translate(2px, 0); }
+            20% { clip-path: inset(40% 0 30% 0); transform: translate(-2px, 0); }
+            40% { clip-path: inset(20% 0 60% 0); transform: translate(1px, 0); }
+            60% { clip-path: inset(5% 0 80% 0); transform: translate(-1px, 0); }
+            80% { clip-path: inset(70% 0 10% 0); transform: translate(0, 0); }
+        }
+
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: var(--black);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.5rem;
+            position: relative;
+            animation: logo-warp 8s ease-in-out infinite;
+        }
+
+        @keyframes logo-warp {
+            0%, 100% { transform: none; letter-spacing: 0; }
+            25% { transform: skewX(-0.5deg); letter-spacing: 0.5px; }
+            50% { transform: skewX(0.3deg); letter-spacing: -0.3px; }
+            75% { transform: skewX(-0.2deg); letter-spacing: 0.2px; }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: all 0.1s;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: var(--cyan);
+            border-color: var(--cyan);
+            background: rgba(0, 255, 255, 0.05);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+        }
+
+        #interference-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+            padding-left: 8%;
+            transform: translateY(-5%);
+        }
+
+        .hero h1 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 12vw;
+            line-height: 0.9;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .hero h1 .glitch-text {
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero h1 .glitch-text::before,
+        .hero h1 .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero h1 .glitch-text::before {
+            color: var(--cyan);
+            animation: glitch-1 2s infinite;
+            z-index: -1;
+        }
+
+        .hero h1 .glitch-text::after {
+            color: var(--magenta);
+            animation: glitch-2 3s infinite;
+            z-index: -2;
+        }
+
+        .hero-tagline {
+            font-size: 1rem;
+            color: var(--gray);
+            border-left: 3px solid var(--cyan);
+            padding-left: 1rem;
+            max-width: 400px;
+        }
+
+        .hero-tagline strong {
+            color: var(--white);
+        }
+
+        .hero-coords {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 0.625rem;
+            color: var(--gray);
+            text-align: right;
+        }
+
+        .hero-coords span {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .hero-coords .live {
+            color: var(--cyan);
+        }
+
+        /* Section styles */
+        section {
+            padding: 10rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Subtle section divider */
+        .section-divider {
+            position: relative;
+            height: 1px;
+            background: rgba(255,255,255,0.05);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-divider::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+            transition: width 1.2s ease-out;
+        }
+
+        .section-divider.visible::before {
+            width: 100%;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 4rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .section-tag {
+            font-size: 0.625rem;
+            padding: 0.25rem 0.75rem;
+            background: var(--cyan);
+            color: var(--black);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .section-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 2rem;
+            text-transform: uppercase;
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2px 2fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-grid .divider {
+            background: linear-gradient(to bottom, var(--cyan), var(--magenta));
+        }
+
+        .about-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .stat-block {
+            padding: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+        }
+
+        .stat-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--cyan);
+        }
+
+        .stat-value {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 3rem;
+            color: var(--cyan);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .about-text h2 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 2rem;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .about-text h2 .highlight {
+            color: var(--black);
+            background: var(--cyan);
+            padding: 0 0.25rem;
+        }
+
+        .about-text p {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9375rem;
+            color: var(--gray);
+            line-height: 1.9;
+        }
+
+        /* Process */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 2rem;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .process-step:hover {
+            border-color: var(--cyan);
+            background: rgba(0, 255, 255, 0.02);
+        }
+
+        .process-step:hover .step-number {
+            color: var(--cyan);
+            text-shadow: 0 0 20px var(--cyan);
+        }
+
+        .step-number {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 4rem;
+            color: rgba(255,255,255,0.1);
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            transition: all 0.2s;
+        }
+
+        .step-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .step-desc {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.875rem;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .portfolio-card {
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .portfolio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,255,255,0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .portfolio-card:hover::before {
+            opacity: 1;
+        }
+
+        .portfolio-card:hover {
+            border-color: var(--cyan);
+        }
+
+        .portfolio-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.625rem;
+            padding: 0.25rem 0.75rem;
+            background: var(--cyan);
+            color: var(--black);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        .portfolio-card:nth-child(2) .portfolio-status {
+            background: var(--magenta);
+        }
+
+        .portfolio-name {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .portfolio-desc {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9375rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .portfolio-tag {
+            font-size: 0.625rem;
+            padding: 0.25rem 0.75rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .principle {
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin: -1px;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .principle:hover {
+            background: rgba(0, 255, 255, 0.02);
+            z-index: 1;
+        }
+
+        .principle:hover .principle-number {
+            color: var(--cyan);
+        }
+
+        .principle-number {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 0.75rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+            transition: color 0.2s;
+        }
+
+        .principle h3 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .principle p {
+            font-size: 0.8125rem;
+            color: var(--gray);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 2rem;
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section h2 .highlight {
+            color: var(--black);
+            background: var(--cyan);
+            padding: 0 0.25rem;
+        }
+
+        .cta-section p {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            color: var(--gray);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .cta-button {
+            display: inline-block;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--black);
+            background: var(--cyan);
+            text-decoration: none;
+            padding: 1rem 2.5rem;
+            border: 2px solid var(--cyan);
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 100%;
+            height: 100%;
+            border: 1px solid var(--magenta);
+            transition: all 0.2s;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--cyan);
+            transform: translate(2px, 2px);
+        }
+
+        .cta-button:hover::before {
+            top: 0;
+            left: 0;
+        }
+
+        .cta-subtext {
+            margin-top: 1.5rem;
+            font-size: 0.6875rem;
+            color: var(--gray);
+            letter-spacing: 0.05em;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-brand h2 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            font-size: 0.8125rem;
+            color: var(--gray);
+        }
+
+        .footer-col h4 {
+            font-size: 0.625rem;
+            letter-spacing: 0.15em;
+            color: var(--cyan);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col a {
+            display: block;
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.8125rem;
+            margin-bottom: 0.75rem;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 4rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            font-size: 0.625rem;
+            color: var(--gray);
+            letter-spacing: 0.1em;
+        }
+
+        .back-link {
+            font-size: 0.625rem;
+            color: var(--cyan);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--cyan);
+            transition: all 0.2s;
+        }
+
+        .back-link:hover {
+            background: var(--cyan);
+            color: var(--black);
+        }
+
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 15vw; }
+            .hero-content { padding-left: 4%; }
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .about-grid .divider { display: none; }
+            .process-grid { grid-template-columns: 1fr; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .principles-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+            .cta-section h2 { font-size: 2rem; }
+        }
+
+        @media (max-width: 640px) {
+            nav { padding: 1rem; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 20vw; }
+            .hero-content { padding-left: 0; transform: none; }
+            section { padding: 6rem 1rem; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .cta-section h2 { font-size: 1.5rem; }
+            .cta-button { padding: 0.875rem 2rem; }
+            .section-divider { margin: 0 1rem; }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            .section-divider::before {
+                transition: none;
+            }
+            .section-divider.visible::before { width: 100%; }
+        }
+
+        /* ========================================
+           LIGHT MODE OVERRIDES
+           ======================================== */
+
+        /* Theme toggle button */
+        .theme-toggle {
+            background: transparent;
+            border: 1px solid var(--cyan);
+            padding: 0.5rem 0.75rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(0, 255, 255, 0.1);
+        }
+
+        [data-theme="light"] .theme-toggle:hover {
+            background: rgba(196, 148, 63, 0.1);
+        }
+
+        .theme-toggle svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--cyan);
+        }
+
+        /* Light mode - softer grid */
+        [data-theme="light"] .grid-structure {
+            background:
+                linear-gradient(90deg, rgba(196, 148, 63, 0.06) 1px, transparent 1px),
+                linear-gradient(rgba(196, 148, 63, 0.06) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* Light mode - reduced noise */
+        [data-theme="light"] .noise-overlay {
+            opacity: 0.02;
+        }
+
+        /* Light mode - nav */
+        [data-theme="light"] nav {
+            background: var(--black);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="light"] .nav-links a:hover {
+            background: rgba(196, 148, 63, 0.08);
+        }
+
+        /* Light mode - glitch disabled (softer look) */
+        [data-theme="light"] .hero h1 .glitch-text::before,
+        [data-theme="light"] .hero h1 .glitch-text::after {
+            display: none;
+        }
+
+        /* Light mode - interference canvas reduced */
+        [data-theme="light"] #interference-canvas {
+            opacity: 0.15;
+        }
+
+        /* Light mode - section elements */
+        [data-theme="light"] .section-header {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="light"] .section-divider {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        /* Light mode - stat blocks */
+        [data-theme="light"] .stat-block {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Light mode - process steps */
+        [data-theme="light"] .process-step {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        [data-theme="light"] .process-step:hover {
+            background: rgba(196, 148, 63, 0.04);
+        }
+
+        [data-theme="light"] .process-step:hover .step-number {
+            text-shadow: none;
+        }
+
+        [data-theme="light"] .step-number {
+            color: rgba(0, 0, 0, 0.08);
+        }
+
+        /* Light mode - portfolio cards */
+        [data-theme="light"] .portfolio-card {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        [data-theme="light"] .portfolio-card::before {
+            background: linear-gradient(135deg, rgba(196, 148, 63, 0.05), transparent);
+        }
+
+        [data-theme="light"] .portfolio-tag {
+            border: 1px solid rgba(0, 0, 0, 0.15);
+        }
+
+        /* Light mode - principles */
+        [data-theme="light"] .principles-grid {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="light"] .principle {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        [data-theme="light"] .principle:hover {
+            background: rgba(196, 148, 63, 0.04);
+        }
+
+        /* Light mode - CTA */
+        [data-theme="light"] .cta-section {
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="light"] .cta-button::before {
+            border: 1px solid var(--magenta);
+        }
+
+        /* Light mode - footer */
+        [data-theme="light"] footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="light"] .footer-bottom {
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        /* Light mode - selection */
+        [data-theme="light"] ::selection {
+            background: var(--cyan);
+            color: var(--black);
+        }
+
+        /* Light mode - cursor */
+        [data-theme="light"] body {
+            cursor: default;
+        }
+
+        @media (max-width: 640px) {
+            .theme-toggle {
+                padding: 0.4rem 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-structure"></div>
+    <div class="noise-overlay"></div>
+
+    <nav>
+        <div class="logo">BLOOM</div>
+        <div class="nav-links">
+            <a href="#about">ABOUT</a>
+            <a href="#process">PROCESS</a>
+            <a href="#portfolio">PORTFOLIO</a>
+            <a href="#principles">PRINCIPLES</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <svg id="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg id="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <canvas id="interference-canvas"></canvas>
+        <div class="hero-content">
+            <h1><span class="glitch-text" data-text="BLOOM">BLOOM</span></h1>
+            <p class="hero-tagline">DeFi venture studio. We find the friction in decentralized finance and <strong>build products that remove it</strong>.</p>
+        </div>
+        <div class="hero-coords">
+            <span>SYS.STATUS: <span class="live">ACTIVE</span></span>
+            <span>FIELD.ID: 0x8F3A</span>
+            <span>BLOOM.v1.0.0</span>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section id="about">
+        <div class="section-header">
+            <span class="section-tag">01</span>
+            <h2 class="section-title">About // Thesis</h2>
+        </div>
+        <div class="about-grid">
+            <div class="about-stats">
+                <div class="stat-block">
+                    <div class="stat-value">5+</div>
+                    <div class="stat-label">Years in DeFi</div>
+                </div>
+                <div class="stat-block">
+                    <div class="stat-value">01</div>
+                    <div class="stat-label">Products Live</div>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="about-text">
+                <h2>We identify <span class="highlight">bottlenecks</span> in decentralised finance and build products to solve them.</h2>
+                <p>Most teams chase features. We hunt friction. For five years, we've built inside DeFi—not watching from the sidelines, but using it daily, stress-testing it, feeling where it breaks. Every product starts with a problem we've hit ourselves.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section id="process">
+        <div class="section-header">
+            <span class="section-tag">02</span>
+            <h2 class="section-title">Process</h2>
+        </div>
+        <div class="process-grid">
+            <div class="process-step">
+                <span class="step-number">01</span>
+                <h3 class="step-title">Identify</h3>
+                <p class="step-desc">Map the field. Locate friction points where value leaks, trust breaks, or complexity overwhelms the system.</p>
+            </div>
+            <div class="process-step">
+                <span class="step-number">02</span>
+                <h3 class="step-title">Architect</h3>
+                <p class="step-desc">Design from first principles. Understand the physics of the problem before proposing structure.</p>
+            </div>
+            <div class="process-step">
+                <span class="step-number">03</span>
+                <h3 class="step-title">Cultivate</h3>
+                <p class="step-desc">Build for emergence. Launch lean, iterate fast, grow organically. Forced adoption always fails.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section id="portfolio">
+        <div class="section-header">
+            <span class="section-tag">03</span>
+            <h2 class="section-title">Portfolio</h2>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-card">
+                <span class="portfolio-status">● LIVE</span>
+                <h3 class="portfolio-name">TIPZ</h3>
+                <p class="portfolio-desc">Privacy-first micro-tipping for creators using Zcash shielded addresses. Support without surveillance. No trace.</p>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">Privacy</span>
+                    <span class="portfolio-tag">Zcash</span>
+                    <span class="portfolio-tag">Creator Economy</span>
+                </div>
+            </div>
+            <div class="portfolio-card">
+                <span class="portfolio-status">◐ DEV</span>
+                <h3 class="portfolio-name">PRJ_02</h3>
+                <p class="portfolio-desc">Bottleneck identified. Solution architecting. Emerging from the field.</p>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">Classified</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section id="principles">
+        <div class="section-header">
+            <span class="section-tag">04</span>
+            <h2 class="section-title">Principles</h2>
+        </div>
+        <div class="principles-grid">
+            <div class="principle">
+                <span class="principle-number">[01]</span>
+                <h3>Privacy is Fundamental</h3>
+                <p>Every indexed transaction is leverage against the individual. We build tools that can't be weaponized.</p>
+            </div>
+            <div class="principle">
+                <span class="principle-number">[02]</span>
+                <h3>Emergence Over Force</h3>
+                <p>Complex systems resist top-down control. We design for organic growth.</p>
+            </div>
+            <div class="principle">
+                <span class="principle-number">[03]</span>
+                <h3>Simplicity at Surface</h3>
+                <p>Sophisticated tech should feel inevitable. Complexity hidden, utility exposed.</p>
+            </div>
+            <div class="principle">
+                <span class="principle-number">[04]</span>
+                <h3>Long-Term Aligned</h3>
+                <p>We build products we'd use. Incentives matter; we eat our own cooking.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Building in <span class="highlight">DeFi</span>?</h2>
+            <p>We're always looking for hard problems and aligned founders. If you're working on something that removes friction from decentralized finance, we want to hear about it.</p>
+            <a href="mailto:hello@bloom.studio" class="cta-button">Get in Touch →</a>
+            <p class="cta-subtext">No pitch decks required. Just tell us the problem.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h2>BLOOM</h2>
+                <p>DeFi venture studio. We find the friction and build products that remove it.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Studio</h4>
+                <a href="#about">About</a>
+                <a href="#process">Process</a>
+                <a href="#principles">Principles</a>
+            </div>
+            <div class="footer-col">
+                <h4>Portfolio</h4>
+                <a href="https://tipz.cash" target="_blank" rel="noopener">TIPZ</a>
+                <a href="#portfolio">PRJ_02</a>
+            </div>
+            <div class="footer-col">
+                <h4>Links</h4>
+                <a href="https://twitter.com/bloomstudio" target="_blank" rel="noopener">Twitter</a>
+                <a href="https://github.com/bloom-studio" target="_blank" rel="noopener">GitHub</a>
+                <a href="mailto:hello@bloom.studio">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 BLOOM VENTURE STUDIO // ALL RIGHTS RESERVED</p>
+            <a href="index.html" class="back-link">← ALL DESIGNS</a>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('theme-icon-sun');
+        const moonIcon = document.getElementById('theme-icon-moon');
+        let currentTheme = localStorage.getItem('bloom-v4-theme') || 'dark';
+
+        function setTheme(theme) {
+            currentTheme = theme;
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('bloom-v4-theme', theme);
+
+            if (theme === 'light') {
+                sunIcon.style.display = 'none';
+                moonIcon.style.display = 'block';
+            } else {
+                sunIcon.style.display = 'block';
+                moonIcon.style.display = 'none';
+            }
+        }
+
+        // Initialize theme
+        setTheme(currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        });
+
+        // Quantum interference pattern
+        const canvas = document.getElementById('interference-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let time = 0;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        function getThemeColors() {
+            const isLight = currentTheme === 'light';
+            return {
+                // In light mode, use muted gold tones
+                primary: isLight ? { r: 196, g: 148, b: 63 } : { r: 0, g: 255, b: 255 },
+                secondary: isLight ? { r: 166, g: 124, b: 50 } : { r: 255, g: 0, b: 255 },
+                intensity: isLight ? 0.4 : 0.3
+            };
+        }
+
+        function drawInterference() {
+            const imageData = ctx.createImageData(width, height);
+            const data = imageData.data;
+            const colors = getThemeColors();
+
+            for (let y = 0; y < height; y += 2) {
+                for (let x = 0; x < width; x += 2) {
+                    // Two wave sources
+                    const d1 = Math.sqrt(Math.pow(x - width * 0.3, 2) + Math.pow(y - height * 0.5, 2));
+                    const d2 = Math.sqrt(Math.pow(x - width * 0.7, 2) + Math.pow(y - height * 0.5, 2));
+
+                    // Wave interference
+                    const wave1 = Math.sin(d1 * 0.02 - time);
+                    const wave2 = Math.sin(d2 * 0.02 - time * 1.1);
+                    const interference = (wave1 + wave2) / 2;
+
+                    // Color based on interference
+                    const intensity = Math.abs(interference);
+                    const index = (y * width + x) * 4;
+
+                    if (interference > 0) {
+                        // Primary color (cyan/gold)
+                        data[index] = Math.floor(colors.primary.r * intensity * colors.intensity);
+                        data[index + 1] = Math.floor(colors.primary.g * intensity * colors.intensity);
+                        data[index + 2] = Math.floor(colors.primary.b * intensity * colors.intensity);
+                    } else {
+                        // Secondary color (magenta/darker gold)
+                        data[index] = Math.floor(colors.secondary.r * intensity * colors.intensity * 0.7);
+                        data[index + 1] = Math.floor(colors.secondary.g * intensity * colors.intensity * 0.7);
+                        data[index + 2] = Math.floor(colors.secondary.b * intensity * colors.intensity * 0.7);
+                    }
+                    data[index + 3] = Math.floor(255 * intensity * 0.5);
+
+                    // Fill 2x2 block for performance
+                    if (x + 1 < width) {
+                        data[index + 4] = data[index];
+                        data[index + 5] = data[index + 1];
+                        data[index + 6] = data[index + 2];
+                        data[index + 7] = data[index + 3];
+                    }
+                }
+
+                // Copy row below
+                if (y + 1 < height) {
+                    const rowIndex = y * width * 4;
+                    const nextRowIndex = (y + 1) * width * 4;
+                    for (let i = 0; i < width * 4; i++) {
+                        data[nextRowIndex + i] = data[rowIndex + i];
+                    }
+                }
+            }
+
+            ctx.putImageData(imageData, 0, 0);
+        }
+
+        function animate() {
+            time += 0.05;
+            drawInterference();
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', resize);
+
+        resize();
+        animate();
+
+        // Section divider scroll animation
+        const dividers = document.querySelectorAll('.section-divider');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-100px 0px',
+            threshold: 0
+        };
+
+        const dividerObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        dividers.forEach(divider => dividerObserver.observe(divider));
+
+    </script>
+</body>
+</html>
