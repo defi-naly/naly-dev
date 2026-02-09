@@ -6,7 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Two projects:
 - **naly.dev** (this repo) - Interactive financial dashboards, economic analysis, and "The Money Game" educational feature
-- **TIPZ** (separate repo: `defi-naly/tipz`, local at `/tipz`) - Privacy-first micro-tipping for X creators using Zcash (v1)
+- **TIPZ** (3 repos under `tipz-cash` org, all private):
+  - `tipz-cash/tipz.cash` (local: `/tipz`) - Web app + Supabase
+  - `tipz-cash/tipz-extension` (local: `/tipz-extension`) - Browser extension
+  - `tipz-cash/tipz-internal` (local: `/tipz-internal`) - Marketing, GTM, assets
 
 ## Build Commands
 
@@ -21,9 +24,11 @@ npm run lint     # ESLint
 ```bash
 npm run dev      # Dev server
 npm run build    # Production build
+npm run test     # Run tests (vitest)
+npm run test:watch  # Watch mode
 ```
 
-### TIPZ Extension (`/tipz/extension`)
+### TIPZ Extension (`/tipz-extension`)
 ```bash
 npm run dev      # Plasmo dev with hot reload
 npm run build    # Build extension
@@ -43,10 +48,40 @@ npm run package  # Package for Chrome Web Store
 - `/data` - Static data (chapters.ts, echoes.json, purchasing-power.json)
 - `/lib` - Utilities including FRED API integration
 
-### TIPZ Structure
-- `/tipz/web` - Next.js 16 web app with Supabase backend (registration, creator profiles, tip pages)
-- `/tipz/extension` - Plasmo browser extension: **creator tool** for monetizing content on X
-- `/tipz/supabase` - Database migrations
+### TIPZ Repository Structure
+
+**tipz.cash** (web app):
+```
+/web/               # Next.js 16 app + API
+/supabase/          # Database migrations
+/docs/
+  /engineering/     # Architecture, roadmap
+  /technical/       # Implementation guides
+  /operations/      # Runbooks, support
+```
+
+**tipz-extension** (browser extension):
+```
+/background.ts      # Service worker, Supabase Realtime
+/popup.tsx          # Creator dashboard
+/contents/          # Content scripts (x.tsx, tipz-interceptor.tsx)
+/lib/               # Utilities (api, crypto, identity, realtime)
+/components/        # UI components
+/assets/            # Extension icons
+```
+
+**tipz-internal** (private docs):
+```
+/marketing/         # Messaging, pitch decks
+/gtm/               # Go-to-market, KOL outreach
+/design/            # Brand guidelines, UX flows
+/guides/            # Creator onboarding
+/grants/            # Grant applications
+/analysis/          # Strategic frameworks
+/research/          # PDF generator
+/video/             # Remotion video generator
+/assets/zec-logos/  # Zcash brand assets
+```
 
 ### TIPZ Product Direction
 
@@ -95,10 +130,10 @@ The extension helps **creators** monetize their content. Tippers use the web app
 **Status:** Cross-chain payments via NEAR Intents are live and working.
 
 **Supported Payment Methods:**
-- **ETH** (Ethereum mainnet) → ZEC shielded ✅
-- **USDC** (Ethereum, Polygon, Arbitrum, Optimism) → ZEC shielded ✅
-- **USDT** (Ethereum) → ZEC shielded ✅
-- **SOL** (Solana via Phantom) → ZEC shielded ✅
+- **ETH** (Ethereum mainnet) → ZEC shielded
+- **USDC** (Ethereum, Polygon, Arbitrum, Optimism) → ZEC shielded
+- **USDT** (Ethereum) → ZEC shielded
+- **SOL** (Solana via Phantom) → ZEC shielded
 
 **Wallets Supported:**
 - MetaMask, Rabby, Coinbase Wallet (EVM)
@@ -106,13 +141,13 @@ The extension helps **creators** monetize their content. Tippers use the web app
 
 **Flow:** User connects wallet → selects amount/token → sends to NEAR Intents deposit address → NEAR handles cross-chain swap → Creator receives shielded ZEC
 
-**Key Files:**
-- `web/lib/wallet.ts` - Wallet connection, transaction execution
-- `web/lib/near-intents.ts` - NEAR Intents API integration
-- `web/hooks/useTipping.ts` - Tipping state machine with status polling
-- `web/app/api/swap/quote/route.ts` - Quote endpoint
-- `web/app/api/swap/execute/route.ts` - Execute endpoint
-- `web/app/api/swap/status/route.ts` - Status polling endpoint
+**Key Files (in tipz.cash/web):**
+- `lib/wallet.ts` - Wallet connection, transaction execution
+- `lib/near-intents.ts` - NEAR Intents API integration
+- `hooks/useTipping.ts` - Tipping state machine with status polling
+- `app/api/swap/quote/route.ts` - Quote endpoint
+- `app/api/swap/execute/route.ts` - Execute endpoint
+- `app/api/swap/status/route.ts` - Status polling endpoint
 
 ### TIPZ Web Features (v1)
 
@@ -120,6 +155,28 @@ The extension helps **creators** monetize their content. Tippers use the web app
 - **Creator Directory:** Browse registered creators with demo mode fallback
 - **Creator Profiles:** Individual tip pages at `/:handle`
 - **ZEC Price Ticker:** Real-time via CoinGecko
+
+### TIPZ Testing
+
+**Framework:** Vitest — 139 tests across 11 files
+
+**Test locations (in tipz.cash/web):**
+- `__tests__/*.test.ts` - Unit and integration tests
+- `scripts/test-near-intents.ts` - NEAR Intents integration test script
+
+**What's covered:**
+- Swap quote/execute/status API routes (SOL, ETH, USDC, USDT)
+- NEAR Intents integration (quoting, execution, status polling)
+- Wallet connection and transaction flows
+- Registration and creator directory
+- ZEC price fetching with fallback
+
+**Bugs fixed (SOL support — 5 fixes in `app/api/swap/quote/route.ts`):**
+- SOL token config (decimals, blockchain, symbol mapping)
+- Solana deposit address generation
+- SOL amount conversion (lamports)
+- Quote response formatting for Solana
+- ZEC fallback price updated to current market rate
 
 ### The Money Game Architecture
 - Single-page game with state machine: title → playing → end
@@ -175,4 +232,5 @@ animate={{ opacity: 1, y: 0 }}
 
 ## Environment Variables
 
-See `.env.example` files in `/tipz/web` and `/tipz/extension` for required variables (Supabase credentials, API URLs).
+- **TIPZ Web**: See `.env.example` in `/tipz/web` (Supabase credentials, NEAR credentials)
+- **TIPZ Extension**: See `.env.example` in `/tipz-extension` (Supabase credentials, API URLs)
