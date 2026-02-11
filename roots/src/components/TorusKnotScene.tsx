@@ -25,7 +25,7 @@ export function TorusKnotScene({ progress = 0 }: { progress?: number }) {
   // TorusKnotGeometry(radius, tube, tubularSegments, radialSegments, p, q)
   // p=2 q=3 gives the trefoil knot matching the reference image
   const baseGeo = useMemo(() => {
-    return new THREE.TorusKnotGeometry(1.0, 0.35, 128, 24, 2, 3);
+    return new THREE.TorusKnotGeometry(0.8, 0.28, 128, 24, 2, 3);
   }, []);
 
   // Store base positions for noise displacement

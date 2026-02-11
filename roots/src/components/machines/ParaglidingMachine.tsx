@@ -394,7 +394,7 @@ export function ParaglidingMachine({ progress }: { progress: number }) {
       const orbZ = Math.sin(angle) * orbitRadiusZ * radiusScale;
 
       // Settled positions: evenly spread across horizontal
-      const settledX = -1.8 + (i / 3) * 3.6; // [-1.8, -0.6, 0.6, 1.8]
+      const settledX = -2.4 + (i / 3) * 4.8; // [-2.4, -0.8, 0.8, 2.4]
       const settledY = orbitCenterY;
       const settledZ = 0;
 
@@ -470,7 +470,7 @@ export function ParaglidingMachine({ progress }: { progress: number }) {
       {PROJECTS.map((project, i) => {
         const stagger = i * 0.02;
         const labelOp = smoothstep((progress - (0.86 + stagger)) / 0.08);
-        const labelX = -1.8 + (i / 3) * 3.6;
+        const labelX = -2.4 + (i / 3) * 4.8;
 
         return labelOp > 0.01 ? (
           <Html
@@ -481,7 +481,6 @@ export function ParaglidingMachine({ progress }: { progress: number }) {
             style={{
               opacity: labelOp,
               pointerEvents: labelOp > 0.5 ? 'auto' : 'none',
-              whiteSpace: 'nowrap',
             }}
           >
             {project.url ? (

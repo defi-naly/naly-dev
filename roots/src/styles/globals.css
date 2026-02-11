@@ -501,6 +501,7 @@ body {
   cursor: pointer;
   padding: 4px 8px;
   white-space: nowrap;
+  max-width: 180px;
 }
 
 .portfolio-node-name {
@@ -517,6 +518,8 @@ body {
   font-size: 10px;
   font-weight: 300;
   color: var(--ink-light);
+  white-space: normal;
+  text-align: center;
 }
 
 span.portfolio-node-label {
