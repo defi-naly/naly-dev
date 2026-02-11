@@ -34,7 +34,7 @@ const summaryItems = [
   'Scarce assets outpace cash over time',
 ];
 
-const SHARE_URL = 'https://naly.dev/learn/game';
+const SHARE_URL = 'https://app.naly.dev/learn/game';
 const SHARE_TEXT = 'Just finished The Money Game - 8 chapters on how money really works. Worth the 20 minutes.';
 
 export default function EndScreen({ onRestart }: EndScreenProps) {

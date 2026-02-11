@@ -11,7 +11,7 @@ export const PORTFOLIO_NODES: PortfolioNode[] = [
   { id: 'tipz', name: 'TIPZ', label: 'Privacy-First Micro-Tipping', url: 'https://tipz.cash', type: 'work' },
   { id: 'beets', name: 'BEETS', label: 'DEX · LST · Validator', url: 'https://beets.fi', type: 'work' },
   { id: 'balancer', name: 'BALANCER', label: 'Custom AMM Infrastructure', url: 'https://balancer.fi', type: 'work' },
-  { id: 'terminal', name: 'TERMINAL', label: 'Interactive Dashboards', url: 'https://naly.dev', type: 'work' },
+  { id: 'terminal', name: 'TERMINAL', label: 'Interactive Dashboards', url: 'https://app.naly.dev', type: 'work' },
 
   // Channels — smaller, outer positions
   { id: 'defi_naly', name: '@defi_naly', label: 'DeFi analysis and takes', url: 'https://x.com/defi_naly', type: 'channel' },
