@@ -1,5 +1,5 @@
 import { useRef, useMemo } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 import * as THREE from 'three';
 import { createNoise2D, createNoise3D, fbm } from '../../utils/noise';
@@ -172,7 +172,7 @@ function createEnneperGeometry(targetRadius: number, segs = 32): THREE.EdgesGeom
 const PROJECTS: { id: string; name: string; label: string; url?: string }[] = [
   { id: 'beets', name: 'BEETS', label: 'DEX · LST · Validator', url: 'https://beets.fi' },
   { id: 'balancer', name: 'BALANCER', label: 'Custom AMM Infrastructure', url: 'https://balancer.fi' },
-  { id: 'tipz', name: 'TIPZ', label: 'Privacy-First Micro-Tipping' },
+  { id: 'tipz', name: 'TIPZ', label: 'Private Tipping' },
   { id: 'terminal', name: 'TERMINAL', label: 'Interactive Dashboards', url: 'https://app.naly.dev' },
 ];
 
@@ -183,6 +183,10 @@ export function ParaglidingMachine({ progress }: { progress: number }) {
   const cylinderRef = useRef<THREE.LineSegments>(null);
   const ballRef = useRef<THREE.Group>(null);
   const projectRefs = useRef<(THREE.Group | null)[]>([]);
+
+  // Scale horizontal spread so projects fit narrow viewports (split-screen)
+  const viewportWidth = useThree(state => state.viewport.width);
+  const xScale = Math.min(1, viewportWidth / 6.8);
 
   const noise2D = useMemo(() => createNoise2D(42), []);
   const noise3D = useMemo(() => createNoise3D(99), []);
@@ -362,7 +366,7 @@ export function ParaglidingMachine({ progress }: { progress: number }) {
 
     // Project wireframes: emerge from thermal center → orbit → settle
     const orbitCenterY = 2.4;
-    const orbitRadiusX = 1.4;
+    const orbitRadiusX = 1.4 * xScale;
     const orbitRadiusZ = 0.8;
     const baseSpeed = 0.6;
 
@@ -394,7 +398,7 @@ export function ParaglidingMachine({ progress }: { progress: number }) {
       const orbZ = Math.sin(angle) * orbitRadiusZ * radiusScale;
 
       // Settled positions: evenly spread across horizontal
-      const settledX = -2.4 + (i / 3) * 4.8; // [-2.4, -0.8, 0.8, 2.4]
+      const settledX = (-2.4 + (i / 3) * 4.8) * xScale;
       const settledY = orbitCenterY;
       const settledZ = 0;
 
@@ -470,7 +474,7 @@ export function ParaglidingMachine({ progress }: { progress: number }) {
       {PROJECTS.map((project, i) => {
         const stagger = i * 0.02;
         const labelOp = smoothstep((progress - (0.86 + stagger)) / 0.08);
-        const labelX = -2.4 + (i / 3) * 4.8;
+        const labelX = (-2.4 + (i / 3) * 4.8) * xScale;
 
         return labelOp > 0.01 ? (
           <Html
@@ -495,8 +499,10 @@ export function ParaglidingMachine({ progress }: { progress: number }) {
               </a>
             ) : (
               <span className="portfolio-node-label">
-                <span className="portfolio-node-name">{project.name}</span>
-                <span className="portfolio-node-desc">{project.label} · Coming Soon</span>
+                <span className="portfolio-node-name">
+                  {project.name} <span className="portfolio-coming-soon">Soon</span>
+                </span>
+                <span className="portfolio-node-desc">{project.label}</span>
               </span>
             )}
           </Html>

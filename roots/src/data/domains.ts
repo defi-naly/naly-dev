@@ -46,7 +46,9 @@ export const domains: Domain[] = [
     title: 'Natural Systems',
     subtitle: 'Thermal Formation',
     color: '#4a90d9',
-    tagline: 'Nature is the original systems engineer.',
-    projects: [],
+    tagline: 'Nature is the original systems engineer. I\'m building tools to read its patterns.',
+    projects: [
+      { name: 'PARAGUIDE', description: 'Flight planning tools for paraglider pilots', tag: 'Thermal & Route Analysis' },
+    ],
   },
 ];
