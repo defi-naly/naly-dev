@@ -238,7 +238,7 @@ body {
 .bloom-wordmark {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: 30vw;
+  font-size: 25vw;
   line-height: 0.85;
   letter-spacing: -0.02em;
   text-transform: uppercase;
@@ -355,7 +355,9 @@ body {
   text-transform: uppercase;
   margin-top: 0;
   margin-bottom: 0;
-  white-space: nowrap;
+  text-align: center;
+  max-width: 40rem;
+  margin-inline: auto;
 }
 
 /* ========================================
@@ -1405,6 +1407,17 @@ body {
   color: var(--border);
 }
 
+.foundation-icon {
+  color: var(--bloom-accent);
+  opacity: 0.6;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.foundation-detail:hover .foundation-icon {
+  opacity: 1;
+}
+
 .foundation-proof {
   font-family: var(--font-body);
   font-size: var(--text-sm);
@@ -1413,6 +1426,14 @@ body {
   padding-top: 1rem;
   border-top: 1px solid var(--border);
   margin-bottom: 0.5rem;
+}
+
+.foundation-proof-highlight {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1rem;
+  margin-top: 1rem;
 }
 
 .foundation-proof strong {

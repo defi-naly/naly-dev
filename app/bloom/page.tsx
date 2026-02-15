@@ -12,7 +12,7 @@ import PortfolioTimeline from './components/PortfolioTimeline';
 import JudgmentToggle from './components/JudgmentToggle';
 import { StaggerContainer, StaggerItem } from './components/StaggerContainer';
 import ContactForm from './components/ContactForm';
-import { ArrowRight, ArrowDown } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import ProcessFlow from './components/method/ProcessFlow';
 
 // Lazy load Three.js component
@@ -21,19 +21,6 @@ const WireframeMesh = dynamic(() => import('./components/WireframeMesh'), {
 });
 
 const portfolio = [
-  {
-    name: 'INSIDE LABS',
-    status: 'live' as const,
-    statusLabel: 'LATEST BUILD',
-    description:
-      'Complete website for a Swiss tourism tech company — built in a single day. Production-grade marketing site with 3D hero, multilingual support, interactive demos. AI-augmented content workflows they own and operate.',
-    stats: [
-      { value: '1 Day', label: 'Build Time' },
-      { value: '4', label: 'Pages' },
-    ],
-    tags: ['Distribution'],
-    link: 'https://insidelabs.tech',
-  },
   {
     name: 'TIPZ',
     status: 'live' as const,
@@ -44,7 +31,7 @@ const portfolio = [
       { value: '4', label: 'Chains' },
       { value: '5', label: 'Wallets' },
     ],
-    tags: ['Network Effects'],
+    tags: ['Trust'],
     milestones: [
       { year: '2024', event: 'Research & architecture design' },
       { year: '2025', event: 'Cross-chain payments via NEAR Intents' },
@@ -146,21 +133,8 @@ export default function BloomPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
             >
-              We build the foundations that networks are built on.
+              Foundations for networks worth building.
             </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              style={{ display: 'flex', gap: '1rem', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}
-            >
-              <a href="#work" className="bloom-hero-cta bloom-hero-cta-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}>
-                See the Work <ArrowDown size={14} strokeWidth={1.5} />
-              </a>
-              <a href="#contact" className="bloom-hero-cta" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}>
-                Start a Sprint <ArrowRight size={14} strokeWidth={1.5} />
-              </a>
-            </motion.div>
           </ScrollFade>
         </section>
 
@@ -170,6 +144,7 @@ export default function BloomPage() {
           <SectionDivider />
           <section id="thesis" className="bloom-section">
             <SectionHeader number="01" title="The Thesis" />
+
             <div className="about-grid">
               <MotionReveal>
                 <div className="about-text">
@@ -187,56 +162,52 @@ export default function BloomPage() {
                       Users who bring users. Trust that compounds. Distribution you own. These survive when software becomes free.
                     </p>
                     <p>
-                      We build the foundations that networks are built on — in days, not months.
+                      This is why we&apos;re selective about who we partner with.
                     </p>
                   </div>
                 </div>
               </MotionReveal>
               <div className="about-stats">
-                <StatBlock value={100} suffix="%" label="Ship Rate" delay={0} />
+                <StatBlock value={100} suffix="%" label="Shipped" delay={0} />
                 <StatBlock value={5} label="Products Live" delay={200} />
                 <StatBlock value={0} label="Dead Products" delay={400} />
               </div>
             </div>
           </section>
 
-          {/* ─── 02 THE PROOF ─── */}
-          <SectionDivider />
-          <section id="proof" className="bloom-section">
-            <SectionHeader number="02" title="The Proof" />
-            <JudgmentToggle />
-            <MotionReveal>
-              <div className="mid-cta">
-                <p className="mid-cta-text">Not sure which foundation you&apos;re missing?</p>
-                <a href="/bloom/diagnostic" className="bloom-hero-cta" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}>
-                  Take the Diagnostic <ArrowRight size={14} strokeWidth={1.5} />
-                </a>
-              </div>
-            </MotionReveal>
-          </section>
-
-          {/* ─── 03 THE WORK ─── */}
+          {/* ─── 02 THE WORK ─── */}
           <SectionDivider />
           <section id="work" className="bloom-section">
-            <SectionHeader number="03" title="The Work" />
+            <SectionHeader number="02" title="The Work" />
+
             <div className="build-intro">
               <MotionReveal>
                 <h2 className="judgment-headline">
                   Anyone can build now. The hard part is knowing what&apos;s worth building.
                 </h2>
+                <p className="section-subheading">These are the ones we chose.</p>
               </MotionReveal>
             </div>
             <PortfolioTimeline items={portfolio} />
+          </section>
+
+          {/* ─── 03 THE PROOF ─── */}
+          <SectionDivider />
+          <section id="proof" className="bloom-section">
+            <SectionHeader number="03" title="The Proof" />
+
+            <JudgmentToggle />
           </section>
 
           {/* ─── 04 FOUNDATIONS ─── */}
           <SectionDivider />
           <section id="foundations" className="bloom-section">
             <SectionHeader number="04" title="Foundations" />
+
             <MotionReveal>
               <h2 className="judgment-headline">Three foundations. One goal.</h2>
-              <p className="section-subheading">
-                The network is the moat. We build the foundations that get you there.
+              <p className="section-subheading" style={{ marginBottom: '2rem' }}>
+                Distribution, trust, and judgment. The three forces that survive when software becomes free.
               </p>
             </MotionReveal>
             <StaggerContainer className="edge-grid edge-grid-3">
@@ -246,10 +217,9 @@ export default function BloomPage() {
                   whileHover={{ y: -6, scale: 1.02 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 >
-                  <span className="edge-number">01</span>
                   <h4>Distribution</h4>
                   <p className="edge-tagline">How the network finds you.</p>
-                  <p>Your website is your distribution. We build sites that convert — in days, not months. AI-augmented so you own and operate without us.</p>
+                  <p>Your website is your distribution. Sites that convert, built to be owned and operated by you — not dependent on us.</p>
                   <div className="edge-proof">Proof: Inside Labs — complete site, 1 day</div>
                   <div className="edge-sprint">Sprint: 1 week</div>
                 </motion.div>
@@ -260,10 +230,9 @@ export default function BloomPage() {
                   whileHover={{ y: -6, scale: 1.02 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 >
-                  <span className="edge-number">02</span>
                   <h4>Trust</h4>
                   <p className="edge-tagline">Why the network stays.</p>
-                  <p>Trust is the moat your competitors can&apos;t copy. We build the systems that earn it — at protocol level.</p>
+                  <p>Trust is the moat your competitors can&apos;t copy. Earned through rigor. Proven at protocol level. It compounds — every delivery builds on the last.</p>
                   <div className="edge-proof">Proof: Balancer v3 — launched with Aave</div>
                   <div className="edge-sprint">Sprint: 1–2 weeks</div>
                 </motion.div>
@@ -274,7 +243,6 @@ export default function BloomPage() {
                   whileHover={{ y: -6, scale: 1.02 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 >
-                  <span className="edge-number">03</span>
                   <h4>Judgment</h4>
                   <p className="edge-tagline">What network to build.</p>
                   <p>AI builds anything. Knowing what to build is the hard part. We encode judgment into your operations.</p>
@@ -283,6 +251,14 @@ export default function BloomPage() {
                 </motion.div>
               </StaggerItem>
             </StaggerContainer>
+            <MotionReveal>
+              <div className="mid-cta">
+                <p className="mid-cta-text">Not sure which foundation you&apos;re missing?</p>
+                <a href="/bloom/diagnostic" className="bloom-hero-cta" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}>
+                  Take the Diagnostic <ArrowRight size={14} strokeWidth={1.5} />
+                </a>
+              </div>
+            </MotionReveal>
           </section>
 
           {/* ─── 05 HOW WE WORK ─── */}
@@ -290,13 +266,14 @@ export default function BloomPage() {
           <section id="how-we-work" className="bloom-section partners-section">
             <SectionHeader number="05" title="How We Work" />
 
+
             <div className="partners-intro">
               <MotionReveal>
                 <h2 className="partners-headline">
                   Sprints, not <span className="highlight">engagements</span>.
                 </h2>
                 <p className="section-subheading">
-                  Fixed scope. Fixed price. Working foundation — not a roadmap. AI-augmented execution means we ship what traditional teams quote in months.
+                  Fixed scope. Fixed price. Shipped foundation — not a roadmap. You own it. You operate it.
                 </p>
               </MotionReveal>
             </div>
@@ -307,7 +284,7 @@ export default function BloomPage() {
               { id: 'build', name: 'Build', duration: '1\u20134 weeks',
                 description: 'AI-augmented execution at every step. You get a working foundation — not a deck, not a roadmap.' },
               { id: 'ship', name: 'Ship & Own', duration: 'Delivered',
-                description: 'You own it outright. The foundation is laid. Now build the network.' },
+                description: 'You own it outright. AI workflows included. The foundation is laid. Now build the network on top.' },
             ]} />
 
             <MotionReveal>
@@ -328,7 +305,7 @@ export default function BloomPage() {
           <section id="contact" className="cta-section">
             <MotionReveal>
               <div className="cta-content">
-                <h2>Ready to build the <span className="highlight">foundation</span>?</h2>
+                <h2>Ready to ship the <span className="highlight">foundation</span>?</h2>
                 <p>
                   Tell us what&apos;s missing. We&apos;ll tell you honestly if a sprint can get you there.
                 </p>
@@ -344,7 +321,7 @@ export default function BloomPage() {
           <div className="footer-grid">
             <div className="footer-brand">
               <h2>BLOOM</h2>
-              <p>Network foundations. AI-native. Operator-built.</p>
+              <p>Network foundations. AI-native. Selective partners.</p>
             </div>
             <div className="footer-col">
               <h4>Studio</h4>

@@ -3,13 +3,13 @@
 import { motion } from 'motion/react';
 import CustomCursor from '../components/CustomCursor';
 import MotionReveal from '../components/MotionReveal';
-import ScrollFade from '../components/ScrollFade';
-import SectionHeader from '../components/SectionHeader';
+import StatBlock from '../components/StatBlock';
+
 import SectionDivider from '../components/SectionDivider';
-import { StaggerContainer, StaggerItem } from '../components/StaggerContainer';
+
 import ContactForm from '../components/ContactForm';
 import ProcessFlow from '../components/method/ProcessFlow';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Globe, Shield, Compass } from 'lucide-react';
 
 export default function FoundationsPage() {
   return (
@@ -35,92 +35,44 @@ export default function FoundationsPage() {
               Back
             </a>
             <a href="/bloom/diagnostic" className="bloom-nav-link">Diagnostic</a>
-            <a href="/bloom#contact" className="bloom-nav-cta">Start a Sprint</a>
+            <a href="#contact" className="bloom-nav-cta">Start a Sprint</a>
           </div>
         </nav>
 
-        {/* ─── HERO ─── */}
-        <section className="bloom-hero" style={{ minHeight: '70vh' }}>
-          <ScrollFade>
-            <motion.h1
-              className="bloom-wordmark"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            >
-              FOUNDATIONS
-            </motion.h1>
-            <motion.p
-              className="bloom-tagline"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            >
-              THE NETWORK IS THE MOAT.
-            </motion.p>
-            <motion.p
-              className="bloom-tagline-sub"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              style={{ maxWidth: '600px', margin: '0 auto 2rem', lineHeight: '1.7' }}
-            >
-              AI will automate software. It won&apos;t automate people or capital. The only durable asset is a network — users, trust, distribution — that compounds faster than competitors can clone.
-            </motion.p>
-            <motion.p
-              className="bloom-tagline-sub"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              style={{ color: 'var(--bright)' }}
-            >
-              We build the foundations that get you there.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.1, ease: [0.16, 1, 0.3, 1] }}
-              style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginTop: '1rem' }}
-            >
-              <a href="/bloom#contact" className="bloom-hero-cta" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}>
-                Start a Sprint <ArrowRight size={14} strokeWidth={1.5} />
-              </a>
-            </motion.div>
-          </ScrollFade>
-        </section>
+        {/* ─── HERO (thesis folded in) ─── */}
+        <div className="diag-container" style={{ minHeight: 'auto', paddingBottom: 0 }}>
+          <motion.div
+            className="diag-header"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <h1 className="diag-title">What survives when software is free</h1>
+            <p className="diag-subtitle">
+              AI will commoditize every product. The companies that survive won&apos;t be the ones who built the best software — they&apos;ll be the ones who built the best networks. We build the foundations that networks are built on.
+            </p>
+          </motion.div>
+        </div>
 
         <div className="bloom-container">
 
-          {/* ─── 01 THE THESIS ─── */}
+          {/* ─── TRUST SIGNALS ─── */}
           <SectionDivider />
           <section className="bloom-section">
-            <SectionHeader number="01" title="The Thesis" />
-            <MotionReveal>
-              <div className="about-text">
-                <h2 className="judgment-headline">Software is about to become free.</h2>
-                <div className="thesis-body">
-                  <p>
-                    When anyone can build anything, the product isn&apos;t the moat. The network is. Users who bring users. Trust that compounds. Distribution you own.
-                  </p>
-                  <p>
-                    The companies that survive the AI transition won&apos;t be the ones who built the best software. They&apos;ll be the ones who built the best networks.
-                  </p>
-                  <p>
-                    We build the foundations that networks are built on.
-                  </p>
-                </div>
-              </div>
-            </MotionReveal>
+            <div className="about-stats">
+              <StatBlock prefix="$" value={120} suffix="B" label="Protocol Volume" delay={0} />
+              <StatBlock prefix=">" value={240} suffix="M" label="Staked Liquidity" delay={200} />
+              <StatBlock value={0} label="Platform Dependencies" delay={400} />
+            </div>
           </section>
 
-          {/* ─── 02 THREE FOUNDATIONS ─── */}
+          {/* ─── THREE FOUNDATIONS ─── */}
           <SectionDivider />
           <section className="bloom-section">
-            <SectionHeader number="02" title="Three Foundations" />
             <MotionReveal>
               <h2 className="judgment-headline">Three foundations. One goal.</h2>
               <p className="section-subheading">
-                The network is the moat. Distribution gets you there. Trust makes it stick. Judgment tells you which one to build.
+                Distribution gets you there. Trust makes it stick. Judgment tells you what to build.
               </p>
             </MotionReveal>
 
@@ -128,7 +80,7 @@ export default function FoundationsPage() {
             <MotionReveal>
               <div id="distribution" className="foundation-detail">
                 <div className="foundation-detail-header">
-                  <span className="edge-number">01</span>
+                  <Globe size={20} strokeWidth={1.5} className="foundation-icon" />
                   <h3>Distribution</h3>
                   <p className="edge-tagline">How the network finds you.</p>
                 </div>
@@ -145,7 +97,7 @@ export default function FoundationsPage() {
                       <li>SEO architecture with automated monitoring</li>
                     </ul>
                   </div>
-                  <div className="foundation-proof">
+                  <div className="foundation-proof foundation-proof-highlight">
                     <strong>Proof:</strong> Inside Labs — complete marketing site, 1 day. AI-augmented content workflows they own and operate.
                   </div>
                   <div className="foundation-sprint">Sprint: 1 week, fixed price</div>
@@ -157,7 +109,7 @@ export default function FoundationsPage() {
             <MotionReveal>
               <div id="trust" className="foundation-detail">
                 <div className="foundation-detail-header">
-                  <span className="edge-number">02</span>
+                  <Shield size={20} strokeWidth={1.5} className="foundation-icon" />
                   <h3>Trust</h3>
                   <p className="edge-tagline">Why the network stays.</p>
                 </div>
@@ -174,7 +126,7 @@ export default function FoundationsPage() {
                       <li>Social proof systems that scale</li>
                     </ul>
                   </div>
-                  <div className="foundation-proof">
+                  <div className="foundation-proof foundation-proof-highlight">
                     <strong>Proof:</strong> Balancer v3 — launched in direct partnership with Aave, DeFi&apos;s largest liquidity market. Trust earned at protocol level.
                   </div>
                   <div className="foundation-sprint">Sprint: 1–2 weeks, fixed price</div>
@@ -186,7 +138,7 @@ export default function FoundationsPage() {
             <MotionReveal>
               <div id="judgment" className="foundation-detail">
                 <div className="foundation-detail-header">
-                  <span className="edge-number">03</span>
+                  <Compass size={20} strokeWidth={1.5} className="foundation-icon" />
                   <h3>Judgment</h3>
                   <p className="edge-tagline">What network to build.</p>
                 </div>
@@ -203,19 +155,28 @@ export default function FoundationsPage() {
                       <li>Positioning docs that update as market shifts</li>
                     </ul>
                   </div>
-                  <div className="foundation-proof">
+                  <div className="foundation-proof foundation-proof-highlight">
                     <strong>Proof:</strong> Stader abandoned Fantom. 6M FTM in a dead contract. We acquired it, rebranded to stS, and built it into Sonic&apos;s largest LST — 290M S at peak. That&apos;s judgment.
                   </div>
                   <div className="foundation-sprint">Sprint: 1 week, fixed price</div>
                 </div>
               </div>
             </MotionReveal>
+
+            {/* Mid-page CTA */}
+            <MotionReveal>
+              <div className="mid-cta">
+                <p className="mid-cta-text">Know which foundation you need?</p>
+                <a href="#contact" className="bloom-hero-cta" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}>
+                  Start a Sprint
+                </a>
+              </div>
+            </MotionReveal>
           </section>
 
-          {/* ─── 03 THE SPRINT MODEL ─── */}
+          {/* ─── THE SPRINT MODEL ─── */}
           <SectionDivider />
           <section className="bloom-section partners-section">
-            <SectionHeader number="03" title="The Sprint Model" />
             <MotionReveal>
               <h2 className="judgment-headline">Fixed scope. Fixed price. Foundation shipped.</h2>
               <p className="section-subheading">
@@ -238,12 +199,12 @@ export default function FoundationsPage() {
           <section id="contact" className="cta-section">
             <MotionReveal>
               <div className="cta-content">
-                <h2>The network is the moat. We build the <span className="highlight">foundations</span>.</h2>
+                <h2>One sprint. One foundation. <span className="highlight">You own it</span>.</h2>
                 <p>
-                  Tell us what&apos;s missing. We&apos;ll tell you if a sprint can get you there.
+                  Tell us which foundation is missing. We&apos;ll tell you if a sprint can get you there.
                 </p>
                 <ContactForm />
-                <p className="cta-subtext">No decks. No proposals. Just the problem and the deliverable.</p>
+                <p className="cta-subtext">We respond within 48 hours. No decks. No proposals. Just the problem and the deliverable.</p>
               </div>
             </MotionReveal>
           </section>
