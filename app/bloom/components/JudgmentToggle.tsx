@@ -15,7 +15,7 @@ interface CardData {
 const cards: CardData[] = [
   {
     offTitle: 'Gave every team AI tools',
-    offResult: 'Faster output. Same bad decisions. Now with confidence.',
+    offResult: 'Faster output. Same bad decisions. More confident about them.',
     onTitle: 'Cut to 4 producers. Gave them everything.',
     onResult: 'Small team. Full leverage. No committees.',
     stat: '10x output/person',

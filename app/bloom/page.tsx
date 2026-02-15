@@ -103,7 +103,7 @@ export default function BloomPage() {
           <div className="bloom-nav-links">
             <a href="/bloom/method" className="bloom-nav-link">Method</a>
             <a href="/bloom/diagnostic" className="bloom-nav-link">Diagnostic</a>
-            <a href="#contact" className="bloom-nav-cta">Contact</a>
+            <a href="#contact" className="bloom-nav-cta">Start a Sprint</a>
           </div>
         </nav>
 
@@ -133,8 +133,8 @@ export default function BloomPage() {
               transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
               style={{ display: 'flex', gap: '1rem', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}
             >
-              <a href="/bloom/diagnostic" className="bloom-hero-cta" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}>
-                Take the Diagnostic <ArrowRight size={14} strokeWidth={1.5} />
+              <a href="#contact" className="bloom-hero-cta" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}>
+                Start a Sprint <ArrowRight size={14} strokeWidth={1.5} />
               </a>
               <a href="#proof" className="bloom-hero-cta bloom-hero-cta-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}>
                 See the Proof <ArrowDown size={14} strokeWidth={1.5} />
@@ -157,7 +157,7 @@ export default function BloomPage() {
                   </h2>
                   <div className="thesis-body">
                     <p>
-                      AI will automate software. The gap between Human+AI and pure AI is shrinking — 12 to 24 months, maybe less. Most companies are scrambling to add AI tools. We&apos;re asking a different question.
+                      AI will automate software. The gap between Human+AI and pure AI is shrinking — 12 to 24 months, maybe less. Most companies are scrambling to add AI tools. We&apos;re asking a different question: what&apos;s still valuable when AI builds everything?
                     </p>
                     <p>
                       What assets can you own that still matter when AI builds everything? Network effects. Distribution. Judgment. Trust. The answer isn&apos;t building faster — it&apos;s building things that compound.
@@ -171,7 +171,7 @@ export default function BloomPage() {
               <div className="about-stats">
                 <StatBlock value={100} suffix="%" label="Ship Rate" delay={0} />
                 <StatBlock value={5} label="Products Shipped" delay={200} />
-                <StatBlock value={10} suffix="x" label="Output per Person" delay={400} />
+                <StatBlock value={0} label="Dead Products" delay={400} />
               </div>
             </div>
           </section>
@@ -184,9 +184,9 @@ export default function BloomPage() {
             {/* Mid-page CTA — captures desire at peak after toggle interaction */}
             <MotionReveal>
               <div className="mid-cta">
-                <p className="mid-cta-text">Think you know where your system breaks?</p>
+                <p className="mid-cta-text">Not sure which asset you&apos;re missing? Take the 5-minute diagnostic.</p>
                 <a href="/bloom/diagnostic" className="bloom-hero-cta" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}>
-                  Score Your Organization <ArrowRight size={14} strokeWidth={1.5} />
+                  Take the Diagnostic <ArrowRight size={14} strokeWidth={1.5} />
                 </a>
               </div>
             </MotionReveal>
@@ -199,7 +199,7 @@ export default function BloomPage() {
             <div className="build-intro">
               <MotionReveal>
                 <h2 className="judgment-headline">
-                  Anyone can build a product now — the hard part is building one that works.
+                  Here&apos;s what judgment looks like in production.
                 </h2>
               </MotionReveal>
             </div>
@@ -319,12 +319,12 @@ export default function BloomPage() {
           <section id="contact" className="cta-section">
             <MotionReveal>
               <div className="cta-content">
-                <h2>Ready to <span className="highlight">build something durable</span>?</h2>
+                <h2>Tell us what&apos;s missing. We&apos;ll tell you if a sprint can fix it.</h2>
                 <p>
-                  Tell us what you&apos;re building. We&apos;ll tell you honestly whether we can help.
+                  One conversation. One deliverable. No fluff.
                 </p>
                 <ContactForm />
-                <p className="cta-subtext">No decks. No proposals. Just the problem and the people.</p>
+                <p className="cta-subtext">This isn&apos;t for companies who want a roadmap and a 90-day engagement. It&apos;s for teams who want a working asset, fast.</p>
               </div>
             </MotionReveal>
           </section>

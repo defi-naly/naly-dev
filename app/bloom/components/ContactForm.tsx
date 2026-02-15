@@ -109,7 +109,7 @@ export default function ContactForm() {
         disabled={formState === 'submitting'}
         style={formState === 'submitting' ? { opacity: 0.6 } : undefined}
       >
-        {formState === 'submitting' ? 'Sending...' : 'Book an Assessment'}
+        {formState === 'submitting' ? 'Sending...' : 'Start a Sprint'}
       </button>
     </form>
   );
