@@ -1,0 +1,481 @@
+/* ============================================================
+   BLOOM Method Page — Dedicated Styles
+   Uses same CSS variables from bloom.css
+   ============================================================ */
+
+/* ─── METHOD PAGE OVERRIDES ─── */
+
+/* More breathing room between sections */
+.bloom-main .bloom-section {
+  /* Override only on method page via specificity */
+}
+
+/* ─── METHOD HERO ─── */
+
+.method-hero {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 6rem 2rem 4rem;
+  position: relative;
+  --section-padding: clamp(10rem, 18vh, 20rem);
+}
+
+.method-hero-label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.method-hero-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: var(--text-3xl);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.0;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.method-hero-subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--muted);
+  max-width: 600px;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── PROBLEM SECTION ─── */
+
+.method-problem {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.method-problem-headline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-2xl);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.method-problem-headline .highlight {
+  color: var(--void);
+  background: var(--bloom-accent);
+  padding: 0 0.25rem;
+}
+
+.method-problem-subline {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.method-problem-body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--muted);
+  line-height: 1.9;
+  text-align: center;
+}
+
+.method-problem-body p + p {
+  margin-top: 1.5rem;
+}
+
+/* ─── PILLAR GRID ─── */
+
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.pillar-card {
+  padding: 1.75rem;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+}
+
+.pillar-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--bloom-accent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.pillar-card:hover {
+  border-color: var(--border-hover);
+  background: rgba(255, 255, 255, 0.03);
+  transform: translateY(-2px);
+}
+
+.pillar-card.active {
+  border-color: var(--bloom-accent);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.pillar-card.active::before {
+  opacity: 1;
+}
+
+.pillar-card-icon {
+  color: var(--muted);
+  margin-bottom: 1rem;
+  opacity: 0.6;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.pillar-card.active .pillar-card-icon,
+.pillar-card:hover .pillar-card-icon {
+  opacity: 1;
+  color: var(--bloom-accent);
+}
+
+.pillar-card-number {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--bloom-accent);
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.pillar-card-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.pillar-card-subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+
+.pillar-card-desc {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ─── PILLAR DETAIL PANEL ─── */
+
+.pillar-detail {
+  max-width: var(--container-max);
+  margin: 2rem auto 0;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+  overflow: hidden;
+}
+
+.pillar-detail-content {
+  padding: 2rem;
+}
+
+/* 2-column layout for expanded pillar detail */
+.pillar-detail-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+}
+
+.pillar-detail-col-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--bloom-accent);
+  margin-bottom: 1.25rem;
+}
+
+/* Divider between system map and AI intervention */
+.pillar-detail-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.pillar-detail-divider::before,
+.pillar-detail-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.pillar-detail-section-label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--bloom-accent);
+  white-space: nowrap;
+}
+
+/* System Map */
+.system-elements {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.system-element {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  transition: border-color 0.2s ease;
+}
+
+.system-element:hover {
+  border-color: var(--border-hover);
+}
+
+.system-element-type {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.5rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.system-element-type.stock {
+  color: var(--bloom-accent);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.system-element-type.flow {
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.system-element-type.reinforcing_loop {
+  color: var(--success);
+  background: rgba(74, 222, 128, 0.08);
+}
+
+.system-element-type.balancing_loop {
+  color: var(--warning);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.system-element-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.system-element-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  margin-bottom: 0.25rem;
+}
+
+.system-element-desc {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* Leverage Points */
+.leverage-points-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.leverage-point-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border);
+  transition: border-color 0.2s ease;
+}
+
+.leverage-point-item:hover {
+  border-color: var(--border-hover);
+}
+
+.leverage-point-level {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.5rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+  height: fit-content;
+}
+
+.leverage-point-level.parameters { color: var(--muted); background: rgba(255, 255, 255, 0.04); }
+.leverage-point-level.feedback { color: var(--bloom-accent); background: rgba(255, 255, 255, 0.06); }
+.leverage-point-level.structure { color: var(--success); background: rgba(74, 222, 128, 0.08); }
+.leverage-point-level.paradigm { color: var(--warning); background: rgba(245, 158, 11, 0.08); }
+
+.leverage-point-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.leverage-point-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  margin-bottom: 0.25rem;
+}
+
+.leverage-point-desc {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.leverage-point-intervention {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--bloom-accent);
+  line-height: 1.5;
+}
+
+.leverage-point-intervention::before {
+  content: '\2192 ';
+}
+
+/* ─── METHOD CTA ─── */
+
+.method-cta {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.method-cta h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-2xl);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.method-cta h2 .highlight {
+  color: var(--void);
+  background: var(--bloom-accent);
+  padding: 0 0.25rem;
+}
+
+.method-cta p {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+/* CTA glow */
+.method-cta-section {
+  position: relative;
+}
+
+.method-cta-section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  height: 40vh;
+  background: radial-gradient(
+    ellipse 100% 80% at center,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.02) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.method-cta-section .method-cta {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── SECTION SPACING OVERRIDE ─── */
+
+/* Method page gets more breathing room */
+.bloom-main .bloom-section {
+  padding: clamp(10rem, 18vh, 20rem) 2rem;
+}
+
+/* ─── RESPONSIVE ─── */
+
+@media (max-width: 768px) {
+  .pillar-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pillar-detail-2col {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .system-element {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .leverage-point-item {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .method-hero {
+    min-height: 60vh;
+    padding-top: 5rem;
+  }
+}

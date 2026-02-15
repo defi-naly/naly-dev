@@ -1,0 +1,813 @@
+/* ========================================
+   BLOOM DIAGNOSTIC — Design System
+   ======================================== */
+
+/* ─── CONTAINER ─── */
+
+.diag-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 8rem 2rem 4rem;
+  min-height: 100vh;
+}
+
+/* ─── HEADER ─── */
+
+.diag-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.diag-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: var(--text-3xl);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.diag-subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.diag-time {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 1.5rem;
+  opacity: 0.6;
+}
+
+/* ─── STEP TITLES ─── */
+
+.diag-step-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-2xl);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.75rem;
+}
+
+.diag-step-subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--bloom-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.diag-step-desc {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 700px;
+}
+
+/* ─── MATURITY SELECT ─── */
+
+.diag-maturity-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.diag-maturity-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.diag-maturity-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  padding: 2rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  appearance: none;
+}
+
+.diag-maturity-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.diag-maturity-headcount {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--bloom-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+
+.diag-maturity-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.25rem;
+}
+
+.diag-maturity-subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+
+.diag-maturity-desc {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .diag-maturity-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── PROGRESS BAR ─── */
+
+.diag-progress {
+  margin-bottom: 2rem;
+}
+
+.diag-progress-label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.diag-progress-bar {
+  height: 2px;
+  background: var(--border);
+  width: 100%;
+  position: relative;
+}
+
+.diag-progress-fill {
+  height: 100%;
+  background: var(--bloom-accent);
+  transition: width 0.5s ease;
+}
+
+/* ─── AUDIT STEP ─── */
+
+.diag-audit-header {
+  margin-bottom: 3rem;
+}
+
+.diag-dimensions {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.diag-dimension {
+  border: 1px solid var(--border);
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.diag-dimension-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.diag-dimension-desc {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* ─── SCORE SELECTOR ─── */
+
+.score-selector {
+  margin-top: 0.5rem;
+}
+
+.score-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.score-btn {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  appearance: none;
+}
+
+.score-btn:hover,
+.score-btn.hovered {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--bright);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.score-btn.active {
+  border-color: var(--bloom-accent);
+  color: var(--void);
+  background: var(--bloom-accent);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.2);
+}
+
+.score-rubric {
+  min-height: 2.5rem;
+}
+
+.score-rubric-text {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--bright);
+  line-height: 1.6;
+}
+
+.score-rubric-hint {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  opacity: 0.5;
+}
+
+/* ─── NAVIGATION BUTTONS ─── */
+
+.diag-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.diag-nav-btn {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  appearance: none;
+}
+
+.diag-nav-back {
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--border);
+  padding: 0.75rem 2rem;
+}
+
+.diag-nav-back:hover {
+  color: var(--bright);
+  border-color: var(--muted);
+}
+
+.diag-nav-next {
+  color: var(--void);
+  background: var(--bloom-accent);
+  border: none;
+  padding: 0.75rem 2.5rem;
+}
+
+.diag-nav-next:hover {
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.diag-nav-next.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ─── RESULTS ─── */
+
+.diag-results {
+  padding-bottom: 4rem;
+}
+
+/* Grade Hero */
+.diag-grade-hero {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding: 3rem 0;
+}
+
+.diag-grade-circle {
+  width: 120px;
+  height: 120px;
+  border: 2px solid var(--bloom-accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 2rem;
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+}
+
+.diag-grade-letter {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 3.5rem;
+  color: var(--bloom-accent);
+}
+
+.diag-grade-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.diag-grade-score {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--muted);
+  margin-bottom: 0.25rem;
+}
+
+.diag-grade-maturity {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+}
+
+/* Section Titles */
+.diag-section {
+  margin-bottom: 3rem;
+}
+
+.diag-section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.diag-section-desc {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
+/* Pillar Scores */
+.diag-pillar-scores {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.diag-pillar-score-card {
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.diag-pillar-score-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.diag-pillar-score-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.diag-pillar-score-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--bloom-accent);
+}
+
+.diag-pillar-score-bar {
+  height: 4px;
+  background: var(--border);
+  margin-bottom: 1rem;
+}
+
+.diag-pillar-score-fill {
+  height: 100%;
+  background: var(--bloom-accent);
+}
+
+.diag-pillar-dimensions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.diag-dim-row {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+}
+
+.diag-dim-name {
+  color: var(--muted);
+}
+
+.diag-dim-score {
+  color: var(--bright);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .diag-pillar-scores {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Archetypes */
+.diag-archetypes {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.diag-archetype-card {
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.diag-archetype-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.diag-archetype-pillar {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--bloom-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.diag-archetype-confidence {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid;
+}
+
+.diag-archetype-confidence.high {
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.diag-archetype-confidence.medium {
+  color: var(--warning);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.diag-archetype-confidence.low {
+  color: var(--muted);
+  border-color: var(--border);
+}
+
+.diag-archetype-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.diag-archetype-pattern {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.diag-archetype-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.diag-archetype-label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 0.375rem;
+}
+
+.diag-archetype-trap .diag-archetype-label {
+  color: #ef4444;
+}
+
+.diag-archetype-response .diag-archetype-label {
+  color: var(--success);
+}
+
+.diag-archetype-trap p,
+.diag-archetype-response p {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .diag-archetype-detail {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Weakest Asset Card */
+.diag-weakest-card {
+  border: 1px solid var(--bloom-accent);
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.diag-weakest-text {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.diag-weakest-text strong {
+  color: var(--bloom-accent);
+  font-weight: 700;
+}
+
+.diag-sprint-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--void);
+  background: var(--bloom-accent);
+  padding: 0.75rem 2rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.diag-sprint-cta:hover {
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.diag-pillar-score-card.weakest {
+  border-color: var(--bloom-accent);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+/* Email Gate */
+.diag-email-gate {
+  text-align: center;
+  padding: 2rem;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.diag-email-gate-text {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+.diag-email-gate-form {
+  display: flex;
+  gap: 1rem;
+  max-width: 400px;
+  margin: 0 auto 1rem;
+}
+
+.diag-email-gate-form .contact-input {
+  flex: 1;
+}
+
+.diag-email-gate-form .cta-button {
+  flex-shrink: 0;
+  padding: 0.75rem 1.5rem;
+  font-size: var(--text-xs);
+}
+
+.diag-skip-gate {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  appearance: none;
+}
+
+.diag-skip-gate:hover {
+  opacity: 1;
+}
+
+/* Recommendations */
+.diag-recommendations {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.diag-rec-card {
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 0.3s ease;
+}
+
+.diag-rec-card.blurred {
+  filter: blur(4px);
+  pointer-events: none;
+  user-select: none;
+}
+
+.diag-rec-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.diag-rec-pillar {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--bloom-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.diag-rec-level {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid;
+}
+
+.diag-rec-level.level-paradigm {
+  color: var(--warning);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.diag-rec-level.level-structure {
+  color: var(--success);
+  border-color: rgba(74, 222, 128, 0.3);
+}
+
+.diag-rec-level.level-feedback {
+  color: var(--bloom-accent);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.diag-rec-level.level-parameters {
+  color: var(--muted);
+  border-color: var(--border);
+}
+
+.diag-rec-intervention {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-base);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.diag-rec-reason {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Bottom CTAs */
+.diag-bottom-ctas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.diag-restart {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  appearance: none;
+}
+
+.diag-restart:hover {
+  opacity: 1;
+}
+
+@media (max-width: 640px) {
+  .diag-container {
+    padding-top: 6rem;
+  }
+
+  .diag-email-gate-form {
+    flex-direction: column;
+  }
+
+  .diag-bottom-ctas {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .score-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}
