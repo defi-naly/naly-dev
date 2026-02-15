@@ -136,8 +136,8 @@ export default function BloomPage() {
               <a href="#contact" className="bloom-hero-cta" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}>
                 Start a Sprint <ArrowRight size={14} strokeWidth={1.5} />
               </a>
-              <a href="#proof" className="bloom-hero-cta bloom-hero-cta-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}>
-                See the Proof <ArrowDown size={14} strokeWidth={1.5} />
+              <a href="#what-we-build" className="bloom-hero-cta bloom-hero-cta-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}>
+                See What We Build <ArrowDown size={14} strokeWidth={1.5} />
               </a>
             </motion.div>
           </ScrollFade>
@@ -160,13 +160,10 @@ export default function BloomPage() {
                       AI will automate software. The gap between Human+AI and pure AI is shrinking — 12 to 24 months, maybe less. Most companies are scrambling to add AI tools. We&apos;re asking a different question: what&apos;s still valuable when AI builds everything?
                     </p>
                     <p>
-                      What assets can you own that still matter when AI builds everything? Network effects. Distribution. Judgment. Trust. The answer isn&apos;t building faster — it&apos;s building things that compound.
+                      Network effects. Distribution. Judgment. Trust. The answer isn&apos;t building faster — it&apos;s building things that compound. We convert the current advantage into assets that last.
                     </p>
                   </div>
                 </div>
-              </MotionReveal>
-              <MotionReveal>
-                <p className="section-subheading">We convert the current advantage into assets that last.</p>
               </MotionReveal>
               <div className="about-stats">
                 <StatBlock value={100} suffix="%" label="Ship Rate" delay={0} />
@@ -176,12 +173,58 @@ export default function BloomPage() {
             </div>
           </section>
 
-          {/* ─── 02 THE PROOF ─── */}
+          {/* ─── 02 WHAT WE BUILD ─── */}
           <SectionDivider />
-          <section id="proof" className="bloom-section">
-            <SectionHeader number="02" title="The Proof" />
-            <JudgmentToggle />
-            {/* Mid-page CTA — captures desire at peak after toggle interaction */}
+          <section id="what-we-build" className="bloom-section">
+            <SectionHeader number="02" title="What We Build" />
+            <h2 className="judgment-headline">Four assets that survive when AI commoditizes everything else.</h2>
+            <StaggerContainer className="edge-grid">
+              <StaggerItem>
+                <motion.div
+                  className="edge-item"
+                  whileHover={{ y: -6, scale: 1.02 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                >
+                  <span className="edge-number">01</span>
+                  <h4>Distribution</h4>
+                  <p>Channels, content systems, and conversion infrastructure that compound reach over time. Not ads — assets. The difference is whether it still works when you stop paying.</p>
+                </motion.div>
+              </StaggerItem>
+              <StaggerItem>
+                <motion.div
+                  className="edge-item"
+                  whileHover={{ y: -6, scale: 1.02 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                >
+                  <span className="edge-number">02</span>
+                  <h4>Trust</h4>
+                  <p>Brand clarity, social proof, and reputation systems that make strangers willing to buy. AI can generate content — it can&apos;t generate credibility.</p>
+                </motion.div>
+              </StaggerItem>
+              <StaggerItem>
+                <motion.div
+                  className="edge-item"
+                  whileHover={{ y: -6, scale: 1.02 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                >
+                  <span className="edge-number">03</span>
+                  <h4>Network Effects</h4>
+                  <p>Products that get better as more people use them. Retention loops, switching costs, user-to-user value. The only moat AI can&apos;t replicate — because the moat is the users.</p>
+                </motion.div>
+              </StaggerItem>
+              <StaggerItem>
+                <motion.div
+                  className="edge-item"
+                  whileHover={{ y: -6, scale: 1.02 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                >
+                  <span className="edge-number">04</span>
+                  <h4>Judgment</h4>
+                  <p>Decision speed, AI integration depth, build-vs-buy clarity. The one asset that appreciates when everything else gets automated. AI made building fast — it didn&apos;t make building the right thing fast.</p>
+                </motion.div>
+              </StaggerItem>
+            </StaggerContainer>
+            {/* Diagnostic CTA */}
             <MotionReveal>
               <div className="mid-cta">
                 <p className="mid-cta-text">Not sure which asset you&apos;re missing? Take the 5-minute diagnostic.</p>
@@ -192,10 +235,17 @@ export default function BloomPage() {
             </MotionReveal>
           </section>
 
-          {/* ─── 03 WHAT WE'VE BUILT ─── */}
+          {/* ─── 03 THE PROOF ─── */}
+          <SectionDivider />
+          <section id="proof" className="bloom-section">
+            <SectionHeader number="03" title="The Proof" />
+            <JudgmentToggle />
+          </section>
+
+          {/* ─── 04 WHAT WE'VE BUILT ─── */}
           <SectionDivider />
           <section id="work" className="bloom-section">
-            <SectionHeader number="03" title="What We've Built" />
+            <SectionHeader number="04" title="What We've Built" />
             <div className="build-intro">
               <MotionReveal>
                 <h2 className="judgment-headline">
@@ -206,60 +256,7 @@ export default function BloomPage() {
             <PortfolioTimeline items={portfolio} />
           </section>
 
-          {/* ─── 04 THE EDGE ─── */}
-          <SectionDivider />
-          <section id="edge" className="bloom-section">
-            <SectionHeader number="04" title="The Edge" />
-            <h2 className="judgment-headline">Everyone has access to the tools. Few know what to build with them.</h2>
-            <StaggerContainer className="edge-grid">
-              <StaggerItem>
-                <motion.div
-                  className="edge-item"
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                >
-                  <span className="edge-number">01</span>
-                  <h4>Judgment Compounds</h4>
-                  <p>AI made building fast. It didn&apos;t make building the right thing fast. Judgment is the only asset that appreciates when everything else gets automated.</p>
-                </motion.div>
-              </StaggerItem>
-              <StaggerItem>
-                <motion.div
-                  className="edge-item"
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                >
-                  <span className="edge-number">02</span>
-                  <h4>Small Team, Full Leverage</h4>
-                  <p>Every team member operates at the frontier. No managers managing managers. No committees. The window where small teams outperform large ones has never been wider — and it&apos;s closing.</p>
-                </motion.div>
-              </StaggerItem>
-              <StaggerItem>
-                <motion.div
-                  className="edge-item"
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                >
-                  <span className="edge-number">03</span>
-                  <h4>Network Effects or Nothing</h4>
-                  <p>Products without moats are features someone will clone. We only build things with network effects, compounding distribution, or structural advantages. Everything else is a waste of the window.</p>
-                </motion.div>
-              </StaggerItem>
-              <StaggerItem>
-                <motion.div
-                  className="edge-item"
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                >
-                  <span className="edge-number">04</span>
-                  <h4>Own What Compounds</h4>
-                  <p>Every engagement produces a durable asset — products, frameworks, distribution, relationships. We don&apos;t trade time for money. If it doesn&apos;t compound, we don&apos;t do it.</p>
-                </motion.div>
-              </StaggerItem>
-            </StaggerContainer>
-          </section>
-
-          {/* ─── 05 SELECTIVE PARTNERS ─── */}
+          {/* ─── 05 HOW WE WORK ─── */}
           <SectionDivider />
           <section id="partners" className="bloom-section partners-section">
             <SectionHeader number="05" title="How We Work" />
