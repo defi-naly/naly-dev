@@ -12,7 +12,7 @@ import PortfolioTimeline from './components/PortfolioTimeline';
 import JudgmentToggle from './components/JudgmentToggle';
 import { StaggerContainer, StaggerItem } from './components/StaggerContainer';
 import ContactForm from './components/ContactForm';
-import { ExternalLink, ArrowRight, ArrowDown } from 'lucide-react';
+import { ArrowRight, ArrowDown } from 'lucide-react';
 import ProcessFlow from './components/method/ProcessFlow';
 
 // Lazy load Three.js component
@@ -22,16 +22,29 @@ const WireframeMesh = dynamic(() => import('./components/WireframeMesh'), {
 
 const portfolio = [
   {
+    name: 'INSIDE LABS',
+    status: 'live' as const,
+    statusLabel: 'LATEST BUILD',
+    description:
+      'Complete website for a Swiss tourism tech company — built in a single day. Production-grade marketing site with 3D hero, multilingual support, interactive demos. AI-augmented content workflows they own and operate.',
+    stats: [
+      { value: '1 Day', label: 'Build Time' },
+      { value: '4', label: 'Pages' },
+    ],
+    tags: ['Distribution'],
+    link: 'https://insidelabs.tech',
+  },
+  {
     name: 'TIPZ',
     status: 'live' as const,
-    statusLabel: 'PRIMARY BET',
+    statusLabel: 'OWN PRODUCT',
     description:
-      'The network effects bet. Privacy-first micro-tipping for creators using Zcash shielded addresses. Every feature answers one question: does this increase network density? Cross-chain payments via NEAR Intents, real-time notifications, creator tools, browser extension.',
+      'Privacy-first micro-tipping for creators using Zcash shielded addresses. Cross-chain payments via NEAR Intents. Every feature answers: does this increase network density?',
     stats: [
-      { value: '4', label: 'Chains Supported' },
-      { value: '5', label: 'Wallet Integrations' },
+      { value: '4', label: 'Chains' },
+      { value: '5', label: 'Wallets' },
     ],
-    tags: ['Payments', 'Cross-Chain', 'Creator Tools'],
+    tags: ['Network Effects'],
     milestones: [
       { year: '2024', event: 'Research & architecture design' },
       { year: '2025', event: 'Cross-chain payments via NEAR Intents' },
@@ -45,12 +58,12 @@ const portfolio = [
     status: 'legacy' as const,
     statusLabel: 'OPERATED',
     description:
-      'Contributed to the architecture of a protocol handling $120B in volume. Smart contracts, complex financial logic, multi-chain deployment across Ethereum, Polygon, and Arbitrum.',
+      'Launched Balancer v3 in direct partnership with Aave, DeFi\u2019s largest liquidity market. Trusted at protocol level to ship critical infrastructure.',
     stats: [
       { value: '$1.5B', label: 'Peak TVL' },
-      { value: '$120B', label: 'Total Volume' },
+      { value: '$120B', label: 'Volume' },
     ],
-    tags: ['Smart Contracts', 'Multi-Chain', 'Protocol'],
+    tags: ['Trust'],
     milestones: [
       { year: '2020', event: 'Launch on Ethereum mainnet' },
       { year: '2021', event: '$1.5B TVL peak achieved' },
@@ -65,12 +78,12 @@ const portfolio = [
     status: 'legacy' as const,
     statusLabel: 'OPERATED',
     description:
-      'Built the largest exchange on a new blockchain from zero. Product, contracts, validators, liquid staking — the full stack. First and only protocol to be both the #1 DEX and #1 LST on a single network.',
+      'Built the largest exchange on Sonic from zero. Product, contracts, validators, liquid staking. First protocol to be both #1 DEX and #1 LST on a single network.',
     stats: [
       { value: '$250M', label: 'Peak TVL' },
-      { value: '$1.4B', label: 'All-Time Volume' },
+      { value: '$1.4B', label: 'Volume' },
     ],
-    tags: ['Full Stack', 'From Zero', 'Sonic'],
+    tags: ['Full Stack'],
     milestones: [
       { year: '2021', event: 'Launched on Fantom as Beethoven X' },
       { year: '2022', event: '$250M TVL peak' },
@@ -101,7 +114,7 @@ export default function BloomPage() {
             BLOOM
           </a>
           <div className="bloom-nav-links">
-            <a href="/bloom/method" className="bloom-nav-link">Method</a>
+            <a href="/bloom/foundations" className="bloom-nav-link">Foundations</a>
             <a href="/bloom/diagnostic" className="bloom-nav-link">Diagnostic</a>
             <a href="#contact" className="bloom-nav-cta">Start a Sprint</a>
           </div>
@@ -125,19 +138,27 @@ export default function BloomPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
             >
-              AI won&apos;t save your company. Judgment will. We&apos;re the venture studio that brings both.
+              AI won&apos;t save your company. Judgment will.
+            </motion.p>
+            <motion.p
+              className="bloom-tagline-sub"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            >
+              We build the foundations that networks are built on.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
               style={{ display: 'flex', gap: '1rem', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}
             >
+              <a href="#work" className="bloom-hero-cta bloom-hero-cta-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}>
+                See the Work <ArrowDown size={14} strokeWidth={1.5} />
+              </a>
               <a href="#contact" className="bloom-hero-cta" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}>
                 Start a Sprint <ArrowRight size={14} strokeWidth={1.5} />
-              </a>
-              <a href="#what-we-build" className="bloom-hero-cta bloom-hero-cta-ghost" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}>
-                See What We Build <ArrowDown size={14} strokeWidth={1.5} />
               </a>
             </motion.div>
           </ScrollFade>
@@ -153,32 +174,72 @@ export default function BloomPage() {
               <MotionReveal>
                 <div className="about-text">
                   <h2>
-                    THE WINDOW IS <span className="highlight">CLOSING</span>.
+                    THE NETWORK IS THE <span className="highlight">MOAT</span>.
                   </h2>
                   <div className="thesis-body">
                     <p>
-                      AI will automate software. The gap between Human+AI and pure AI is shrinking — 12 to 24 months, maybe less. Most companies are scrambling to add AI tools. We&apos;re asking a different question: what&apos;s still valuable when AI builds everything?
+                      AI will automate software. The gap between Human+AI and pure AI is 12–24 months, maybe less. When anyone can build anything, the product isn&apos;t the moat.
                     </p>
                     <p>
-                      Network effects. Distribution. Judgment. Trust. The answer isn&apos;t building faster — it&apos;s building things that compound. We convert the current advantage into assets that last.
+                      The network is.
+                    </p>
+                    <p>
+                      Users who bring users. Trust that compounds. Distribution you own. These survive when software becomes free.
+                    </p>
+                    <p>
+                      We build the foundations that networks are built on — in days, not months.
                     </p>
                   </div>
                 </div>
               </MotionReveal>
               <div className="about-stats">
                 <StatBlock value={100} suffix="%" label="Ship Rate" delay={0} />
-                <StatBlock value={5} label="Products Shipped" delay={200} />
+                <StatBlock value={5} label="Products Live" delay={200} />
                 <StatBlock value={0} label="Dead Products" delay={400} />
               </div>
             </div>
           </section>
 
-          {/* ─── 02 WHAT WE BUILD ─── */}
+          {/* ─── 02 THE PROOF ─── */}
           <SectionDivider />
-          <section id="what-we-build" className="bloom-section">
-            <SectionHeader number="02" title="What We Build" />
-            <h2 className="judgment-headline">Four assets that survive when AI commoditizes everything else.</h2>
-            <StaggerContainer className="edge-grid">
+          <section id="proof" className="bloom-section">
+            <SectionHeader number="02" title="The Proof" />
+            <JudgmentToggle />
+            <MotionReveal>
+              <div className="mid-cta">
+                <p className="mid-cta-text">Not sure which foundation you&apos;re missing?</p>
+                <a href="/bloom/diagnostic" className="bloom-hero-cta" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}>
+                  Take the Diagnostic <ArrowRight size={14} strokeWidth={1.5} />
+                </a>
+              </div>
+            </MotionReveal>
+          </section>
+
+          {/* ─── 03 THE WORK ─── */}
+          <SectionDivider />
+          <section id="work" className="bloom-section">
+            <SectionHeader number="03" title="The Work" />
+            <div className="build-intro">
+              <MotionReveal>
+                <h2 className="judgment-headline">
+                  Anyone can build now. The hard part is knowing what&apos;s worth building.
+                </h2>
+              </MotionReveal>
+            </div>
+            <PortfolioTimeline items={portfolio} />
+          </section>
+
+          {/* ─── 04 FOUNDATIONS ─── */}
+          <SectionDivider />
+          <section id="foundations" className="bloom-section">
+            <SectionHeader number="04" title="Foundations" />
+            <MotionReveal>
+              <h2 className="judgment-headline">Three foundations. One goal.</h2>
+              <p className="section-subheading">
+                The network is the moat. We build the foundations that get you there.
+              </p>
+            </MotionReveal>
+            <StaggerContainer className="edge-grid edge-grid-3">
               <StaggerItem>
                 <motion.div
                   className="edge-item"
@@ -187,7 +248,10 @@ export default function BloomPage() {
                 >
                   <span className="edge-number">01</span>
                   <h4>Distribution</h4>
-                  <p>Channels, content systems, and conversion infrastructure that compound reach over time. Not ads — assets. The difference is whether it still works when you stop paying.</p>
+                  <p className="edge-tagline">How the network finds you.</p>
+                  <p>Your website is your distribution. We build sites that convert — in days, not months. AI-augmented so you own and operate without us.</p>
+                  <div className="edge-proof">Proof: Inside Labs — complete site, 1 day</div>
+                  <div className="edge-sprint">Sprint: 1 week</div>
                 </motion.div>
               </StaggerItem>
               <StaggerItem>
@@ -198,7 +262,10 @@ export default function BloomPage() {
                 >
                   <span className="edge-number">02</span>
                   <h4>Trust</h4>
-                  <p>Brand clarity, social proof, and reputation systems that make strangers willing to buy. AI can generate content — it can&apos;t generate credibility.</p>
+                  <p className="edge-tagline">Why the network stays.</p>
+                  <p>Trust is the moat your competitors can&apos;t copy. We build the systems that earn it — at protocol level.</p>
+                  <div className="edge-proof">Proof: Balancer v3 — launched with Aave</div>
+                  <div className="edge-sprint">Sprint: 1–2 weeks</div>
                 </motion.div>
               </StaggerItem>
               <StaggerItem>
@@ -208,105 +275,50 @@ export default function BloomPage() {
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 >
                   <span className="edge-number">03</span>
-                  <h4>Network Effects</h4>
-                  <p>Products that get better as more people use them. Retention loops, switching costs, user-to-user value. The only moat AI can&apos;t replicate — because the moat is the users.</p>
-                </motion.div>
-              </StaggerItem>
-              <StaggerItem>
-                <motion.div
-                  className="edge-item"
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                >
-                  <span className="edge-number">04</span>
                   <h4>Judgment</h4>
-                  <p>Decision speed, AI integration depth, build-vs-buy clarity. The one asset that appreciates when everything else gets automated. AI made building fast — it didn&apos;t make building the right thing fast.</p>
+                  <p className="edge-tagline">What network to build.</p>
+                  <p>AI builds anything. Knowing what to build is the hard part. We encode judgment into your operations.</p>
+                  <div className="edge-proof">Proof: Acquired abandoned LST at 6M FTM. Built to 290M S.</div>
+                  <div className="edge-sprint">Sprint: 1 week</div>
                 </motion.div>
               </StaggerItem>
             </StaggerContainer>
-            {/* Diagnostic CTA */}
-            <MotionReveal>
-              <div className="mid-cta">
-                <p className="mid-cta-text">Not sure which asset you&apos;re missing? Take the 5-minute diagnostic.</p>
-                <a href="/bloom/diagnostic" className="bloom-hero-cta" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}>
-                  Take the Diagnostic <ArrowRight size={14} strokeWidth={1.5} />
-                </a>
-              </div>
-            </MotionReveal>
-          </section>
-
-          {/* ─── 03 THE PROOF ─── */}
-          <SectionDivider />
-          <section id="proof" className="bloom-section">
-            <SectionHeader number="03" title="The Proof" />
-            <JudgmentToggle />
-          </section>
-
-          {/* ─── 04 WHAT WE'VE BUILT ─── */}
-          <SectionDivider />
-          <section id="work" className="bloom-section">
-            <SectionHeader number="04" title="What We've Built" />
-            <div className="build-intro">
-              <MotionReveal>
-                <h2 className="judgment-headline">
-                  Here&apos;s what judgment looks like in production.
-                </h2>
-              </MotionReveal>
-            </div>
-            <PortfolioTimeline items={portfolio} />
           </section>
 
           {/* ─── 05 HOW WE WORK ─── */}
           <SectionDivider />
-          <section id="partners" className="bloom-section partners-section">
+          <section id="how-we-work" className="bloom-section partners-section">
             <SectionHeader number="05" title="How We Work" />
 
-            {/* Full-width intro */}
             <div className="partners-intro">
               <MotionReveal>
                 <h2 className="partners-headline">
-                  We selectively partner with companies <span className="highlight">worth amplifying</span>.
+                  Sprints, not <span className="highlight">engagements</span>.
                 </h2>
+                <p className="section-subheading">
+                  Fixed scope. Fixed price. Working foundation — not a roadmap. AI-augmented execution means we ship what traditional teams quote in months.
+                </p>
               </MotionReveal>
             </div>
 
-            {/* Timeline: Process steps */}
             <ProcessFlow steps={[
-              { id: 'discovery', name: 'Discovery', duration: '~1 week',
-                description: 'We map where the durable assets are \u2014 network effects, distribution, trust \u2014 and whether AI will capture them or just accelerate the wrong things.' },
-              { id: 'build', name: 'Build', duration: '2\u20134 weeks',
-                description: 'Fixed scope. Working software that builds toward something durable. Not a roadmap \u2014 an asset. AI-augmented execution means we ship what traditional teams quote in months.' },
-              { id: 'validate', name: 'Validate', duration: '90 days',
-                description: 'Do the assets actually compound? Network density growing, distribution widening, trust deepening \u2014 or just metrics moving. If it\u2019s not compounding, we walk away together.' },
+              { id: 'identify', name: 'Identify', duration: 'Day 1',
+                description: 'Which foundation is missing? One conversation to scope the sprint around a single deliverable.' },
+              { id: 'build', name: 'Build', duration: '1\u20134 weeks',
+                description: 'AI-augmented execution at every step. You get a working foundation — not a deck, not a roadmap.' },
+              { id: 'ship', name: 'Ship & Own', duration: 'Delivered',
+                description: 'You own it outright. The foundation is laid. Now build the network.' },
             ]} />
 
-            {/* Method CTA */}
             <MotionReveal>
               <div style={{ textAlign: 'center', margin: '3rem 0' }}>
                 <a
-                  href="/bloom/method"
+                  href="/bloom/foundations"
                   className="bloom-hero-cta"
                   style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}
                 >
-                  See the Full Methodology <ArrowRight size={14} strokeWidth={1.5} />
+                  See All Foundations <ArrowRight size={14} strokeWidth={1.5} />
                 </a>
-              </div>
-            </MotionReveal>
-
-            {/* Current Partners */}
-            <MotionReveal>
-              <div className="current-partners">
-                <span className="current-partners-label">Current Partners</span>
-                <div className="current-partners-logos">
-                  <a href="https://insidelabs.tech" target="_blank" rel="noopener noreferrer" className="partner-logo-link">
-                    <span className="partner-logo-text">INSIDE LABS</span>
-                    <ExternalLink size={11} strokeWidth={1.5} />
-                  </a>
-                  <a href="https://soniclabs.com" target="_blank" rel="noopener noreferrer" className="partner-logo-link">
-                    <span className="partner-logo-text">SONIC</span>
-                    <ExternalLink size={11} strokeWidth={1.5} />
-                  </a>
-                </div>
               </div>
             </MotionReveal>
           </section>
@@ -316,12 +328,12 @@ export default function BloomPage() {
           <section id="contact" className="cta-section">
             <MotionReveal>
               <div className="cta-content">
-                <h2>Tell us what&apos;s missing. We&apos;ll tell you if a sprint can fix it.</h2>
+                <h2>Ready to build the <span className="highlight">foundation</span>?</h2>
                 <p>
-                  One conversation. One deliverable. No fluff.
+                  Tell us what&apos;s missing. We&apos;ll tell you honestly if a sprint can get you there.
                 </p>
                 <ContactForm />
-                <p className="cta-subtext">This isn&apos;t for companies who want a roadmap and a 90-day engagement. It&apos;s for teams who want a working asset, fast.</p>
+                <p className="cta-subtext">No decks. No proposals. Just the problem and the deliverable.</p>
               </div>
             </MotionReveal>
           </section>
@@ -332,30 +344,32 @@ export default function BloomPage() {
           <div className="footer-grid">
             <div className="footer-brand">
               <h2>BLOOM</h2>
-              <p>Software venture studio. AI-native. Operator-built.</p>
+              <p>Network foundations. AI-native. Operator-built.</p>
             </div>
             <div className="footer-col">
               <h4>Studio</h4>
               <a href="#thesis">Thesis</a>
-              <a href="#partners">Partners</a>
-              <a href="/bloom/method">Method</a>
+              <a href="#work">Work</a>
+              <a href="/bloom/foundations">Foundations</a>
               <a href="/bloom/diagnostic">Diagnostic</a>
             </div>
             <div className="footer-col">
               <h4>Portfolio</h4>
+              <a href="https://insidelabs.tech" target="_blank" rel="noopener noreferrer">Inside Labs</a>
               <a href="https://tipz.cash" target="_blank" rel="noopener noreferrer">TIPZ</a>
               <a href="https://balancer.fi" target="_blank" rel="noopener noreferrer">Balancer</a>
               <a href="https://beets.fi" target="_blank" rel="noopener noreferrer">Beets</a>
             </div>
             <div className="footer-col">
-              <h4>Partners</h4>
-              <a href="https://insidelabs.tech" target="_blank" rel="noopener noreferrer">Inside Labs</a>
-              <a href="https://soniclabs.com" target="_blank" rel="noopener noreferrer">Sonic</a>
+              <h4>Foundations</h4>
+              <a href="/bloom/foundations#distribution">Distribution</a>
+              <a href="/bloom/foundations#trust">Trust</a>
+              <a href="/bloom/foundations#judgment">Judgment</a>
             </div>
             <div className="footer-col">
               <h4>Links</h4>
               <a href="https://twitter.com/bloomstudio" target="_blank" rel="noopener noreferrer">Twitter</a>
-              <a href="#contact">Contact</a>
+              <a href="#contact">Start a Sprint</a>
             </div>
           </div>
           <div className="footer-bottom">

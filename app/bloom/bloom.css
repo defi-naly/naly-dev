@@ -253,6 +253,16 @@ body {
   color: var(--bright);
   text-transform: uppercase;
   letter-spacing: 0.15em;
+  margin-bottom: 0.75rem;
+  position: relative;
+  z-index: 2;
+}
+
+.bloom-tagline-sub {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  letter-spacing: 0.08em;
   margin-bottom: 2rem;
   position: relative;
   z-index: 2;
@@ -588,9 +598,39 @@ body {
   line-height: 1.6;
 }
 
+.edge-tagline {
+  font-style: italic;
+  color: var(--bloom-accent) !important;
+  margin-bottom: 0.5rem;
+}
+
+.edge-proof {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  opacity: 0.7;
+}
+
+.edge-sprint {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--bloom-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.5rem;
+}
+
+.edge-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
 @media (max-width: 768px) {
-  .edge-grid {
-    grid-template-columns: 1fr;
+  .edge-grid,
+  .edge-grid-3 {
+    grid-template-columns: 1fr !important;
   }
 }
 
@@ -1291,6 +1331,100 @@ body {
   opacity: 0.5;
   margin-top: 1.5rem !important;
   margin-bottom: 0 !important;
+}
+
+/* ========================================
+   FOUNDATION DETAIL CARDS (Foundations page)
+   ======================================== */
+
+.foundation-detail {
+  border: 1px solid var(--border);
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  background: rgba(255, 255, 255, 0.02);
+  transition: border-color 0.3s ease;
+}
+
+.foundation-detail:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.foundation-detail-header {
+  margin-bottom: 1.5rem;
+}
+
+.foundation-detail-header h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-2xl);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.25rem;
+}
+
+.foundation-detail-body p {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.foundation-deliverables {
+  margin-bottom: 1.5rem;
+}
+
+.foundation-deliverables h4 {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--bright);
+  margin-bottom: 0.75rem;
+}
+
+.foundation-deliverables ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.foundation-deliverables li {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  line-height: 1.7;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.foundation-deliverables li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--border);
+}
+
+.foundation-proof {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  line-height: 1.6;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  margin-bottom: 0.5rem;
+}
+
+.foundation-proof strong {
+  color: var(--bright);
+}
+
+.foundation-sprint {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--bloom-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 /* ========================================

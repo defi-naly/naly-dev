@@ -81,7 +81,7 @@ export default function DiagnosticPage() {
               <ArrowLeft size={12} strokeWidth={1.5} />
               Back
             </a>
-            <a href="/bloom#what-we-build" className="bloom-nav-link">What We Build</a>
+            <a href="/bloom/foundations" className="bloom-nav-link">Foundations</a>
             <a href="/bloom#contact" className="bloom-nav-cta">Start a Sprint</a>
           </div>
         </nav>

@@ -29,10 +29,10 @@ const cards: CardData[] = [
   },
   {
     offTitle: 'Hired AI strategy consultants',
-    offResult: '6 months of workshops. Nothing in production. They invoiced and moved on.',
+    offResult: '6 months of workshops. Nothing in production.',
     onTitle: 'One system-level intervention.',
     onResult: 'Changed the structure. Not the tools.',
-    stat: 'same stack, 5 products',
+    stat: 'Same stack, 5 products',
   },
   {
     offTitle: 'Built internal AI tools',

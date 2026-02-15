@@ -25,14 +25,14 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'BLOOM | AI Integration Studio',
+  title: 'BLOOM | Network Foundations Studio',
   description:
     "AI won't save your company. Judgment will. We're the venture studio that brings both.",
   icons: {
     icon: '/favicon.svg',
   },
   openGraph: {
-    title: 'BLOOM | AI Integration Studio',
+    title: 'BLOOM | Network Foundations Studio',
     description:
       "AI won't save your company. Judgment will. We're the venture studio that brings both.",
     siteName: 'BLOOM',
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'BLOOM | AI Integration Studio',
+    title: 'BLOOM | Network Foundations Studio',
     description:
       "AI won't save your company. Judgment will. We're the venture studio that brings both.",
     images: ['/og.png'],
