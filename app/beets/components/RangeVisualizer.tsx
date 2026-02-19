@@ -8,8 +8,13 @@ const BAR_COUNT = 20;
 const TICK_MS = 2500;
 
 // Price path: starts in-range (~$1.05), sweeps up to $1.50, back down to $0.80, loops
-const PRICE_PATH = [9, 12, 15, 17, 15, 12, 9, 6, 3, 6];
+// Bar-to-price mapping: price = 0.60 + barIndex * 0.05
+//   bar 8=$1.00, bar 10=$1.10 (CL range), bar 18=$1.50, bar 4=$0.80
+const PRICE_PATH = [9, 12, 15, 18, 15, 12, 9, 6, 4, 6];
 const TICK_COUNT = PRICE_PATH.length;
+
+// Convert bar index to dollar price
+const barToPrice = (idx: number) => 0.60 + idx * 0.05;
 
 // Fee rate per second when in range
 const FEE_RATE = 0.32;
@@ -157,15 +162,36 @@ export default function RangeVisualizer() {
             />
           </div>
 
-          {/* Status + earnings */}
+          {/* Price + Status + earnings */}
           <div className="range-earnings">
+            <div className="range-earnings-row" style={{ marginBottom: '0.5rem' }}>
+              <span style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 'var(--text-xs)',
+                fontWeight: 600,
+                color: 'var(--muted)',
+              }}>
+                Price: <span style={{ color: 'var(--bright)', fontVariantNumeric: 'tabular-nums' }}>${barToPrice(priceIdx).toFixed(2)}</span>
+                <span style={{ opacity: 0.5, marginLeft: '0.5rem' }}>Range: $1.00 – $1.10</span>
+              </span>
+            </div>
             <div className={`range-viz-status ${staticInRange ? 'good' : 'bad'}`}>
               <span className={`status-dot ${staticInRange ? 'good' : 'bad'}`} />
               {staticInRange ? 'In Range' : 'Out of Range — No Swap Fees Earned'}
             </div>
-            <span className="range-earnings-value">
-              ${staticFees.toFixed(2)}
-            </span>
+            <div className="range-earnings-row" style={{ marginTop: '0.375rem' }}>
+              <span style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 'var(--text-xs)',
+                fontWeight: 500,
+                color: 'var(--muted)',
+              }}>
+                Fees earned
+              </span>
+              <span className="range-earnings-value">
+                ${staticFees.toFixed(2)}
+              </span>
+            </div>
             <div className="range-progress-bar">
               <div
                 className={`range-progress-fill ${staticInRange ? '' : 'dead'}`}
@@ -209,15 +235,36 @@ export default function RangeVisualizer() {
             />
           </div>
 
-          {/* Status + earnings */}
+          {/* Price + Status + earnings */}
           <div className="range-earnings">
+            <div className="range-earnings-row" style={{ marginBottom: '0.5rem' }}>
+              <span style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 'var(--text-xs)',
+                fontWeight: 600,
+                color: 'var(--muted)',
+              }}>
+                Price: <span style={{ color: 'var(--bright)', fontVariantNumeric: 'tabular-nums' }}>${barToPrice(priceIdx).toFixed(2)}</span>
+                <span style={{ opacity: 0.5, marginLeft: '0.5rem' }}>Range: auto-adjusts</span>
+              </span>
+            </div>
             <div className="range-viz-status good">
               <span className="status-dot good" />
               Always In Range — Always Earning
             </div>
-            <span className="range-earnings-value">
-              ${dynamicFees.toFixed(2)}
-            </span>
+            <div className="range-earnings-row" style={{ marginTop: '0.375rem' }}>
+              <span style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 'var(--text-xs)',
+                fontWeight: 500,
+                color: 'var(--muted)',
+              }}>
+                Fees earned
+              </span>
+              <span className="range-earnings-value">
+                ${dynamicFees.toFixed(2)}
+              </span>
+            </div>
             <div className="range-progress-bar">
               <div
                 className="range-progress-fill"
