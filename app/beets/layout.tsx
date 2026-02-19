@@ -41,8 +41,8 @@ export default function BeetsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={satoshi.variable}>
-      <body>{children}</body>
-    </html>
+    <div className={satoshi.variable}>
+      {children}
+    </div>
   );
 }

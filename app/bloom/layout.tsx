@@ -60,11 +60,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={`${darkerGrotesque.variable} ${ibmPlexMono.variable} ${jetbrainsMono.variable}`}
-    >
-      <body>{children}</body>
-    </html>
+    <div className={`${darkerGrotesque.variable} ${ibmPlexMono.variable} ${jetbrainsMono.variable}`}>
+      {children}
+    </div>
   );
 }
