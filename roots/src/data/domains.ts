@@ -24,7 +24,7 @@ export const domains: Domain[] = [
     color: '#6b8f71',
     tagline: 'One becomes many — code replaces the middlemen.',
     projects: [
-      { name: 'Beets', description: 'DEX · LST · Validator', tag: 'Liquidity · Staking · Validation', url: 'https://app.naly.dev/beets' },
+      { name: 'Beets', description: 'DEX · LST · Validator', tag: 'Liquidity · Staking · Validation', url: '/beets' },
       { name: 'Balancer', description: 'Custom AMM Infrastructure', tag: 'Programmable Liquidity Pools', url: 'https://balancer.fi' },
       { name: 'TERMINAL', description: 'Interactive Dashboards', tag: 'Live Financial Research', url: 'https://app.naly.dev' },
     ],

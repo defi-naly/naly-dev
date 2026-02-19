@@ -170,7 +170,7 @@ function createEnneperGeometry(targetRadius: number, segs = 32): THREE.EdgesGeom
 
 // 4 projects — each gets a unique wireframe shape
 const PROJECTS: { id: string; name: string; label: string; url?: string }[] = [
-  { id: 'beets', name: 'BEETS', label: 'DEX · LST · Validator', url: 'https://app.naly.dev/beets' },
+  { id: 'beets', name: 'BEETS', label: 'DEX · LST · Validator', url: '/beets' },
   { id: 'balancer', name: 'BALANCER', label: 'Custom AMM Infrastructure', url: 'https://balancer.fi' },
   { id: 'tipz', name: 'TIPZ', label: 'Private Tipping' },
   { id: 'terminal', name: 'TERMINAL', label: 'Interactive Dashboards', url: 'https://app.naly.dev' },
