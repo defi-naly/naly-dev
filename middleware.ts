@@ -11,11 +11,6 @@ export function middleware(request: NextRequest) {
     );
   }
 
-  // Homepage → roots page (all hosts including localhost)
-  if (pathname === '/') {
-    return NextResponse.rewrite(new URL('/roots', request.url));
-  }
-
   // In production, redirect /roots to / to prevent duplicate URLs
   if (hostname === 'naly.dev' || hostname === 'www.naly.dev') {
     if (pathname === '/roots' || pathname.startsWith('/roots/')) {
