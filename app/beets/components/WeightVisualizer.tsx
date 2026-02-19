@@ -1,60 +1,91 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, useInView } from 'motion/react';
 import MotionReveal from './MotionReveal';
-
-const TICK_MS = 3000;
-const TICK_COUNT = 4;
 
 interface Asset {
   name: string;
   target: number;
   color: string;
+  freq: number;
+  amp: number;
+  phase: number;
 }
 
 const assets: Asset[] = [
-  { name: 'wETH', target: 60, color: 'var(--bloom-accent)' },
-  { name: 'USDC', target: 25, color: 'var(--navy)' },
-  { name: 'wBTC', target: 15, color: 'var(--success)' },
+  { name: 'wETH', target: 60, color: 'var(--bloom-accent)', freq: 0.4, amp: 10, phase: 0 },
+  { name: 'USDC', target: 25, color: 'var(--navy)', freq: 0.3, amp: 7, phase: 2.1 },
+  { name: 'wBTC', target: 15, color: 'var(--success)', freq: 0.5, amp: 5, phase: 4.2 },
 ];
 
-// Simulated drifts per tick — weight deviations from target
-const driftSequence = [
-  [0, 0, 0],      // tick 0: at target
-  [8, -5, -3],    // tick 1: ETH pumps, drift away
-  [12, -8, -4],   // tick 2: drift worsens
-  [0, 0, 0],      // tick 3: arb rebalances back
-];
+// Damping factor: weighted pool arbs keep drift small
+const ARB_DAMPING = 0.15;
+// Threshold (in %) to consider "off target"
+const DRIFT_THRESHOLD = 3;
+
+function computeDrifts(elapsed: number): number[] {
+  // Two sine waves at different frequencies for organic movement
+  const raw = assets.map((a) =>
+    a.amp * Math.sin(a.freq * elapsed + a.phase) +
+    a.amp * 0.4 * Math.sin(a.freq * 2.3 * elapsed + a.phase + 1.5),
+  );
+  // Normalize to zero-sum so weights always total 100%
+  const avg = raw.reduce((s, d) => s + d, 0) / raw.length;
+  return raw.map((d) => d - avg);
+}
 
 export default function WeightVisualizer() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: '-100px' });
-  const [tick, setTick] = useState(0);
+  const [drifts, setDrifts] = useState([0, 0, 0]);
+  const startTimeRef = useRef(0);
+  const lastUpdateRef = useRef(0);
+  const rafRef = useRef<number>(0);
+
+  const animate = useCallback((timestamp: number) => {
+    if (startTimeRef.current === 0) startTimeRef.current = timestamp;
+
+    // Throttle state updates to ~15 fps (every 66ms)
+    if (timestamp - lastUpdateRef.current < 66) {
+      rafRef.current = requestAnimationFrame(animate);
+      return;
+    }
+    lastUpdateRef.current = timestamp;
+
+    const elapsed = (timestamp - startTimeRef.current) / 1000;
+    setDrifts(computeDrifts(elapsed));
+    rafRef.current = requestAnimationFrame(animate);
+  }, []);
 
   useEffect(() => {
     if (!isInView) return;
-    const interval = setInterval(() => setTick((t) => t + 1), TICK_MS);
-    return () => clearInterval(interval);
-  }, [isInView]);
+    startTimeRef.current = 0;
+    lastUpdateRef.current = 0;
+    rafRef.current = requestAnimationFrame(animate);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [isInView, animate]);
 
-  const driftIdx = tick % TICK_COUNT;
-  const drifts = driftSequence[driftIdx];
-  const isRebalanced = driftIdx === 0 || driftIdx === 3;
+  const maxManualDrift = Math.max(...drifts.map(Math.abs));
+  const isManualDrifted = maxManualDrift > DRIFT_THRESHOLD;
+
+  const dampedDrifts = drifts.map((d) => d * ARB_DAMPING);
+  const maxWeightedDrift = Math.max(...dampedDrifts.map(Math.abs));
+  const isWeightedDrifted = maxWeightedDrift > 0.5;
 
   return (
     <div ref={ref} className="range-viz">
-      {/* Manual portfolio — drifts and stays drifted */}
+      {/* Manual portfolio — drifts with no correction */}
       <MotionReveal delay={0}>
         <div className="range-viz-panel bad">
           <div className="range-viz-label bad">Manual Portfolio</div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
             {assets.map((asset, i) => {
-              // Manual never rebalances — accumulates drift
-              const manualDrift = driftIdx >= 1 ? driftSequence[Math.min(driftIdx, 2)][i] : 0;
-              const current = asset.target + manualDrift;
-              const isDrifted = Math.abs(manualDrift) > 1;
+              const current = asset.target + drifts[i];
+              const isDrifted = Math.abs(drifts[i]) > DRIFT_THRESHOLD;
 
               return (
                 <div key={asset.name}>
@@ -79,7 +110,7 @@ export default function WeightVisualizer() {
                       fontVariantNumeric: 'tabular-nums',
                       color: isDrifted ? 'var(--warning)' : 'var(--muted)',
                     }}>
-                      {current}% <span style={{ opacity: 0.5 }}>/ {asset.target}%</span>
+                      {Math.round(current)}% <span style={{ opacity: 0.5 }}>/ {asset.target}%</span>
                     </span>
                   </div>
                   <div style={{
@@ -98,7 +129,7 @@ export default function WeightVisualizer() {
                     }} />
                     <motion.div
                       animate={{ width: `${current}%` }}
-                      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{ duration: 0.1, ease: 'linear' }}
                       style={{
                         height: '100%',
                         background: isDrifted ? 'var(--warning)' : asset.color,
@@ -114,23 +145,23 @@ export default function WeightVisualizer() {
 
           <div className="range-earnings" style={{ marginTop: '1.25rem' }}>
             <div className="range-earnings-row">
-              <div className={`range-viz-status ${driftIdx >= 1 ? 'bad' : ''}`}>
-                <span className={`status-dot ${driftIdx >= 1 ? 'bad' : ''}`} />
-                {driftIdx >= 1 ? 'Off target — needs rebalancing' : 'At target'}
+              <div className={`range-viz-status ${isManualDrifted ? 'bad' : ''}`}>
+                <span className={`status-dot ${isManualDrifted ? 'bad' : ''}`} />
+                {isManualDrifted ? 'Off target — needs rebalancing' : 'At target'}
               </div>
             </div>
           </div>
         </div>
       </MotionReveal>
 
-      {/* Weighted pool — auto-rebalances */}
+      {/* Weighted pool — arbs auto-rebalance */}
       <MotionReveal delay={0.15}>
         <div className="range-viz-panel good">
           <div className="range-viz-label good">Weighted Pool</div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
             {assets.map((asset, i) => {
-              const current = asset.target + drifts[i];
+              const current = asset.target + dampedDrifts[i];
 
               return (
                 <div key={asset.name}>
@@ -153,9 +184,9 @@ export default function WeightVisualizer() {
                       fontSize: 'var(--text-xs)',
                       fontWeight: 600,
                       fontVariantNumeric: 'tabular-nums',
-                      color: isRebalanced ? 'var(--bloom-accent)' : 'var(--muted)',
+                      color: 'var(--bloom-accent)',
                     }}>
-                      {current}% <span style={{ opacity: 0.5 }}>/ {asset.target}%</span>
+                      {Math.round(current)}% <span style={{ opacity: 0.5 }}>/ {asset.target}%</span>
                     </span>
                   </div>
                   <div style={{
@@ -173,7 +204,7 @@ export default function WeightVisualizer() {
                     }} />
                     <motion.div
                       animate={{ width: `${current}%` }}
-                      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{ duration: 0.1, ease: 'linear' }}
                       style={{
                         height: '100%',
                         background: asset.color,
@@ -190,9 +221,9 @@ export default function WeightVisualizer() {
             <div className="range-earnings-row">
               <div className="range-viz-status good">
                 <span className="status-dot good" />
-                {isRebalanced
-                  ? 'On target — arbs paid fees to rebalance'
-                  : 'Price moved — arbs rebalancing...'}
+                {isWeightedDrifted
+                  ? 'Price moved — arbs rebalancing...'
+                  : 'On target — arbs paid fees to rebalance'}
               </div>
             </div>
           </div>

@@ -6,7 +6,10 @@ import MotionReveal from './MotionReveal';
 
 const BAR_COUNT = 20;
 const TICK_MS = 2500;
-const TICK_COUNT = 6;
+
+// Price path: starts in-range (~$1.05), sweeps up to $1.50, back down to $0.80, loops
+const PRICE_PATH = [9, 12, 15, 17, 15, 12, 9, 6, 3, 6];
+const TICK_COUNT = PRICE_PATH.length;
 
 // Fee rate per second when in range
 const FEE_RATE = 0.32;
@@ -45,8 +48,8 @@ export default function RangeVisualizer() {
   const rafRef = useRef<number>(0);
 
   // Track whether static is in range
-  const staticRange = { start: 5, end: 12 };
-  const priceIdx = 8 + (tick % TICK_COUNT) * 2; // 8, 10, 12, 14, 16, 18
+  const staticRange = { start: 8, end: 10 };
+  const priceIdx = PRICE_PATH[tick % TICK_COUNT];
   const staticInRange = priceIdx >= staticRange.start && priceIdx <= staticRange.end;
   const staticInRangeRef = useRef(staticInRange);
   staticInRangeRef.current = staticInRange;
