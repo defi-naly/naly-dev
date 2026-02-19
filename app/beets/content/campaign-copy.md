@@ -80,7 +80,7 @@ You get the capital efficiency of concentrated liquidity with the simplicity of 
 
 ### Battle-Tested
 **Short:** Built on Balancer V3. Audited. Open source.
-**Long:** reCLAMMs run on Balancer V3's vault architecture — the same infrastructure securing billions in TVL across multiple chains. The vault handles all pool accounting, token transfers, and security. Pool contracts are compact and auditable. The codebase is open source (balancer/reclamm on GitHub), professionally audited, and live in production.
+**Long:** reCLAMMs run on Balancer V3's vault architecture — the same infrastructure securing $200M+ in TVL across 12 chains. The vault handles all pool accounting, token transfers, and security. Pool contracts are compact and auditable. The codebase is open source (balancer/reclamm on GitHub), professionally audited, and live in production.
 
 ---
 

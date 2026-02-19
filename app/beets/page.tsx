@@ -129,7 +129,7 @@ export default function BeetsHub() {
                   whileHover={{ y: -2 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 >
-                  <div className="stat-value">$3B+</div>
+                  <div className="stat-value">$200M+</div>
                   <div className="stat-label">Total Value Locked</div>
                   <div className="stat-sublabel">Across all Balancer deployments</div>
                 </motion.div>
@@ -140,9 +140,9 @@ export default function BeetsHub() {
                   whileHover={{ y: -2 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 >
-                  <div className="stat-value">6+</div>
+                  <div className="stat-value">13</div>
                   <div className="stat-label">Security Audits</div>
-                  <div className="stat-sublabel">Trail of Bits, Certora, and more</div>
+                  <div className="stat-sublabel">Trail of Bits, Certora, Spearbit, Cantina</div>
                 </motion.div>
               </StaggerItem>
               <StaggerItem>
@@ -151,9 +151,9 @@ export default function BeetsHub() {
                   whileHover={{ y: -2 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 >
-                  <div className="stat-value">8</div>
+                  <div className="stat-value">12</div>
                   <div className="stat-label">Chains</div>
-                  <div className="stat-sublabel">Sonic, Ethereum, Arbitrum, and more</div>
+                  <div className="stat-sublabel">Sonic, Ethereum, Arbitrum, Base, and more</div>
                 </motion.div>
               </StaggerItem>
             </StaggerContainer>

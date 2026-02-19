@@ -73,7 +73,7 @@ Hundreds of millions lost to oracle exploits in DeFi. reCLAMMs sidestep the enti
 **10/**
 The stack matters too.
 
-reCLAMMs run on Balancer V3's vault architecture — the same battle-tested infrastructure securing billions in TVL. Transient accounting via EIP-1153. Modular hooks. Audited and live in production.
+reCLAMMs run on Balancer V3's vault architecture — the same battle-tested infrastructure securing $200M+ in TVL. Transient accounting via EIP-1153. Modular hooks. Audited and live in production.
 
 This isn't experimental. It's infrastructure.
 
