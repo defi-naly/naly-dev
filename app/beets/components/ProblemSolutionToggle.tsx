@@ -4,7 +4,7 @@ import { useState, useRef, useCallback, useEffect } from 'react';
 import { motion } from 'motion/react';
 import MotionReveal from './MotionReveal';
 
-interface CardData {
+export interface CardData {
   offTitle: string;
   offResult: string;
   onTitle: string;
@@ -12,7 +12,7 @@ interface CardData {
   stat: string;
 }
 
-const cards: CardData[] = [
+const defaultCards: CardData[] = [
   {
     offTitle: 'Set a range. Price moved. Start over.',
     offResult:
@@ -78,7 +78,17 @@ const CheckIcon = () => (
   </svg>
 );
 
-export default function ProblemSolutionToggle() {
+interface ProblemSolutionToggleProps {
+  cards?: CardData[];
+  offLabel?: string;
+  onLabel?: string;
+}
+
+export default function ProblemSolutionToggle({
+  cards = defaultCards,
+  offLabel = 'Traditional CL',
+  onLabel = 'reCLAMMs',
+}: ProblemSolutionToggleProps) {
   const [isOn, setIsOn] = useState(false);
 
   return (
@@ -88,7 +98,7 @@ export default function ProblemSolutionToggle() {
           <span
             className={`judgment-label ${!isOn ? 'active' : 'inactive'}`}
           >
-            Traditional CL
+            {offLabel}
           </span>
           <button
             type="button"
@@ -106,7 +116,7 @@ export default function ProblemSolutionToggle() {
           <span
             className={`judgment-label ${isOn ? 'active' : 'inactive'}`}
           >
-            reCLAMMs
+            {onLabel}
           </span>
         </div>
       </MotionReveal>
@@ -215,7 +225,7 @@ function ToggleCard({
           className="judgment-card-sweep"
           style={{
             background:
-              'linear-gradient(90deg, transparent 0%, rgba(0,255,255,0.06) 40%, rgba(0,255,255,0.1) 50%, rgba(0,255,255,0.06) 60%, transparent 100%)',
+              'linear-gradient(90deg, transparent 0%, rgba(var(--accent-rgb),0.06) 40%, rgba(var(--accent-rgb),0.1) 50%, rgba(var(--accent-rgb),0.06) 60%, transparent 100%)',
             backgroundSize: '200% 100%',
             animation: 'sweep-upgrade 1.2s ease-out forwards',
           }}
@@ -227,7 +237,7 @@ function ToggleCard({
           className="judgment-card-glow"
           style={{
             opacity: isHovered ? 1 : 0,
-            background: `radial-gradient(400px circle at ${mousePos.x}% ${mousePos.y}%, rgba(0,255,255,0.06), transparent 60%)`,
+            background: `radial-gradient(400px circle at ${mousePos.x}% ${mousePos.y}%, rgba(var(--accent-rgb),0.06), transparent 60%)`,
           }}
         />
       )}

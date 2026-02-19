@@ -16,13 +16,13 @@ export const weightedFeatures: Feature[] = [
   {
     title: 'Self-Rebalancing',
     description:
-      'Arbitrageurs rebalance to your target weights and pay swap fees to do it. Free rebalancing, built in.',
+      'Arbitrageurs rebalance to your target weights and pay you swap fees to do it. Free rebalancing, built into the math.',
     icon: 'RefreshCw',
   },
   {
     title: 'Swap Fee Earnings',
     description:
-      'Every trade through your pool pays a fee. Passive yield from day one — no active management required.',
+      'Every trade through your pool pays a fee. Passive yield from day one — no active management or monitoring required.',
     icon: 'Coins',
   },
   {

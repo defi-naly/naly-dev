@@ -14,7 +14,7 @@ export const features: Feature[] = [
   {
     title: 'Oracle-Free',
     description:
-      'No external price feeds, no oracle risk. reCLAMMs uses on-chain math to set ranges — fully trustless.',
+      'No external price feeds, no oracle risk. reCLAMMs uses on-chain math to set ranges — fully trustless and autonomous.',
     icon: 'Shield',
   },
   {

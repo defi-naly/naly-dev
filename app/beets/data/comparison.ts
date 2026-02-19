@@ -1,11 +1,6 @@
-export interface ComparisonRow {
-  feature: string;
-  reclamms: string;
-  uniV3: string;
-  fullRange: string;
-}
+import { ComparisonRowData } from '../components/ComparisonTable';
 
-export const comparisonRows: ComparisonRow[] = [
+export const comparisonRows: ComparisonRowData[] = [
   {
     feature: 'Range Management',
     reclamms: 'Automatic',

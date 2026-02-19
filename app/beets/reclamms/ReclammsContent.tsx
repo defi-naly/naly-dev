@@ -1,6 +1,5 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import { motion } from 'motion/react';
 import MotionReveal from '../components/MotionReveal';
 import ScrollFade from '../components/ScrollFade';
@@ -15,10 +14,6 @@ import ArchitectureDiagram from '../components/ArchitectureDiagram';
 import BeetsNav from '../components/BeetsNav';
 import BeetsFooter from '../components/BeetsFooter';
 import { ArrowRight, ArrowUpRight, RefreshCcw, Puzzle, Bot } from 'lucide-react';
-
-const HeroCurveMesh = dynamic(() => import('../components/HeroCurveMesh'), {
-  ssr: false,
-});
 
 export default function ReclammsContent() {
   return (
@@ -35,7 +30,6 @@ export default function ReclammsContent() {
 
         {/* ─── HERO ─── */}
         <section className="bloom-hero">
-          <HeroCurveMesh />
           <ScrollFade>
             <motion.h1
               className="bloom-wordmark"
@@ -174,7 +168,8 @@ export default function ReclammsContent() {
                   <h4>JIT Attacks</h4>
                   <p>
                     Bots sandwich your swaps with just-in-time liquidity. You
-                    provide the capital — they extract the profit.
+                    provide the capital — they extract the profit. No defense,
+                    no recourse.
                   </p>
                 </motion.div>
               </StaggerItem>
@@ -188,12 +183,12 @@ export default function ReclammsContent() {
 
             <MotionReveal>
               <div className="about-grid">
-                <div className="about-text" style={{ textAlign: 'center' }}>
+                <div className="about-text" >
                   <h2>
                     AUTO-ADJUSTING RANGES.{' '}
                     <span className="highlight">ZERO</span> MANAGEMENT.
                   </h2>
-                  <p style={{ maxWidth: '600px', margin: '0 auto' }}>
+                  <p >
                     reCLAMMs ranges track the market price on-chain. Your
                     liquidity stays concentrated where trades happen — earning
                     fees without intervention.

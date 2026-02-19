@@ -1,15 +1,23 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Battery, Split, Gauge } from 'lucide-react';
 import MotionReveal from '../components/MotionReveal';
 import ScrollFade from '../components/ScrollFade';
 import SectionHeader from '../components/SectionHeader';
 import SectionDivider from '../components/SectionDivider';
+import { StaggerContainer, StaggerItem } from '../components/StaggerContainer';
+import BoostedVisualizer from '../components/BoostedVisualizer';
+import ProblemSolutionToggle from '../components/ProblemSolutionToggle';
 import FeatureGrid from '../components/FeatureGrid';
+import ComparisonTable from '../components/ComparisonTable';
+import ArchitectureDiagram from '../components/ArchitectureDiagram';
 import BeetsNav from '../components/BeetsNav';
 import BeetsFooter from '../components/BeetsFooter';
 import { boostedFeatures } from '../data/boosted-features';
+import { boostedToggleCards } from '../data/boosted-toggle';
+import { boostedComparisonColumns, boostedComparisonRows } from '../data/boosted-comparison';
+import { boostedLayers, boostedDetails } from '../data/boosted-architecture';
 
 export default function BoostedContent() {
   return (
@@ -96,19 +104,68 @@ export default function BoostedContent() {
 
             <MotionReveal>
               <div className="about-grid">
-                <div className="about-text" style={{ textAlign: 'center' }}>
+                <div className="about-text">
                   <h2>
                     IDLE LIQUIDITY IS{' '}
                     <span className="highlight">WASTED</span> CAPITAL.
                   </h2>
-                  <p style={{ maxWidth: '600px', margin: '0 auto' }}>
-                    Most AMM liquidity sits idle — waiting for swaps that may
-                    never come. Lending markets offer yield on the same assets,
-                    but traditional LPs are forced to choose one or the other.
-                  </p>
                 </div>
               </div>
             </MotionReveal>
+
+            <StaggerContainer className="pain-cards">
+              <StaggerItem>
+                <motion.div
+                  className="pain-card"
+                  whileHover={{ y: -4 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                >
+                  <div className="pain-card-icon">
+                    <Battery size={24} strokeWidth={1.5} />
+                  </div>
+                  <h4>80%+ Sits Idle</h4>
+                  <p>
+                    In a standard AMM, most liquidity waits for swaps that
+                    never come. That capital earns zero yield while sitting
+                    in the pool contract.
+                  </p>
+                </motion.div>
+              </StaggerItem>
+              <StaggerItem>
+                <motion.div
+                  className="pain-card"
+                  whileHover={{ y: -4 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                >
+                  <div className="pain-card-icon">
+                    <Split size={24} strokeWidth={1.5} />
+                  </div>
+                  <h4>LP or Lend — Pick One</h4>
+                  <p>
+                    Splitting capital between AMM pools and lending protocols
+                    means multiple positions, multiple gas costs, and
+                    constant rebalancing.
+                  </p>
+                </motion.div>
+              </StaggerItem>
+              <StaggerItem>
+                <motion.div
+                  className="pain-card"
+                  whileHover={{ y: -4 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                >
+                  <div className="pain-card-icon">
+                    <Gauge size={24} strokeWidth={1.5} />
+                  </div>
+                  <h4>Manual Yield Chasing</h4>
+                  <p>
+                    Moving capital between protocols to chase the best rate
+                    costs gas and attention. By the time you act, the
+                    opportunity has moved.
+                  </p>
+                </motion.div>
+              </StaggerItem>
+            </StaggerContainer>
           </section>
 
           {/* ─── 02 THE SOLUTION ─── */}
@@ -118,12 +175,12 @@ export default function BoostedContent() {
 
             <MotionReveal>
               <div className="about-grid">
-                <div className="about-text" style={{ textAlign: 'center' }}>
+                <div className="about-text">
                   <h2>
                     DUAL YIELD.{' '}
                     <span className="highlight">ZERO</span> IDLE CAPITAL.
                   </h2>
-                  <p style={{ maxWidth: '600px', margin: '0 auto' }}>
+                  <p>
                     Boosted pools route unused liquidity to lending protocols
                     automatically. You earn swap fees on active capital and
                     lending yield on idle reserves — all from a single
@@ -132,12 +189,32 @@ export default function BoostedContent() {
                 </div>
               </div>
             </MotionReveal>
+
+            <BoostedVisualizer />
           </section>
 
-          {/* ─── 03 FEATURES ─── */}
+          {/* ─── 03 THE GAP ─── */}
+          <SectionDivider />
+          <section id="gap" className="bloom-section">
+            <SectionHeader number="03" title="The Gap" />
+
+            <MotionReveal>
+              <h2 className="judgment-headline">
+                Same capital. Different yield.
+              </h2>
+            </MotionReveal>
+
+            <ProblemSolutionToggle
+              cards={boostedToggleCards}
+              offLabel="Standard AMM"
+              onLabel="Boosted Pool"
+            />
+          </section>
+
+          {/* ─── 04 FEATURES ─── */}
           <SectionDivider />
           <section id="features" className="bloom-section">
-            <SectionHeader number="03" title="Features" />
+            <SectionHeader number="04" title="Features" />
 
             <MotionReveal>
               <h2
@@ -149,6 +226,45 @@ export default function BoostedContent() {
             </MotionReveal>
 
             <FeatureGrid features={boostedFeatures} />
+          </section>
+
+          {/* ─── 05 COMPARISON TABLE ─── */}
+          <SectionDivider />
+          <section id="compare" className="bloom-section">
+            <SectionHeader number="05" title="Comparison" />
+
+            <MotionReveal>
+              <h2 className="judgment-headline">
+                How boosted pools stack up.
+              </h2>
+            </MotionReveal>
+
+            <ComparisonTable
+              columns={boostedComparisonColumns}
+              rows={boostedComparisonRows}
+            />
+          </section>
+
+          {/* ─── 06 ARCHITECTURE ─── */}
+          <SectionDivider />
+          <section id="architecture" className="bloom-section">
+            <SectionHeader number="06" title="Architecture" />
+
+            <MotionReveal>
+              <h2 className="judgment-headline">
+                Native yield at the vault level.
+              </h2>
+              <p className="section-subheading" style={{ marginBottom: '2rem' }}>
+                Boosted pools use the Balancer V3 vault&apos;s ERC-4626 buffer
+                layer to route idle liquidity to lending markets — no external
+                keepers, no per-user overhead.
+              </p>
+            </MotionReveal>
+
+            <ArchitectureDiagram
+              layers={boostedLayers}
+              details={boostedDetails}
+            />
           </section>
 
           {/* ─── CTA ─── */}
@@ -181,6 +297,14 @@ export default function BoostedContent() {
                     className="cta-button-secondary"
                   >
                     Read the Docs
+                  </a>
+                  <a
+                    href="https://discord.gg/beets"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cta-button-secondary"
+                  >
+                    Join Discord
                   </a>
                 </div>
               </div>

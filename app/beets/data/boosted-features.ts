@@ -16,13 +16,13 @@ export const boostedFeatures: Feature[] = [
   {
     title: 'Always Liquid',
     description:
-      'Swaps execute instantly from available reserves. The pool dynamically manages the swap-to-lending split.',
+      'Swaps execute instantly from available reserves. The pool dynamically manages the optimal swap-to-lending split.',
     icon: 'Droplets',
   },
   {
     title: 'Single Position',
     description:
-      'One deposit, two yield streams. No need to split capital between LP positions and lending protocols.',
+      'One deposit, two yield streams. No need to split capital between LP positions and lending protocols manually.',
     icon: 'Layers',
   },
   {

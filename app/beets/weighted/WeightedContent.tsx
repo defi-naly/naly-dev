@@ -1,15 +1,23 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, RefreshCcw, Scale, Puzzle } from 'lucide-react';
 import MotionReveal from '../components/MotionReveal';
 import ScrollFade from '../components/ScrollFade';
 import SectionHeader from '../components/SectionHeader';
 import SectionDivider from '../components/SectionDivider';
+import { StaggerContainer, StaggerItem } from '../components/StaggerContainer';
+import WeightVisualizer from '../components/WeightVisualizer';
+import ProblemSolutionToggle from '../components/ProblemSolutionToggle';
 import FeatureGrid from '../components/FeatureGrid';
+import ComparisonTable from '../components/ComparisonTable';
+import ArchitectureDiagram from '../components/ArchitectureDiagram';
 import BeetsNav from '../components/BeetsNav';
 import BeetsFooter from '../components/BeetsFooter';
 import { weightedFeatures } from '../data/weighted-features';
+import { weightedToggleCards } from '../data/weighted-toggle';
+import { weightedComparisonColumns, weightedComparisonRows } from '../data/weighted-comparison';
+import { weightedLayers, weightedDetails } from '../data/weighted-architecture';
 
 export default function WeightedContent() {
   return (
@@ -96,19 +104,68 @@ export default function WeightedContent() {
 
             <MotionReveal>
               <div className="about-grid">
-                <div className="about-text" style={{ textAlign: 'center' }}>
+                <div className="about-text">
                   <h2>
                     MANUAL REBALANCING{' '}
                     <span className="highlight">KILLS</span> RETURNS.
                   </h2>
-                  <p style={{ maxWidth: '600px', margin: '0 auto' }}>
-                    Traditional portfolios drift from target allocations.
-                    Rebalancing costs gas, creates taxable events, and demands
-                    constant attention. The overhead eats into returns.
-                  </p>
                 </div>
               </div>
             </MotionReveal>
+
+            <StaggerContainer className="pain-cards">
+              <StaggerItem>
+                <motion.div
+                  className="pain-card"
+                  whileHover={{ y: -4 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                >
+                  <div className="pain-card-icon">
+                    <RefreshCcw size={24} strokeWidth={1.5} />
+                  </div>
+                  <h4>Constant Rebalancing</h4>
+                  <p>
+                    Portfolios drift from target weights with every price
+                    move. Rebalancing costs gas, creates taxable events, and
+                    most people never bother.
+                  </p>
+                </motion.div>
+              </StaggerItem>
+              <StaggerItem>
+                <motion.div
+                  className="pain-card"
+                  whileHover={{ y: -4 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                >
+                  <div className="pain-card-icon">
+                    <Scale size={24} strokeWidth={1.5} />
+                  </div>
+                  <h4>50/50 Only</h4>
+                  <p>
+                    Standard AMMs lock you into equal weight pairs. No way to
+                    express conviction with 80/20 splits or build multi-asset
+                    index portfolios.
+                  </p>
+                </motion.div>
+              </StaggerItem>
+              <StaggerItem>
+                <motion.div
+                  className="pain-card"
+                  whileHover={{ y: -4 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                >
+                  <div className="pain-card-icon">
+                    <Puzzle size={24} strokeWidth={1.5} />
+                  </div>
+                  <h4>Fragmented Positions</h4>
+                  <p>
+                    A 5-asset portfolio means 4+ separate LP positions across
+                    multiple pools. More gas, more complexity, more things to
+                    track and manage.
+                  </p>
+                </motion.div>
+              </StaggerItem>
+            </StaggerContainer>
           </section>
 
           {/* ─── 02 THE SOLUTION ─── */}
@@ -118,26 +175,45 @@ export default function WeightedContent() {
 
             <MotionReveal>
               <div className="about-grid">
-                <div className="about-text" style={{ textAlign: 'center' }}>
+                <div className="about-text">
                   <h2>
                     SET YOUR WEIGHTS.{' '}
                     <span className="highlight">THE MARKET</span> REBALANCES.
                   </h2>
-                  <p style={{ maxWidth: '600px', margin: '0 auto' }}>
+                  <p>
                     Define your target allocation — 80/20, 60/20/20, or equal
                     splits — and the pool enforces it. Arbitrageurs rebalance
-                    for you and pay swap fees in the process. Your portfolio
-                    stays on target while generating yield.
+                    for you and pay swap fees in the process.
                   </p>
                 </div>
               </div>
             </MotionReveal>
+
+            <WeightVisualizer />
           </section>
 
-          {/* ─── 03 FEATURES ─── */}
+          {/* ─── 03 THE GAP ─── */}
+          <SectionDivider />
+          <section id="gap" className="bloom-section">
+            <SectionHeader number="03" title="The Gap" />
+
+            <MotionReveal>
+              <h2 className="judgment-headline">
+                Same portfolio. Different outcome.
+              </h2>
+            </MotionReveal>
+
+            <ProblemSolutionToggle
+              cards={weightedToggleCards}
+              offLabel="Manual Portfolio"
+              onLabel="Weighted Pool"
+            />
+          </section>
+
+          {/* ─── 04 FEATURES ─── */}
           <SectionDivider />
           <section id="features" className="bloom-section">
-            <SectionHeader number="03" title="Features" />
+            <SectionHeader number="04" title="Features" />
 
             <MotionReveal>
               <h2
@@ -149,6 +225,44 @@ export default function WeightedContent() {
             </MotionReveal>
 
             <FeatureGrid features={weightedFeatures} />
+          </section>
+
+          {/* ─── 05 COMPARISON TABLE ─── */}
+          <SectionDivider />
+          <section id="compare" className="bloom-section">
+            <SectionHeader number="05" title="Comparison" />
+
+            <MotionReveal>
+              <h2 className="judgment-headline">
+                How weighted pools stack up.
+              </h2>
+            </MotionReveal>
+
+            <ComparisonTable
+              columns={weightedComparisonColumns}
+              rows={weightedComparisonRows}
+            />
+          </section>
+
+          {/* ─── 06 ARCHITECTURE ─── */}
+          <SectionDivider />
+          <section id="architecture" className="bloom-section">
+            <SectionHeader number="06" title="Architecture" />
+
+            <MotionReveal>
+              <h2 className="judgment-headline">
+                Audited math. Proven at scale.
+              </h2>
+              <p className="section-subheading" style={{ marginBottom: '2rem' }}>
+                Weighted pools use a generalized constant product formula — the
+                same math that powers index funds, enforced by smart contract.
+              </p>
+            </MotionReveal>
+
+            <ArchitectureDiagram
+              layers={weightedLayers}
+              details={weightedDetails}
+            />
           </section>
 
           {/* ─── CTA ─── */}
@@ -181,6 +295,14 @@ export default function WeightedContent() {
                     className="cta-button-secondary"
                   >
                     Read the Docs
+                  </a>
+                  <a
+                    href="https://discord.gg/beets"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cta-button-secondary"
+                  >
+                    Join Discord
                   </a>
                 </div>
               </div>
