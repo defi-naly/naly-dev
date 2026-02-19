@@ -9,7 +9,7 @@ export interface PortfolioNode {
 export const PORTFOLIO_NODES: PortfolioNode[] = [
   // Work — larger, inner ring
   { id: 'tipz', name: 'TIPZ', label: 'Privacy-First Micro-Tipping', url: 'https://tipz.cash', type: 'work' },
-  { id: 'beets', name: 'BEETS', label: 'DEX · LST · Validator', url: 'https://beets.fi', type: 'work' },
+  { id: 'beets', name: 'BEETS', label: 'DEX · LST · Validator', url: 'https://app.naly.dev/beets', type: 'work' },
   { id: 'balancer', name: 'BALANCER', label: 'Custom AMM Infrastructure', url: 'https://balancer.fi', type: 'work' },
   { id: 'terminal', name: 'TERMINAL', label: 'Interactive Dashboards', url: 'https://app.naly.dev', type: 'work' },
 
