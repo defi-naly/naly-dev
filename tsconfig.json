@@ -34,6 +34,13 @@
     "**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "tipz",
+    "tipz-extension",
+    "tipz-internal",
+    "naly-terminal",
+    "roots",
+    "zcash-explainer",
+    "sovereign-zec-dashboard"
   ]
 }

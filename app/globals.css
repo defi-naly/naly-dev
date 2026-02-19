@@ -103,3 +103,93 @@ button:focus-visible {
 .data-neutral {
   color: #737373;
 }
+
+/* Print styles for pitch deck */
+@media print {
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .print\:block {
+    display: block !important;
+  }
+
+  .print\:break-after-page {
+    break-after: page;
+  }
+
+  .print\:min-h-screen {
+    min-height: 100vh;
+  }
+
+  /* Light theme pitch deck - minimal adjustments needed */
+  .bg-white {
+    background-color: white !important;
+  }
+
+  /* Swiss red accent in print */
+  .text-\[\#E53935\] {
+    color: #E53935 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .bg-\[\#E53935\] {
+    background-color: #E53935 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .fill-\[\#E53935\] {
+    fill: #E53935 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Ensure SVG colors print correctly */
+  svg rect[fill="#E53935"],
+  svg path[fill="#E53935"],
+  svg circle[fill="#E53935"] {
+    fill: #E53935 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Dark theme fallback styles (kept for backwards compatibility) */
+  .bg-neutral-900,
+  .bg-zinc-900 {
+    background-color: #f5f5f5 !important;
+  }
+
+  .border-neutral-800,
+  .border-zinc-800 {
+    border-color: #d4d4d4 !important;
+  }
+
+  .text-white {
+    color: black !important;
+  }
+
+  .text-neutral-400,
+  .text-neutral-500,
+  .text-zinc-500 {
+    color: #525252 !important;
+  }
+
+  .text-amber-500 {
+    color: #d97706 !important;
+  }
+
+  .text-emerald-500 {
+    color: #059669 !important;
+  }
+
+  .text-red-500 {
+    color: #dc2626 !important;
+  }
+}

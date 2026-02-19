@@ -1,13 +1,14 @@
 import './roots.css';
 import { Metadata } from 'next';
+import { RootsBodyClass } from './components/RootsBodyClass';
 
 export const metadata: Metadata = {
-  title: 'Dylan Adams | The Root System',
-  description: 'Four domains, one root system. Finance, DeFi, paragliding, alpine — everything connects.',
+  title: 'Naly',
+  description: 'DeFi, digital sovereignty, natural systems — three domains, one portfolio.',
   openGraph: {
-    title: 'Dylan Adams | The Root System',
-    description: 'Four domains, one root system.',
-    url: 'https://app.naly.dev/roots',
+    title: 'Naly',
+    description: 'DeFi, digital sovereignty, natural systems — three domains, one portfolio.',
+    url: 'https://naly.dev',
     siteName: 'naly.dev',
     type: 'website',
   },
@@ -18,5 +19,10 @@ export default function RootsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <>
+      <RootsBodyClass />
+      {children}
+    </>
+  );
 }

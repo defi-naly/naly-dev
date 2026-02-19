@@ -1,6 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/beets", "destination": "https://app.naly.dev/beets" },
-    { "source": "/beets/:path*", "destination": "https://app.naly.dev/beets/:path*" }
-  ]
-}
