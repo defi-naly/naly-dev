@@ -42,6 +42,7 @@ export default function BeetsLayout({
 }) {
   return (
     <div className={satoshi.variable}>
+      <link rel="preload" href="/beets/bg-blue.webp" as="image" type="image/webp" />
       {children}
     </div>
   );

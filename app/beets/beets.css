@@ -100,16 +100,16 @@ body {
 .beets-bg-vignette {
   position: absolute;
   inset: 0;
-  background-image: url('/beets/bg-blue.png');
+  background-image: url('/beets/bg-blue.webp');
   background-size: cover;
   background-position: center right;
 }
 
 /* Per-page background variants via data attribute on wrapper */
-[data-beets-bg="green"] .beets-bg-vignette { background-image: url('/beets/bg-green.png'); }
-[data-beets-bg="orange"] .beets-bg-vignette { background-image: url('/beets/bg-orange.png'); }
-[data-beets-bg="red"] .beets-bg-vignette { background-image: url('/beets/bg-red.png'); }
-[data-beets-bg="mono"] .beets-bg-vignette { background-image: url('/beets/bg-mono.png'); }
+[data-beets-bg="green"] .beets-bg-vignette { background-image: url('/beets/bg-green.webp'); }
+[data-beets-bg="orange"] .beets-bg-vignette { background-image: url('/beets/bg-orange.webp'); }
+[data-beets-bg="red"] .beets-bg-vignette { background-image: url('/beets/bg-red.webp'); }
+[data-beets-bg="mono"] .beets-bg-vignette { background-image: url('/beets/bg-mono.webp'); }
 
 /* Per-page accent colors — match each brand background's fan color */
 [data-beets-bg="blue"]   { --bloom-accent: #05d690; --accent-rgb: 5, 214, 144; }
