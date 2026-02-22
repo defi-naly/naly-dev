@@ -1,0 +1,621 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10000001 /* MountainGuideApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000001; };
+		A10000002 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000002; };
+		A10000003 /* SRSCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000003; };
+		A10000004 /* Domain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000004; };
+		A10000005 /* Scenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000005; };
+		A10000006 /* SRSEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000006; };
+		A10000007 /* MasteryEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000007; };
+		A10000008 /* CardGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000008; };
+		A10000009 /* DomainContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000009; };
+		A10000010 /* ScenarioContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010; };
+		A10000011 /* KnowledgeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000011; };
+		A10000012 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000012; };
+		A10000013 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000013; };
+		A10000014 /* ReviewSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000014; };
+		A10000015 /* DomainListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000015; };
+		A10000016 /* ModuleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000016; };
+		A10000017 /* ScenarioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000017; };
+		A10000018 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000018; };
+		B10000001 /* LessonContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000001; };
+		B10000002 /* PracticeQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000002; };
+		B10000003 /* GamificationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000003; };
+		B10000004 /* GamificationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000004; };
+		B10000005 /* WeatherLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000005; };
+		B10000006 /* AvalancheLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000006; };
+		B10000007 /* FlyingLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000007; };
+		B10000008 /* LessonContentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000008; };
+		B10000009 /* LayeredStackDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000009; };
+		B10000010 /* CrossSectionDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000010; };
+		B10000011 /* InteractiveGaugeDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000011; };
+		B10000012 /* ComparisonSplitDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000012; };
+		B10000013 /* ForceArrowDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000013; };
+		B10000014 /* TriangleDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000014; };
+		B10000015 /* TimelineDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000015; };
+		B10000016 /* LabeledSceneDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000016; };
+		B10000017 /* DiagramFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000017; };
+		B10000018 /* MCQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000018; };
+		B10000019 /* SequenceOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000019; };
+		B10000020 /* LabelDiagramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000020; };
+		B10000021 /* TrueFalseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000021; };
+		B10000022 /* CalculationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000022; };
+		B10000023 /* HotspotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000023; };
+		B10000024 /* MatchPairsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000024; };
+		B10000025 /* PracticeQuestionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000025; };
+		B10000026 /* ProgressDotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000026; };
+		B10000027 /* XPAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000027; };
+		B10000028 /* MedalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000028; };
+		B10000029 /* AnimatedCounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000029; };
+		B10000030 /* ConceptMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000030; };
+		B10000031 /* LessonTeachingPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000031; };
+		B10000032 /* LessonPracticePhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000032; };
+		B10000033 /* LessonSynthesisPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000033; };
+		B10000034 /* LessonResultsPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000034; };
+		B10000035 /* LessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000035; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A20000001 /* MountainGuideApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MountainGuideApp.swift; sourceTree = "<group>"; };
+		A20000002 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		A20000003 /* SRSCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRSCard.swift; sourceTree = "<group>"; };
+		A20000004 /* Domain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Domain.swift; sourceTree = "<group>"; };
+		A20000005 /* Scenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenario.swift; sourceTree = "<group>"; };
+		A20000006 /* SRSEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRSEngine.swift; sourceTree = "<group>"; };
+		A20000007 /* MasteryEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasteryEngine.swift; sourceTree = "<group>"; };
+		A20000008 /* CardGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardGenerator.swift; sourceTree = "<group>"; };
+		A20000009 /* DomainContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainContent.swift; sourceTree = "<group>"; };
+		A20000010 /* ScenarioContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioContent.swift; sourceTree = "<group>"; };
+		A20000011 /* KnowledgeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeStore.swift; sourceTree = "<group>"; };
+		A20000012 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		A20000013 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		A20000014 /* ReviewSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSessionView.swift; sourceTree = "<group>"; };
+		A20000015 /* DomainListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainListView.swift; sourceTree = "<group>"; };
+		A20000016 /* ModuleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleDetailView.swift; sourceTree = "<group>"; };
+		A20000017 /* ScenarioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioView.swift; sourceTree = "<group>"; };
+		A20000018 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A30000001 /* MountainGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MountainGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B20000001 /* LessonContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonContent.swift; sourceTree = "<group>"; };
+		B20000002 /* PracticeQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeQuestion.swift; sourceTree = "<group>"; };
+		B20000003 /* GamificationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamificationState.swift; sourceTree = "<group>"; };
+		B20000004 /* GamificationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamificationEngine.swift; sourceTree = "<group>"; };
+		B20000005 /* WeatherLessons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherLessons.swift; sourceTree = "<group>"; };
+		B20000006 /* AvalancheLessons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvalancheLessons.swift; sourceTree = "<group>"; };
+		B20000007 /* FlyingLessons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyingLessons.swift; sourceTree = "<group>"; };
+		B20000008 /* LessonContentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonContentData.swift; sourceTree = "<group>"; };
+		B20000009 /* LayeredStackDiagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayeredStackDiagram.swift; sourceTree = "<group>"; };
+		B20000010 /* CrossSectionDiagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossSectionDiagram.swift; sourceTree = "<group>"; };
+		B20000011 /* InteractiveGaugeDiagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveGaugeDiagram.swift; sourceTree = "<group>"; };
+		B20000012 /* ComparisonSplitDiagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComparisonSplitDiagram.swift; sourceTree = "<group>"; };
+		B20000013 /* ForceArrowDiagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForceArrowDiagram.swift; sourceTree = "<group>"; };
+		B20000014 /* TriangleDiagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangleDiagram.swift; sourceTree = "<group>"; };
+		B20000015 /* TimelineDiagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineDiagram.swift; sourceTree = "<group>"; };
+		B20000016 /* LabeledSceneDiagram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledSceneDiagram.swift; sourceTree = "<group>"; };
+		B20000017 /* DiagramFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagramFactory.swift; sourceTree = "<group>"; };
+		B20000018 /* MCQView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCQView.swift; sourceTree = "<group>"; };
+		B20000019 /* SequenceOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceOrderView.swift; sourceTree = "<group>"; };
+		B20000020 /* LabelDiagramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelDiagramView.swift; sourceTree = "<group>"; };
+		B20000021 /* TrueFalseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrueFalseView.swift; sourceTree = "<group>"; };
+		B20000022 /* CalculationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationView.swift; sourceTree = "<group>"; };
+		B20000023 /* HotspotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotspotView.swift; sourceTree = "<group>"; };
+		B20000024 /* MatchPairsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchPairsView.swift; sourceTree = "<group>"; };
+		B20000025 /* PracticeQuestionFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeQuestionFactory.swift; sourceTree = "<group>"; };
+		B20000026 /* ProgressDotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressDotsView.swift; sourceTree = "<group>"; };
+		B20000027 /* XPAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPAnimationView.swift; sourceTree = "<group>"; };
+		B20000028 /* MedalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalView.swift; sourceTree = "<group>"; };
+		B20000029 /* AnimatedCounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedCounterView.swift; sourceTree = "<group>"; };
+		B20000030 /* ConceptMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConceptMapView.swift; sourceTree = "<group>"; };
+		B20000031 /* LessonTeachingPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonTeachingPhase.swift; sourceTree = "<group>"; };
+		B20000032 /* LessonPracticePhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonPracticePhase.swift; sourceTree = "<group>"; };
+		B20000033 /* LessonSynthesisPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonSynthesisPhase.swift; sourceTree = "<group>"; };
+		B20000034 /* LessonResultsPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonResultsPhase.swift; sourceTree = "<group>"; };
+		B20000035 /* LessonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A40000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A50000001 = {
+			isa = PBXGroup;
+			children = (
+				A50000002 /* MountainGuide */,
+				A50000010 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A50000002 /* MountainGuide */ = {
+			isa = PBXGroup;
+			children = (
+				A20000001 /* MountainGuideApp.swift */,
+				A20000002 /* Theme.swift */,
+				A50000003 /* Models */,
+				A50000004 /* Engine */,
+				A50000005 /* Content */,
+				A50000006 /* Views */,
+				A50000009 /* Services */,
+			);
+			path = MountainGuide;
+			sourceTree = "<group>";
+		};
+		A50000003 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A20000003 /* SRSCard.swift */,
+				A20000004 /* Domain.swift */,
+				A20000005 /* Scenario.swift */,
+				B20000001 /* LessonContent.swift */,
+				B20000002 /* PracticeQuestion.swift */,
+				B20000003 /* GamificationState.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A50000004 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				A20000006 /* SRSEngine.swift */,
+				A20000007 /* MasteryEngine.swift */,
+				A20000008 /* CardGenerator.swift */,
+				B20000004 /* GamificationEngine.swift */,
+			);
+			path = Engine;
+			sourceTree = "<group>";
+		};
+		A50000005 /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				A20000009 /* DomainContent.swift */,
+				A20000010 /* ScenarioContent.swift */,
+				B20000005 /* WeatherLessons.swift */,
+				B20000006 /* AvalancheLessons.swift */,
+				B20000007 /* FlyingLessons.swift */,
+				B20000008 /* LessonContentData.swift */,
+			);
+			path = Content;
+			sourceTree = "<group>";
+		};
+		A50000006 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A50000007 /* Dashboard */,
+				A50000011 /* Review */,
+				A50000008 /* Learn */,
+				A50000012 /* Settings */,
+				B50000001 /* Diagrams */,
+				B50000002 /* Practice */,
+				B50000003 /* Components */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A50000007 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				A20000013 /* DashboardView.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		A50000008 /* Learn */ = {
+			isa = PBXGroup;
+			children = (
+				A20000015 /* DomainListView.swift */,
+				A20000016 /* ModuleDetailView.swift */,
+				A20000017 /* ScenarioView.swift */,
+				B20000031 /* LessonTeachingPhase.swift */,
+				B20000032 /* LessonPracticePhase.swift */,
+				B20000033 /* LessonSynthesisPhase.swift */,
+				B20000034 /* LessonResultsPhase.swift */,
+				B20000035 /* LessonView.swift */,
+			);
+			path = Learn;
+			sourceTree = "<group>";
+		};
+		A50000009 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A20000011 /* KnowledgeStore.swift */,
+				A20000012 /* NotificationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A50000010 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A30000001 /* MountainGuide.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A50000011 /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				A20000014 /* ReviewSessionView.swift */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
+		A50000012 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				A20000018 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		B50000001 /* Diagrams */ = {
+			isa = PBXGroup;
+			children = (
+				B20000009 /* LayeredStackDiagram.swift */,
+				B20000010 /* CrossSectionDiagram.swift */,
+				B20000011 /* InteractiveGaugeDiagram.swift */,
+				B20000012 /* ComparisonSplitDiagram.swift */,
+				B20000013 /* ForceArrowDiagram.swift */,
+				B20000014 /* TriangleDiagram.swift */,
+				B20000015 /* TimelineDiagram.swift */,
+				B20000016 /* LabeledSceneDiagram.swift */,
+				B20000017 /* DiagramFactory.swift */,
+			);
+			path = Diagrams;
+			sourceTree = "<group>";
+		};
+		B50000002 /* Practice */ = {
+			isa = PBXGroup;
+			children = (
+				B20000018 /* MCQView.swift */,
+				B20000019 /* SequenceOrderView.swift */,
+				B20000020 /* LabelDiagramView.swift */,
+				B20000021 /* TrueFalseView.swift */,
+				B20000022 /* CalculationView.swift */,
+				B20000023 /* HotspotView.swift */,
+				B20000024 /* MatchPairsView.swift */,
+				B20000025 /* PracticeQuestionFactory.swift */,
+			);
+			path = Practice;
+			sourceTree = "<group>";
+		};
+		B50000003 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B20000026 /* ProgressDotsView.swift */,
+				B20000027 /* XPAnimationView.swift */,
+				B20000028 /* MedalView.swift */,
+				B20000029 /* AnimatedCounterView.swift */,
+				B20000030 /* ConceptMapView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A60000001 /* MountainGuide */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A80000003 /* Build configuration list for PBXNativeTarget "MountainGuide" */;
+			buildPhases = (
+				A70000001 /* Sources */,
+				A40000001 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MountainGuide;
+			productName = MountainGuide;
+			productReference = A30000001 /* MountainGuide.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A90000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					A60000001 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+				};
+			};
+			buildConfigurationList = A80000001 /* Build configuration list for PBXProject "MountainGuide" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A50000001;
+			productRefGroup = A50000010 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A60000001 /* MountainGuide */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A70000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000001 /* MountainGuideApp.swift in Sources */,
+				A10000002 /* Theme.swift in Sources */,
+				A10000003 /* SRSCard.swift in Sources */,
+				A10000004 /* Domain.swift in Sources */,
+				A10000005 /* Scenario.swift in Sources */,
+				A10000006 /* SRSEngine.swift in Sources */,
+				A10000007 /* MasteryEngine.swift in Sources */,
+				A10000008 /* CardGenerator.swift in Sources */,
+				A10000009 /* DomainContent.swift in Sources */,
+				A10000010 /* ScenarioContent.swift in Sources */,
+				A10000011 /* KnowledgeStore.swift in Sources */,
+				A10000012 /* NotificationService.swift in Sources */,
+				A10000013 /* DashboardView.swift in Sources */,
+				A10000014 /* ReviewSessionView.swift in Sources */,
+				A10000015 /* DomainListView.swift in Sources */,
+				A10000016 /* ModuleDetailView.swift in Sources */,
+				A10000017 /* ScenarioView.swift in Sources */,
+				A10000018 /* SettingsView.swift in Sources */,
+				B10000001 /* LessonContent.swift in Sources */,
+				B10000002 /* PracticeQuestion.swift in Sources */,
+				B10000003 /* GamificationState.swift in Sources */,
+				B10000004 /* GamificationEngine.swift in Sources */,
+				B10000005 /* WeatherLessons.swift in Sources */,
+				B10000006 /* AvalancheLessons.swift in Sources */,
+				B10000007 /* FlyingLessons.swift in Sources */,
+				B10000008 /* LessonContentData.swift in Sources */,
+				B10000009 /* LayeredStackDiagram.swift in Sources */,
+				B10000010 /* CrossSectionDiagram.swift in Sources */,
+				B10000011 /* InteractiveGaugeDiagram.swift in Sources */,
+				B10000012 /* ComparisonSplitDiagram.swift in Sources */,
+				B10000013 /* ForceArrowDiagram.swift in Sources */,
+				B10000014 /* TriangleDiagram.swift in Sources */,
+				B10000015 /* TimelineDiagram.swift in Sources */,
+				B10000016 /* LabeledSceneDiagram.swift in Sources */,
+				B10000017 /* DiagramFactory.swift in Sources */,
+				B10000018 /* MCQView.swift in Sources */,
+				B10000019 /* SequenceOrderView.swift in Sources */,
+				B10000020 /* LabelDiagramView.swift in Sources */,
+				B10000021 /* TrueFalseView.swift in Sources */,
+				B10000022 /* CalculationView.swift in Sources */,
+				B10000023 /* HotspotView.swift in Sources */,
+				B10000024 /* MatchPairsView.swift in Sources */,
+				B10000025 /* PracticeQuestionFactory.swift in Sources */,
+				B10000026 /* ProgressDotsView.swift in Sources */,
+				B10000027 /* XPAnimationView.swift in Sources */,
+				B10000028 /* MedalView.swift in Sources */,
+				B10000029 /* AnimatedCounterView.swift in Sources */,
+				B10000030 /* ConceptMapView.swift in Sources */,
+				B10000031 /* LessonTeachingPhase.swift in Sources */,
+				B10000032 /* LessonPracticePhase.swift in Sources */,
+				B10000033 /* LessonSynthesisPhase.swift in Sources */,
+				B10000034 /* LessonResultsPhase.swift in Sources */,
+				B10000035 /* LessonView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A80000101 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A80000102 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A80000201 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.naly.MountainGuide;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A80000202 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.naly.MountainGuide;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A80000001 /* Build configuration list for PBXProject "MountainGuide" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A80000101 /* Debug */,
+				A80000102 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A80000003 /* Build configuration list for PBXNativeTarget "MountainGuide" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A80000201 /* Debug */,
+				A80000202 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = A90000001 /* Project object */;
+}
