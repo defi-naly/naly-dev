@@ -14,6 +14,14 @@ enum LessonContentData {
             return avalancheLessons[slug]
         case .flying:
             return flyingLessons[slug]
+        case .navigation:
+            return navigationLessons[slug]
+        case .ropeSystems:
+            return ropeSystemsLessons[slug]
+        case .glacierTravel:
+            return glacierTravelLessons[slug]
+        case .firstAid:
+            return firstAidLessons[slug]
         }
     }
 
@@ -65,5 +73,65 @@ enum LessonContentData {
         "xc-tactics": FlyingLessons.xcTactics,
         "convergence-sea-breeze": FlyingLessons.convergenceSeaBreeze,
         "between-thermals": FlyingLessons.betweenThermals,
+    ]
+
+    // MARK: - Navigation Lessons
+
+    private static let navigationLessons: [String: Lesson] = [
+        "map-reading": NavigationLessons.mapReading,
+        "compass": NavigationLessons.compass,
+        "gps": NavigationLessons.gps,
+        "route-planning": NavigationLessons.routePlanning,
+        "terrain-association": NavigationLessons.terrainAssociation,
+        "contouring": NavigationLessons.contouring,
+        "triangulation": NavigationLessons.triangulation,
+        "whiteout-navigation": NavigationLessons.whiteoutNavigation,
+        "night-navigation": NavigationLessons.nightNavigation,
+        "emergency-navigation": NavigationLessons.emergencyNavigation,
+    ]
+
+    // MARK: - Rope Systems Lessons
+
+    private static let ropeSystemsLessons: [String: Lesson] = [
+        "knots": RopeSystemsLessons.knots,
+        "anchors": RopeSystemsLessons.anchors,
+        "belaying": RopeSystemsLessons.belaying,
+        "rappelling": RopeSystemsLessons.rappelling,
+        "rope-mechanics": RopeSystemsLessons.ropeMechanics,
+        "top-rope": RopeSystemsLessons.topRope,
+        "multi-pitch": RopeSystemsLessons.multiPitch,
+        "rescue-hauls": RopeSystemsLessons.rescueHauls,
+        "crevasse-rescue-rope": RopeSystemsLessons.crevasseRescueRope,
+        "improvised-systems": RopeSystemsLessons.improvisedSystems,
+    ]
+
+    // MARK: - Glacier Travel Lessons
+
+    private static let glacierTravelLessons: [String: Lesson] = [
+        "glacier-anatomy": GlacierTravelLessons.glacierAnatomy,
+        "crevasse-identification": GlacierTravelLessons.crevasseIdentification,
+        "rope-teams": GlacierTravelLessons.ropeTeams,
+        "probe-techniques": GlacierTravelLessons.probeTechniques,
+        "glacier-route-finding": GlacierTravelLessons.glacierRouteFinding,
+        "travel-protocols": GlacierTravelLessons.travelProtocols,
+        "crevasse-rescue": GlacierTravelLessons.crevasseRescue,
+        "glacier-camping": GlacierTravelLessons.glacierCamping,
+        "seasonal-changes": GlacierTravelLessons.seasonalChanges,
+        "glacier-weather": GlacierTravelLessons.glacierWeather,
+    ]
+
+    // MARK: - First Aid Lessons
+
+    private static let firstAidLessons: [String: Lesson] = [
+        "wilderness-assessment": FirstAidLessons.wildernessAssessment,
+        "hypothermia": FirstAidLessons.hypothermia,
+        "altitude-sickness": FirstAidLessons.altitudeSickness,
+        "fractures-splints": FirstAidLessons.fracturesSplints,
+        "wound-care": FirstAidLessons.woundCare,
+        "lightning-injuries": FirstAidLessons.lightningInjuries,
+        "frostbite": FirstAidLessons.frostbite,
+        "dehydration-heat": FirstAidLessons.dehydrationHeat,
+        "emergency-shelter": FirstAidLessons.emergencyShelter,
+        "evacuation-planning": FirstAidLessons.evacuationPlanning,
     ]
 }

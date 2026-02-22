@@ -7,12 +7,20 @@ enum DomainId: String, Codable, CaseIterable {
     case weather
     case avalanche
     case flying
+    case navigation
+    case ropeSystems
+    case glacierTravel
+    case firstAid
 
     var color: Color {
         switch self {
         case .weather: return .weatherAccent
         case .avalanche: return .avalancheAccent
         case .flying: return .flyingAccent
+        case .navigation: return .navigationAccent
+        case .ropeSystems: return .ropeSystemsAccent
+        case .glacierTravel: return .glacierTravelAccent
+        case .firstAid: return .firstAidAccent
         }
     }
 
@@ -21,6 +29,10 @@ enum DomainId: String, Codable, CaseIterable {
         case .weather: return "cloud.sun.fill"
         case .avalanche: return "mountain.2.fill"
         case .flying: return "bird.fill"
+        case .navigation: return "location.north.fill"
+        case .ropeSystems: return "link"
+        case .glacierTravel: return "snowflake"
+        case .firstAid: return "cross.case.fill"
         }
     }
 }

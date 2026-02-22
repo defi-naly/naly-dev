@@ -116,6 +116,11 @@ struct InteractiveGaugeDiagram: View {
                     .font(.mono(9))
                     .foregroundStyle(Color.textDim)
                     .position(x: w - 20, y: trackY + trackHeight / 2 + 44)
+
+                // Slope angle visual (when unit is degrees)
+                if unit == "°" {
+                    slopeAngleVisual(w: w, h: h)
+                }
             }
         }
         .onChange(of: stepIndex) { _ in
@@ -136,5 +141,44 @@ struct InteractiveGaugeDiagram: View {
             return Color(hex: zone.color)
         }
         return .amber
+    }
+
+    private func slopeAngleVisual(w: CGFloat, h: CGFloat) -> some View {
+        let originX = w * 0.15
+        let originY = h * 0.92
+        let lineLen: CGFloat = w * 0.3
+        let angleRad = currentValue * .pi / 180
+
+        return ZStack {
+            // Horizontal reference
+            Path { path in
+                path.move(to: CGPoint(x: originX, y: originY))
+                path.addLine(to: CGPoint(x: originX + lineLen, y: originY))
+            }
+            .stroke(Color.terminalBorder.opacity(0.5), lineWidth: 1)
+
+            // Tilted slope line
+            Path { path in
+                path.move(to: CGPoint(x: originX, y: originY))
+                path.addLine(to: CGPoint(
+                    x: originX + lineLen * cos(angleRad),
+                    y: originY - lineLen * sin(angleRad)
+                ))
+            }
+            .stroke(currentZoneColor, lineWidth: 2)
+
+            // Arc showing angle
+            Path { path in
+                path.addArc(
+                    center: CGPoint(x: originX, y: originY),
+                    radius: 20,
+                    startAngle: .degrees(0),
+                    endAngle: .degrees(-Double(currentValue)),
+                    clockwise: true
+                )
+            }
+            .stroke(currentZoneColor.opacity(0.5), lineWidth: 1)
+        }
+        .animation(.spring(response: 0.3), value: currentValue)
     }
 }

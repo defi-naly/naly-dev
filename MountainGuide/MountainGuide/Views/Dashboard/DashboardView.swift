@@ -31,7 +31,7 @@ struct DashboardView: View {
                         )
                         StatCard(
                             label: "Mastered",
-                            value: "\(store.completedModuleCount())/30",
+                            value: "\(store.completedModuleCount())/\(DomainContent.allDomains.reduce(0) { $0 + $1.modules.count })",
                             icon: "checkmark.seal.fill",
                             color: .emerald
                         )

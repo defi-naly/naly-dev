@@ -27,12 +27,9 @@ struct LabeledSceneDiagram: View {
                         )
                     )
 
-                // Scene description
+                // Rendered scene content
                 if let desc = config.sceneDescription {
-                    Text(desc)
-                        .font(.mono(9))
-                        .foregroundStyle(Color.textDim)
-                        .position(x: w / 2, y: h - 16)
+                    SceneRenderer.render(description: desc, width: w, height: h)
                 }
 
                 // Hotspot markers

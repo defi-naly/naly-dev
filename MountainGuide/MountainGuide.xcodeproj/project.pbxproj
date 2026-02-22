@@ -60,6 +60,41 @@
 		B10000033 /* LessonSynthesisPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000033; };
 		B10000034 /* LessonResultsPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000034; };
 		B10000035 /* LessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000035; };
+		C10000001 /* CloudShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000001; };
+		C10000002 /* SceneRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000002; };
+		C10000003 /* DefaultScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000003; };
+		C10000004 /* CumulusScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000004; };
+		C10000005 /* LenticularScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000005; };
+		C10000006 /* CumulonimbusScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000006; };
+		C10000007 /* CloudStreetScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000007; };
+		C10000008 /* DyingVsBuildingScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000008; };
+		C10000009 /* MountainCloudOverviewScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000009; };
+		C10000010 /* SurfaceTypesScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000010; };
+		C10000011 /* TerrainTrapCrossSectionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000011; };
+		C10000012 /* GullyComparisonScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000012; };
+		C10000013 /* CliffBandScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000013; };
+		C10000014 /* ForestTerrainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000014; };
+		C10000015 /* MapContourScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000015; };
+		C10000016 /* KnotDiagramScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000016; };
+		C10000017 /* GlacierSurfaceScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000017; };
+		C10000018 /* BodyAssessmentScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000018; };
+		C10000019 /* RopeTeamScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000019; };
+		C10000020 /* AnchorSystemScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000020; };
+		D10000001 /* ExploreContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000001; };
+		D10000002 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000002; };
+		D10000003 /* ExploreArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000003; };
+		D10000004 /* ExploreContentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000004; };
+		D10000005 /* WeatherExplore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000005; };
+		D10000006 /* AvalancheExplore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000006; };
+		D10000007 /* FlyingExplore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000007; };
+		D10000008 /* NavigationExplore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000008; };
+		D10000009 /* RopeSystemsExplore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000009; };
+		D10000010 /* GlacierTravelExplore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000010; };
+		D10000011 /* FirstAidExplore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000011; };
+		E10000001 /* NavigationLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20000001; };
+		E10000002 /* RopeSystemsLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20000002; };
+		E10000003 /* GlacierTravelLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20000003; };
+		E10000004 /* FirstAidLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20000004; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +152,41 @@
 		B20000033 /* LessonSynthesisPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonSynthesisPhase.swift; sourceTree = "<group>"; };
 		B20000034 /* LessonResultsPhase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonResultsPhase.swift; sourceTree = "<group>"; };
 		B20000035 /* LessonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonView.swift; sourceTree = "<group>"; };
+		C20000001 /* CloudShapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudShapes.swift; sourceTree = "<group>"; };
+		C20000002 /* SceneRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneRenderer.swift; sourceTree = "<group>"; };
+		C20000003 /* DefaultScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultScene.swift; sourceTree = "<group>"; };
+		C20000004 /* CumulusScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CumulusScene.swift; sourceTree = "<group>"; };
+		C20000005 /* LenticularScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LenticularScene.swift; sourceTree = "<group>"; };
+		C20000006 /* CumulonimbusScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CumulonimbusScene.swift; sourceTree = "<group>"; };
+		C20000007 /* CloudStreetScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStreetScene.swift; sourceTree = "<group>"; };
+		C20000008 /* DyingVsBuildingScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DyingVsBuildingScene.swift; sourceTree = "<group>"; };
+		C20000009 /* MountainCloudOverviewScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MountainCloudOverviewScene.swift; sourceTree = "<group>"; };
+		C20000010 /* SurfaceTypesScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurfaceTypesScene.swift; sourceTree = "<group>"; };
+		C20000011 /* TerrainTrapCrossSectionScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerrainTrapCrossSectionScene.swift; sourceTree = "<group>"; };
+		C20000012 /* GullyComparisonScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GullyComparisonScene.swift; sourceTree = "<group>"; };
+		C20000013 /* CliffBandScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CliffBandScene.swift; sourceTree = "<group>"; };
+		C20000014 /* ForestTerrainScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForestTerrainScene.swift; sourceTree = "<group>"; };
+		C20000015 /* MapContourScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapContourScene.swift; sourceTree = "<group>"; };
+		C20000016 /* KnotDiagramScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnotDiagramScene.swift; sourceTree = "<group>"; };
+		C20000017 /* GlacierSurfaceScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlacierSurfaceScene.swift; sourceTree = "<group>"; };
+		C20000018 /* BodyAssessmentScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyAssessmentScene.swift; sourceTree = "<group>"; };
+		C20000019 /* RopeTeamScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RopeTeamScene.swift; sourceTree = "<group>"; };
+		C20000020 /* AnchorSystemScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchorSystemScene.swift; sourceTree = "<group>"; };
+		D20000001 /* ExploreContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreContent.swift; sourceTree = "<group>"; };
+		D20000002 /* ExploreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreView.swift; sourceTree = "<group>"; };
+		D20000003 /* ExploreArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreArticleView.swift; sourceTree = "<group>"; };
+		D20000004 /* ExploreContentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreContentData.swift; sourceTree = "<group>"; };
+		D20000005 /* WeatherExplore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherExplore.swift; sourceTree = "<group>"; };
+		D20000006 /* AvalancheExplore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvalancheExplore.swift; sourceTree = "<group>"; };
+		D20000007 /* FlyingExplore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyingExplore.swift; sourceTree = "<group>"; };
+		D20000008 /* NavigationExplore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationExplore.swift; sourceTree = "<group>"; };
+		D20000009 /* RopeSystemsExplore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RopeSystemsExplore.swift; sourceTree = "<group>"; };
+		D20000010 /* GlacierTravelExplore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlacierTravelExplore.swift; sourceTree = "<group>"; };
+		D20000011 /* FirstAidExplore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidExplore.swift; sourceTree = "<group>"; };
+		E20000001 /* NavigationLessons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLessons.swift; sourceTree = "<group>"; };
+		E20000002 /* RopeSystemsLessons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RopeSystemsLessons.swift; sourceTree = "<group>"; };
+		E20000003 /* GlacierTravelLessons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlacierTravelLessons.swift; sourceTree = "<group>"; };
+		E20000004 /* FirstAidLessons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidLessons.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +231,7 @@
 				B20000001 /* LessonContent.swift */,
 				B20000002 /* PracticeQuestion.swift */,
 				B20000003 /* GamificationState.swift */,
+				D20000001 /* ExploreContent.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -184,9 +255,29 @@
 				B20000005 /* WeatherLessons.swift */,
 				B20000006 /* AvalancheLessons.swift */,
 				B20000007 /* FlyingLessons.swift */,
+				E20000001 /* NavigationLessons.swift */,
+				E20000002 /* RopeSystemsLessons.swift */,
+				E20000003 /* GlacierTravelLessons.swift */,
+				E20000004 /* FirstAidLessons.swift */,
 				B20000008 /* LessonContentData.swift */,
+				C50000001 /* Explore */,
 			);
 			path = Content;
+			sourceTree = "<group>";
+		};
+		C50000001 /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				D20000004 /* ExploreContentData.swift */,
+				D20000005 /* WeatherExplore.swift */,
+				D20000006 /* AvalancheExplore.swift */,
+				D20000007 /* FlyingExplore.swift */,
+				D20000008 /* NavigationExplore.swift */,
+				D20000009 /* RopeSystemsExplore.swift */,
+				D20000010 /* GlacierTravelExplore.swift */,
+				D20000011 /* FirstAidExplore.swift */,
+			);
+			path = Explore;
 			sourceTree = "<group>";
 		};
 		A50000006 /* Views */ = {
@@ -195,12 +286,22 @@
 				A50000007 /* Dashboard */,
 				A50000011 /* Review */,
 				A50000008 /* Learn */,
+				D50000001 /* Explore */,
 				A50000012 /* Settings */,
 				B50000001 /* Diagrams */,
 				B50000002 /* Practice */,
 				B50000003 /* Components */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D50000001 /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				D20000002 /* ExploreView.swift */,
+				D20000003 /* ExploreArticleView.swift */,
+			);
+			path = Explore;
 			sourceTree = "<group>";
 		};
 		A50000007 /* Dashboard */ = {
@@ -271,8 +372,36 @@
 				B20000015 /* TimelineDiagram.swift */,
 				B20000016 /* LabeledSceneDiagram.swift */,
 				B20000017 /* DiagramFactory.swift */,
+				C50000002 /* Scenes */,
 			);
 			path = Diagrams;
+			sourceTree = "<group>";
+		};
+		C50000002 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				C20000001 /* CloudShapes.swift */,
+				C20000002 /* SceneRenderer.swift */,
+				C20000003 /* DefaultScene.swift */,
+				C20000004 /* CumulusScene.swift */,
+				C20000005 /* LenticularScene.swift */,
+				C20000006 /* CumulonimbusScene.swift */,
+				C20000007 /* CloudStreetScene.swift */,
+				C20000008 /* DyingVsBuildingScene.swift */,
+				C20000009 /* MountainCloudOverviewScene.swift */,
+				C20000010 /* SurfaceTypesScene.swift */,
+				C20000011 /* TerrainTrapCrossSectionScene.swift */,
+				C20000012 /* GullyComparisonScene.swift */,
+				C20000013 /* CliffBandScene.swift */,
+				C20000014 /* ForestTerrainScene.swift */,
+				C20000015 /* MapContourScene.swift */,
+				C20000016 /* KnotDiagramScene.swift */,
+				C20000017 /* GlacierSurfaceScene.swift */,
+				C20000018 /* BodyAssessmentScene.swift */,
+				C20000019 /* RopeTeamScene.swift */,
+				C20000020 /* AnchorSystemScene.swift */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		B50000002 /* Practice */ = {
@@ -412,6 +541,41 @@
 				B10000033 /* LessonSynthesisPhase.swift in Sources */,
 				B10000034 /* LessonResultsPhase.swift in Sources */,
 				B10000035 /* LessonView.swift in Sources */,
+				C10000001 /* CloudShapes.swift in Sources */,
+				C10000002 /* SceneRenderer.swift in Sources */,
+				C10000003 /* DefaultScene.swift in Sources */,
+				C10000004 /* CumulusScene.swift in Sources */,
+				C10000005 /* LenticularScene.swift in Sources */,
+				C10000006 /* CumulonimbusScene.swift in Sources */,
+				C10000007 /* CloudStreetScene.swift in Sources */,
+				C10000008 /* DyingVsBuildingScene.swift in Sources */,
+				C10000009 /* MountainCloudOverviewScene.swift in Sources */,
+				C10000010 /* SurfaceTypesScene.swift in Sources */,
+				C10000011 /* TerrainTrapCrossSectionScene.swift in Sources */,
+				C10000012 /* GullyComparisonScene.swift in Sources */,
+				C10000013 /* CliffBandScene.swift in Sources */,
+				C10000014 /* ForestTerrainScene.swift in Sources */,
+				C10000015 /* MapContourScene.swift in Sources */,
+				C10000016 /* KnotDiagramScene.swift in Sources */,
+				C10000017 /* GlacierSurfaceScene.swift in Sources */,
+				C10000018 /* BodyAssessmentScene.swift in Sources */,
+				C10000019 /* RopeTeamScene.swift in Sources */,
+				C10000020 /* AnchorSystemScene.swift in Sources */,
+				D10000001 /* ExploreContent.swift in Sources */,
+				D10000002 /* ExploreView.swift in Sources */,
+				D10000003 /* ExploreArticleView.swift in Sources */,
+				D10000004 /* ExploreContentData.swift in Sources */,
+				D10000005 /* WeatherExplore.swift in Sources */,
+				D10000006 /* AvalancheExplore.swift in Sources */,
+				D10000007 /* FlyingExplore.swift in Sources */,
+				D10000008 /* NavigationExplore.swift in Sources */,
+				D10000009 /* RopeSystemsExplore.swift in Sources */,
+				D10000010 /* GlacierTravelExplore.swift in Sources */,
+				D10000011 /* FirstAidExplore.swift in Sources */,
+				E10000001 /* NavigationLessons.swift in Sources */,
+				E10000002 /* RopeSystemsLessons.swift in Sources */,
+				E10000003 /* GlacierTravelLessons.swift in Sources */,
+				E10000004 /* FirstAidLessons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

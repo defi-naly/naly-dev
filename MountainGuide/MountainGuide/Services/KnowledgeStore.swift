@@ -30,7 +30,8 @@ struct KnowledgeState: Codable {
 class KnowledgeStore: ObservableObject {
     @Published var state: KnowledgeState
 
-    private static let storageKey = "mountains-knowledge-v3"
+    private static let storageKey = "mountains-knowledge-v4"
+    private static let v3StorageKey = "mountains-knowledge-v3"
     private static let legacyStorageKey = "mountains-knowledge-v2"
 
     var dueCardCount: Int {
@@ -48,21 +49,31 @@ class KnowledgeStore: ObservableObject {
     // MARK: - Persistence
 
     private static func load() -> KnowledgeState {
-        // Try v3 first
+        // Try v4 first
         if let data = UserDefaults.standard.data(forKey: storageKey),
            let state = try? JSONDecoder().decode(KnowledgeState.self, from: data) {
-            return state
+            return fillMissingModules(state)
+        }
+
+        // Try migrating from v3
+        if let data = UserDefaults.standard.data(forKey: v3StorageKey),
+           let v3State = try? JSONDecoder().decode(KnowledgeState.self, from: data) {
+            let migrated = migrateV3toV4(v3State)
+            if let newData = try? JSONEncoder().encode(migrated) {
+                UserDefaults.standard.set(newData, forKey: storageKey)
+            }
+            return migrated
         }
 
         // Try migrating from v2
         if let data = UserDefaults.standard.data(forKey: legacyStorageKey),
            let legacy = try? JSONDecoder().decode(LegacyKnowledgeStateV2.self, from: data) {
             let migrated = migrateV2toV3(legacy)
-            // Persist migrated state
-            if let newData = try? JSONEncoder().encode(migrated) {
+            let v4 = migrateV3toV4(migrated)
+            if let newData = try? JSONEncoder().encode(v4) {
                 UserDefaults.standard.set(newData, forKey: storageKey)
             }
-            return migrated
+            return v4
         }
 
         return createDefaultState()
@@ -92,6 +103,33 @@ class KnowledgeStore: ObservableObject {
         )
     }
 
+    // MARK: - V3 → V4 Migration (adds 4 new domains)
+
+    private static func migrateV3toV4(_ v3: KnowledgeState) -> KnowledgeState {
+        var state = v3
+        state.version = 4
+        return fillMissingModules(state)
+    }
+
+    /// Ensures all domains/modules defined in DomainContent have entries in state.
+    /// This handles both migration and any future domain additions gracefully.
+    private static func fillMissingModules(_ state: KnowledgeState) -> KnowledgeState {
+        var updated = state
+        for domain in DomainContent.allDomains {
+            for mod in domain.modules {
+                let key = "\(domain.id.rawValue)-\(mod.slug)"
+                if updated.modules[key] == nil {
+                    updated.modules[key] = MasteryEngine.createModuleMastery(
+                        domain: domain.id,
+                        moduleId: mod.id,
+                        moduleSlug: mod.slug
+                    )
+                }
+            }
+        }
+        return updated
+    }
+
     static func createDefaultState() -> KnowledgeState {
         var modules: [String: ModuleMastery] = [:]
 
@@ -111,7 +149,7 @@ class KnowledgeStore: ObservableObject {
             cards: [],
             stats: .empty(),
             gamification: .empty(),
-            version: 3
+            version: 4
         )
     }
 

@@ -23,6 +23,10 @@ extension Color {
     static let weatherAccent = Color(hex: "7BA7CC")
     static let avalancheAccent = Color.white
     static let flyingAccent = Color(hex: "E8A87C")
+    static let navigationAccent = Color(hex: "8B5CF6")
+    static let ropeSystemsAccent = Color(hex: "F97316")
+    static let glacierTravelAccent = Color(hex: "06B6D4")
+    static let firstAidAccent = Color(hex: "EF4444")
 
     // Medal colors
     static let medalBronze = Color(hex: "CD7F32")

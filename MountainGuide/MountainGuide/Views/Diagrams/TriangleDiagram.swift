@@ -55,14 +55,20 @@ struct TriangleDiagram: View {
                         let isTapped = tappedVertex == vertex.id
 
                         VStack(spacing: 4) {
-                            Circle()
-                                .fill(isRevealed ? Color(hex: vertex.color) : Color.terminalBorder)
-                                .frame(width: 36, height: 36)
-                                .overlay(
-                                    Circle()
-                                        .stroke(Color(hex: vertex.color).opacity(isRevealed ? 0.6 : 0.2), lineWidth: 2)
-                                )
-                                .shadow(color: isRevealed ? Color(hex: vertex.color).opacity(0.4) : .clear, radius: 6)
+                            ZStack {
+                                Circle()
+                                    .fill(isRevealed ? Color(hex: vertex.color).opacity(0.2) : Color.terminalBorder)
+                                    .frame(width: 36, height: 36)
+                                    .overlay(
+                                        Circle()
+                                            .stroke(Color(hex: vertex.color).opacity(isRevealed ? 0.6 : 0.2), lineWidth: 2)
+                                    )
+                                    .shadow(color: isRevealed ? Color(hex: vertex.color).opacity(0.4) : .clear, radius: 6)
+
+                                Image(systemName: Self.iconForVertex(vertex.label))
+                                    .font(.system(size: 14, weight: .medium))
+                                    .foregroundStyle(isRevealed ? Color(hex: vertex.color) : Color.textDim)
+                            }
 
                             Text(vertex.label)
                                 .font(.mono(10, weight: .bold))
@@ -129,6 +135,20 @@ struct TriangleDiagram: View {
                 y: center.y + radius * sin(angle)
             )
         }
+    }
+
+    static func iconForVertex(_ label: String) -> String {
+        let t = label.lowercased()
+        if t.contains("terrain") { return "mountain.2" }
+        if t.contains("snowpack") || t.contains("snow") { return "snowflake" }
+        if t.contains("weather") || t.contains("trigger") { return "cloud.bolt" }
+        if t.contains("human") || t.contains("people") { return "person" }
+        if t.contains("wind") { return "wind" }
+        if t.contains("temperature") { return "thermometer.medium" }
+        if t.contains("moisture") { return "drop" }
+        if t.contains("instability") { return "exclamationmark.triangle" }
+        if t.contains("lift") { return "arrow.up" }
+        return "circle.fill"
     }
 
     private func revealVertices() {

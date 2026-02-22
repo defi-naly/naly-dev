@@ -19,7 +19,7 @@ struct ContentView: View {
     @State private var selectedTab: Tab = .dashboard
 
     enum Tab: String {
-        case dashboard, learn, review, settings
+        case dashboard, learn, explore, review, settings
     }
 
     var body: some View {
@@ -35,6 +35,12 @@ struct ContentView: View {
                     Label("Learn", systemImage: "book.fill")
                 }
                 .tag(Tab.learn)
+
+            ExploreView()
+                .tabItem {
+                    Label("Explore", systemImage: "book.pages")
+                }
+                .tag(Tab.explore)
 
             ReviewSessionView()
                 .tabItem {

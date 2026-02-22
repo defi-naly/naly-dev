@@ -27,13 +27,18 @@ struct ForceArrowDiagram: View {
                     let to = CGPoint(x: arrow.toX * w, y: (1 - arrow.toY) * h)
                     let color = Color(hex: arrow.color)
 
-                    // Arrow shaft
+                    // Arrow shaft (width proportional to arrow length)
+                    let dx = arrow.toX - arrow.fromX
+                    let dy = arrow.toY - arrow.fromY
+                    let magnitude = sqrt(dx * dx + dy * dy)
+                    let strokeW = max(1.5, min(5.0, 1.5 + magnitude * 5.0))
+
                     Path { path in
                         path.move(to: from)
                         path.addLine(to: to)
                     }
                     .trim(from: 0, to: arrowProgress)
-                    .stroke(color, style: StrokeStyle(lineWidth: 2.5, lineCap: .round))
+                    .stroke(color, style: StrokeStyle(lineWidth: strokeW, lineCap: .round))
 
                     // Arrowhead
                     if arrowProgress > 0.8 {

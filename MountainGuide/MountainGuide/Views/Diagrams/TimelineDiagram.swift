@@ -19,7 +19,7 @@ struct TimelineDiagram: View {
             let padding: CGFloat = 30
 
             let usableWidth = w - padding * 2
-            let spacing = segments.count > 1 ? usableWidth / CGFloat(segments.count - 1) : 0
+            let positions = nodePositions(usableWidth: usableWidth, padding: padding)
 
             ZStack {
                 // Track line
@@ -29,20 +29,26 @@ struct TimelineDiagram: View {
                 }
                 .stroke(Color.terminalBorder, lineWidth: 2)
 
-                // Active track line
+                // Colored track segments between nodes
                 if revealedNodes > 0 {
-                    let endX = padding + CGFloat(min(revealedNodes - 1, segments.count - 1)) * spacing
-                    Path { path in
-                        path.move(to: CGPoint(x: padding, y: trackY))
-                        path.addLine(to: CGPoint(x: endX, y: trackY))
+                    ForEach(0..<min(revealedNodes, segments.count), id: \.self) { i in
+                        if i < segments.count - 1, i + 1 < positions.count {
+                            let startX = positions[i]
+                            let endX = positions[i + 1]
+                            let segColor = Color(hex: segments[i].color)
+                            Path { path in
+                                path.move(to: CGPoint(x: startX, y: trackY))
+                                path.addLine(to: CGPoint(x: endX, y: trackY))
+                            }
+                            .stroke(segColor, lineWidth: 3)
+                            .shadow(color: segColor.opacity(0.4), radius: 3)
+                        }
                     }
-                    .stroke(Color.amber, lineWidth: 2)
-                    .shadow(color: .amber.opacity(0.4), radius: 3)
                 }
 
                 // Nodes and labels
                 ForEach(Array(segments.enumerated()), id: \.element.id) { index, segment in
-                    let x = padding + CGFloat(index) * spacing
+                    let x = index < positions.count ? positions[index] : padding
                     let isActive = index < revealedNodes
                     let isCurrent = index == revealedNodes - 1
                     let segmentColor = Color(hex: segment.color)
@@ -72,7 +78,7 @@ struct TimelineDiagram: View {
                         .font(.mono(9, weight: isActive ? .bold : .regular))
                         .foregroundStyle(isActive ? Color.textPrimary : Color.textDim)
                         .multilineTextAlignment(.center)
-                        .frame(width: max(spacing - 4, 60))
+                        .frame(width: max(usableWidth / max(CGFloat(segments.count), 1) - 4, 60))
                         .position(x: x, y: trackY - nodeRadius - 20)
 
                     // Description below (when current)
@@ -90,6 +96,31 @@ struct TimelineDiagram: View {
         }
         .onAppear { revealNodes() }
         .onChange(of: stepIndex) { _ in revealNodes() }
+    }
+
+    /// Compute node X positions proportional to segment values.
+    /// Falls back to equal spacing if all values are zero.
+    private func nodePositions(usableWidth: CGFloat, padding: CGFloat) -> [CGFloat] {
+        guard segments.count > 1 else {
+            return segments.isEmpty ? [] : [padding + usableWidth / 2]
+        }
+
+        let totalValue = segments.reduce(CGFloat(0)) { $0 + max($1.value, 0) }
+
+        // If no meaningful values, use equal spacing
+        if totalValue <= 0 {
+            let spacing = usableWidth / CGFloat(segments.count - 1)
+            return (0..<segments.count).map { padding + CGFloat($0) * spacing }
+        }
+
+        // Proportional spacing: each gap between nodes is proportional to the segment value
+        var positions: [CGFloat] = [padding]
+        var cumulative: CGFloat = 0
+        for i in 0..<segments.count - 1 {
+            cumulative += max(segments[i].value, 0)
+            positions.append(padding + (cumulative / totalValue) * usableWidth)
+        }
+        return positions
     }
 
     private func revealNodes() {

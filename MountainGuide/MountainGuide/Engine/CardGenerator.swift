@@ -46,6 +46,58 @@ enum CardGenerator {
         "between-thermals": "You're at 4000ft, 5km from the next likely thermal source, in 1 m/s sink. Your min sink speed is 35 km/h. Calculate if you'll arrive with enough altitude.",
     ]
 
+    private static let navigationApplicationTemplates: [String: String] = [
+        "map-reading": "You're holding a 1:25,000 topographic map. The contour interval is 20m. You count 5 contour lines between two points. What is the elevation difference?",
+        "compass": "Your map bearing to a summit is 045° magnetic. The local declination is 2°E. What bearing do you set on your compass for the field?",
+        "gps": "Your GPS shows you're at 46.5°N, 7.8°E with 8m accuracy. You're navigating to a waypoint 200m away in forest. What's your navigation strategy?",
+        "route-planning": "You're planning a route over a 3,200m pass. The approach is 1,200m of elevation gain over 6km. Estimate your travel time using Naismith's Rule.",
+        "terrain-association": "You can see a prominent ridge to your east and a lake to your northwest. Using your map, how do you confirm your position?",
+        "contouring": "You need to traverse a steep hillside at 2,400m without gaining or losing elevation. Describe your contouring technique.",
+        "triangulation": "You can identify three peaks from your position. Their map bearings are 030°, 150°, and 270°. How do you fix your position?",
+        "whiteout-navigation": "Visibility drops to 10m on a glacier. You have a compass bearing of 195° to the hut. How do you navigate safely?",
+        "night-navigation": "You're descending a mountain trail at night with headlamps. The trail junctions are unmarked. What techniques keep you on route?",
+        "emergency-navigation": "Your GPS is dead, compass lost. It's 3pm, you know the valley runs east-west. How do you navigate to safety?",
+    ]
+
+    private static let ropeSystemsApplicationTemplates: [String: String] = [
+        "knots": "You need to tie into the end of a climbing rope. Which knot do you use, and how do you verify it's correctly tied?",
+        "anchors": "You're building a top-rope anchor using two bolts and a cordelette. Walk through the SERENE criteria for your anchor.",
+        "belaying": "Your climber is 15m above you on a vertical face. They fall. Describe the belay technique to catch the fall safely.",
+        "rappelling": "You need to rappel a 50m cliff with a 60m rope. Describe your setup including backup and rope retrieval plan.",
+        "rope-mechanics": "A climber takes a 6m fall on 3m of rope out. What is the fall factor? What forces does this generate?",
+        "top-rope": "You're setting up a top-rope system at a crag. The anchor is 3m back from the edge. How do you manage rope drag and direction?",
+        "multi-pitch": "You're leading the third pitch of a 5-pitch route. Your second is cleaning gear. Describe your belay transition.",
+        "rescue-hauls": "Your partner is hanging on the rope 10m below you and cannot climb. You need to haul them up. Describe a 3:1 Z-pulley setup.",
+        "crevasse-rescue-rope": "Your rope team partner has fallen into a crevasse. They're conscious but can't climb out. Walk through the rescue sequence.",
+        "improvised-systems": "You need to build an emergency rappel but have no rappel device. What improvised techniques can you use?",
+    ]
+
+    private static let glacierTravelApplicationTemplates: [String: String] = [
+        "glacier-anatomy": "You're approaching a glacier. You can see a bergschrund at the top and lateral moraines on both sides. What does this tell you about route options?",
+        "crevasse-identification": "You see a convex roll in the glacier surface with subtle sagging lines perpendicular to the fall line. What crevasse hazard does this indicate?",
+        "rope-teams": "Your party of 4 is crossing a moderately crevassed glacier. How do you configure your rope team?",
+        "probe-techniques": "You're crossing a snow bridge that spans approximately 3m. How do you probe it to assess safety?",
+        "glacier-route-finding": "The glacier ahead has a major icefall. You can see a route through on the left side or around on moraine. Evaluate both options.",
+        "travel-protocols": "Your rope team is crossing a crevasse zone. The person ahead of you suddenly drops through a snow bridge. What are your immediate actions?",
+        "crevasse-rescue": "You've self-arrested after your partner fell in a crevasse. They're 8m down and conscious. Describe the rescue steps.",
+        "glacier-camping": "You need to camp on a glacier at 3,500m. What are your site selection criteria and safety considerations?",
+        "seasonal-changes": "It's mid-August and you're planning to cross a glacier that was fully snow-covered in June. How have conditions changed?",
+        "glacier-weather": "Morning cloud is building rapidly over the glacier and temperature is rising. What weather hazards should you anticipate?",
+    ]
+
+    private static let firstAidApplicationTemplates: [String: String] = [
+        "wilderness-assessment": "You find an unconscious hiker on the trail. There's no one else around. Walk through your primary assessment sequence.",
+        "hypothermia": "Your partner is shivering uncontrollably, confused, and has slurred speech after a river crossing. Core temp estimated 32°C. What stage is this and what do you do?",
+        "altitude-sickness": "At 4,200m, a team member has a severe headache, nausea, and is staggering when they walk. What condition do you suspect and what's the treatment?",
+        "fractures-splints": "A climber has an obvious deformity of the lower leg after a fall. They can wiggle their toes. How do you splint and manage this injury?",
+        "wound-care": "A team member has a deep laceration on their forearm from a sharp rock. Bleeding is steady but not spurting. Describe wound management.",
+        "lightning-injuries": "A lightning strike hits near your group on an exposed ridge. One person is unconscious and not breathing. What do you do?",
+        "frostbite": "After 6 hours in -25°C, a climber's fingers are white, hard, and have no sensation. What stage is this and how do you treat it?",
+        "dehydration-heat": "A hiker collapses on a hot day. Their skin is hot and dry, they're confused, and their heart rate is 140. What's your diagnosis and treatment?",
+        "emergency-shelter": "A storm hits and your group is caught above treeline with no tent. Temperature is dropping to -10°C. How do you build emergency shelter?",
+        "evacuation-planning": "A team member has a suspected spinal injury at 3,000m, 8km from the trailhead. Walk through your evacuation decision-making.",
+    ]
+
     // MARK: - Generate Cards
 
     static func generateCardsForModule(domain: DomainId, moduleSlug: String) -> [SRSCard] {
@@ -117,6 +169,10 @@ enum CardGenerator {
         case .weather: templates = weatherApplicationTemplates
         case .avalanche: templates = avalancheApplicationTemplates
         case .flying: templates = flyingApplicationTemplates
+        case .navigation: templates = navigationApplicationTemplates
+        case .ropeSystems: templates = ropeSystemsApplicationTemplates
+        case .glacierTravel: templates = glacierTravelApplicationTemplates
+        case .firstAid: templates = firstAidApplicationTemplates
         }
         return templates[slug] ?? "Apply your understanding of \(module.title.lowercased()) to a practical scenario."
     }
