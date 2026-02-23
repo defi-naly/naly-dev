@@ -58,20 +58,25 @@ export default function FoundationsPage() {
 
           {/* ─── TRUST SIGNALS ─── */}
           <SectionDivider />
-          <section className="bloom-section">
+          <section className="bloom-section stats-section">
             <div className="about-stats">
-              <StatBlock prefix="$" value={120} suffix="B" label="Protocol Volume" delay={0} />
-              <StatBlock prefix=">" value={240} suffix="M" label="Staked Liquidity" delay={200} />
-              <StatBlock value={0} label="Platform Dependencies" delay={400} />
+              <StatBlock prefix="$" value={120} suffix="B" label="Protocol Volume" sublabel="Through custom AMM innovation" delay={0} />
+              <StatBlock value={48} suffix="x" label="Liquidity Growth" sublabel="No new incentive token required" delay={200} />
+              <StatBlock value={78} suffix="%" label="Market Dominance" sublabel="Via established social capital" delay={400} />
             </div>
+            <MotionReveal>
+              <p className="stats-bridge">
+                We built these numbers in DeFi — protocols that move billions through network effects alone. The economics transfer. Distribution, trust, and compounding work the same way in every domain.
+              </p>
+            </MotionReveal>
           </section>
 
           {/* ─── THREE FOUNDATIONS ─── */}
           <SectionDivider />
-          <section className="bloom-section">
+          <section className="bloom-section stats-section">
             <MotionReveal>
               <h2 className="judgment-headline">Three foundations. One goal.</h2>
-              <p className="section-subheading">
+              <p className="stats-bridge">
                 Distribution gets you there. Trust makes it stick. Judgment tells you what to build.
               </p>
             </MotionReveal>
@@ -100,7 +105,6 @@ export default function FoundationsPage() {
                   <div className="foundation-proof foundation-proof-highlight">
                     <strong>Proof:</strong> Inside Labs — complete marketing site, 1 day. AI-augmented content workflows they own and operate.
                   </div>
-                  <div className="foundation-sprint">Sprint: 1 week, fixed price</div>
                 </div>
               </div>
             </MotionReveal>
@@ -129,7 +133,6 @@ export default function FoundationsPage() {
                   <div className="foundation-proof foundation-proof-highlight">
                     <strong>Proof:</strong> Balancer v3 — launched in direct partnership with Aave, DeFi&apos;s largest liquidity market. Trust earned at protocol level.
                   </div>
-                  <div className="foundation-sprint">Sprint: 1–2 weeks, fixed price</div>
                 </div>
               </div>
             </MotionReveal>
@@ -158,7 +161,6 @@ export default function FoundationsPage() {
                   <div className="foundation-proof foundation-proof-highlight">
                     <strong>Proof:</strong> Stader abandoned Fantom. 6M FTM in a dead contract. We acquired it, rebranded to stS, and built it into Sonic&apos;s largest LST — 290M S at peak. That&apos;s judgment.
                   </div>
-                  <div className="foundation-sprint">Sprint: 1 week, fixed price</div>
                 </div>
               </div>
             </MotionReveal>
@@ -178,7 +180,7 @@ export default function FoundationsPage() {
           <SectionDivider />
           <section className="bloom-section partners-section">
             <MotionReveal>
-              <h2 className="judgment-headline">Fixed scope. Fixed price. Foundation shipped.</h2>
+              <h2 className="judgment-headline">Fixed scope. $15,000. Foundation shipped.</h2>
               <p className="section-subheading">
                 Not a retainer. Not a roadmap. Not a 90-day engagement. One sprint, one foundation, you own it. Then you build the network on top.
               </p>
@@ -186,12 +188,76 @@ export default function FoundationsPage() {
 
             <ProcessFlow steps={[
               { id: 'identify', name: 'Identify', duration: 'Day 1',
-                description: 'Which foundation is missing? Distribution, trust, or judgment? One conversation to scope the sprint around a single deliverable.' },
+                description: 'Which foundation is missing? One conversation to scope the sprint around a single deliverable.' },
               { id: 'build', name: 'Build', duration: '1\u20134 weeks',
-                description: 'AI-augmented execution at every step. What traditional teams quote in months, we ship in weeks. You get a working foundation \u2014 not a deck, not a roadmap.' },
+                description: 'AI-augmented execution at every step. You get a working foundation — not a deck, not a roadmap.' },
               { id: 'ship', name: 'Ship & Own', duration: 'Delivered',
-                description: 'You own it outright. AI workflows included. The foundation is laid. If there\u2019s a next sprint, we scope it based on what we learned from the first.' },
+                description: 'You own it outright. AI workflows included. The foundation compounds. Build the network on top.' },
             ]} />
+          </section>
+
+          {/* ─── THE INVESTMENT ─── */}
+          <SectionDivider />
+          <section className="bloom-section">
+            <MotionReveal>
+              <div className="investment-section">
+                <h2 className="investment-headline">The Investment</h2>
+                <p className="investment-subline">One sprint. One foundation. $15,000.</p>
+
+                <div className="investment-comparison">
+                  <div className="investment-row">
+                    <span className="investment-row-label">Agencies quote this in months.</span>
+                    <span className="investment-row-cost">$45,000 – $150,000</span>
+                  </div>
+                  <div className="investment-row">
+                    <span className="investment-row-label">Consultants deliver decks.</span>
+                    <span className="investment-row-cost">$200–500/hr, nothing ships</span>
+                  </div>
+                  <div className="investment-row">
+                    <span className="investment-row-label">Freelancers lack the strategic layer.</span>
+                    <span className="investment-row-cost">$6,000 – $10,000</span>
+                  </div>
+                  <div className="investment-row investment-row-bloom">
+                    <span className="investment-row-label">BLOOM ships a working foundation in one week.</span>
+                    <span className="investment-row-cost">$15,000</span>
+                  </div>
+                </div>
+              </div>
+            </MotionReveal>
+          </section>
+
+          {/* ─── FOUNDATION STACK ─── */}
+          <SectionDivider />
+          <section className="bloom-section">
+            <MotionReveal>
+              <h2 className="judgment-headline">Foundation Stack</h2>
+              <p className="section-subheading" style={{ marginBottom: '3rem' }}>
+                Most companies are weak on two or three foundations. Stack sprints and save.
+              </p>
+              <div className="pricing-tiers">
+                <div className="pricing-tier">
+                  <div className="pricing-tier-label">Single</div>
+                  <div className="pricing-tier-name">1 Sprint</div>
+                  <div className="pricing-tier-price">$15,000</div>
+                  <div className="pricing-tier-savings">&nbsp;</div>
+                  <p className="pricing-tier-desc">One foundation. One week. You own it.</p>
+                </div>
+                <div className="pricing-tier">
+                  <div className="pricing-tier-label">Double</div>
+                  <div className="pricing-tier-name">2 Sprints</div>
+                  <div className="pricing-tier-price">$28,000</div>
+                  <div className="pricing-tier-savings">Save $2,000</div>
+                  <p className="pricing-tier-desc">Two foundations. Consecutive weeks. Compounding momentum.</p>
+                </div>
+                <div className="pricing-tier pricing-tier-featured">
+                  <div className="pricing-tier-label">Full Stack</div>
+                  <div className="pricing-tier-name">3 Sprints</div>
+                  <div className="pricing-tier-price">$40,000</div>
+                  <div className="pricing-tier-savings">Save $5,000</div>
+                  <p className="pricing-tier-desc">All three foundations. Three weeks. The complete network base.</p>
+                </div>
+              </div>
+            </MotionReveal>
           </section>
 
           {/* ─── CTA ─── */}
