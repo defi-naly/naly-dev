@@ -9,7 +9,7 @@ struct MountainGuideApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(store)
-                .preferredColorScheme(.dark)
+                .preferredColorScheme(.light)
         }
     }
 }
@@ -19,7 +19,7 @@ struct ContentView: View {
     @State private var selectedTab: Tab = .dashboard
 
     enum Tab: String {
-        case dashboard, learn, explore, review, settings
+        case dashboard, learn, explore, review, field
     }
 
     var body: some View {
@@ -49,13 +49,13 @@ struct ContentView: View {
                 .tag(Tab.review)
                 .badge(store.dueCardCount)
 
-            SettingsView()
+            FieldView()
                 .tabItem {
-                    Label("Settings", systemImage: "gear")
+                    Label("Field", systemImage: "wrench.and.screwdriver")
                 }
-                .tag(Tab.settings)
+                .tag(Tab.field)
         }
-        .tint(Color.amber)
+        .tint(Color.accent)
         .onAppear {
             store.validateStreak()
             NotificationService.shared.requestPermission()

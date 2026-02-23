@@ -2,6 +2,7 @@ import SwiftUI
 
 struct DashboardView: View {
     @EnvironmentObject var store: KnowledgeStore
+    @State private var showSettings = false
 
     var body: some View {
         NavigationStack {
@@ -55,7 +56,7 @@ struct DashboardView: View {
                                 Spacer()
                                 Image(systemName: "chevron.right")
                             }
-                            .foregroundStyle(Color.terminalBg)
+                            .foregroundStyle(.white)
                             .padding(16)
                             .background(Color.amber)
                             .cornerRadius(12)
@@ -93,7 +94,20 @@ struct DashboardView: View {
             .background(Color.terminalBg)
             .navigationTitle("Mountain Guide")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbarColorScheme(.dark, for: .navigationBar)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showSettings = true
+                    } label: {
+                        Image(systemName: "gear")
+                            .foregroundStyle(Color.textSecondary)
+                    }
+                }
+            }
+            .sheet(isPresented: $showSettings) {
+                SettingsView()
+                    .environmentObject(store)
+            }
         }
     }
 }
@@ -257,11 +271,11 @@ struct StreakHeatmap: View {
     }
 
     private func heatColor(_ count: Int) -> Color {
-        if count == 0 { return Color.terminalBorder }
-        if count < 3 { return Color.emerald.opacity(0.3) }
-        if count < 8 { return Color.emerald.opacity(0.5) }
-        if count < 15 { return Color.emerald.opacity(0.7) }
-        return Color.emerald
+        if count == 0 { return Color.lightBorder }
+        if count < 3 { return Color(hex: "D1FAE5") }  // emerald-100
+        if count < 8 { return Color(hex: "6EE7B7") }  // emerald-300
+        if count < 15 { return Color(hex: "34D399") } // emerald-400
+        return Color(hex: "059669")                    // emerald-600
     }
 }
 
@@ -370,7 +384,7 @@ struct KnowledgeMapView: View {
                                 .overlay(
                                     Text("\(mod.id)")
                                         .font(.mono(8, weight: .bold))
-                                        .foregroundStyle(phase == .locked ? Color.textDim : Color.terminalBg)
+                                        .foregroundStyle(phase == .locked ? Color.textTertiary : .white)
                                 )
                         }
                     }

@@ -95,6 +95,39 @@
 		E10000002 /* RopeSystemsLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20000002; };
 		E10000003 /* GlacierTravelLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20000003; };
 		E10000004 /* FirstAidLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20000004; };
+		F10000001 /* SwissTopoMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20000001; };
+		F10000002 /* PhotoPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20000002; };
+		G10000001 /* LottieAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = G20000001; };
+		G10000002 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = G30000001 /* Lottie */; };
+		G10000003 /* Animations in Resources */ = {isa = PBXBuildFile; fileRef = G20000002; };
+		H10000001 /* RiveAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000001; };
+		H10000002 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = H30000001 /* RiveRuntime */; };
+		H10000003 /* IllustrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000003; };
+		H10000004 /* IllustrationRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000004; };
+		H10000005 /* SkyPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000005; };
+		H10000006 /* TerrainPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000006; };
+		H10000007 /* SnowPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000007; };
+		H10000008 /* WeatherPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000008; };
+		H10000009 /* VegetationPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000009; };
+		H10000010 /* EquipmentPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000010; };
+		H10000011 /* HumanPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000011; };
+		H10000012 /* PatternPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000012; };
+		H10000013 /* WeatherIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000013; };
+		H10000014 /* AvalancheIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000014; };
+		H10000015 /* FlyingIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000015; };
+		H10000016 /* NavigationIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000016; };
+		H10000017 /* RopeSystemsIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000017; };
+		H10000018 /* GlacierIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000018; };
+		H10000019 /* FirstAidIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000019; };
+		I10000001 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000001; };
+		I10000002 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000002; };
+		I10000003 /* FieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000003; };
+		I10000004 /* InclinometerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000004; };
+		I10000005 /* CompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000005; };
+		I10000006 /* AltimeterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000006; };
+		I10000007 /* ReductionMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000007; };
+		I10000008 /* ConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000008; };
+		I10000009 /* InstrumentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000009; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -187,6 +220,38 @@
 		E20000002 /* RopeSystemsLessons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RopeSystemsLessons.swift; sourceTree = "<group>"; };
 		E20000003 /* GlacierTravelLessons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlacierTravelLessons.swift; sourceTree = "<group>"; };
 		E20000004 /* FirstAidLessons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidLessons.swift; sourceTree = "<group>"; };
+		F20000001 /* SwissTopoMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwissTopoMapView.swift; sourceTree = "<group>"; };
+		F20000002 /* PhotoPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPlaceholder.swift; sourceTree = "<group>"; };
+		F20000003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		G20000001 /* LottieAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationView.swift; sourceTree = "<group>"; };
+		G20000002 /* Animations */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Animations; sourceTree = "<group>"; };
+		H20000001 /* RiveAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiveAnimationView.swift; sourceTree = "<group>"; };
+		H20000003 /* IllustrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IllustrationView.swift; sourceTree = "<group>"; };
+		H20000004 /* IllustrationRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IllustrationRegistry.swift; sourceTree = "<group>"; };
+		H20000005 /* SkyPrimitives.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyPrimitives.swift; sourceTree = "<group>"; };
+		H20000006 /* TerrainPrimitives.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerrainPrimitives.swift; sourceTree = "<group>"; };
+		H20000007 /* SnowPrimitives.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowPrimitives.swift; sourceTree = "<group>"; };
+		H20000008 /* WeatherPrimitives.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherPrimitives.swift; sourceTree = "<group>"; };
+		H20000009 /* VegetationPrimitives.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VegetationPrimitives.swift; sourceTree = "<group>"; };
+		H20000010 /* EquipmentPrimitives.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentPrimitives.swift; sourceTree = "<group>"; };
+		H20000011 /* HumanPrimitives.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumanPrimitives.swift; sourceTree = "<group>"; };
+		H20000012 /* PatternPrimitives.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternPrimitives.swift; sourceTree = "<group>"; };
+		H20000013 /* WeatherIllustrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherIllustrations.swift; sourceTree = "<group>"; };
+		H20000014 /* AvalancheIllustrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvalancheIllustrations.swift; sourceTree = "<group>"; };
+		H20000015 /* FlyingIllustrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyingIllustrations.swift; sourceTree = "<group>"; };
+		H20000016 /* NavigationIllustrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationIllustrations.swift; sourceTree = "<group>"; };
+		H20000017 /* RopeSystemsIllustrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RopeSystemsIllustrations.swift; sourceTree = "<group>"; };
+		H20000018 /* GlacierIllustrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlacierIllustrations.swift; sourceTree = "<group>"; };
+		H20000019 /* FirstAidIllustrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAidIllustrations.swift; sourceTree = "<group>"; };
+		I20000001 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		I20000002 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		I20000003 /* FieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldView.swift; sourceTree = "<group>"; };
+		I20000004 /* InclinometerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InclinometerView.swift; sourceTree = "<group>"; };
+		I20000005 /* CompassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassView.swift; sourceTree = "<group>"; };
+		I20000006 /* AltimeterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AltimeterView.swift; sourceTree = "<group>"; };
+		I20000007 /* ReductionMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReductionMethodView.swift; sourceTree = "<group>"; };
+		I20000008 /* ConditionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionsView.swift; sourceTree = "<group>"; };
+		I20000009 /* InstrumentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +259,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				G10000002 /* Lottie in Frameworks */,
+				H10000002 /* RiveRuntime in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +280,8 @@
 			children = (
 				A20000001 /* MountainGuideApp.swift */,
 				A20000002 /* Theme.swift */,
+				F20000003 /* Assets.xcassets */,
+				G20000002 /* Animations */,
 				A50000003 /* Models */,
 				A50000004 /* Engine */,
 				A50000005 /* Content */,
@@ -232,6 +301,7 @@
 				B20000002 /* PracticeQuestion.swift */,
 				B20000003 /* GamificationState.swift */,
 				D20000001 /* ExploreContent.swift */,
+				I20000001 /* WeatherData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -288,9 +358,11 @@
 				A50000008 /* Learn */,
 				D50000001 /* Explore */,
 				A50000012 /* Settings */,
+				I50000001 /* Field */,
 				B50000001 /* Diagrams */,
 				B50000002 /* Practice */,
 				B50000003 /* Components */,
+				H50000001 /* Illustrations */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -332,6 +404,7 @@
 			children = (
 				A20000011 /* KnowledgeStore.swift */,
 				A20000012 /* NotificationService.swift */,
+				I20000002 /* WeatherService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -427,8 +500,66 @@
 				B20000028 /* MedalView.swift */,
 				B20000029 /* AnimatedCounterView.swift */,
 				B20000030 /* ConceptMapView.swift */,
+				F20000001 /* SwissTopoMapView.swift */,
+				F20000002 /* PhotoPlaceholder.swift */,
+				G20000001 /* LottieAnimationView.swift */,
+				H20000001 /* RiveAnimationView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		H50000001 /* Illustrations */ = {
+			isa = PBXGroup;
+			children = (
+				H20000003 /* IllustrationView.swift */,
+				H20000004 /* IllustrationRegistry.swift */,
+				H50000002 /* Primitives */,
+				H50000003 /* Domains */,
+			);
+			path = Illustrations;
+			sourceTree = "<group>";
+		};
+		H50000002 /* Primitives */ = {
+			isa = PBXGroup;
+			children = (
+				H20000005 /* SkyPrimitives.swift */,
+				H20000006 /* TerrainPrimitives.swift */,
+				H20000007 /* SnowPrimitives.swift */,
+				H20000008 /* WeatherPrimitives.swift */,
+				H20000009 /* VegetationPrimitives.swift */,
+				H20000010 /* EquipmentPrimitives.swift */,
+				H20000011 /* HumanPrimitives.swift */,
+				H20000012 /* PatternPrimitives.swift */,
+			);
+			path = Primitives;
+			sourceTree = "<group>";
+		};
+		H50000003 /* Domains */ = {
+			isa = PBXGroup;
+			children = (
+				H20000013 /* WeatherIllustrations.swift */,
+				H20000014 /* AvalancheIllustrations.swift */,
+				H20000015 /* FlyingIllustrations.swift */,
+				H20000016 /* NavigationIllustrations.swift */,
+				H20000017 /* RopeSystemsIllustrations.swift */,
+				H20000018 /* GlacierIllustrations.swift */,
+				H20000019 /* FirstAidIllustrations.swift */,
+			);
+			path = Domains;
+			sourceTree = "<group>";
+		};
+		I50000001 /* Field */ = {
+			isa = PBXGroup;
+			children = (
+				I20000003 /* FieldView.swift */,
+				I20000004 /* InclinometerView.swift */,
+				I20000005 /* CompassView.swift */,
+				I20000006 /* AltimeterView.swift */,
+				I20000007 /* ReductionMethodView.swift */,
+				I20000008 /* ConditionsView.swift */,
+				I20000009 /* InstrumentCard.swift */,
+			);
+			path = Field;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -440,12 +571,17 @@
 			buildPhases = (
 				A70000001 /* Sources */,
 				A40000001 /* Frameworks */,
+				G50000001 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = MountainGuide;
+			packageProductDependencies = (
+				G30000001 /* Lottie */,
+				H30000001 /* RiveRuntime */,
+			);
 			productName = MountainGuide;
 			productReference = A30000001 /* MountainGuide.app */;
 			productType = "com.apple.product-type.application";
@@ -474,6 +610,10 @@
 				Base,
 			);
 			mainGroup = A50000001;
+			packageReferences = (
+				G40000001 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				H40000001 /* XCRemoteSwiftPackageReference "rive-ios" */,
+			);
 			productRefGroup = A50000010 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -576,10 +716,51 @@
 				E10000002 /* RopeSystemsLessons.swift in Sources */,
 				E10000003 /* GlacierTravelLessons.swift in Sources */,
 				E10000004 /* FirstAidLessons.swift in Sources */,
+				F10000001 /* SwissTopoMapView.swift in Sources */,
+				F10000002 /* PhotoPlaceholder.swift in Sources */,
+				G10000001 /* LottieAnimationView.swift in Sources */,
+				H10000001 /* RiveAnimationView.swift in Sources */,
+				H10000003 /* IllustrationView.swift in Sources */,
+				H10000004 /* IllustrationRegistry.swift in Sources */,
+				H10000005 /* SkyPrimitives.swift in Sources */,
+				H10000006 /* TerrainPrimitives.swift in Sources */,
+				H10000007 /* SnowPrimitives.swift in Sources */,
+				H10000008 /* WeatherPrimitives.swift in Sources */,
+				H10000009 /* VegetationPrimitives.swift in Sources */,
+				H10000010 /* EquipmentPrimitives.swift in Sources */,
+				H10000011 /* HumanPrimitives.swift in Sources */,
+				H10000012 /* PatternPrimitives.swift in Sources */,
+				H10000013 /* WeatherIllustrations.swift in Sources */,
+				H10000014 /* AvalancheIllustrations.swift in Sources */,
+				H10000015 /* FlyingIllustrations.swift in Sources */,
+				H10000016 /* NavigationIllustrations.swift in Sources */,
+				H10000017 /* RopeSystemsIllustrations.swift in Sources */,
+				H10000018 /* GlacierIllustrations.swift in Sources */,
+				H10000019 /* FirstAidIllustrations.swift in Sources */,
+				I10000001 /* WeatherData.swift in Sources */,
+				I10000002 /* WeatherService.swift in Sources */,
+				I10000003 /* FieldView.swift in Sources */,
+				I10000004 /* InclinometerView.swift in Sources */,
+				I10000005 /* CompassView.swift in Sources */,
+				I10000006 /* AltimeterView.swift in Sources */,
+				I10000007 /* ReductionMethodView.swift in Sources */,
+				I10000008 /* ConditionsView.swift in Sources */,
+				I10000009 /* InstrumentCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXResourcesBuildPhase section */
+		G50000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				G10000003 /* Animations in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
 		A80000101 /* Debug */ = {
@@ -779,6 +960,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		G40000001 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.0;
+			};
+		};
+		H40000001 /* XCRemoteSwiftPackageReference "rive-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rive-app/rive-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		G30000001 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = G40000001 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		H30000001 /* RiveRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = H40000001 /* XCRemoteSwiftPackageReference "rive-ios" */;
+			productName = RiveRuntime;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 	};
 	rootObject = A90000001 /* Project object */;
