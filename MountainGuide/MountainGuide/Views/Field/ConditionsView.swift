@@ -16,6 +16,12 @@ struct ConditionsView: View {
                 } else if let error = weather.error {
                     NoDataCard(message: error)
                 } else if let conditions = weather.currentConditions {
+                    // Location header
+                    LocationHeader(
+                        locationName: weather.locationName,
+                        elevation: weather.elevation
+                    )
+
                     // Current conditions hero
                     CurrentConditionsCard(conditions: conditions)
 
@@ -35,8 +41,13 @@ struct ConditionsView: View {
                         HourlyForecastCard(forecast: weather.hourlyForecast)
                     }
 
+                    // 7-day forecast
+                    if !weather.dailyForecast.isEmpty {
+                        DailyForecastCard(forecast: weather.dailyForecast)
+                    }
+
                     // Domain-specific assessments
-                    DomainAssessmentCard(conditions: conditions, mountain: weather.mountainWeather)
+                    DomainAssessmentCard(conditions: conditions, mountain: weather.mountainWeather, recentPrecipitation: weather.recentPrecipitation)
 
                 } else {
                     NoDataCard(message: "Waiting for location to fetch weather...")
@@ -226,7 +237,7 @@ struct AltitudeWindRow: View {
                 .frame(width: 50, alignment: .leading)
 
             Image(systemName: "arrow.up")
-                .rotationEffect(.degrees(Double(wind.direction)))
+                .rotationEffect(.degrees(Double(wind.direction) + 180))
                 .font(.system(size: 12))
                 .foregroundStyle(Color.accent)
 
@@ -414,6 +425,7 @@ struct HourlyChartView: View {
 struct DomainAssessmentCard: View {
     let conditions: WeatherConditions
     let mountain: MountainWeather?
+    let recentPrecipitation: Double
 
     var body: some View {
         InstrumentCard(title: "Conditions For...", icon: "figure.hiking") {
@@ -446,41 +458,139 @@ struct DomainAssessmentCard: View {
         }
     }
 
+    // MARK: - Flying Assessment
+
     private var flyingAssessment: String {
+        let code = conditions.weatherCode
         let wind = conditions.windSpeed
+        let gusts = conditions.windGusts
+        let vis = conditions.visibility
+
+        if code >= 95 { return "Thunderstorm — no fly" }
+        if conditions.precipitation > 0.5 { return "Rain — not flyable" }
+        if code >= 80 && code <= 82 { return "Rain showers — not flyable" }
+        if code >= 61 && code <= 67 { return "Rain — not flyable" }
+        if code >= 71 && code <= 77 { return "Snow — not flyable" }
+        if code >= 85 && code <= 86 { return "Snow showers — not flyable" }
+        if code >= 51 && code <= 57 { return "Drizzle — not flyable" }
+        if code == 45 || code == 48 { return "Fog — not flyable" }
+        if vis < 1.5 { return "Near-zero visibility — not flyable" }
         if wind > 35 { return "Too windy" }
-        if conditions.weatherCode >= 95 { return "Thunderstorm risk" }
+        if gusts > 45 { return "Dangerous gusts" }
         if wind > 25 { return "Marginal winds" }
+        if gusts > 35 { return "Gusty — caution" }
+        if vis < 5.0 { return "Reduced visibility" }
         if conditions.cloudCover > 80 { return "Low cloud — limited thermals" }
         return "Flyable conditions"
     }
 
-    private var skiingAssessment: String {
-        if conditions.temperature > 5 { return "Warm — wet snow risk" }
-        if conditions.windSpeed > 50 { return "High wind — poor visibility" }
-        if let snow = conditions.snowDepth, snow > 0 { return "Snow: \(String(format: "%.0f", snow)) cm" }
-        return "Check local conditions"
-    }
-
-    private var hikingAssessment: String {
-        if conditions.weatherCode >= 95 { return "Thunderstorm — avoid exposed terrain" }
-        if conditions.precipitation > 5 { return "Heavy rain" }
-        if conditions.precipitation > 0 { return "Rain expected" }
-        if conditions.windSpeed > 40 { return "Strong winds on ridges" }
-        return "Good conditions"
-    }
+    // MARK: - Climbing Assessment
 
     private var climbingAssessment: String {
-        if conditions.weatherCode >= 95 { return "Thunderstorm — descend immediately" }
-        if conditions.precipitation > 0 { return "Wet rock — increased fall risk" }
-        if conditions.windSpeed > 40 { return "High wind on exposed faces" }
+        let code = conditions.weatherCode
+        let wind = conditions.windSpeed
+        let gusts = conditions.windGusts
+        let vis = conditions.visibility
+        let humidity = conditions.humidity
+        let temp = conditions.temperature
+
+        if code >= 95 { return "Thunderstorm — descend immediately" }
+        if (code >= 61 && code <= 67) || (code >= 80 && code <= 82) { return "Wet rock — high fall risk" }
+        if code == 56 || code == 57 || code == 66 || code == 67 { return "Freezing precip — verglas risk" }
+        if (code >= 71 && code <= 77) || (code >= 85 && code <= 86) { return "Snow — route conditions changing" }
+        if code >= 51 && code <= 55 { return "Drizzle — slippery rock" }
+        if conditions.precipitation > 0.5 { return "Precipitation — wet rock" }
+        if recentPrecipitation > 2.0 { return "Recently rained — rock still wet" }
+        if recentPrecipitation > 0.5 && humidity > 75 { return "Damp conditions — rock may be wet" }
+        if (code == 45 || code == 48) && vis < 1.0 { return "Fog — poor visibility on route" }
+        if humidity > 90 && temp < 8 { return "Condensation on rock likely" }
+        if gusts > 60 { return "Dangerous gusts on exposed faces" }
+        if wind > 40 { return "High wind on exposed faces" }
+        if gusts > 45 { return "Strong gusts — caution on ridges" }
         if let mt = mountain, let fl = mt.freezingLevel, fl < 2500 { return "Low freezing level — icy above \(fl)m" }
+        if vis < 3.0 { return "Reduced visibility" }
         return "Weather window available"
     }
 
+    // MARK: - Skiing Assessment
+
+    private var skiingAssessment: String {
+        let code = conditions.weatherCode
+        let wind = conditions.windSpeed
+        let gusts = conditions.windGusts
+        let vis = conditions.visibility
+        let temp = conditions.temperature
+        let precip = conditions.precipitation
+
+        if code >= 95 { return "Thunderstorm — descend immediately" }
+        if code == 66 || code == 67 { return "Freezing rain — icy crust hazard" }
+        if wind > 50 { return "Storm wind — whiteout risk" }
+        if gusts > 70 { return "Dangerous gusts" }
+        if precip > 5 { return "Heavy precipitation" }
+        if (code >= 61 && code <= 65) || (code >= 80 && code <= 82) {
+            if temp > -2 { return "Rain on snow — wet snow instability" }
+            return "Precipitation — check avalanche bulletin"
+        }
+        if (code == 45 || code == 48) && vis < 0.5 { return "Fog — near-zero visibility" }
+        if (code == 45 || code == 48) && vis < 2.0 { return "Fog — low visibility" }
+        if (code >= 71 && code <= 77) || (code >= 85 && code <= 86) { return "Snow — check avalanche bulletin" }
+        if code >= 56 && code <= 57 { return "Freezing drizzle — icy surface" }
+        if code >= 51 && code <= 55 { return "Drizzle — wet conditions" }
+        if wind > 35 && gusts > 50 { return "Strong wind — exposed ridges dangerous" }
+        if temp > 5 { return "Warm — wet snow risk" }
+        if let snow = conditions.snowDepth, snow > 0 { return "Snow depth: \(String(format: "%.0f", snow)) cm" }
+        return "Check local conditions"
+    }
+
+    // MARK: - Hiking Assessment
+
+    private var hikingAssessment: String {
+        let code = conditions.weatherCode
+        let wind = conditions.windSpeed
+        let gusts = conditions.windGusts
+        let vis = conditions.visibility
+        let apparent = conditions.apparentTemperature
+
+        if code >= 95 { return "Thunderstorm — avoid exposed terrain" }
+        if conditions.precipitation > 5 { return "Heavy rain — flooding risk on trails" }
+        if (code >= 61 && code <= 67) || (code >= 80 && code <= 82) { return "Rain — slippery trails" }
+        if code == 56 || code == 57 || code == 66 || code == 67 { return "Freezing precip — icy trails" }
+        if (code >= 71 && code <= 77) || (code >= 85 && code <= 86) { return "Snow — trail conditions changing" }
+        if conditions.precipitation > 0 { return "Rain expected" }
+        if (code == 45 || code == 48) && vis < 1.0 { return "Fog — poor visibility" }
+        if (code == 45 || code == 48) && vis < 3.0 { return "Fog — reduced visibility" }
+        if gusts > 60 { return "Dangerous gusts on exposed terrain" }
+        if wind > 40 { return "Strong winds on ridges" }
+        if gusts > 45 { return "Gusty — caution on exposed terrain" }
+        if apparent < -10 { return "Severe wind chill — exposure risk" }
+        if apparent < -5 && wind > 20 { return "Cold + wind — pack warm layers" }
+        if apparent > 35 { return "Extreme heat — hydration critical" }
+        if apparent > 30 { return "High heat — plan for shade and water" }
+        return "Good conditions"
+    }
+
+    // MARK: - Assessment Color
+
     private func assessmentColor(_ text: String) -> Color {
-        if text.contains("Too") || text.contains("Thunderstorm") || text.contains("descend") { return .danger }
-        if text.contains("Marginal") || text.contains("Warm") || text.contains("Rain") || text.contains("Heavy") || text.contains("wind") || text.contains("Wet") || text.contains("Low freezing") { return .warning }
+        // Danger (red)
+        let dangerKeywords = ["Thunderstorm", "Too", "descend", "not flyable", "No fly",
+                              "Storm", "Dangerous", "Severe", "Extreme", "whiteout",
+                              "Near-zero", "verglas"]
+        for keyword in dangerKeywords {
+            if text.contains(keyword) { return .danger }
+        }
+
+        // Warning (amber)
+        let warningKeywords = ["Marginal", "Warm", "Rain", "Heavy", "wind", "Wet",
+                               "Low freezing", "Drizzle", "Fog", "visibility", "Gusty",
+                               "Snow", "Damp", "humidity", "Condensation", "slippery",
+                               "Freezing", "Recently", "caution", "Reduced", "exposure",
+                               "Cold", "heat", "icy", "flooding", "Precipitation",
+                               "check", "bulletin"]
+        for keyword in warningKeywords {
+            if text.contains(keyword) { return .warning }
+        }
+
         return .emerald
     }
 }
@@ -518,6 +628,181 @@ struct DomainChip: View {
     }
 }
 
+// MARK: - Location Header
+
+struct LocationHeader: View {
+    let locationName: String?
+    let elevation: Int?
+
+    var body: some View {
+        HStack(spacing: 6) {
+            Image(systemName: "location.fill")
+                .font(.system(size: 12))
+                .foregroundStyle(Color.accent)
+
+            if let name = locationName {
+                Text(name)
+                    .font(.mono(14, weight: .bold))
+                    .foregroundStyle(Color.textPrimary)
+            }
+
+            if let elev = elevation {
+                Text("•")
+                    .font(.mono(12))
+                    .foregroundStyle(Color.textTertiary)
+                Text("\(elev.formatted()) m")
+                    .font(.mono(13))
+                    .foregroundStyle(Color.textSecondary)
+            }
+
+            Spacer()
+        }
+        .padding(.bottom, 4)
+    }
+}
+
+// MARK: - Daily Forecast Card
+
+struct DailyForecastCard: View {
+    let forecast: [DailyForecast]
+
+    var body: some View {
+        InstrumentCard(title: "7-Day Forecast", icon: "calendar") {
+            VStack(spacing: 0) {
+                ForEach(Array(forecast.enumerated()), id: \.element.id) { index, day in
+                    DailyForecastRow(day: day, isToday: index == 0)
+                    if index < forecast.count - 1 {
+                        Divider()
+                            .padding(.vertical, 6)
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct DailyForecastRow: View {
+    let day: DailyForecast
+    let isToday: Bool
+
+    var body: some View {
+        HStack(spacing: 8) {
+            // Day name
+            Text(dayLabel)
+                .font(.mono(12, weight: isToday ? .bold : .medium))
+                .foregroundStyle(Color.textPrimary)
+                .frame(width: 40, alignment: .leading)
+
+            // Weather icon
+            Image(systemName: weatherIcon(day.weatherCode))
+                .font(.system(size: 14))
+                .foregroundStyle(iconColor)
+                .frame(width: 20)
+
+            // Precipitation / snowfall
+            if day.snowfallSum > 0 {
+                HStack(spacing: 2) {
+                    Image(systemName: "snowflake")
+                        .font(.system(size: 9))
+                    Text(String(format: "%.0f cm", day.snowfallSum))
+                        .font(.mono(10))
+                }
+                .foregroundStyle(Color.weatherSnow)
+                .frame(width: 52, alignment: .leading)
+            } else if day.precipitationSum > 0 {
+                HStack(spacing: 2) {
+                    Image(systemName: "drop.fill")
+                        .font(.system(size: 9))
+                    Text(String(format: "%.1f mm", day.precipitationSum))
+                        .font(.mono(10))
+                }
+                .foregroundStyle(Color.weatherRain)
+                .frame(width: 52, alignment: .leading)
+            } else {
+                Spacer()
+                    .frame(width: 52)
+            }
+
+            Spacer()
+
+            // Wind
+            Text(String(format: "%.0f", day.windSpeedMax))
+                .font(.mono(10))
+                .foregroundStyle(Color.textTertiary)
+            Image(systemName: "wind")
+                .font(.system(size: 9))
+                .foregroundStyle(Color.textTertiary)
+
+            // Temp range
+            Text(String(format: "%.0f°", day.tempMin))
+                .font(.mono(11))
+                .foregroundStyle(Color.textSecondary)
+                .frame(width: 30, alignment: .trailing)
+
+            TempRangeBar(low: day.tempMin, high: day.tempMax)
+                .frame(width: 50, height: 4)
+
+            Text(String(format: "%.0f°", day.tempMax))
+                .font(.mono(11, weight: .semibold))
+                .foregroundStyle(Color.textPrimary)
+                .frame(width: 30, alignment: .trailing)
+        }
+    }
+
+    private var dayLabel: String {
+        if isToday { return "Today" }
+        let f = DateFormatter()
+        f.dateFormat = "EEE"
+        return f.string(from: day.date)
+    }
+
+    private var iconColor: Color {
+        switch day.weatherCode {
+        case 0, 1: return .weatherSun
+        case 2, 3: return .weatherCloud
+        case 45, 48: return .weatherCloud
+        case 51...67: return .weatherRain
+        case 71...86: return .weatherSnow
+        case 95...99: return .danger
+        default: return .textSecondary
+        }
+    }
+
+    private func weatherIcon(_ code: Int) -> String {
+        switch code {
+        case 0, 1: return "sun.max.fill"
+        case 2: return "cloud.sun.fill"
+        case 3: return "cloud.fill"
+        case 45, 48: return "cloud.fog.fill"
+        case 51...57: return "cloud.drizzle.fill"
+        case 61...67: return "cloud.rain.fill"
+        case 71...77: return "cloud.snow.fill"
+        case 80...86: return "cloud.heavyrain.fill"
+        case 95...99: return "cloud.bolt.rain.fill"
+        default: return "cloud"
+        }
+    }
+}
+
+struct TempRangeBar: View {
+    let low: Double
+    let high: Double
+
+    var body: some View {
+        GeometryReader { geo in
+            RoundedRectangle(cornerRadius: 2)
+                .fill(
+                    LinearGradient(
+                        colors: [.weatherRain, .weatherSun],
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                )
+                .frame(width: geo.size.width, height: geo.size.height)
+        }
+    }
+}
+
 // MARK: - No Data Card
 
 struct NoDataCard: View {
@@ -525,7 +810,7 @@ struct NoDataCard: View {
 
     var body: some View {
         VStack(spacing: 12) {
-            Image(systemName: "cloud.slash")
+            Image(systemName: "icloud.slash")
                 .font(.system(size: 32))
                 .foregroundStyle(Color.textTertiary)
             Text(message)

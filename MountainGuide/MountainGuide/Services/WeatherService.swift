@@ -10,19 +10,21 @@ class WeatherService: ObservableObject {
     @Published var currentConditions: WeatherConditions?
     @Published var mountainWeather: MountainWeather?
     @Published var hourlyForecast: [HourlyForecast] = []
+    @Published var dailyForecast: [DailyForecast] = []
     @Published var pressureTrend: PressureTrend = .stable
+    @Published var locationName: String?
+    @Published var elevation: Int?
     @Published var isLoading = false
     @Published var error: String?
+    @Published var thermalForecast: ThermalForecast?
+    @Published var hourlyThermals: [HourlyThermalForecast] = []
+    @Published var recentPrecipitation: Double = 0  // mm over past 6h
 
     private var lastFetchTime: Date?
     private var lastLocation: CLLocationCoordinate2D?
     private let cacheInterval: TimeInterval = 30 * 60 // 30 minutes
 
-    private let decoder: JSONDecoder = {
-        let d = JSONDecoder()
-        d.keyDecodingStrategy = .convertFromSnakeCase
-        return d
-    }()
+    private let decoder = JSONDecoder()
 
     func fetchWeather(latitude: Double, longitude: Double) async {
         // Check cache
@@ -41,7 +43,9 @@ class WeatherService: ObservableObject {
             + "?latitude=\(latitude)&longitude=\(longitude)"
             + "&current=temperature_2m,apparent_temperature,wind_speed_10m,wind_direction_10m,wind_gusts_10m,precipitation,cloud_cover,surface_pressure,relative_humidity_2m,visibility,snow_depth,is_day,weather_code"
             + "&hourly=temperature_2m,precipitation,wind_speed_10m,cloud_cover,weather_code"
-            + "&forecast_days=1"
+            + "&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,snowfall_sum,weather_code,wind_speed_10m_max,wind_gusts_10m_max"
+            + "&forecast_days=7"
+            + "&past_hours=6"
             + "&timezone=auto"
 
         guard let url = URL(string: urlString) else {
@@ -60,6 +64,9 @@ class WeatherService: ObservableObject {
             self.error = "Failed to fetch weather data"
         }
 
+        // Reverse geocode location name
+        await reverseGeocode(latitude: latitude, longitude: longitude)
+
         // Fetch mountain-level winds separately
         await fetchMountainWeather(latitude: latitude, longitude: longitude)
 
@@ -73,7 +80,7 @@ class WeatherService: ObservableObject {
             + ",windspeed_800hPa,windspeed_700hPa,windspeed_600hPa"
             + ",winddirection_800hPa,winddirection_700hPa,winddirection_600hPa"
             + "&current=freezinglevel_height"
-            + "&forecast_days=1"
+            + "&forecast_days=7"
             + "&timezone=auto"
 
         guard let url = URL(string: urlString) else { return }
@@ -89,6 +96,11 @@ class WeatherService: ObservableObject {
 
     private func parseResponse(_ response: OpenMeteoResponse) {
         let current = response.current
+
+        // Parse elevation
+        if let elev = response.elevation {
+            elevation = Int(elev)
+        }
 
         currentConditions = WeatherConditions(
             temperature: current.temperature2m,
@@ -109,12 +121,24 @@ class WeatherService: ObservableObject {
 
         // Parse hourly
         if let hourly = response.hourly {
-            let count = min(24, hourly.time.count)
             let iso = ISO8601DateFormatter()
             iso.formatOptions = [.withFullDate, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
 
-            hourlyForecast = (0..<count).compactMap { i in
+            // Recent precipitation: sum of past 6h
+            let now = Date()
+            var totalRecent = 0.0
+            for i in 0..<hourly.time.count {
+                guard let date = iso.date(from: hourly.time[i]) else { continue }
+                if date <= now && now.timeIntervalSince(date) <= 6 * 3600 {
+                    totalRecent += hourly.precipitation[i]
+                }
+            }
+            recentPrecipitation = totalRecent
+
+            // Filter to current hour onward (past_hours=6 prepends historical entries)
+            hourlyForecast = (0..<hourly.time.count).compactMap { i in
                 guard let date = iso.date(from: hourly.time[i]) else { return nil }
+                guard now.timeIntervalSince(date) < 3600 else { return nil }
                 return HourlyForecast(
                     time: date,
                     temperature: hourly.temperature2m[i],
@@ -122,6 +146,29 @@ class WeatherService: ObservableObject {
                     windSpeed: hourly.windSpeed10m[i],
                     cloudCover: Int(hourly.cloudCover[i]),
                     weatherCode: Int(hourly.weatherCode[i])
+                )
+            }
+            if hourlyForecast.count > 24 {
+                hourlyForecast = Array(hourlyForecast.prefix(24))
+            }
+        }
+
+        // Parse daily forecast
+        if let daily = response.daily {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+
+            dailyForecast = (0..<daily.time.count).compactMap { i in
+                guard let date = dateFormatter.date(from: daily.time[i]) else { return nil }
+                return DailyForecast(
+                    date: date,
+                    tempMax: daily.temperature2mMax[i],
+                    tempMin: daily.temperature2mMin[i],
+                    precipitationSum: daily.precipitationSum[i],
+                    snowfallSum: daily.snowfallSum[i],
+                    weatherCode: Int(daily.weatherCode[i]),
+                    windSpeedMax: daily.windSpeed10mMax[i],
+                    windGustsMax: daily.windGusts10mMax[i]
                 )
             }
         }
@@ -177,8 +224,99 @@ class WeatherService: ObservableObject {
         )
     }
 
+    private func reverseGeocode(latitude: Double, longitude: Double) async {
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+        do {
+            let placemarks = try await CLGeocoder().reverseGeocodeLocation(location)
+            if let place = placemarks.first {
+                let name = place.locality ?? place.name ?? place.administrativeArea
+                locationName = name ?? String(format: "%.2f, %.2f", latitude, longitude)
+            }
+        } catch {
+            locationName = String(format: "%.2f, %.2f", latitude, longitude)
+        }
+    }
+
     func invalidateCache() {
         lastFetchTime = nil
+    }
+
+    // MARK: - Aviation Weather (CAPE, cloud base, thermals)
+
+    func fetchAviationWeather(latitude: Double, longitude: Double) async {
+        let urlString = "https://api.open-meteo.com/v1/forecast"
+            + "?latitude=\(latitude)&longitude=\(longitude)"
+            + "&hourly=cape,lifted_index,boundary_layer_height,dew_point_2m"
+            + "&forecast_days=1"
+            + "&timezone=auto"
+
+        guard let url = URL(string: urlString) else { return }
+
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            let response = try decoder.decode(AviationMeteoResponse.self, from: data)
+            parseAviationResponse(response)
+        } catch {
+            // Aviation data is supplementary
+        }
+    }
+
+    private func parseAviationResponse(_ response: AviationMeteoResponse) {
+        guard let hourly = response.hourly else { return }
+
+        let iso = ISO8601DateFormatter()
+        iso.formatOptions = [.withFullDate, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
+
+        // Find current hour index
+        let now = Date()
+        let calendar = Calendar.current
+        let currentHour = calendar.component(.hour, from: now)
+        let idx = min(currentHour, hourly.time.count - 1)
+
+        let cape = hourly.cape?[safe: idx] ?? 0
+        let liftedIndex = hourly.liftedIndex?[safe: idx] ?? 0
+        let blh = hourly.boundaryLayerHeight?[safe: idx] ?? 1000
+        let dewPoint = hourly.dewPoint2m?[safe: idx] ?? 5
+
+        // Estimate thermal velocity from CAPE: v ≈ sqrt(2 * CAPE / 1000) for simplicity
+        let thermalVelocity = cape > 0 ? sqrt(2 * cape / 1000) : 0
+
+        // Estimate cloud base from dew point spread
+        let temp = currentConditions?.temperature ?? 15
+        let spreadRate = 125.0 // meters per °C spread
+        let cloudBase = Int(max(0, (temp - dewPoint) * spreadRate))
+
+        // Trigger temperature: surface dew point + lapse correction
+        let triggerTemp = dewPoint + (blh / spreadRate)
+
+        thermalForecast = ThermalForecast(
+            thermalVelocity: thermalVelocity,
+            cape: cape,
+            cloudBase: cloudBase,
+            boundaryLayerHeight: Int(blh),
+            triggerTemperature: triggerTemp,
+            dewPoint: dewPoint,
+            liftedIndex: liftedIndex,
+            timestamp: now
+        )
+
+        // Hourly thermals
+        hourlyThermals = (0..<min(24, hourly.time.count)).compactMap { i in
+            guard let date = iso.date(from: hourly.time[i]) else { return nil }
+            let hCape = hourly.cape?[safe: i] ?? 0
+            let hBlh = hourly.boundaryLayerHeight?[safe: i] ?? 0
+            let hDew = hourly.dewPoint2m?[safe: i] ?? 0
+            let hTemp = self.hourlyForecast[safe: i]?.temperature ?? 15
+            let hCloudBase = Int(max(0, (hTemp - hDew) * spreadRate))
+
+            return HourlyThermalForecast(
+                hour: date,
+                thermalVelocity: hCape > 0 ? sqrt(2 * hCape / 1000) : 0,
+                cape: hCape,
+                cloudBase: hCloudBase,
+                boundaryLayerHeight: Int(hBlh)
+            )
+        }
     }
 }
 
@@ -187,6 +325,8 @@ class WeatherService: ObservableObject {
 struct OpenMeteoResponse: Codable {
     let current: CurrentWeather
     let hourly: HourlyWeather?
+    let daily: DailyWeather?
+    let elevation: Double?
 }
 
 struct CurrentWeather: Codable {
@@ -203,6 +343,22 @@ struct CurrentWeather: Codable {
     let snowDepth: Double?
     let isDay: Double
     let weatherCode: Double
+
+    enum CodingKeys: String, CodingKey {
+        case temperature2m = "temperature_2m"
+        case apparentTemperature = "apparent_temperature"
+        case windSpeed10m = "wind_speed_10m"
+        case windDirection10m = "wind_direction_10m"
+        case windGusts10m = "wind_gusts_10m"
+        case precipitation
+        case cloudCover = "cloud_cover"
+        case surfacePressure = "surface_pressure"
+        case relativeHumidity2m = "relative_humidity_2m"
+        case visibility
+        case snowDepth = "snow_depth"
+        case isDay = "is_day"
+        case weatherCode = "weather_code"
+    }
 }
 
 struct HourlyWeather: Codable {
@@ -212,6 +368,37 @@ struct HourlyWeather: Codable {
     let windSpeed10m: [Double]
     let cloudCover: [Double]
     let weatherCode: [Double]
+
+    enum CodingKeys: String, CodingKey {
+        case time
+        case temperature2m = "temperature_2m"
+        case precipitation
+        case windSpeed10m = "wind_speed_10m"
+        case cloudCover = "cloud_cover"
+        case weatherCode = "weather_code"
+    }
+}
+
+struct DailyWeather: Codable {
+    let time: [String]
+    let temperature2mMax: [Double]
+    let temperature2mMin: [Double]
+    let precipitationSum: [Double]
+    let snowfallSum: [Double]
+    let weatherCode: [Double]
+    let windSpeed10mMax: [Double]
+    let windGusts10mMax: [Double]
+
+    enum CodingKeys: String, CodingKey {
+        case time
+        case temperature2mMax = "temperature_2m_max"
+        case temperature2mMin = "temperature_2m_min"
+        case precipitationSum = "precipitation_sum"
+        case snowfallSum = "snowfall_sum"
+        case weatherCode = "weather_code"
+        case windSpeed10mMax = "wind_speed_10m_max"
+        case windGusts10mMax = "wind_gusts_10m_max"
+    }
 }
 
 struct MountainMeteoResponse: Codable {
@@ -221,6 +408,18 @@ struct MountainMeteoResponse: Codable {
 
 struct MountainCurrent: Codable {
     let freezinglevelHeight: Double
+
+    enum CodingKeys: String, CodingKey {
+        case freezinglevelHeight = "freezinglevel_height"
+    }
+}
+
+// MARK: - Safe Array Subscript
+
+extension Array {
+    subscript(safe index: Int) -> Element? {
+        indices.contains(index) ? self[index] : nil
+    }
 }
 
 struct MountainHourly: Codable {
@@ -233,4 +432,16 @@ struct MountainHourly: Codable {
     let winddirection800hPa: [Double]?
     let winddirection700hPa: [Double]?
     let winddirection600hPa: [Double]?
+
+    enum CodingKeys: String, CodingKey {
+        case temperature800hPa = "temperature_800hPa"
+        case temperature700hPa = "temperature_700hPa"
+        case temperature600hPa = "temperature_600hPa"
+        case windspeed800hPa = "windspeed_800hPa"
+        case windspeed700hPa = "windspeed_700hPa"
+        case windspeed600hPa = "windspeed_600hPa"
+        case winddirection800hPa = "winddirection_800hPa"
+        case winddirection700hPa = "winddirection_700hPa"
+        case winddirection600hPa = "winddirection_600hPa"
+    }
 }
