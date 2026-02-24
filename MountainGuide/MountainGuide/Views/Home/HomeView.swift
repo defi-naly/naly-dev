@@ -110,7 +110,7 @@ struct HomeView: View {
 
 struct DangerAssessmentRow: View {
     let activity: Activity
-    @StateObject private var weather = WeatherService.shared
+    @EnvironmentObject var weather: WeatherService
 
     var body: some View {
         HStack(spacing: 12) {
@@ -297,8 +297,9 @@ struct DangerAssessmentRow: View {
 // MARK: - Conditions Snapshot Card
 
 struct ConditionsSnapshotCard: View {
-    @StateObject private var weather = WeatherService.shared
+    @EnvironmentObject var weather: WeatherService
     @EnvironmentObject var activityStore: ActivityStore
+    @EnvironmentObject var locationService: LocationService
 
     var body: some View {
         VStack(spacing: 0) {
@@ -341,6 +342,28 @@ struct ConditionsSnapshotCard: View {
                         .font(.system(size: 12, weight: .semibold))
                         .foregroundStyle(Color.textTertiary)
                 }
+
+                // Freshness footer
+                HStack(spacing: 4) {
+                    if let name = weather.locationName {
+                        Text(name)
+                            .font(.mono(10))
+                            .foregroundStyle(Color.textTertiary)
+                    }
+                    if let lastFetch = weather.lastFetchTime {
+                        Text("·")
+                            .font(.mono(10))
+                            .foregroundStyle(Color.textTertiary)
+                        Text(lastFetch, style: .relative)
+                            .font(.mono(10))
+                            .foregroundStyle(Color.textTertiary)
+                        Text("ago")
+                            .font(.mono(10))
+                            .foregroundStyle(Color.textTertiary)
+                    }
+                    Spacer()
+                }
+                .padding(.top, 8)
             } else {
                 VStack(spacing: 12) {
                     Image(systemName: activityStore.currentActivity.icon)
@@ -360,8 +383,22 @@ struct ConditionsSnapshotCard: View {
         }
         .terminalCard()
         .task {
-            if weather.currentConditions == nil {
-                await weather.fetchWeather(latitude: 46.8, longitude: 8.2)
+            // Wait for real device location (up to 5s) before first fetch
+            if locationService.currentLocation == nil {
+                for _ in 0..<10 {
+                    try? await Task.sleep(for: .milliseconds(500))
+                    if locationService.currentLocation != nil { break }
+                }
+            }
+            let loc = locationService.effectiveLocation
+            await weather.fetchWeather(latitude: loc.latitude, longitude: loc.longitude)
+        }
+        .onChange(of: locationService.currentLocation?.latitude) { _, _ in
+            // .task handles first fetch; only re-fetch for subsequent location changes
+            guard weather.lastFetchTime != nil else { return }
+            let loc = locationService.effectiveLocation
+            Task {
+                await weather.fetchWeather(latitude: loc.latitude, longitude: loc.longitude)
             }
         }
     }

@@ -4,8 +4,8 @@ import CoreLocation
 // MARK: - Weather Conditions View
 
 struct ConditionsView: View {
-    @StateObject private var weather = WeatherService.shared
-    @StateObject private var location = ConditionsLocationManager()
+    @EnvironmentObject var weather: WeatherService
+    @EnvironmentObject var locationService: LocationService
 
     var body: some View {
         ScrollView {
@@ -56,22 +56,28 @@ struct ConditionsView: View {
             .padding()
         }
         .task {
-            if let loc = location.lastLocation {
-                await weather.fetchWeather(latitude: loc.latitude, longitude: loc.longitude)
-            }
-        }
-        .onChange(of: location.lastLocation?.latitude) { _, _ in
-            if let loc = location.lastLocation {
-                Task {
-                    await weather.fetchWeather(latitude: loc.latitude, longitude: loc.longitude)
+            // Wait for real device location (up to 5s) before fetching
+            if locationService.currentLocation == nil {
+                for _ in 0..<10 {
+                    try? await Task.sleep(for: .milliseconds(500))
+                    if locationService.currentLocation != nil { break }
                 }
+            }
+            let loc = locationService.effectiveLocation
+            // Cache inside WeatherService means this is a no-op if HomeView already fetched
+            await weather.fetchWeather(latitude: loc.latitude, longitude: loc.longitude)
+        }
+        .onChange(of: locationService.currentLocation?.latitude) { _, _ in
+            guard weather.lastFetchTime != nil else { return }
+            let loc = locationService.effectiveLocation
+            Task {
+                await weather.fetchWeather(latitude: loc.latitude, longitude: loc.longitude)
             }
         }
         .refreshable {
             weather.invalidateCache()
-            if let loc = location.lastLocation {
-                await weather.fetchWeather(latitude: loc.latitude, longitude: loc.longitude)
-            }
+            let loc = locationService.effectiveLocation
+            await weather.fetchWeather(latitude: loc.latitude, longitude: loc.longitude)
         }
     }
 }
@@ -823,30 +829,3 @@ struct NoDataCard: View {
     }
 }
 
-// MARK: - Location Manager for Conditions
-
-class ConditionsLocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    @Published var lastLocation: CLLocationCoordinate2D?
-
-    private let manager = CLLocationManager()
-
-    override init() {
-        super.init()
-        manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyKilometer
-        manager.requestWhenInUseAuthorization()
-        manager.startUpdatingLocation()
-    }
-
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        lastLocation = locations.last?.coordinate
-        manager.stopUpdatingLocation() // One fix is enough for weather
-    }
-
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        // Use default coords (Zurich) as fallback
-        if lastLocation == nil {
-            lastLocation = CLLocationCoordinate2D(latitude: 47.3769, longitude: 8.5417)
-        }
-    }
-}

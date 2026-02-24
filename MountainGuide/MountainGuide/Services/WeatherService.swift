@@ -20,7 +20,7 @@ class WeatherService: ObservableObject {
     @Published var hourlyThermals: [HourlyThermalForecast] = []
     @Published var recentPrecipitation: Double = 0  // mm over past 6h
 
-    private var lastFetchTime: Date?
+    @Published private(set) var lastFetchTime: Date?
     private var lastLocation: CLLocationCoordinate2D?
     private let cacheInterval: TimeInterval = 30 * 60 // 30 minutes
 
@@ -57,20 +57,17 @@ class WeatherService: ObservableObject {
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             let response = try decoder.decode(OpenMeteoResponse.self, from: data)
-            parseResponse(response)
-            lastFetchTime = Date()
-            lastLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            applyResponse(response, latitude: latitude, longitude: longitude)
         } catch {
             self.error = "Failed to fetch weather data"
         }
 
-        // Reverse geocode location name
-        await reverseGeocode(latitude: latitude, longitude: longitude)
-
-        // Fetch mountain-level winds separately
-        await fetchMountainWeather(latitude: latitude, longitude: longitude)
-
         isLoading = false
+
+        // Supplementary data in parallel — view updates reactively via @Published
+        async let _geo: Void = reverseGeocode(latitude: latitude, longitude: longitude)
+        async let _mtn: Void = fetchMountainWeather(latitude: latitude, longitude: longitude)
+        _ = await (_geo, _mtn)
     }
 
     private func fetchMountainWeather(latitude: Double, longitude: Double) async {
@@ -94,15 +91,13 @@ class WeatherService: ObservableObject {
         }
     }
 
-    private func parseResponse(_ response: OpenMeteoResponse) {
+    /// Batch all parsed results into @Published properties in a single synchronous block,
+    /// so SwiftUI coalesces the changes into one render pass.
+    private func applyResponse(_ response: OpenMeteoResponse, latitude: Double, longitude: Double) {
         let current = response.current
 
-        // Parse elevation
-        if let elev = response.elevation {
-            elevation = Int(elev)
-        }
-
-        currentConditions = WeatherConditions(
+        // Build conditions
+        let conditions = WeatherConditions(
             temperature: current.temperature2m,
             apparentTemperature: current.apparentTemperature,
             windSpeed: current.windSpeed10m,
@@ -119,12 +114,16 @@ class WeatherService: ObservableObject {
             timestamp: Date()
         )
 
+        // Parse elevation
+        let parsedElevation = response.elevation.map { Int($0) }
+
         // Parse hourly
+        var parsedRecentPrecip = 0.0
+        var parsedHourly: [HourlyForecast] = []
         if let hourly = response.hourly {
             let iso = ISO8601DateFormatter()
             iso.formatOptions = [.withFullDate, .withTime, .withDashSeparatorInDate, .withColonSeparatorInTime]
 
-            // Recent precipitation: sum of past 6h
             let now = Date()
             var totalRecent = 0.0
             for i in 0..<hourly.time.count {
@@ -133,10 +132,9 @@ class WeatherService: ObservableObject {
                     totalRecent += hourly.precipitation[i]
                 }
             }
-            recentPrecipitation = totalRecent
+            parsedRecentPrecip = totalRecent
 
-            // Filter to current hour onward (past_hours=6 prepends historical entries)
-            hourlyForecast = (0..<hourly.time.count).compactMap { i in
+            parsedHourly = (0..<hourly.time.count).compactMap { i in
                 guard let date = iso.date(from: hourly.time[i]) else { return nil }
                 guard now.timeIntervalSince(date) < 3600 else { return nil }
                 return HourlyForecast(
@@ -148,17 +146,18 @@ class WeatherService: ObservableObject {
                     weatherCode: Int(hourly.weatherCode[i])
                 )
             }
-            if hourlyForecast.count > 24 {
-                hourlyForecast = Array(hourlyForecast.prefix(24))
+            if parsedHourly.count > 24 {
+                parsedHourly = Array(parsedHourly.prefix(24))
             }
         }
 
-        // Parse daily forecast
+        // Parse daily
+        var parsedDaily: [DailyForecast] = []
         if let daily = response.daily {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
 
-            dailyForecast = (0..<daily.time.count).compactMap { i in
+            parsedDaily = (0..<daily.time.count).compactMap { i in
                 guard let date = dateFormatter.date(from: daily.time[i]) else { return nil }
                 return DailyForecast(
                     date: date,
@@ -173,20 +172,27 @@ class WeatherService: ObservableObject {
             }
         }
 
-        // Calculate pressure trend from hourly data
+        // Calculate pressure trend
+        var parsedTrend: PressureTrend = .stable
         if let hourly = response.hourly, hourly.time.count >= 6 {
-            // Approximate: compare recent vs earlier hourly pressure is not available
-            // Use cloud cover trend as proxy
             let recentCloud = hourly.cloudCover.suffix(3).reduce(0.0, +) / 3
             let earlierCloud = hourly.cloudCover.prefix(3).reduce(0.0, +) / 3
             if recentCloud > earlierCloud + 15 {
-                pressureTrend = .falling
+                parsedTrend = .falling
             } else if recentCloud < earlierCloud - 15 {
-                pressureTrend = .rising
-            } else {
-                pressureTrend = .stable
+                parsedTrend = .rising
             }
         }
+
+        // Assign all @Published properties in one synchronous block → single SwiftUI render pass
+        currentConditions = conditions
+        elevation = parsedElevation
+        recentPrecipitation = parsedRecentPrecip
+        hourlyForecast = parsedHourly
+        dailyForecast = parsedDaily
+        pressureTrend = parsedTrend
+        lastFetchTime = Date()
+        lastLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
 
     private func parseMountainResponse(_ response: MountainMeteoResponse) {
