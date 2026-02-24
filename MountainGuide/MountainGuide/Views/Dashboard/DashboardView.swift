@@ -52,7 +52,7 @@ struct DashboardView: View {
                             HStack {
                                 Image(systemName: "rectangle.stack.fill")
                                 Text("\(store.dueCardCount) cards ready for review")
-                                    .font(.mono(14, weight: .semibold))
+                                    .font(.body(14, weight: .semibold))
                                 Spacer()
                                 Image(systemName: "chevron.right")
                             }
@@ -67,7 +67,7 @@ struct DashboardView: View {
                     // Domain strength cards
                     VStack(alignment: .leading, spacing: 12) {
                         Text("DOMAINS")
-                            .font(.mono(11, weight: .bold))
+                            .font(.body(11, weight: .bold))
                             .foregroundStyle(Color.textMuted)
                             .padding(.horizontal)
 
@@ -142,7 +142,7 @@ struct ReadinessGauge: View {
                         .font(.mono(32, weight: .bold))
                         .foregroundStyle(Color.textPrimary)
                     Text("READY")
-                        .font(.mono(10, weight: .bold))
+                        .font(.body(10, weight: .bold))
                         .foregroundStyle(Color.textMuted)
                 }
             }
@@ -172,7 +172,7 @@ struct StatCard: View {
                 .font(.mono(20, weight: .bold))
                 .foregroundStyle(Color.textPrimary)
             Text(label)
-                .font(.mono(10, weight: .medium))
+                .font(.body(10, weight: .medium))
                 .foregroundStyle(Color.textMuted)
         }
         .frame(maxWidth: .infinity)
@@ -197,10 +197,10 @@ struct DomainStrengthRow: View {
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(domain.name)
-                    .font(.mono(14, weight: .semibold))
+                    .font(.body(14, weight: .semibold))
                     .foregroundStyle(Color.textPrimary)
                 Text("\(completed)/\(total) modules")
-                    .font(.mono(11))
+                    .font(.body(11))
                     .foregroundStyle(Color.textMuted)
             }
 
@@ -234,7 +234,7 @@ struct StreakHeatmap: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("REVIEW HISTORY")
-                .font(.mono(11, weight: .bold))
+                .font(.body(11, weight: .bold))
                 .foregroundStyle(Color.textMuted)
 
             LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 3), count: 7), spacing: 3) {
@@ -248,7 +248,7 @@ struct StreakHeatmap: View {
 
             HStack(spacing: 4) {
                 Text("Less")
-                    .font(.mono(9))
+                    .font(.body(9))
                     .foregroundStyle(Color.textDim)
                 ForEach([0, 1, 5, 10, 20], id: \.self) { level in
                     RoundedRectangle(cornerRadius: 2)
@@ -256,7 +256,7 @@ struct StreakHeatmap: View {
                         .frame(width: 12, height: 12)
                 }
                 Text("More")
-                    .font(.mono(9))
+                    .font(.body(9))
                     .foregroundStyle(Color.textDim)
             }
         }
@@ -285,46 +285,91 @@ struct GamificationBanner: View {
     let gamification: GamificationState
 
     var body: some View {
-        HStack(spacing: 16) {
-            // Level badge
-            VStack(spacing: 2) {
-                Text("LVL \(gamification.level)")
-                    .font(.mono(18, weight: .bold))
-                    .foregroundStyle(gamification.levelTitle.color)
-                Text(gamification.levelTitle.rawValue.uppercased())
-                    .font(.mono(9, weight: .bold))
-                    .foregroundStyle(Color.textMuted)
-            }
-
-            // XP bar
-            VStack(alignment: .leading, spacing: 4) {
-                HStack {
-                    Text("\(gamification.totalXP) XP")
-                        .font(.mono(12, weight: .bold))
-                        .foregroundStyle(Color.amber)
-                    Spacer()
-                    if gamification.xpToNextLevel > 0 {
-                        Text("\(gamification.xpToNextLevel) to next")
-                            .font(.mono(9))
-                            .foregroundStyle(Color.textDim)
-                    }
+        VStack(spacing: 10) {
+            HStack(spacing: 16) {
+                // Level badge
+                VStack(spacing: 2) {
+                    Text("LVL \(gamification.level)")
+                        .font(.mono(18, weight: .bold))
+                        .foregroundStyle(gamification.levelTitle.color)
+                    Text(gamification.levelTitle.rawValue.uppercased())
+                        .font(.body(9, weight: .bold))
+                        .foregroundStyle(Color.textMuted)
                 }
 
-                // Progress bar
-                GeometryReader { geo in
-                    ZStack(alignment: .leading) {
-                        RoundedRectangle(cornerRadius: 3)
-                            .fill(Color.terminalBorder)
-                            .frame(height: 6)
-                        RoundedRectangle(cornerRadius: 3)
-                            .fill(Color.amber)
-                            .frame(width: geo.size.width * gamification.levelProgress, height: 6)
+                // XP bar
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text("\(gamification.totalXP) XP")
+                            .font(.mono(12, weight: .bold))
+                            .foregroundStyle(Color.amber)
+                        Spacer()
+                        if gamification.xpToNextLevel > 0 {
+                            Text("\(gamification.xpToNextLevel) to next")
+                                .font(.body(9))
+                                .foregroundStyle(Color.textDim)
+                        }
                     }
+
+                    // Progress bar
+                    GeometryReader { geo in
+                        ZStack(alignment: .leading) {
+                            RoundedRectangle(cornerRadius: 3)
+                                .fill(Color.terminalBorder)
+                                .frame(height: 6)
+                            RoundedRectangle(cornerRadius: 3)
+                                .fill(Color.amber)
+                                .frame(width: geo.size.width * gamification.levelProgress, height: 6)
+                        }
+                    }
+                    .frame(height: 6)
                 }
-                .frame(height: 6)
             }
+
+            // 3-axis XP mini-bars
+            XPAxisBars(gamification: gamification)
         }
         .terminalCard()
+    }
+}
+
+// MARK: - XP Axis Bars
+
+struct XPAxisBars: View {
+    let gamification: GamificationState
+
+    private var maxXP: Int {
+        max(gamification.preparationXP, gamification.prowessXP, gamification.safetyXP, 1)
+    }
+
+    var body: some View {
+        HStack(spacing: 8) {
+            ForEach(gamification.axisBreakdown, id: \.axis) { item in
+                VStack(spacing: 3) {
+                    HStack(spacing: 4) {
+                        Image(systemName: item.axis.icon)
+                            .font(.system(size: 8))
+                            .foregroundStyle(item.axis.color)
+                        Text(item.axis.displayName)
+                            .font(.body(8, weight: .medium))
+                            .foregroundStyle(Color.textMuted)
+                    }
+
+                    GeometryReader { geo in
+                        ZStack(alignment: .leading) {
+                            RoundedRectangle(cornerRadius: 2)
+                                .fill(Color.terminalBorder)
+                                .frame(height: 4)
+                            RoundedRectangle(cornerRadius: 2)
+                                .fill(item.axis.color)
+                                .frame(width: geo.size.width * CGFloat(item.xp) / CGFloat(maxXP), height: 4)
+                        }
+                    }
+                    .frame(height: 4)
+                }
+                .frame(maxWidth: .infinity)
+            }
+        }
     }
 }
 
@@ -363,7 +408,7 @@ struct KnowledgeMapView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("KNOWLEDGE MAP")
-                .font(.mono(11, weight: .bold))
+                .font(.body(11, weight: .bold))
                 .foregroundStyle(Color.textMuted)
 
             ForEach(DomainContent.allDomains) { domain in

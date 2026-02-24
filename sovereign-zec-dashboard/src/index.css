@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --sov-bg: #0a0a0c;
+  --sov-surface: #12141a;
+  --sov-border: #1e2030;
+  --sov-gold: #F4B728;
+  --sov-gold-glow: rgba(244, 183, 40, 0.3);
+  --sov-gold-dim: rgba(244, 183, 40, 0.15);
+  --sov-violet: #A78BFA;
+  --sov-green: #22C55E;
+  --sov-red: #EF4444;
+  --sov-bright: #F0F0F0;
+  --sov-text: #D1D5DB;
+  --sov-muted: #9CA3AF;
+  --sov-faint: #6B7280;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--sov-bg);
+  color: var(--sov-text);
+  font-family: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(244, 183, 40, 0.2);
+  color: var(--sov-bright);
+}
+
+/* ========================================
+   GRAIN OVERLAY
+   ======================================== */
+
+.sov-grain::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ========================================
+   SCROLLBAR
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sov-faint);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sov-muted);
+}
+
+/* ========================================
+   BLOCK STRIP MARQUEE
+   ======================================== */
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.block-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* ========================================
+   REDUCED MOTION
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .block-marquee {
+    animation: none;
+  }
+
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOOM — Geometric Precision</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0a0a0a;
+            --white: #fafafa;
+            --gold: #d4af37;
+            --gold-dim: #a68a2a;
+            --gray: #666;
+            --gray-light: #999;
+            --grid-color: rgba(212, 175, 55, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .mono {
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        /* Grid overlay */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background-image:
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 80px 80px;
+            opacity: 0.5;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(to bottom, var(--black) 0%, transparent 100%);
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 8rem;
+            font-weight: 300;
+            letter-spacing: 0.4em;
+            margin-bottom: 2rem;
+            line-height: 1;
+        }
+
+        .hero h1 span {
+            color: var(--gold);
+        }
+
+        .hero-tagline {
+            font-size: 0.875rem;
+            letter-spacing: 0.3em;
+            color: var(--gray);
+            text-transform: uppercase;
+            margin-bottom: 4rem;
+        }
+
+        .hero-line {
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            margin: 0 auto;
+        }
+
+        /* Section styles */
+        section {
+            padding: 8rem 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1rem;
+        }
+
+        .section-number {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+        }
+
+        .section-title {
+            font-size: 0.875rem;
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gray-light);
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1px 2fr;
+            gap: 4rem;
+        }
+
+        .about-grid .divider {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .about-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.625rem;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .about-stat {
+            font-size: 4rem;
+            font-weight: 300;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-stat-label {
+            font-size: 0.75rem;
+            color: var(--gray);
+            letter-spacing: 0.1em;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            line-height: 1.3;
+            margin-bottom: 2rem;
+        }
+
+        .about-text p {
+            font-size: 1rem;
+            color: var(--gray-light);
+            max-width: 600px;
+        }
+
+        /* Process */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .process-step {
+            background: var(--black);
+            padding: 3rem;
+            position: relative;
+        }
+
+        .process-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s ease;
+        }
+
+        .process-step:hover::before {
+            transform: scaleX(1);
+        }
+
+        .step-number {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--gold);
+            opacity: 0.3;
+            margin-bottom: 2rem;
+        }
+
+        .step-title {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .step-desc {
+            font-size: 0.875rem;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .portfolio-card {
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 3rem;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .portfolio-card:hover {
+            border-color: var(--gold);
+        }
+
+        .portfolio-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            border-bottom: 1px solid var(--gold);
+            border-right: 1px solid var(--gold);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .portfolio-card:hover::after {
+            opacity: 1;
+        }
+
+        .portfolio-status {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.625rem;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .portfolio-name {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+        }
+
+        .portfolio-desc {
+            font-size: 0.875rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .portfolio-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.625rem;
+            padding: 0.25rem 0.75rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            letter-spacing: 0.1em;
+        }
+
+        /* Principles */
+        .principles-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+        }
+
+        .principle {
+            padding: 2.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: grid;
+            grid-template-columns: 40px 1fr;
+            gap: 2rem;
+            align-items: start;
+            transition: background 0.3s ease;
+        }
+
+        .principle:hover {
+            background: rgba(212, 175, 55, 0.03);
+        }
+
+        .principle-number {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--gold);
+        }
+
+        .principle h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .principle p {
+            font-size: 0.8125rem;
+            color: var(--gray);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-brand h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            font-size: 0.8125rem;
+            color: var(--gray);
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.625rem;
+            letter-spacing: 0.2em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col a {
+            display: block;
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.8125rem;
+            margin-bottom: 0.75rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.625rem;
+            color: var(--gray);
+            letter-spacing: 0.1em;
+        }
+
+        .back-link {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.625rem;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 5rem; }
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .about-grid .divider { display: none; }
+            .process-grid { grid-template-columns: 1fr; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .principles-list { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+        }
+
+        @media (max-width: 640px) {
+            nav { padding: 1rem 2rem; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 3rem; letter-spacing: 0.2em; }
+            section { padding: 4rem 2rem; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-overlay"></div>
+
+    <nav>
+        <div class="logo">BLOOM</div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#process">Process</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#principles">Principles</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <canvas id="particles-canvas"></canvas>
+        <div class="hero-content">
+            <h1>BL<span>O</span><span>O</span>M</h1>
+            <p class="hero-tagline">Where fields converge, things bloom</p>
+            <div class="hero-line"></div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="section-header">
+            <span class="section-number">01</span>
+            <h2 class="section-title">About / Thesis</h2>
+        </div>
+        <div class="about-grid">
+            <div class="about-stats">
+                <div class="about-label">Experience</div>
+                <div class="about-stat">5+</div>
+                <div class="about-stat-label">Years in DeFi</div>
+            </div>
+            <div class="divider"></div>
+            <div class="about-text">
+                <h2>We identify bottlenecks in decentralised finance and build products to solve them.</h2>
+                <p>BLOOM is a for-profit venture studio operating at the intersection of physics and nature. We see DeFi not as a collection of protocols, but as an emergent field—complex systems where small interventions can cascade into fundamental shifts. Our thesis: find the friction, build the solution, let it bloom.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="process">
+        <div class="section-header">
+            <span class="section-number">02</span>
+            <h2 class="section-title">Process</h2>
+        </div>
+        <div class="process-grid">
+            <div class="process-step">
+                <div class="step-number">01</div>
+                <h3 class="step-title">Identify</h3>
+                <p class="step-desc">We map the field. Through deep immersion in DeFi ecosystems, we locate points of friction—places where value leaks, trust breaks, or complexity overwhelms.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">02</div>
+                <h3 class="step-title">Architect</h3>
+                <p class="step-desc">We design from first principles. Every solution begins with the physics of the problem—understanding the forces at play before proposing structure.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">03</div>
+                <h3 class="step-title">Cultivate</h3>
+                <p class="step-desc">We build for emergence. Products launch lean, iterate with users, and grow organically. Forced growth fails; natural growth compounds.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="section-header">
+            <span class="section-number">03</span>
+            <h2 class="section-title">Portfolio</h2>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-card">
+                <div class="portfolio-status">● Live</div>
+                <h3 class="portfolio-name">TIPZ</h3>
+                <p class="portfolio-desc">Privacy-first micro-tipping for creators using Zcash shielded addresses. Support without surveillance.</p>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">Privacy</span>
+                    <span class="portfolio-tag">Zcash</span>
+                    <span class="portfolio-tag">Creator Economy</span>
+                </div>
+            </div>
+            <div class="portfolio-card">
+                <div class="portfolio-status">○ In Development</div>
+                <h3 class="portfolio-name">Project II</h3>
+                <p class="portfolio-desc">Bottleneck identified. Solution in design. Details emerging soon.</p>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="principles">
+        <div class="section-header">
+            <span class="section-number">04</span>
+            <h2 class="section-title">Principles</h2>
+        </div>
+        <div class="principles-list">
+            <div class="principle">
+                <span class="principle-number">01</span>
+                <div>
+                    <h3>Privacy is Fundamental</h3>
+                    <p>Financial surveillance enables control. We build tools that preserve autonomy.</p>
+                </div>
+            </div>
+            <div class="principle">
+                <span class="principle-number">02</span>
+                <div>
+                    <h3>Emergence Over Force</h3>
+                    <p>Complex systems resist top-down control. We design for organic growth.</p>
+                </div>
+            </div>
+            <div class="principle">
+                <span class="principle-number">03</span>
+                <div>
+                    <h3>Simplicity at the Surface</h3>
+                    <p>Sophisticated technology should feel inevitable. Complexity hidden, utility exposed.</p>
+                </div>
+            </div>
+            <div class="principle">
+                <span class="principle-number">04</span>
+                <div>
+                    <h3>Long-Term Alignment</h3>
+                    <p>We build products we'd use ourselves. Incentives matter; we eat our own cooking.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h2>BLOOM</h2>
+                <p>A DeFi venture studio building at the intersection of physics and nature.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Studio</h4>
+                <a href="#about">About</a>
+                <a href="#process">Process</a>
+                <a href="#principles">Principles</a>
+            </div>
+            <div class="footer-col">
+                <h4>Portfolio</h4>
+                <a href="#">TIPZ</a>
+                <a href="#">Project II</a>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <a href="#">Twitter</a>
+                <a href="#">GitHub</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 BLOOM VENTURE STUDIO</p>
+            <a href="index.html" class="back-link">← View All Designs</a>
+        </div>
+    </footer>
+
+    <script>
+        // Geometric particle system
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        const particles = [];
+        const connections = [];
+        const PARTICLE_COUNT = 60;
+        const CONNECTION_DISTANCE = 150;
+        const MOUSE_RADIUS = 200;
+
+        let mouse = { x: null, y: null };
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+            }
+
+            update() {
+                // Mouse interaction
+                if (mouse.x !== null) {
+                    const dx = mouse.x - this.x;
+                    const dy = mouse.y - this.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < MOUSE_RADIUS) {
+                        const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS;
+                        this.vx -= (dx / dist) * force * 0.02;
+                        this.vy -= (dy / dist) * force * 0.02;
+                    }
+                }
+
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Boundary check
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+
+                // Damping
+                this.vx *= 0.99;
+                this.vy *= 0.99;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(212, 175, 55, 0.8)';
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            resize();
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function drawConnections() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < CONNECTION_DISTANCE) {
+                        const opacity = (1 - dist / CONNECTION_DISTANCE) * 0.3;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(212, 175, 55, ${opacity})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            drawConnections();
+
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', resize);
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+        window.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        init();
+        animate();
+    </script>
+</body>
+</html>

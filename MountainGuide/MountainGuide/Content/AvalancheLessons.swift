@@ -308,7 +308,18 @@ enum AvalancheLessons {
                     currentValue: 15
                 ),
                 interactionHint: "Drag the slider to explore different angles",
-                revealItems: nil
+                revealItems: nil,
+                mapConfig: MapConfig(
+                    centerLat: 46.8003,
+                    centerLon: 9.8360,
+                    spanLat: 0.04,
+                    spanLon: 0.04,
+                    pins: [
+                        MapPinData(id: "parsenn", lat: 46.8147, lon: 9.8089, label: "Parsenn"),
+                        MapPinData(id: "jakobshorn", lat: 46.7781, lon: 9.8514, label: "Jakobshorn"),
+                        MapPinData(id: "davos", lat: 46.8003, lon: 9.8360, label: "Davos 1,560m")
+                    ]
+                )
             ),
             TeachingStep(
                 id: "slope-2",

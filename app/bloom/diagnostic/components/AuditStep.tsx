@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { durableAssets, type AssetId } from '../../data/method';
+import { foundations, type AssetId } from '../../data/method';
 import type { AssetDimensionScore } from '../../lib/diagnostic';
 import ScoreSelector from './ScoreSelector';
 
@@ -24,7 +24,7 @@ export default function AuditStep({
   stepIndex,
   totalSteps,
 }: AuditStepProps) {
-  const asset = durableAssets.find((a) => a.id === assetId);
+  const asset = foundations.find((a) => a.id === assetId);
   if (!asset) return null;
 
   const assetScores = scores.filter((s) => s.assetId === assetId);
@@ -41,7 +41,7 @@ export default function AuditStep({
       <div className="diag-audit-header">
         <div className="diag-progress">
           <span className="diag-progress-label">
-            Asset {stepIndex + 1} of {totalSteps}
+            Foundation {stepIndex + 1} of {totalSteps}
           </span>
           <div className="diag-progress-bar">
             <div
@@ -91,7 +91,7 @@ export default function AuditStep({
           onClick={onNext}
           disabled={!allScored}
         >
-          {stepIndex === totalSteps - 1 ? 'See Results' : 'Next Asset'}
+          {stepIndex === totalSteps - 1 ? 'See Results' : 'Next Foundation'}
         </button>
       </div>
     </motion.div>

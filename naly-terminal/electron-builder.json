@@ -1,0 +1,20 @@
+{
+  "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
+  "appId": "dev.naly.terminal",
+  "productName": "Naly Terminal",
+  "directories": {
+    "buildResources": "resources",
+    "output": "release"
+  },
+  "files": [
+    "out/**/*"
+  ],
+  "mac": {
+    "target": ["dmg"],
+    "category": "public.app-category.developer-tools",
+    "darkModeSupport": true
+  },
+  "dmg": {
+    "artifactName": "${productName}-${version}.${ext}"
+  }
+}

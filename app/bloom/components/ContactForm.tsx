@@ -89,7 +89,7 @@ export default function ContactForm() {
       </div>
       <div className="contact-field">
         <textarea
-          placeholder="What are you building?"
+          placeholder="Which foundation are you missing?"
           value={message}
           onChange={(e) => { setMessage(e.target.value); if (errors.message) setErrors(prev => ({ ...prev, message: undefined })); }}
           className={errors.message ? 'contact-input contact-textarea error' : 'contact-input contact-textarea'}

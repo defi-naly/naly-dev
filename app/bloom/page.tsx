@@ -97,7 +97,7 @@ export default function BloomPage() {
       <main className="bloom-main">
         {/* Navigation */}
         <nav className="bloom-nav">
-          <a href="/bloom" className="bloom-nav-logo">
+          <a href="/" className="bloom-nav-logo">
             BLOOM
           </a>
           <div className="bloom-nav-links">
@@ -153,24 +153,21 @@ export default function BloomPage() {
                   </h2>
                   <div className="thesis-body">
                     <p>
-                      AI will automate software. The gap between Human+AI and pure AI is 12–24 months, maybe less. When anyone can build anything, the product isn&apos;t the moat.
+                      When anyone can build anything, the product isn&apos;t the moat.
                     </p>
                     <p>
-                      The network is.
+                      The network is. Users who bring users. Trust that compounds. Distribution you own. These survive when software becomes free.
                     </p>
                     <p>
-                      Users who bring users. Trust that compounds. Distribution you own. These survive when software becomes free.
-                    </p>
-                    <p>
-                      This is why we&apos;re selective about who we partner with.
+                      We proved it in DeFi. The economics are universal.
                     </p>
                   </div>
                 </div>
               </MotionReveal>
               <div className="about-stats">
-                <StatBlock value={100} suffix="%" label="Shipped" delay={0} />
-                <StatBlock value={5} label="Products Live" delay={200} />
-                <StatBlock value={0} label="Dead Products" delay={400} />
+                <StatBlock prefix="$" value={120} suffix="B" label="Protocol Volume" sublabel="Balancer + Beets protocols" delay={0} />
+                <StatBlock value={48} suffix="x" label="Liquidity Growth" sublabel="6M FTM → 290M staked" delay={200} />
+                <StatBlock value={78} suffix="%" label="Market Dominance" sublabel="LST market share on Sonic" delay={400} />
               </div>
             </div>
           </section>
@@ -194,7 +191,7 @@ export default function BloomPage() {
           {/* ─── 03 THE PROOF ─── */}
           <SectionDivider />
           <section id="proof" className="bloom-section">
-            <SectionHeader number="03" title="The Proof" />
+            <SectionHeader number="03" title="The Gap" />
 
             <JudgmentToggle />
           </section>
@@ -221,7 +218,6 @@ export default function BloomPage() {
                   <p className="edge-tagline">How the network finds you.</p>
                   <p>Your website is your distribution. Sites that convert, built to be owned and operated by you — not dependent on us.</p>
                   <div className="edge-proof">Proof: Inside Labs — complete site, 1 day</div>
-                  <div className="edge-sprint">Sprint: 1 week</div>
                 </motion.div>
               </StaggerItem>
               <StaggerItem>
@@ -232,9 +228,8 @@ export default function BloomPage() {
                 >
                   <h4>Trust</h4>
                   <p className="edge-tagline">Why the network stays.</p>
-                  <p>Trust is the moat your competitors can&apos;t copy. Earned through rigor. Proven at protocol level. It compounds — every delivery builds on the last.</p>
+                  <p>Trust is the moat competitors can&apos;t copy. Earned through rigor. Proven at protocol level. It compounds — every delivery builds on the last.</p>
                   <div className="edge-proof">Proof: Balancer v3 — launched with Aave</div>
-                  <div className="edge-sprint">Sprint: 1–2 weeks</div>
                 </motion.div>
               </StaggerItem>
               <StaggerItem>
@@ -245,9 +240,8 @@ export default function BloomPage() {
                 >
                   <h4>Judgment</h4>
                   <p className="edge-tagline">What network to build.</p>
-                  <p>AI builds anything. Knowing what to build is the hard part. We encode judgment into your operations.</p>
+                  <p>AI builds anything. Knowing what to build is the hard part. We encode judgment into your operations so every decision compounds.</p>
                   <div className="edge-proof">Proof: Acquired abandoned LST at 6M FTM. Built to 290M S.</div>
-                  <div className="edge-sprint">Sprint: 1 week</div>
                 </motion.div>
               </StaggerItem>
             </StaggerContainer>
@@ -273,7 +267,7 @@ export default function BloomPage() {
                   Sprints, not <span className="highlight">engagements</span>.
                 </h2>
                 <p className="section-subheading">
-                  Fixed scope. Fixed price. Shipped foundation — not a roadmap. You own it. You operate it.
+                  Fixed scope. $15,000. Shipped foundation — not a roadmap. You own it. You operate it.
                 </p>
               </MotionReveal>
             </div>
@@ -284,7 +278,7 @@ export default function BloomPage() {
               { id: 'build', name: 'Build', duration: '1\u20134 weeks',
                 description: 'AI-augmented execution at every step. You get a working foundation — not a deck, not a roadmap.' },
               { id: 'ship', name: 'Ship & Own', duration: 'Delivered',
-                description: 'You own it outright. AI workflows included. The foundation is laid. Now build the network on top.' },
+                description: 'You own it outright. AI workflows included. The foundation compounds. Build the network on top.' },
             ]} />
 
             <MotionReveal>

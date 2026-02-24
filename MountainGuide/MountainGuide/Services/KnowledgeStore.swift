@@ -305,8 +305,12 @@ class KnowledgeStore: ObservableObject {
         addXP(xp, domain: domain)
     }
 
-    func addXP(_ amount: Int, domain: DomainId) {
-        state.gamification.totalXP += amount
+    func addXP(_ amount: Int, axis: XPAxis = .preparation, domain: DomainId) {
+        switch axis {
+        case .preparation: state.gamification.preparationXP += amount
+        case .prowess: state.gamification.prowessXP += amount
+        case .safety: state.gamification.safetyXP += amount
+        }
         let domainKey = domain.rawValue
         state.gamification.domainXP[domainKey] = (state.gamification.domainXP[domainKey] ?? 0) + amount
         save()
@@ -314,7 +318,27 @@ class KnowledgeStore: ObservableObject {
 
     func addReviewXP(grade: Grade, domain: DomainId) {
         let xp = GamificationEngine.xpForReview(grade: grade)
-        addXP(xp, domain: domain)
+        addXP(xp, axis: .preparation, domain: domain)
+    }
+
+    // MARK: - Prowess XP from Activities
+
+    func addProwessXP(from activity: ActivityRecord) {
+        let elevGain: Double
+        let domain: DomainId
+        switch activity {
+        case .flight(let f): elevGain = f.altitudeGain; domain = .flying
+        case .tour(let t): elevGain = t.elevationGain; domain = .avalanche
+        case .hike(let h): elevGain = h.elevationGain; domain = .navigation
+        case .climb(let c): elevGain = c.elevationGain; domain = .ropeSystems
+        }
+        let vertXP = Int(elevGain / 100) * XPReward.verticalMeter100XP
+        addXP(vertXP + XPReward.activityCompletedXP, axis: .prowess, domain: domain)
+
+        // Bonus for flight distance
+        if case .flight(let f) = activity {
+            addXP(Int(f.xcDistance) * XPReward.kmFlownXP, axis: .prowess, domain: .flying)
+        }
     }
 
     // MARK: - Data Export

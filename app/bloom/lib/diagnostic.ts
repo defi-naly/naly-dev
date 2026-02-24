@@ -2,14 +2,14 @@ import {
   pillars,
   maturityBrackets,
   meadowsHierarchy,
-  durableAssets,
+  foundations,
   type PillarId,
   type MaturityId,
   type MeadowsLevel,
   type PillarDefinition,
   type SystemArchetype,
   type AssetId,
-  type DurableAssetDefinition,
+  type FoundationDefinition,
 } from '../data/method';
 
 // ─── TYPES ───
@@ -259,7 +259,7 @@ export const PILLAR_ORDER: PillarId[] = ['strategy', 'marketing', 'sales', 'oper
 // DURABLE ASSET DIAGNOSTIC — New Model
 // ============================================================
 
-export const ASSET_ORDER: AssetId[] = ['distribution', 'trust', 'network_effects', 'judgment'];
+export const ASSET_ORDER: AssetId[] = ['distribution', 'trust', 'judgment'];
 
 export interface AssetDimensionScore {
   assetId: AssetId;
@@ -278,7 +278,7 @@ export interface AssetDiagnosticResult {
   overallScore: number;
   grade: string;
   gradeLabel: string;
-  weakestAsset: {
+  weakestFoundation: {
     id: AssetId;
     name: string;
     score: number;
@@ -287,7 +287,7 @@ export interface AssetDiagnosticResult {
 }
 
 export function getInitialAssetScores(): AssetDimensionScore[] {
-  return durableAssets.flatMap((asset) =>
+  return foundations.flatMap((asset) =>
     asset.dimensions.map((dim) => ({
       assetId: asset.id,
       dimensionName: dim.name,
@@ -297,7 +297,7 @@ export function getInitialAssetScores(): AssetDimensionScore[] {
 }
 
 export function calculateAssetScores(scores: AssetDimensionScore[]): AssetScore[] {
-  return durableAssets.map((asset) => {
+  return foundations.map((asset) => {
     const assetDims = scores.filter((s) => s.assetId === asset.id);
     const scored = assetDims.filter((s) => s.score !== null);
     const avg = scored.length > 0
@@ -313,11 +313,11 @@ export function calculateAssetScores(scores: AssetDimensionScore[]): AssetScore[
 }
 
 function getAssetGrade(score: number): { grade: string; label: string } {
-  if (score >= 4.5) return { grade: 'A', label: 'Durable Foundation' };
+  if (score >= 4.5) return { grade: 'A', label: 'Strong Foundation' };
   if (score >= 3.5) return { grade: 'B', label: 'Strong but Exposed' };
   if (score >= 2.5) return { grade: 'C', label: 'Vulnerable to Disruption' };
   if (score >= 1.5) return { grade: 'D', label: 'Critical Gaps' };
-  return { grade: 'F', label: 'No Durable Assets' };
+  return { grade: 'F', label: 'No Foundation' };
 }
 
 export function runAssetDiagnostic(scores: AssetDimensionScore[]): AssetDiagnosticResult {
@@ -330,14 +330,14 @@ export function runAssetDiagnostic(scores: AssetDimensionScore[]): AssetDiagnost
 
   // Find weakest asset
   const weakest = scored.reduce((min, a) => (a.average < min.average ? a : min), scored[0]);
-  const weakestDef = durableAssets.find((d) => d.id === weakest?.assetId);
+  const weakestDef = foundations.find((d) => d.id === weakest?.assetId);
 
   return {
     assetScores,
     overallScore,
     grade,
     gradeLabel,
-    weakestAsset: {
+    weakestFoundation: {
       id: weakest?.assetId ?? 'distribution',
       name: weakestDef?.name ?? 'Distribution',
       score: weakest?.average ?? 0,
@@ -346,6 +346,6 @@ export function runAssetDiagnostic(scores: AssetDimensionScore[]): AssetDiagnost
   };
 }
 
-export function getAssetById(id: AssetId): DurableAssetDefinition | undefined {
-  return durableAssets.find((a) => a.id === id);
+export function getAssetById(id: AssetId): FoundationDefinition | undefined {
+  return foundations.find((a) => a.id === id);
 }

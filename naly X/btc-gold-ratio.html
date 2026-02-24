@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bitcoin Priced in Gold — @defi_naly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --void: #08090c;
+      --soil: #0f1014;
+      --surface: #161819;
+      --border: #1e1c1a;
+      --bright: #f0efe9;
+      --text: #d4cfc4;
+      --muted: #a69b8a;
+      --dim: #6b6560;
+      --accent: #7ba3c9;
+      --accent-bright: #96bade;
+      --accent-glow: rgba(123, 163, 201, 0.3);
+      --snow: #e8edf4;
+      --pine: #3d9970;
+      --rock: #6b7a8f;
+      --peak: #b8c4d4;
+      --gold: #c9a84c;
+      --gold-bright: #e2c76e;
+      --display: 'Space Grotesk', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Inter', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--void);
+      font-family: var(--sans);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 32px;
+    }
+
+    .bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      opacity: 0.2;
+    }
+
+    .bg-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(8, 9, 12, 0.55);
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 800px;
+      background: rgba(15, 16, 20, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(123, 163, 201, 0.1);
+      border-radius: 16px;
+      padding: 48px 52px;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(123, 163, 201, 0.25), transparent);
+    }
+
+    .card-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-family: var(--display);
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--bright);
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .card-subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      margin-bottom: 32px;
+    }
+
+    canvas {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .stat-row {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .stat {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .stat-value {
+      font-family: var(--display);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--snow);
+      letter-spacing: -0.02em;
+    }
+
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--dim);
+      letter-spacing: 0.04em;
+    }
+
+    .stat-arrow {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--dim);
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 8px 0;
+    }
+
+    .card-footer {
+      font-family: var(--display);
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+    }
+
+    .card-footer strong {
+      color: var(--snow);
+      font-weight: 500;
+    }
+
+    .watermark {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 20px;
+      text-align: right;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg">
+  <img src="1080x360.jpeg" alt="">
+  <div class="bg-overlay"></div>
+</div>
+
+<div class="card">
+  <div class="card-label">Performance</div>
+  <div class="card-title">Bitcoin Priced in Gold</div>
+  <div class="card-subtitle">Ounces of gold per BTC, 2015–2026</div>
+
+  <div class="chart-container">
+    <canvas id="chart"></canvas>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat">
+      <span class="stat-value">0.2 oz</span>
+      <span class="stat-label">Jan 2015</span>
+    </div>
+    <div class="stat-arrow">→</div>
+    <div class="stat">
+      <span class="stat-value">13.56 oz</span>
+      <span class="stat-label">Today</span>
+    </div>
+    <div class="stat-arrow" style="margin-left: auto;"></div>
+    <div class="stat">
+      <span class="stat-value" style="color: var(--accent);">~68x</span>
+      <span class="stat-label">in a decade</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card-footer">
+    Gold doubled while BTC halved. The ratio fell from 38 oz to 13.56.<br>
+    <strong>On a chart that started at 0.2, you're still up 68x.</strong>
+  </div>
+
+  <div class="watermark">@defi_naly</div>
+</div>
+
+<script>
+  // BTC/Gold ratio: approximate monthly data (ounces of gold per 1 BTC)
+  // Sources: BTC/USD and Gold/USD monthly closes, computed ratio
+  const data = [
+    // 2015: BTC ~$200-430, Gold ~$1060-1180
+    { date: '2015-01', value: 0.18 },
+    { date: '2015-04', value: 0.20 },
+    { date: '2015-07', value: 0.25 },
+    { date: '2015-10', value: 0.24 },
+    // 2016: BTC ~$370-960, Gold ~$1060-1370
+    { date: '2016-01', value: 0.34 },
+    { date: '2016-04', value: 0.35 },
+    { date: '2016-07', value: 0.49 },
+    { date: '2016-10', value: 0.54 },
+    // 2017: BTC ~$900-14000, Gold ~$1150-1300
+    { date: '2017-01', value: 0.77 },
+    { date: '2017-04', value: 1.05 },
+    { date: '2017-07', value: 1.95 },
+    { date: '2017-10', value: 4.55 },
+    { date: '2017-12', value: 14.8 },
+    // 2018: BTC crash ~$14000-3200, Gold ~$1200-1280
+    { date: '2018-01', value: 8.0 },
+    { date: '2018-04', value: 5.3 },
+    { date: '2018-07', value: 5.2 },
+    { date: '2018-10', value: 5.1 },
+    { date: '2018-12', value: 2.9 },
+    // 2019: BTC ~$3400-7200, Gold ~$1280-1520
+    { date: '2019-01', value: 2.7 },
+    { date: '2019-04', value: 3.9 },
+    { date: '2019-07', value: 7.0 },
+    { date: '2019-10', value: 5.5 },
+    { date: '2019-12', value: 4.8 },
+    // 2020: BTC ~$6900-29000, Gold ~$1520-1900
+    { date: '2020-01', value: 5.3 },
+    { date: '2020-04', value: 4.1 },
+    { date: '2020-07', value: 5.9 },
+    { date: '2020-10', value: 7.1 },
+    { date: '2020-12', value: 15.4 },
+    // 2021: BTC ~$29000-69000, Gold ~$1700-1830
+    { date: '2021-01', value: 17.4 },
+    { date: '2021-04', value: 33.5 },
+    { date: '2021-07', value: 18.8 },
+    { date: '2021-10', value: 34.0 },
+    { date: '2021-11', value: 37.8 },
+    // 2022: BTC crash ~$47000-16500, Gold ~$1650-1830
+    { date: '2022-01', value: 23.8 },
+    { date: '2022-04', value: 21.2 },
+    { date: '2022-07', value: 13.2 },
+    { date: '2022-10', value: 12.4 },
+    { date: '2022-12', value: 9.3 },
+    // 2023: BTC ~$16600-42000, Gold ~$1830-2060
+    { date: '2023-01', value: 12.0 },
+    { date: '2023-04', value: 14.2 },
+    { date: '2023-07', value: 15.1 },
+    { date: '2023-10', value: 15.4 },
+    { date: '2023-12', value: 20.4 },
+    // 2024: BTC ~$42000-96000, Gold ~$2040-2630
+    { date: '2024-01', value: 20.8 },
+    { date: '2024-04', value: 28.5 },
+    { date: '2024-07', value: 26.2 },
+    { date: '2024-10', value: 25.2 },
+    { date: '2024-12', value: 36.5 },
+    // 2025: BTC $94K→$126K ATH (Oct)→$90K, Gold $2,800→$4,500
+    { date: '2025-01', value: 33.6 },
+    { date: '2025-04', value: 24.3 },
+    { date: '2025-07', value: 27.3 },
+    { date: '2025-10', value: 30.8 },
+    { date: '2025-12', value: 20.0 },
+    // 2026: BTC ~$64K crash, Gold ~$4,850
+    { date: '2026-01', value: 17.5 },
+    { date: '2026-02', value: 13.56 },
+  ];
+
+  const canvas = document.getElementById('chart');
+  const dpr = window.devicePixelRatio || 1;
+  const W = 696; // card inner width (800 - 52*2)
+  const H = 320;
+
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  // Layout
+  const padLeft = 52;
+  const padRight = 16;
+  const padTop = 24;
+  const padBottom = 36;
+  const chartW = W - padLeft - padRight;
+  const chartH = H - padTop - padBottom;
+
+  // Data bounds
+  const maxVal = 42;
+  const minVal = 0;
+
+  // Peak data point
+  const peakIdx = data.reduce((best, d, i) => d.value > data[best].value ? i : best, 0);
+  const currentIdx = data.length - 1;
+
+  function xPos(i) {
+    return padLeft + (i / (data.length - 1)) * chartW;
+  }
+
+  function yPos(v) {
+    return padTop + chartH - ((v - minVal) / (maxVal - minVal)) * chartH;
+  }
+
+  // --- Grid lines ---
+  ctx.strokeStyle = 'rgba(30, 28, 26, 0.5)';
+  ctx.lineWidth = 1;
+  const yTicks = [0, 10, 20, 30, 40];
+  yTicks.forEach(v => {
+    const y = Math.round(yPos(v)) + 0.5;
+    ctx.beginPath();
+    ctx.moveTo(padLeft, y);
+    ctx.lineTo(W - padRight, y);
+    ctx.stroke();
+  });
+
+  // --- Y-axis labels ---
+  ctx.font = '500 10px "JetBrains Mono", monospace';
+  ctx.fillStyle = '#6b6560';
+  ctx.textAlign = 'right';
+  ctx.textBaseline = 'middle';
+  yTicks.forEach(v => {
+    ctx.fillText(v + ' oz', padLeft - 10, yPos(v));
+  });
+
+  // --- X-axis labels ---
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'top';
+  const yearLabels = ['2015', '2017', '2019', '2021', '2023', '2026'];
+  yearLabels.forEach(year => {
+    const idx = data.findIndex(d => d.date.startsWith(year));
+    if (idx >= 0) {
+      ctx.fillText(year, xPos(idx), H - padBottom + 12);
+    }
+  });
+
+  // --- Gradient fill under line ---
+  ctx.beginPath();
+  ctx.moveTo(xPos(0), yPos(data[0].value));
+  data.forEach((d, i) => {
+    ctx.lineTo(xPos(i), yPos(d.value));
+  });
+  ctx.lineTo(xPos(data.length - 1), yPos(0));
+  ctx.lineTo(xPos(0), yPos(0));
+  ctx.closePath();
+
+  const grad = ctx.createLinearGradient(0, padTop, 0, padTop + chartH);
+  grad.addColorStop(0, 'rgba(123, 163, 201, 0.18)');
+  grad.addColorStop(0.6, 'rgba(123, 163, 201, 0.05)');
+  grad.addColorStop(1, 'rgba(123, 163, 201, 0)');
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // --- Main line ---
+  ctx.beginPath();
+  ctx.moveTo(xPos(0), yPos(data[0].value));
+  data.forEach((d, i) => {
+    if (i === 0) return;
+    ctx.lineTo(xPos(i), yPos(d.value));
+  });
+  ctx.strokeStyle = '#7ba3c9';
+  ctx.lineWidth = 2.5;
+  ctx.lineJoin = 'round';
+  ctx.lineCap = 'round';
+  ctx.stroke();
+
+  // --- Peak annotation ---
+  const peakX = xPos(peakIdx);
+  const peakY = yPos(data[peakIdx].value);
+
+  // Peak dot
+  ctx.beginPath();
+  ctx.arc(peakX, peakY, 3.5, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(123, 163, 201, 0.6)';
+  ctx.fill();
+
+  // Peak label
+  ctx.font = '500 10px "JetBrains Mono", monospace';
+  ctx.fillStyle = '#a69b8a';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'bottom';
+  ctx.fillText('Peak: ~38 oz', peakX, peakY - 10);
+
+  // --- "You are here" annotation ---
+  const curX = xPos(currentIdx);
+  const curY = yPos(data[currentIdx].value);
+
+  // Current dot (gold colored, larger)
+  ctx.beginPath();
+  ctx.arc(curX, curY, 5, 0, Math.PI * 2);
+  ctx.fillStyle = '#c9a84c';
+  ctx.fill();
+
+  // Glow ring
+  ctx.beginPath();
+  ctx.arc(curX, curY, 9, 0, Math.PI * 2);
+  ctx.strokeStyle = 'rgba(201, 168, 76, 0.3)';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // "You are here" label
+  ctx.font = '600 10px "JetBrains Mono", monospace';
+  ctx.fillStyle = '#e2c76e';
+  ctx.textAlign = 'right';
+  ctx.textBaseline = 'bottom';
+  ctx.fillText('You are here', curX - 14, curY - 6);
+
+  // Value label
+  ctx.font = '500 10px "JetBrains Mono", monospace';
+  ctx.fillStyle = '#a69b8a';
+  ctx.textAlign = 'right';
+  ctx.fillText('13.56 oz', curX - 14, curY + 6);
+</script>
+
+</body>
+</html>

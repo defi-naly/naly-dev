@@ -95,7 +95,7 @@ struct LabelDiagramView: View {
                 } label: {
                     Text("Check Labels")
                         .font(.mono(14, weight: .bold))
-                        .foregroundStyle(Color.terminalBg)
+                        .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 14)
                         .background(Color.amber)

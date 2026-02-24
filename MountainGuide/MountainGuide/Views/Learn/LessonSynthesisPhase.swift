@@ -66,7 +66,7 @@ struct LessonSynthesisPhase: View {
                         .font(.mono(14, weight: .bold))
                     Image(systemName: "arrow.right")
                 }
-                .foregroundStyle(Color.terminalBg)
+                .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 14)
                 .background(Color.amber)

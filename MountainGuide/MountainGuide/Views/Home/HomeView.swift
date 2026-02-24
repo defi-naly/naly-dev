@@ -384,10 +384,10 @@ struct ConditionsSnapshotCard: View {
         .terminalCard()
         .task {
             // Wait for real device location (up to 5s) before first fetch
-            if locationService.currentLocation == nil {
+            if locationService.currentLocation == nil && !locationService.authorizationDenied {
                 for _ in 0..<10 {
                     try? await Task.sleep(for: .milliseconds(500))
-                    if locationService.currentLocation != nil { break }
+                    if locationService.currentLocation != nil || locationService.authorizationDenied { break }
                 }
             }
             let loc = locationService.effectiveLocation

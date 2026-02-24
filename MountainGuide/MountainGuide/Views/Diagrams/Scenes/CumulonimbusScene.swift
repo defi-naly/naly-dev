@@ -6,9 +6,9 @@ struct CumulonimbusScene: View {
 
     var body: some View {
         ZStack {
-            // Dark storm sky
+            // Storm sky
             LinearGradient(
-                colors: [Color(hex: "0f172a"), Color(hex: "1e293b")],
+                colors: [Color(hex: "BFDBFE"), Color(hex: "94A3B8")],
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -76,7 +76,7 @@ struct CumulonimbusScene: View {
 
             // Ground plane
             Rectangle()
-                .fill(Color(hex: "374151").opacity(0.3))
+                .fill(Color(hex: "A8A29E").opacity(0.3))
                 .frame(height: height * 0.08)
                 .position(x: width / 2, y: height * 0.96)
         }

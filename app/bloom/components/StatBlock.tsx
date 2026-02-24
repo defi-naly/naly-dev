@@ -9,6 +9,7 @@ interface StatBlockProps {
   prefix?: string;
   suffix?: string;
   label: string;
+  sublabel?: string;
   delay?: number;
 }
 
@@ -16,7 +17,7 @@ function easeOutQuart(t: number) {
   return 1 - Math.pow(1 - t, 4);
 }
 
-export default function StatBlock({ value, prefix = '', suffix = '', label, delay = 0 }: StatBlockProps) {
+export default function StatBlock({ value, prefix = '', suffix = '', label, sublabel, delay = 0 }: StatBlockProps) {
   const [display, setDisplay] = useState('0');
   const ref = useRef<HTMLDivElement>(null);
   const counted = useRef(false);
@@ -61,6 +62,7 @@ export default function StatBlock({ value, prefix = '', suffix = '', label, dela
           {prefix}{display}{suffix}
         </div>
         <div className="stat-label">{label}</div>
+        {sublabel && <div className="stat-sublabel">{sublabel}</div>}
       </div>
     </MotionReveal>
   );

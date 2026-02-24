@@ -33,6 +33,18 @@ struct WindAtAltitude {
     let temperature: Double          // Celsius
 }
 
+struct DailyForecast: Identifiable {
+    let id = UUID()
+    let date: Date
+    let tempMax: Double
+    let tempMin: Double
+    let precipitationSum: Double
+    let snowfallSum: Double
+    let weatherCode: Int
+    let windSpeedMax: Double
+    let windGustsMax: Double
+}
+
 struct HourlyForecast: Identifiable {
     let id = UUID()
     let time: Date

@@ -61,6 +61,7 @@ struct ModuleScore: Codable {
 // MARK: - XP Rewards
 
 enum XPReward {
+    // Preparation XP (lessons, reviews)
     static let teachingStepViewed = 5
     static let practiceCorrect = 20
     static let practiceAttempted = 5
@@ -72,6 +73,21 @@ enum XPReward {
     static let reviewHard = 10
     static let reviewGood = 15
     static let reviewEasy = 20
+
+    // Prowess XP
+    static let verticalMeter100XP = 1     // per 100m elevation gain
+    static let kmFlownXP = 5              // per km XC distance
+    static let activityCompletedXP = 25   // per synced activity
+
+    // Preparation XP (field tools)
+    static let bulletinCheckedXP = 10
+    static let preFlightCheckedXP = 15
+    static let plannerUsedXP = 10
+
+    // Safety XP
+    static let postTripReviewXP = 50
+    static let hazardIdentifiedXP = 10
+    static let decisionReviewXP = 15
 
     static func forGrade(_ grade: Grade) -> Int {
         switch grade {
@@ -147,13 +163,20 @@ enum LevelTitle: String {
 // MARK: - Gamification State
 
 struct GamificationState: Codable {
-    var totalXP: Int
+    var preparationXP: Int
+    var prowessXP: Int
+    var safetyXP: Int
     var moduleScores: [String: ModuleScore]     // key: "${domain}-${slug}"
     var domainXP: [String: Int]                 // key: domain rawValue
 
+    // totalXP is now computed from the 3 axes
+    var totalXP: Int { preparationXP + prowessXP + safetyXP }
+
     static func empty() -> GamificationState {
         GamificationState(
-            totalXP: 0,
+            preparationXP: 0,
+            prowessXP: 0,
+            safetyXP: 0,
             moduleScores: [:],
             domainXP: [:]
         )
@@ -191,5 +214,64 @@ struct GamificationState: Codable {
 
     func medalCount(_ medal: Medal) -> Int {
         moduleScores.values.filter { $0.bestMedal == medal }.count
+    }
+
+    // MARK: - Axis breakdown for display
+
+    var axisBreakdown: [(axis: XPAxis, xp: Int)] {
+        [
+            (.preparation, preparationXP),
+            (.prowess, prowessXP),
+            (.safety, safetyXP)
+        ]
+    }
+
+    // MARK: - Custom Codable (migration from legacy totalXP)
+
+    enum CodingKeys: String, CodingKey {
+        case preparationXP, prowessXP, safetyXP
+        case moduleScores, domainXP
+        case totalXP  // legacy key for migration
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        moduleScores = try container.decode([String: ModuleScore].self, forKey: .moduleScores)
+        domainXP = try container.decode([String: Int].self, forKey: .domainXP)
+
+        // Migration: if 3-axis fields exist, use them. Otherwise migrate legacy totalXP.
+        if let prep = try? container.decode(Int.self, forKey: .preparationXP) {
+            preparationXP = prep
+            prowessXP = try container.decodeIfPresent(Int.self, forKey: .prowessXP) ?? 0
+            safetyXP = try container.decodeIfPresent(Int.self, forKey: .safetyXP) ?? 0
+        } else {
+            // Legacy: all XP was preparation
+            preparationXP = try container.decodeIfPresent(Int.self, forKey: .totalXP) ?? 0
+            prowessXP = 0
+            safetyXP = 0
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(preparationXP, forKey: .preparationXP)
+        try container.encode(prowessXP, forKey: .prowessXP)
+        try container.encode(safetyXP, forKey: .safetyXP)
+        try container.encode(moduleScores, forKey: .moduleScores)
+        try container.encode(domainXP, forKey: .domainXP)
+    }
+
+    init(
+        preparationXP: Int = 0,
+        prowessXP: Int = 0,
+        safetyXP: Int = 0,
+        moduleScores: [String: ModuleScore] = [:],
+        domainXP: [String: Int] = [:]
+    ) {
+        self.preparationXP = preparationXP
+        self.prowessXP = prowessXP
+        self.safetyXP = safetyXP
+        self.moduleScores = moduleScores
+        self.domainXP = domainXP
     }
 }

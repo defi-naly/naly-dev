@@ -94,7 +94,6 @@ struct LessonView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle(module.title)
-        .toolbarColorScheme(.dark, for: .navigationBar)
         .onAppear {
             if store.moduleMastery(domain: module.domain, slug: module.slug)?.phase == .locked {
                 store.startModule(domain: module.domain, slug: module.slug)

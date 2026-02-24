@@ -1,4 +1,5 @@
 import SwiftUI
+import MapKit
 
 struct LessonTeachingPhase: View {
     let steps: [TeachingStep]
@@ -31,15 +32,41 @@ struct LessonTeachingPhase: View {
             .padding(.horizontal, 16)
             .padding(.top, 8)
 
-            // Diagram (60% of screen)
-            DiagramFactory.makeDiagram(
-                type: step.diagramType,
-                config: step.diagramConfig,
-                stepIndex: currentStep
-            )
-            .frame(maxHeight: .infinity)
-            .padding(.horizontal, 12)
-            .padding(.vertical, 8)
+            // Animation > Map > Diagram (60% of screen)
+            if let animName = step.animationName {
+                RiveAnimationView(animationName: animName)
+                    .frame(maxHeight: .infinity)
+                    .cornerRadius(12)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
+            } else if let mapConfig = step.mapConfig {
+                VStack(spacing: 4) {
+                    SwissTopoMapView(
+                        region: MKCoordinateRegion(
+                            center: CLLocationCoordinate2D(latitude: mapConfig.centerLat, longitude: mapConfig.centerLon),
+                            span: MKCoordinateSpan(latitudeDelta: mapConfig.spanLat, longitudeDelta: mapConfig.spanLon)
+                        ),
+                        annotations: (mapConfig.pins ?? []).map { pin in
+                            MapPin(id: pin.id, coordinate: CLLocationCoordinate2D(latitude: pin.lat, longitude: pin.lon), title: pin.label, icon: "mappin")
+                        },
+                        showsUserLocation: false
+                    )
+                    .frame(maxHeight: .infinity)
+                    .cornerRadius(8)
+                    SwissTopoAttribution()
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+            } else {
+                DiagramFactory.makeDiagram(
+                    type: step.diagramType,
+                    config: step.diagramConfig,
+                    stepIndex: currentStep
+                )
+                .frame(maxHeight: .infinity)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+            }
 
             // Content
             VStack(alignment: .leading, spacing: 8) {
@@ -106,7 +133,7 @@ struct LessonTeachingPhase: View {
                             .font(.mono(14, weight: .bold))
                         Image(systemName: currentStep < steps.count - 1 ? "chevron.right" : "arrow.right")
                     }
-                    .foregroundStyle(Color.terminalBg)
+                    .foregroundStyle(.white)
                     .padding(.vertical, 12)
                     .padding(.horizontal, 24)
                     .background(Color.amber)

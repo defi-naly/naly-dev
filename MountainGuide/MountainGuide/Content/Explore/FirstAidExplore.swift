@@ -25,11 +25,14 @@ enum FirstAidExplore {
         title: "Wilderness Patient Assessment",
         summary: "Patient assessment in the wilderness follows the same systematic approach used in urban medicine, but with critical adaptations for remote environments where evacuation may take hours or days and resources are limited to what you carry.",
         icon: "stethoscope",
+        heroImageName: "Photos/Heroes/hero-firstaid-assessment",
         sections: [
             ExploreSection(
                 id: "wpa-1",
                 heading: "Scene Safety and Size-Up",
                 body: "Before you touch the patient, stop. Scene safety is the first and most important step in any wilderness medical response, and it is the step most often skipped under the pressure of urgency. Assess the environment for ongoing hazards: rockfall, avalanche terrain, lightning exposure, swift water, unstable terrain, or hostile wildlife. Count the number of patients. Determine the mechanism of injury if possible, because the mechanism tells you what injuries to expect even before you lay hands on the patient. A rescuer who becomes a second victim does not double the problem — they eliminate the only resource available. Take ten seconds to read the scene before you commit to action.",
+                imageName: "Photos/firstaid-scene-safety",
+                imageCaption: "Assessing scene safety before approaching a patient in alpine terrain",
                 diagram: ExploreDiagram(
                     type: .labeledScene,
                     config: DiagramConfig(
@@ -54,6 +57,9 @@ enum FirstAidExplore {
                 id: "wpa-2",
                 heading: "Primary Survey: ABCDE",
                 body: "The primary survey is a rapid 60-second assessment designed to identify and treat immediate life threats. Airway: is it open and clear? If the patient is unconscious, use a jaw thrust (not head-tilt chin-lift if spinal injury is suspected) to open the airway. Breathing: look at the chest for rise, listen for air movement, feel for breath on your cheek. Note the rate, depth, and effort. Circulation: check for a radial pulse. If absent, check the carotid. Scan for massive external hemorrhage and control it immediately with direct pressure. Disability: use the AVPU scale — is the patient Alert, responsive to Voice, responsive to Pain, or Unresponsive? Exposure: remove enough clothing to identify injuries, but protect the patient from environmental heat loss. In wilderness medicine, the primary survey is repeated every time the patient's condition changes.",
+                imageName: "Photos/firstaid-assessment",
+                imageCaption: "Wilderness patient assessment in alpine terrain",
+                animationName: "anim-cpr-rhythm",
                 diagram: ExploreDiagram(
                     type: .timeline,
                     config: DiagramConfig(
@@ -79,6 +85,8 @@ enum FirstAidExplore {
                 id: "wpa-3",
                 heading: "Secondary Survey: Head-to-Toe Exam",
                 body: "Once life threats are addressed, perform a systematic head-to-toe examination. Start at the skull: palpate for depressions, lacerations, and fluid from the ears or nose. Gently palpate the cervical spine for midline tenderness. Move to the chest: compress each side to feel for crepitus or instability suggesting rib fractures. Palpate the abdomen in all four quadrants, noting rigidity or guarding. Compress the pelvis gently inward once — if it moves, stop immediately, as pelvic instability indicates life-threatening hemorrhage. Run your hands along each extremity, checking for deformity, swelling, and tenderness. Assess circulation, sensation, and motor function distal to any injury. Check the back by log-rolling the patient. Document every finding — rescue teams arriving hours later will depend on your initial assessment to guide their treatment decisions.",
+                imageName: "Photos/firstaid-head-to-toe",
+                imageCaption: "Systematic head-to-toe secondary assessment in the field",
                 diagram: ExploreDiagram(
                     type: .labeledScene,
                     config: DiagramConfig(
@@ -135,6 +143,7 @@ enum FirstAidExplore {
         title: "Hypothermia",
         summary: "Hypothermia — a core body temperature below 35 degrees C — is the most common killer in wilderness environments and the most commonly underestimated threat. It can develop in any season, at any altitude, and in conditions that seem benign.",
         icon: "thermometer.snowflake",
+        heroImageName: "Photos/Heroes/hero-firstaid-hypothermia",
         sections: [
             ExploreSection(
                 id: "hypo-1",
@@ -163,6 +172,8 @@ enum FirstAidExplore {
                 id: "hypo-2",
                 heading: "Field Treatment",
                 body: "Treatment depends on stage. For mild hypothermia, the priority is halting further heat loss and supporting the body's own rewarming through shivering. Remove wet clothing, insulate from the ground (this is critical — conductive heat loss to the ground is enormous), create a vapor barrier with a tarp or emergency blanket, and provide warm sweet drinks and calories to fuel shivering. For moderate hypothermia, the patient can no longer rewarm themselves. Handle them gently and horizontally to prevent cold blood from the extremities rushing to the core (afterdrop). Apply external heat sources to the trunk — hot water bottles or chemical heat packs to the armpits, groin, and neck. Do not warm the extremities. For severe hypothermia, insulate, handle with extreme care, and evacuate. These patients need hospital rewarming. If there is no pulse after 60 seconds of careful checking, begin CPR and do not stop until the patient is warm or you are physically unable to continue.",
+                imageName: "Photos/firstaid-hypothermia-treatment",
+                imageCaption: "Field treatment of a hypothermic patient using insulation layers",
                 diagram: nil,
                 keyFacts: [
                     "Insulate from the ground first — conductive heat loss to cold ground is the largest heat drain",
@@ -177,6 +188,8 @@ enum FirstAidExplore {
                 id: "hypo-3",
                 heading: "The Hypothermia Wrap",
                 body: "The hypothermia wrap is the definitive field treatment for packaging a hypothermic patient. The goal is to create an insulated, vapor-sealed cocoon that halts all further heat loss. Layer from the inside out: place an insulating pad on the ground (two pads if available), then a vapor barrier (tarp or emergency blanket, shiny side in), then the patient in dry insulation (sleeping bag, dry clothing, anything available), then heat sources against the trunk, then close the vapor barrier completely, and finally add an outer windproof and waterproof shell. The vapor barrier is essential because evaporative heat loss can drain more energy than any other mechanism. A properly constructed hypothermia wrap can halt temperature decline even in severe conditions and buy critical time for evacuation. Practice building one before you need to build one in an emergency, because the fine motor skills required are exactly the skills that cold and stress degrade first.",
+                imageName: "Photos/firstaid-hypothermia-wrap",
+                imageCaption: "Hypothermia wrap layering system with vapor barrier and insulation",
                 diagram: ExploreDiagram(
                     type: .layeredStack,
                     config: DiagramConfig(
@@ -233,11 +246,14 @@ enum FirstAidExplore {
         title: "Altitude Sickness",
         summary: "Altitude illness encompasses a spectrum from mild Acute Mountain Sickness to the lethal conditions of High Altitude Cerebral Edema and High Altitude Pulmonary Edema. The treatment for all three is the same: descend.",
         icon: "mountain.2.fill",
+        heroImageName: "Photos/Heroes/hero-firstaid-altitude",
         sections: [
             ExploreSection(
                 id: "alt-1",
                 heading: "Acute Mountain Sickness (AMS)",
                 body: "AMS is the mildest form of altitude illness and by far the most common. It typically develops 6 to 12 hours after arriving at a new altitude and presents as a headache combined with at least one other symptom: nausea, fatigue, dizziness, or difficulty sleeping. The Lake Louise Score provides a standardized assessment: rate headache, gastrointestinal symptoms, fatigue, and dizziness on a 0-3 scale; a score of 3 or higher with headache present diagnoses AMS. The fundamental cause is the reduced partial pressure of oxygen at altitude — at 3,000 meters, each breath delivers roughly 30% less oxygen than at sea level. Most people acclimatize within 1-3 days if they do not ascend further, but AMS is the warning signal that the body is struggling to adapt and must not be ignored.",
+                imageName: "Photos/firstaid-altitude-symptoms",
+                imageCaption: "Recognizing acute mountain sickness symptoms at high altitude",
                 diagram: nil,
                 keyFacts: [
                     "AMS affects 25% of people ascending to 2,500 meters and 50% at 4,000 meters",
@@ -332,6 +348,7 @@ enum FirstAidExplore {
         title: "Fractures and Splinting",
         summary: "Wilderness fracture management differs fundamentally from hospital care. You cannot get an X-ray, and evacuation may take hours or days. The goal is to stabilize the injury, manage pain, maintain circulation, and get the patient to definitive care.",
         icon: "bandage.fill",
+        heroImageName: "Photos/Heroes/hero-firstaid-fractures",
         sections: [
             ExploreSection(
                 id: "frac-1",
@@ -364,6 +381,8 @@ enum FirstAidExplore {
                 id: "frac-3",
                 heading: "Improvised Splinting",
                 body: "A good splint immobilizes the joint above and the joint below the fracture, is padded to prevent pressure sores, and allows you to monitor and maintain distal circulation. In the wilderness, splint materials are everywhere: trekking poles, tent poles, ice axes, foam sleeping pads, stiff branches, even a rolled-up newspaper or magazine. The SAM splint, if carried, is the most versatile commercial option — it can be shaped into a gutter splint, a sugar-tong splint, or a cervical collar. For lower extremity fractures, the uninjured leg can serve as a splint by securing the legs together with padding between them. The key principles are universal: immobilize above and below, pad all bony prominences, secure snugly but not so tight as to impair circulation, and recheck CSM every 15 minutes. Cold, numbness, or loss of pulse distal to the splint means it is too tight and must be loosened immediately.",
+                imageName: "Photos/firstaid-sam-splint",
+                imageCaption: "Improvised splinting with SAM splint and padding materials",
                 diagram: nil,
                 keyFacts: [
                     "Immobilize the joint above and the joint below the fracture",
@@ -409,11 +428,14 @@ enum FirstAidExplore {
         title: "Wound Care in the Wilderness",
         summary: "Wound management in remote environments prioritizes aggressive irrigation and infection prevention over cosmetic closure. In the wilderness, infection is the primary threat, and the decisions you make in the first hour determine the outcome days later.",
         icon: "cross.case.fill",
+        heroImageName: "Photos/Heroes/hero-firstaid-wounds",
         sections: [
             ExploreSection(
                 id: "wound-1",
                 heading: "Irrigation: The Most Important Step",
                 body: "Irrigation — the mechanical flushing of a wound with clean water under pressure — is the single most important wound care intervention. It physically removes bacteria, dirt, and debris that would otherwise cause infection. The standard is at least 1 liter of the cleanest water available, delivered under pressure. A syringe with an 18-gauge needle produces ideal irrigation pressure (8-12 psi). In the field, a zip-lock bag with a small hole poked in the corner, squeezed firmly, produces adequate pressure. A hydration bladder with the bite valve makes an excellent irrigator. The water does not need to be sterile — potable drinking water is sufficient. Water that is clean enough to drink is clean enough to irrigate a wound. Irrigate until the wound looks clean, then irrigate some more. The solution to pollution is dilution.",
+                imageName: "Photos/firstaid-kit",
+                imageCaption: "Mountain first aid kit with essential supplies",
                 diagram: nil,
                 keyFacts: [
                     "Irrigation pressure of 8-12 psi is optimal — a syringe with 18-gauge needle achieves this",
@@ -442,6 +464,8 @@ enum FirstAidExplore {
                 id: "wound-3",
                 heading: "Infection Prevention and Monitoring",
                 body: "Wound infection in the wilderness can progress from nuisance to life-threatening sepsis with alarming speed. After irrigation and dressing, monitor the wound at every dressing change for signs of infection: increasing redness spreading from the wound edges, warmth, swelling, increasing pain, purulent discharge, red streaks tracking up the limb (lymphangitis), and systemic signs including fever and chills. Red streaks indicate that infection has spread to the lymphatic system and the patient needs antibiotics urgently and may need evacuation. If antibiotics are carried, a broad-spectrum option such as amoxicillin-clavulanate (Augmentin) 875/125mg twice daily or cephalexin 500mg four times daily covers most wilderness wound pathogens. Change dressings at least twice daily, re-irrigating each time. A wound that was clean yesterday can be infected today.",
+                imageName: "Photos/firstaid-wound-irrigation",
+                imageCaption: "Wound irrigation technique using improvised pressure system",
                 diagram: nil,
                 keyFacts: [
                     "Signs of infection: spreading redness, warmth, swelling, increasing pain, purulent discharge",
@@ -487,6 +511,7 @@ enum FirstAidExplore {
         title: "Lightning Injuries",
         summary: "Lightning kills more people in mountain environments than most climbers realize. Understanding the injury mechanisms, treatment priorities, and prevention strategies specific to mountain terrain is essential wilderness medical knowledge.",
         icon: "bolt.fill",
+        heroImageName: "Photos/Heroes/hero-firstaid-lightning",
         sections: [
             ExploreSection(
                 id: "light-1",
@@ -520,6 +545,8 @@ enum FirstAidExplore {
                 id: "light-3",
                 heading: "Prevention in Mountain Terrain",
                 body: "Lightning avoidance in mountains begins with timing. Monitor weather forecasts and observe cumulus development. The standard alpine rule — be off summits and exposed ridges by early afternoon — exists primarily because of lightning. When thunderstorms are forecast, plan routes that keep you below treeline during the afternoon peak. If caught above treeline with no time to descend, avoid being the tallest object, move away from summits, ridgelines, and isolated trees, and descend to a lower point on the slope. Avoid wet gullies and cracks in rock (current paths). Assume the lightning position: crouch on the balls of your feet with feet together, arms around knees, on insulating material if available. In a group, spread out at least 15 meters apart to reduce multiple casualties from a single strike. Remove metal-frame packs but keep them nearby for emergency use after the storm passes.",
+                imageName: "Photos/firstaid-lightning-position",
+                imageCaption: "Lightning crouch position to minimize ground current exposure",
                 diagram: nil,
                 keyFacts: [
                     "The 30-30 rule: if flash-to-bang time is under 30 seconds, seek shelter; wait 30 minutes after the last thunder",
@@ -551,11 +578,14 @@ enum FirstAidExplore {
         title: "Frostbite",
         summary: "Frostbite is the freezing of tissue, most commonly affecting fingers, toes, ears, and nose. Field management decisions — particularly whether to thaw in the field or keep frozen for transport — can mean the difference between losing a fingertip and losing a hand.",
         icon: "snowflake",
+        heroImageName: "Photos/Heroes/hero-firstaid-frostbite",
         sections: [
             ExploreSection(
                 id: "frost-1",
                 heading: "Stages and Recognition",
                 body: "Frostbite progresses through recognizable stages. Frostnip is a precursor — superficial cooling without ice crystal formation. The skin is pale and numb but soft when pressed. It resolves completely with rewarming and causes no tissue damage. Superficial frostbite involves ice crystal formation in the skin but not the deeper tissues. The skin appears white or grayish-yellow, feels waxy, and is still somewhat pliable. After rewarming, clear blisters form. Deep frostbite extends into subcutaneous tissue, muscle, tendons, and even bone. The affected area is hard as wood when pressed, completely insensate, and may appear mottled purple or black. After rewarming, hemorrhagic (blood-filled) blisters form. The depth of frostbite is often impossible to determine in the field until after thawing, which is why thawing decisions must be made carefully.",
+                imageName: "Photos/firstaid-frostbite-stages",
+                imageCaption: "Frostbite progression from frostnip to deep tissue freezing",
                 diagram: ExploreDiagram(
                     type: .timeline,
                     config: DiagramConfig(
@@ -638,6 +668,7 @@ enum FirstAidExplore {
         title: "Dehydration and Heat Illness",
         summary: "Dehydration and heat illness are among the most preventable wilderness emergencies and among the most dangerous when they progress unchecked. Heat stroke kills rapidly, and the window between recognizable symptoms and organ failure is disturbingly narrow.",
         icon: "sun.max.fill",
+        heroImageName: "Photos/Heroes/hero-firstaid-heat",
         sections: [
             ExploreSection(
                 id: "heat-1",
@@ -657,6 +688,8 @@ enum FirstAidExplore {
                 id: "heat-2",
                 heading: "Heat Exhaustion vs. Heat Stroke",
                 body: "Heat exhaustion and heat stroke represent a spectrum, but the distinction between them is critical because treatment differs dramatically. Heat exhaustion presents with heavy sweating, weakness, nausea, headache, dizziness, and a core temperature below 40 degrees C. The thermoregulatory system is struggling but still functioning — the patient is still sweating. Treatment is rest in shade, removal of excess clothing, active cooling, and oral rehydration with electrolyte solution. Heat stroke occurs when thermoregulation fails completely. The hallmark is altered mental status (confusion, combativeness, seizures, or unconsciousness) combined with a core temperature above 40 degrees C. Sweating may or may not be present — the classic teaching that heat stroke patients stop sweating is not always true. Heat stroke is a true medical emergency with a mortality rate exceeding 50% if cooling is delayed.",
+                imageName: "Photos/firstaid-heat-exhaustion",
+                imageCaption: "Heat exhaustion signs and cooling techniques in mountain terrain",
                 diagram: ExploreDiagram(
                     type: .comparisonSplit,
                     config: DiagramConfig(
@@ -737,6 +770,7 @@ enum FirstAidExplore {
         title: "Emergency Shelter",
         summary: "When injury, weather, or darkness forces an unplanned stop in the wilderness, your ability to create effective shelter from available materials determines whether the situation becomes an inconvenience or a fatal exposure emergency.",
         icon: "tent.fill",
+        heroImageName: "Photos/Heroes/hero-firstaid-shelter",
         sections: [
             ExploreSection(
                 id: "shelter-1",
@@ -756,6 +790,8 @@ enum FirstAidExplore {
                 id: "shelter-2",
                 heading: "Snow Shelters",
                 body: "In winter mountain environments, snow is the best building material available. A snow trench is the fastest shelter to construct: dig a body-sized trench 2 feet deep, line the bottom with insulation, and roof it with a tarp, snow blocks, or ski equipment. Construction time: 20-30 minutes with a shovel. A snow cave, excavated into a stable snowbank at least 6 feet deep, provides superior insulation and wind protection but requires 1-3 hours to build and significant energy expenditure. The critical design principle for any snow shelter is that the sleeping platform must be higher than the entrance, because cold air sinks and warm air rises. A cold well at the entrance traps descending cold air below the sleeping level. Ventilation is non-negotiable: a fist-sized hole in the roof prevents carbon dioxide accumulation, and a trekking pole pushed through the roof from inside ensures the vent remains open even if snowfall covers the exterior.",
+                imageName: "Photos/firstaid-snow-shelter",
+                imageCaption: "Emergency snow shelter construction for overnight bivouac",
                 diagram: nil,
                 keyFacts: [
                     "Snow trench: 20-30 minutes with a shovel, adequate emergency shelter",
@@ -815,6 +851,7 @@ enum FirstAidExplore {
         title: "Evacuation Planning",
         summary: "The decision of how to evacuate a patient from the wilderness — self-evacuation, assisted ground evacuation, or helicopter rescue — depends on the patient's condition, the terrain, the resources available, and the time to definitive care. Getting this decision right is as important as the medical treatment itself.",
         icon: "figure.walk",
+        heroImageName: "Photos/Heroes/hero-firstaid-evacuation",
         sections: [
             ExploreSection(
                 id: "evac-1",
@@ -834,6 +871,8 @@ enum FirstAidExplore {
                 id: "evac-2",
                 heading: "Improvised Litter Construction",
                 body: "When a patient cannot walk, an improvised litter becomes necessary. The simplest design uses two rigid poles (trekking poles, branches, tent poles) threaded through jacket sleeves, with the jackets zipped closed around the poles to create a carrying surface. Reinforce with additional clothing or webbing. A more robust litter uses a sleeping pad or pack frame as a platform, secured to two poles with cordage or strap. For steep terrain, the patient must be secured to the litter with webbing or rope to prevent sliding. Every litter carry requires a minimum of 4-6 bearers with frequent rotation — carrying a loaded litter over rough terrain is extraordinarily demanding, and bearer exhaustion is the primary limiting factor. Practice litter building before you need it in an emergency. A group that has never built an improvised litter will waste 30-60 minutes of critical time figuring it out while the patient deteriorates.",
+                imageName: "Photos/firstaid-improvised-litter",
+                imageCaption: "Improvised stretcher litter built from trekking poles and packs",
                 diagram: nil,
                 keyFacts: [
                     "Jacket litter: thread poles through jacket sleeves and zip closed — quickest to build",

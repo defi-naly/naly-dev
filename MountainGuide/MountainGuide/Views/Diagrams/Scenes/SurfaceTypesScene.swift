@@ -8,7 +8,7 @@ struct SurfaceTypesScene: View {
         ZStack {
             // Sky
             LinearGradient(
-                colors: [Color(hex: "1e3a5f"), Color(hex: "2563eb").opacity(0.2)],
+                colors: [Color(hex: "DBEAFE"), Color(hex: "93C5FD")],
                 startPoint: .top,
                 endPoint: .bottom
             )

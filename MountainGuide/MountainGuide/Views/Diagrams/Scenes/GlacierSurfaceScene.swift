@@ -9,7 +9,7 @@ struct GlacierSurfaceScene: View {
             // Glacier ice background
             let bg = Path(roundedRect: CGRect(origin: .zero, size: size), cornerRadius: 0)
             context.fill(bg, with: .linearGradient(
-                Gradient(colors: [Color(hex: "0f172a"), Color(hex: "164e63").opacity(0.5)]),
+                Gradient(colors: [Color(hex: "E0F2FE"), Color(hex: "7DD3FC")]),
                 startPoint: CGPoint(x: size.width / 2, y: 0), endPoint: CGPoint(x: size.width / 2, y: size.height)
             ))
 
@@ -35,7 +35,7 @@ struct GlacierSurfaceScene: View {
             surfaceFill.addLine(to: CGPoint(x: size.width, y: 0))
             surfaceFill.addLine(to: CGPoint(x: 0, y: 0))
             surfaceFill.closeSubpath()
-            context.fill(surfaceFill, with: .color(Color.white.opacity(0.08)))
+            context.fill(surfaceFill, with: .color(Color.white.opacity(0.6)))
 
             // Crevasse 1 — wide transverse
             var crev1 = Path()

@@ -8,7 +8,7 @@ struct CumulusScene: View {
         ZStack {
             // Sky gradient
             LinearGradient(
-                colors: [Color(hex: "1e3a5f"), Color(hex: "3b82f6").opacity(0.3)],
+                colors: [Color(hex: "DBEAFE"), Color(hex: "93C5FD")],
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -73,7 +73,7 @@ struct CumulusScene: View {
             }
             .fill(
                 LinearGradient(
-                    colors: [Color(hex: "374151").opacity(0.5), Color(hex: "1f2937").opacity(0.4)],
+                    colors: [Color(hex: "86EFAC").opacity(0.4), Color(hex: "4ADE80").opacity(0.3)],
                     startPoint: .top,
                     endPoint: .bottom
                 )

@@ -27,11 +27,15 @@ enum WeatherExplore {
         title: "The Atmosphere: Our Ocean of Air",
         summary: "The structure, composition, and behavior of the atmosphere from the ground up. Understanding this invisible ocean is the foundation of all weather knowledge.",
         icon: "globe.americas.fill",
+        heroImageName: "Photos/Heroes/hero-weather-atmosphere",
         sections: [
             ExploreSection(
                 id: "atmosphere-structure",
                 heading: "Layers of the Atmosphere",
                 body: "The atmosphere is not a uniform blanket of air but a layered structure, each layer with distinct characteristics that matter for anyone operating in the mountains. The troposphere, where all weather occurs, extends from the surface to roughly 36,000 feet at mid-latitudes, though this height varies with season and latitude. Almost all the moisture, clouds, and turbulence that concern us are confined to this lowest layer. Above it sits the stratosphere, remarkably stable and dry, which acts as a lid on the weather systems below. The tropopause, the boundary between these two layers, is a critical ceiling that even the most powerful thunderstorms struggle to penetrate.",
+                imageName: "Photos/weather-atmosphere-layers",
+                imageCaption: "Earth's atmospheric layers viewed from high altitude",
+                animationName: "anim-cloud-formation",
                 diagram: ExploreDiagram(
                     type: .layeredStack,
                     config: DiagramConfig(
@@ -91,11 +95,14 @@ enum WeatherExplore {
         title: "Pressure Systems: The Engines of Weather",
         summary: "High and low pressure systems are the primary organizing structures of weather. Understanding how they form, move, and interact is essential for reading weather maps and anticipating conditions.",
         icon: "gauge.with.dots.needle.33percent",
+        heroImageName: "Photos/Heroes/hero-weather-pressure-systems",
         sections: [
             ExploreSection(
                 id: "pressure-basics",
                 heading: "What Pressure Means",
                 body: "Atmospheric pressure is simply the weight of the air column above a given point. When air is heated, it expands and becomes less dense, creating relatively lower pressure at the surface. When air cools, it contracts and sinks, creating higher pressure. These pressure differences, though small in absolute terms, are the fundamental driving force of all wind. Air always flows from high pressure toward low pressure, but because the Earth is rotating, this flow is deflected by the Coriolis effect — to the right in the Northern Hemisphere. The result is that air spirals clockwise out of high pressure systems and counterclockwise into low pressure systems. The spacing of isobars on a weather map tells you the pressure gradient: tightly packed isobars mean strong winds, widely spaced isobars mean light winds.",
+                imageName: "Photos/weather-pressure-map",
+                imageCaption: "Surface pressure analysis chart with isobars",
                 diagram: nil,
                 keyFacts: [
                     "Standard sea-level pressure is 1013.25 hPa — deviations indicate weather systems",
@@ -144,11 +151,14 @@ enum WeatherExplore {
         title: "Fronts: Where Air Masses Collide",
         summary: "Fronts mark the boundaries between air masses of different temperature and moisture characteristics. They produce much of the significant weather that affects mountain activities.",
         icon: "arrow.left.and.right",
+        heroImageName: "Photos/Heroes/hero-weather-fronts",
         sections: [
             ExploreSection(
                 id: "fronts-cold",
                 heading: "Cold Fronts",
                 body: "A cold front is the leading edge of an advancing cold air mass pushing beneath warmer air. Because cold air is denser, it acts like a wedge, lifting the warm air forcefully and rapidly. The frontal surface is steep — typically sloping at 1:50 to 1:100 — which concentrates the lifting into a narrow band. This produces a line of intense weather: towering cumulonimbus clouds, heavy rain or hail, gusty winds, and sometimes severe thunderstorms. The passage of a cold front is usually dramatic and fast, lasting perhaps an hour or two at any given location. Afterwards, the air clears remarkably quickly as the cold, dry air mass moves in, often bringing excellent visibility and crisp conditions. In the mountains, cold fronts can produce sudden drops in temperature of 10 to 15 degrees C, violent gusts, and rapid accumulation of snow at altitude.",
+                imageName: "Photos/weather-cold-front",
+                imageCaption: "Cold front approaching over mountain terrain",
                 diagram: nil,
                 keyFacts: [
                     "Cold fronts typically move at 20–35 mph, faster than warm fronts",
@@ -197,6 +207,7 @@ enum WeatherExplore {
         title: "Cloud Types: Reading the Sky's Language",
         summary: "Clouds are visible messages written in the sky. Learning to read their form, altitude, and evolution tells you what the atmosphere is doing now and what it will do next.",
         icon: "cloud.fill",
+        heroImageName: "Photos/Heroes/hero-weather-cloud-types",
         sections: [
             ExploreSection(
                 id: "clouds-high",
@@ -228,6 +239,9 @@ enum WeatherExplore {
                 id: "clouds-low",
                 heading: "Low Clouds and Vertical Development",
                 body: "Low clouds form below 6,500 feet and include stratus, stratocumulus, and nimbostratus. Stratus is the featureless gray blanket that produces drizzle and reduces visibility — it is common in valleys during stable conditions and can persist for days under a strong inversion. Nimbostratus is the thick, dark rain cloud that produces steady, moderate precipitation over wide areas. Cumulus clouds, which extend vertically rather than horizontally, are the most dynamic and informative clouds for mountain travelers. Fair-weather cumulus with flat bases and limited vertical extent indicate mild instability and pleasant conditions. Cumulus that grow tall rapidly, especially those with hard, cauliflower-like edges, are a sign of vigorous convection. When their tops glaciate — turning from sharp-edged white to fuzzy, fibrous ice — they are transitioning to cumulonimbus and thunderstorm development is imminent.",
+                imageName: "Photos/weather-cumulus",
+                imageCaption: "Fair-weather cumulus over alpine terrain",
+                animationName: "anim-cloud-formation",
                 diagram: nil,
                 keyFacts: [
                     "Cumulus cloud bases can be estimated: base height in feet equals the spread between surface temperature and dew point multiplied by 400",
@@ -250,11 +264,14 @@ enum WeatherExplore {
         title: "Thermals and Convection: The Vertical Engine",
         summary: "Thermals are columns of rising air driven by differential surface heating. They are the primary energy source for soaring flight and a critical factor in mountain weather development.",
         icon: "arrow.up.circle.fill",
+        heroImageName: "Photos/Heroes/hero-weather-thermals",
         sections: [
             ExploreSection(
                 id: "thermals-formation",
                 heading: "How Thermals Form",
                 body: "Thermals begin at the surface, where solar heating creates pockets of air that are warmer and therefore less dense than their surroundings. These 'thermal bubbles' initially cling to the surface, growing in temperature until they are buoyant enough to break free and rise. The trigger is often a surface feature that concentrates heat — a plowed field, a parking lot, a rocky south-facing slope, or a ridge line that focuses wind into a convergence zone. Once released, the thermal accelerates upward, entraining surrounding air and growing in diameter as it rises. A typical thermal in mountain country might be 200 to 500 meters in diameter near the surface, expanding to a kilometer or more at cloudbase. The air between thermals sinks to compensate, creating the alternating pattern of lift and sink that pilots know so well.",
+                imageName: "Photos/weather-thermal-source",
+                imageCaption: "Differential heating on sun-exposed slopes",
                 diagram: nil,
                 keyFacts: [
                     "Thermals typically begin forming 2–3 hours after sunrise as the surface heats",
@@ -303,6 +320,7 @@ enum WeatherExplore {
         title: "Lapse Rates and Stability: The Atmosphere's Thermostat",
         summary: "Lapse rates describe how temperature changes with altitude. The relationship between actual and theoretical lapse rates determines atmospheric stability — the single most important factor in weather development.",
         icon: "thermometer.medium",
+        heroImageName: "Photos/Heroes/hero-weather-lapse-rates",
         sections: [
             ExploreSection(
                 id: "lapse-basics",
@@ -334,6 +352,8 @@ enum WeatherExplore {
                 id: "stability-practical",
                 heading: "Reading Stability in the Field",
                 body: "You do not need a radiosonde to assess atmospheric stability. The sky itself is your instrument. A stable atmosphere produces smooth air, layered clouds (stratus, altostratus), haze trapped beneath inversions, and steady winds. An unstable atmosphere produces bumpy air, vertically developed clouds (cumulus, cumulonimbus), excellent visibility between thermals, and gusty, shifting winds. Pagen teaches pilots to 'read the sky' by watching cumulus clouds: their height, rate of growth, and shape tell you about instability and moisture. Flat cumulus that spread out horizontally are hitting a stable layer. Cumulus that tower upward aggressively have found unstable air above and may become hazardous. For mountain hikers, stability matters because unstable air means afternoon thunderstorms are possible and route planning should prioritize being off exposed ridges and summits by early afternoon.",
+                imageName: "Photos/weather-stability-sky",
+                imageCaption: "Reading stability from cumulus development",
                 diagram: nil,
                 keyFacts: [
                     "Smooth air and layered clouds indicate stability",
@@ -356,11 +376,13 @@ enum WeatherExplore {
         title: "Mountain Winds: Local Circulation Systems",
         summary: "Mountains create their own wind systems through differential heating and channeling of airflow. These local winds can dominate over synoptic patterns and create both opportunities and hazards.",
         icon: "wind",
+        heroImageName: "Photos/Heroes/hero-weather-mountain-winds",
         sections: [
             ExploreSection(
                 id: "winds-valley",
                 heading: "Valley and Slope Winds",
                 body: "The most fundamental mountain wind system is the valley breeze cycle, driven entirely by differential heating. During the day, mountain slopes heat faster than the air at the same altitude over the valley center. This creates an upslope wind (anabatic flow) that begins on east-facing slopes in the morning and spreads to all sun-exposed slopes by midday. The cumulative effect of all these slope winds draws air up from the plains and lowlands into the valley, creating a valley wind that flows up-valley during the day. This system can be remarkably strong — 10 to 20 knots is common in well-defined alpine valleys. At night, the process reverses. Radiative cooling chills the slopes, and cold, dense air drains downhill as a katabatic wind, pooling in valley floors and flowing down-valley as a mountain wind. Understanding this daily reversal is critical for planning departure times, selecting campsites, and anticipating conditions at passes and ridges.",
+                animationName: "anim-valley-winds",
                 diagram: nil,
                 keyFacts: [
                     "Upslope (anabatic) winds begin 1–2 hours after sunrise and peak in early afternoon",
@@ -374,6 +396,8 @@ enum WeatherExplore {
                 id: "winds-foehn",
                 heading: "Foehn Winds",
                 body: "The foehn is one of the most dramatic and dangerous mountain wind phenomena. It occurs when a strong pressure gradient forces air over a mountain range. As the air rises on the windward side, it cools at the DALR until it reaches saturation, then continues cooling at the slower SALR while shedding moisture as precipitation. When this air descends the lee side, it warms at the DALR the entire way down — having lost its moisture on the windward side. The result is a dramatically warmer and drier wind on the lee side. A classic foehn can raise temperatures by 15 to 20 degrees C in hours, drop relative humidity to single digits, and produce sustained winds of 40 to 80 knots in exposed terrain. In the Alps, the foehn is a well-known hazard, capable of triggering avalanches through rapid warming, creating extreme fire danger, and producing turbulence severe enough to destroy aircraft.",
+                imageName: "Photos/weather-foehn-wall",
+                imageCaption: "Foehn wall cloud bank on the windward side",
                 diagram: nil,
                 keyFacts: [
                     "Foehn winds can raise temperatures by 15–20 degrees C within hours",
@@ -409,11 +433,13 @@ enum WeatherExplore {
         title: "Mountain Waves: Standing Waves in the Sky",
         summary: "When stable air flows over mountain barriers, it can set up standing wave patterns that extend tens of thousands of feet above the peaks. These waves are both a magnificent soaring resource and a serious hazard.",
         icon: "water.waves",
+        heroImageName: "Photos/Heroes/hero-weather-mountain-waves",
         sections: [
             ExploreSection(
                 id: "waves-formation",
                 heading: "How Mountain Waves Form",
                 body: "Mountain waves form when three conditions are met: wind blowing roughly perpendicular to a ridge (within about 30 degrees), a stable layer at or near ridge-top level, and wind speed increasing with altitude. When these conditions align, the mountain acts like a rock in a stream, displacing the airflow upward. In a stable atmosphere, the displaced air overshoots its equilibrium level and oscillates back and forth, creating a standing wave pattern downwind of the ridge. The wavelength — the distance between successive wave crests — depends on wind speed and stability, typically ranging from 5 to 15 miles. The wave pattern can extend far downwind, sometimes producing three or four crests, and can reach altitudes well into the stratosphere. The Sierra Wave in California has been documented to heights above 40,000 feet, and similar wave systems occur in the Alps, Andes, and any significant mountain range.",
+                animationName: "anim-lenticular-wave",
                 diagram: ExploreDiagram(
                     type: .crossSection,
                     config: DiagramConfig(
@@ -456,6 +482,8 @@ enum WeatherExplore {
                 id: "waves-indicators",
                 heading: "Recognizing Wave Activity",
                 body: "Mountain waves advertise their presence through several distinctive visual signatures. The most obvious is the lenticular cloud — a smooth, lens-shaped or almond-shaped cloud that hovers in place despite strong winds, continuously forming at the upwind edge and evaporating at the downwind edge. Lenticular clouds are often stacked in layers, and when they appear over mountain terrain, they are an unambiguous sign that a wave system is active. A cap cloud or foehn wall on the ridge itself indicates the initial displacement of the airflow. Below, ragged rotor clouds tumble chaotically, in stark contrast to the serene lenticulars above. In dry conditions, wave activity may be entirely invisible, betrayed only by strong, gusty surface winds on the lee side and pilots' reports of smooth, powerful lift and sink aloft. Weather stations on mountain summits that report sustained strong winds with relatively little gustiness are another indicator — the smooth laminar flow of a well-established wave is very different from mechanical turbulence.",
+                imageName: "Photos/weather-lenticular",
+                imageCaption: "Lenticular cloud cap over a mountain peak",
                 diagram: nil,
                 keyFacts: [
                     "Lenticular clouds are the signature visual indicator of mountain wave activity",
@@ -478,6 +506,7 @@ enum WeatherExplore {
         title: "Convergence: Where Air Masses Meet",
         summary: "Convergence zones, where air from different directions meets and is forced upward, are among the most important and least understood weather features in mountain terrain. They produce reliable lift, unexpected clouds, and sometimes violent weather.",
         icon: "arrow.triangle.merge",
+        heroImageName: "Photos/Heroes/hero-weather-convergence",
         sections: [
             ExploreSection(
                 id: "convergence-basics",
@@ -496,6 +525,8 @@ enum WeatherExplore {
                 id: "convergence-sea-breeze",
                 heading: "Sea Breeze and Valley Convergence",
                 body: "The sea breeze front is one of the most dramatic convergence features in coastal mountain terrain. As the land heats during the day, cool marine air pushes inland, undercutting the warmer air over land and lifting it forcefully. This sea breeze front can penetrate 30 to 50 miles or more inland, sometimes reaching mountain ranges in the afternoon. When the sea breeze collides with valley breezes or thermally driven upslope winds, the convergence can trigger explosive cumulus development and thunderstorms. In many mountain regions around the world, the daily collision of sea breeze and mountain winds is the primary thunderstorm trigger. Valley-to-valley convergence is equally important: where two valley systems meet at a common ridge or pass, the opposing up-valley winds converge and create persistent lift zones that can sustain cloud development even when conditions elsewhere are too weak.",
+                imageName: "Photos/weather-convergence-line",
+                imageCaption: "Convergence line marked by cumulus development",
                 diagram: nil,
                 keyFacts: [
                     "Sea breeze fronts can penetrate 30–50 miles inland by late afternoon",
@@ -531,11 +562,15 @@ enum WeatherExplore {
         title: "Thunderstorm Safety: Respect the King of Storms",
         summary: "Thunderstorms are the most dangerous weather phenomenon that mountain travelers routinely encounter. Understanding their lifecycle, recognizing the warning signs, and knowing how to respond can save your life.",
         icon: "cloud.bolt.fill",
+        heroImageName: "Photos/Heroes/hero-weather-thunderstorms",
         sections: [
             ExploreSection(
                 id: "thunderstorm-lifecycle",
                 heading: "The Thunderstorm Lifecycle",
                 body: "Every thunderstorm follows a three-stage lifecycle. The cumulus stage begins when a trigger — a thermal, convergence line, frontal lift, or orographic forcing — pushes moist, unstable air past its level of free convection. The cloud grows rapidly, with updrafts of 3,000 to 6,000 feet per minute drawing in moisture from miles around. There is no precipitation and no lightning yet, but the cloud's explosive vertical growth is unmistakable. The mature stage begins when precipitation becomes too heavy for the updraft to support and falls through the cloud, dragging air down with it to create a downdraft alongside the updraft. This is the most violent phase: lightning, heavy rain or hail, severe turbulence, and downbursts all occur simultaneously. The dissipating stage begins when the downdraft spreads across the base, cutting off the updraft's warm, moist air supply. Precipitation weakens, the cloud loses its sharp edges, and the storm gradually decays into stratiform debris. The entire lifecycle typically takes 30 to 60 minutes for an individual cell.",
+                imageName: "Photos/weather-cumulonimbus",
+                imageCaption: "Cumulonimbus anvil developing over the Alps",
+                animationName: "anim-cumulonimbus-lifecycle",
                 diagram: nil,
                 keyFacts: [
                     "Cumulus stage: rapid vertical growth, strong updraft only, no precipitation or lightning yet",
@@ -562,6 +597,8 @@ enum WeatherExplore {
                 id: "thunderstorm-protection",
                 heading: "Avoidance and Response",
                 body: "The best thunderstorm strategy is avoidance through timing and route selection. In most mountain ranges during summer, thunderstorms follow a predictable diurnal pattern: cumulus development begins by late morning, storms initiate by early to mid-afternoon, and peak activity occurs between 2:00 and 5:00 PM. The classic alpine strategy is an early start — on the trail by dawn, on the summit by late morning, and back below treeline by early afternoon. Watch the sky constantly: if cumulus clouds are growing rapidly by mid-morning, conditions are more unstable than usual and you should accelerate your timeline. If caught in the open, the lightning crouch is a last resort: squat on the balls of your feet with feet together, arms wrapped around your knees, on an insulating pad if possible. Avoid being the tallest object, avoid metal conductors, and stay away from water and wet crevices. In a group, spread out to reduce the chance of multiple casualties from a single strike. Get off ridges and summits immediately — descending even a few hundred feet can dramatically reduce your exposure.",
+                imageName: "Photos/weather-lightning-ridge",
+                imageCaption: "Lightning striking an exposed mountain ridge",
                 diagram: nil,
                 keyFacts: [
                     "Alpine start strategy: summit by late morning, below treeline by early afternoon",

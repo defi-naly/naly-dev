@@ -52,4 +52,13 @@ enum GamificationEngine {
     static func xpForReview(grade: Grade) -> Int {
         XPReward.forGrade(grade)
     }
+
+    // MARK: - Post-Trip Review XP
+
+    static func calculateReviewXP(hazardCount: Int, hasDecision: Bool) -> Int {
+        var xp = XPReward.postTripReviewXP                    // 50 base
+        xp += hazardCount * XPReward.hazardIdentifiedXP       // +10 per hazard
+        if hasDecision { xp += XPReward.decisionReviewXP }    // +15
+        return xp
+    }
 }

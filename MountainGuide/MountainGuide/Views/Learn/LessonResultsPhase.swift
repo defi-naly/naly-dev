@@ -92,7 +92,7 @@ struct LessonResultsPhase: View {
                                 .font(.mono(14, weight: .bold))
                             Image(systemName: "checkmark")
                         }
-                        .foregroundStyle(Color.terminalBg)
+                        .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 14)
                         .background(Color.amber)

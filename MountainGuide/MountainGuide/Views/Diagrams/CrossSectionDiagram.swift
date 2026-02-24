@@ -27,7 +27,7 @@ struct CrossSectionDiagram: View {
             ZStack {
                 // Sky gradient
                 LinearGradient(
-                    colors: [Color(hex: "1a1a2e"), Color(hex: "16213e")],
+                    colors: [Color(hex: "DBEAFE"), Color(hex: "93C5FD")],
                     startPoint: .top,
                     endPoint: .bottom
                 )
@@ -36,7 +36,7 @@ struct CrossSectionDiagram: View {
                 mountainProfile(width: w, height: h)
                     .fill(
                         LinearGradient(
-                            colors: [Color(hex: "374151"), Color(hex: "1f2937")],
+                            colors: [Color(hex: "78716C"), Color(hex: "57534E")],
                             startPoint: .top,
                             endPoint: .bottom
                         )

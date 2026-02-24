@@ -27,7 +27,18 @@ enum GlacierTravelLessons {
                     labels: ["Accumulation Zone", "ELA", "Ablation Zone"]
                 ),
                 interactionHint: nil,
-                revealItems: nil
+                revealItems: nil,
+                mapConfig: MapConfig(
+                    centerLat: 46.4730,
+                    centerLon: 8.0647,
+                    spanLat: 0.06,
+                    spanLon: 0.06,
+                    pins: [
+                        MapPinData(id: "aletsch-start", lat: 46.4958, lon: 7.9479, label: "Konkordiaplatz"),
+                        MapPinData(id: "aletsch-tongue", lat: 46.3933, lon: 8.0767, label: "Aletsch Tongue"),
+                        MapPinData(id: "ela-line", lat: 46.4500, lon: 8.0300, label: "ELA ~2,800m")
+                    ]
+                )
             ),
             TeachingStep(
                 id: "anatomy-2",
@@ -583,7 +594,18 @@ enum GlacierTravelLessons {
                     ]
                 ),
                 interactionHint: "Tap to evaluate route options",
-                revealItems: nil
+                revealItems: nil,
+                mapConfig: MapConfig(
+                    centerLat: 45.9400,
+                    centerLon: 7.8700,
+                    spanLat: 0.05,
+                    spanLon: 0.05,
+                    pins: [
+                        MapPinData(id: "monte-rosa-hut", lat: 45.9567, lon: 7.8097, label: "Monte Rosa Hut 2,883m"),
+                        MapPinData(id: "dufourspitze", lat: 45.9369, lon: 7.8667, label: "Dufourspitze 4,634m"),
+                        MapPinData(id: "gorner-glacier", lat: 45.9500, lon: 7.8300, label: "Gornergletscher")
+                    ]
+                )
             ),
             TeachingStep(
                 id: "route-2",

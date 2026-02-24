@@ -135,12 +135,22 @@ function JudgmentCard({
     }
   }, [isOn, hasSwept, prefersReducedMotion]);
 
+  const rawMouse = useRef({ x: 0, y: 0 });
+  const rafPending = useRef(false);
+
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    setMousePos({
-      x: ((e.clientX - rect.left) / rect.width) * 100,
-      y: ((e.clientY - rect.top) / rect.height) * 100,
+    rawMouse.current.x = e.clientX;
+    rawMouse.current.y = e.clientY;
+    if (rafPending.current) return;
+    rafPending.current = true;
+    requestAnimationFrame(() => {
+      rafPending.current = false;
+      if (!cardRef.current) return;
+      const rect = cardRef.current.getBoundingClientRect();
+      setMousePos({
+        x: ((rawMouse.current.x - rect.left) / rect.width) * 100,
+        y: ((rawMouse.current.y - rect.top) / rect.height) * 100,
+      });
     });
   }, []);
 

@@ -829,7 +829,18 @@ enum WeatherLessons {
                     labels: ["Valley cross-section", "Anabatic flow"]
                 ),
                 interactionHint: nil,
-                revealItems: nil
+                revealItems: nil,
+                mapConfig: MapConfig(
+                    centerLat: 46.5936,
+                    centerLon: 7.9086,
+                    spanLat: 0.04,
+                    spanLon: 0.04,
+                    pins: [
+                        MapPinData(id: "lauterbrunnen", lat: 46.5936, lon: 7.9086, label: "Lauterbrunnen Valley"),
+                        MapPinData(id: "stechelberg", lat: 46.5592, lon: 7.8981, label: "Stechelberg"),
+                        MapPinData(id: "murren", lat: 46.5592, lon: 7.8925, label: "Mürren 1,638m")
+                    ]
+                )
             ),
             TeachingStep(
                 id: "mtn-winds-2",

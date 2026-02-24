@@ -43,7 +43,6 @@ struct ScenarioView: View {
         .background(Color.terminalBg)
         .navigationTitle(scenario.title)
         .navigationBarTitleDisplayMode(.inline)
-        .toolbarColorScheme(.dark, for: .navigationBar)
     }
 
     // MARK: - Locked
@@ -238,7 +237,7 @@ struct ScenarioView: View {
                 } label: {
                     Text("Done")
                         .font(.mono(13, weight: .bold))
-                        .foregroundStyle(Color.terminalBg)
+                        .foregroundStyle(.white)
                         .padding(.vertical, 12)
                         .frame(maxWidth: .infinity)
                         .background(Color.amber)

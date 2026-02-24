@@ -25,11 +25,14 @@ enum AvalancheExplore {
         title: "The Avalanche Triangle",
         summary: "Every avalanche requires the simultaneous presence of three factors: unstable terrain, a reactive snowpack, and a weather trigger. Understanding how these elements interact is the foundation of all avalanche risk assessment.",
         icon: "triangle.fill",
+        heroImageName: "Photos/Heroes/hero-avalanche-triangle",
         sections: [
             ExploreSection(
                 id: "triangle-overview-1",
                 heading: "Three Ingredients, One Result",
                 body: "The avalanche triangle is the central organizing framework for understanding why avalanches happen. Every avalanche requires terrain steep enough to slide, a snowpack with a weak layer beneath a cohesive slab, and a weather event that tips the balance. Remove any single ingredient and the avalanche cannot occur. This is not a theoretical abstraction; it is the practical reality that every backcountry traveler must internalize before stepping into avalanche terrain.",
+                imageName: "Photos/avalanche-triangle-overview",
+                imageCaption: "The three elements of avalanche formation",
                 diagram: nil,
                 keyFacts: [
                     "All three factors must be present simultaneously for an avalanche to release",
@@ -94,11 +97,15 @@ enum AvalancheExplore {
         title: "Slab Avalanche Mechanics",
         summary: "Slab avalanches kill more people than any other type. Understanding how a cohesive slab sits atop a weak layer and fractures as a unit is essential to recognizing the invisible architecture of danger in the snowpack.",
         icon: "square.stack.3d.up.fill",
+        heroImageName: "Photos/Heroes/hero-avalanche-slab-mechanics",
         sections: [
             ExploreSection(
                 id: "slab-mechanics-1",
                 heading: "Anatomy of a Slab",
                 body: "A slab avalanche requires a cohesive layer of snow resting on top of a weaker layer, all sitting on a bed surface. The slab has enough internal cohesion to fracture and move as a single unit, much like a pane of glass sliding off a tilted table. The weak layer is the critical failure plane, often composed of faceted crystals, surface hoar, or depth hoar that cannot bear the increasing load above. When stress on the weak layer exceeds its strength, the fracture propagates outward at speeds approaching 100 meters per second, and the entire slab begins to move.",
+                imageName: "Photos/avalanche-slab-anatomy",
+                imageCaption: "Cross-section showing slab, weak layer, and bed surface",
+                animationName: "anim-avalanche-slab-release",
                 diagram: nil,
                 keyFacts: [
                     "Slab avalanches account for virtually all avalanche fatalities",
@@ -154,11 +161,14 @@ enum AvalancheExplore {
         title: "Slope Angle & the Danger Zone",
         summary: "Slope angle is the single most important terrain factor in avalanche risk. The vast majority of slab avalanches release on slopes between 30 and 45 degrees, with a sharp peak around 38 degrees.",
         icon: "angle",
+        heroImageName: "Photos/Heroes/hero-avalanche-slope-angle",
         sections: [
             ExploreSection(
                 id: "slope-angle-1",
                 heading: "The Critical Range: 30 to 45 Degrees",
                 body: "Decades of accident data show that roughly 93% of fatal avalanches release on slopes between 30 and 45 degrees, with the peak frequency near 38 degrees. Below 30 degrees, most snow simply does not have enough gravitational stress to overcome the friction and bonding holding it in place. Above 45 degrees, snow tends to sluff off continuously in small amounts rather than building into dangerous slabs. This 30-to-45-degree band is the avalanche sweet spot, and learning to recognize it in the field is the single most impactful terrain skill a backcountry traveler can develop.",
+                imageName: "Photos/avalanche-slope-angle",
+                imageCaption: "Slope angle assessment in avalanche terrain",
                 diagram: nil,
                 keyFacts: [
                     "93% of fatal avalanches occur on slopes between 30-45 degrees",
@@ -215,11 +225,14 @@ enum AvalancheExplore {
         title: "Terrain Traps",
         summary: "A terrain trap is any feature that increases the consequences of being caught in an avalanche. Gullies, cliff bands, tree wells, and flat benches below steep slopes all transform survivable slides into fatal ones.",
         icon: "exclamationmark.triangle.fill",
+        heroImageName: "Photos/Heroes/hero-avalanche-terrain-traps",
         sections: [
             ExploreSection(
                 id: "terrain-traps-1",
                 heading: "What Makes a Terrain Trap",
                 body: "A terrain trap does not change the probability of an avalanche releasing. Instead, it dramatically increases the consequences if one does. A small slide on an open slope might carry a skier 50 meters with shallow burial. The same small slide funneling into a gully can pile debris 3 meters deep. Terrain traps include gullies and couloirs that channel debris, cliff bands that add fall trauma, flat benches or creek beds where debris piles deep, and dense trees that cause impact injuries and complicate rescue. Learning to read terrain traps is a matter of asking one question: if a slide happens here, what happens to me?",
+                imageName: "Photos/avalanche-terrain-trap",
+                imageCaption: "Terrain trap: gully feature concentrating avalanche runout",
                 diagram: nil,
                 keyFacts: [
                     "Terrain traps increase consequences, not probability",
@@ -233,6 +246,8 @@ enum AvalancheExplore {
                 id: "terrain-traps-2",
                 heading: "Common Terrain Trap Scenarios",
                 body: "The most common fatal terrain trap is a gully or creek bed at the bottom of an avalanche path. Debris funnels into the narrow channel and piles deep, making both survival and rescue extremely difficult. Cliff bands below avalanche slopes add falling injuries to burial risk. Crevasses on glaciated terrain swallow avalanche debris and victims alike. Even trees, often thought of as safety anchors, become terrain traps when they are sparse enough to allow a slide but dense enough to cause fatal impact injuries. The worst scenarios combine multiple traps: a slide that carries a victim over a cliff into a gully produces compounding trauma.",
+                imageName: "Photos/avalanche-debris",
+                imageCaption: "Avalanche debris field in a valley",
                 diagram: nil,
                 keyFacts: [
                     "Creek beds and gullies are the most common fatal terrain traps",
@@ -276,6 +291,7 @@ enum AvalancheExplore {
         title: "Snowpack Structure & Crystal Types",
         summary: "The snowpack is a layered history of the winter's weather. Understanding how different crystal types form, bond, and fail is essential to reading the invisible architecture that determines whether a slope will hold or release.",
         icon: "snowflake",
+        heroImageName: "Photos/Heroes/hero-avalanche-snowpack",
         sections: [
             ExploreSection(
                 id: "snowpack-crystals-1",
@@ -293,6 +309,9 @@ enum AvalancheExplore {
                 id: "snowpack-crystals-2",
                 heading: "Weak Layer Crystal Types",
                 body: "Three crystal types are responsible for the vast majority of slab avalanche weak layers. Surface hoar forms on cold, clear, calm nights when water vapor deposits as large, feathery crystals on the snow surface; once buried by subsequent snowfall, these crystals form an extremely persistent weak layer. Faceted crystals grow when large temperature gradients drive water vapor transport through the snowpack, producing large, angular, poorly-bonded grains. Depth hoar is the extreme end of faceting, forming large cup-shaped crystals near the ground in shallow snowpacks with strong temperature gradients. All three types share a critical property: they resist bonding with surrounding snow and can persist as weak layers for weeks or months.",
+                imageName: "Photos/avalanche-crystal-types",
+                imageCaption: "Weak layer crystal types under magnification",
+                animationName: "anim-snowpack-metamorphism",
                 diagram: nil,
                 keyFacts: [
                     "Surface hoar: forms on cold clear nights, extremely persistent once buried",
@@ -349,11 +368,14 @@ enum AvalancheExplore {
         title: "Stability Testing Methods",
         summary: "Snowpack stability tests provide direct evidence of weak layer presence and reactivity. From quick field tests to formal pit profiles, each method has strengths and limitations that practitioners must understand.",
         icon: "hand.tap.fill",
+        heroImageName: "Photos/Heroes/hero-avalanche-stability-testing",
         sections: [
             ExploreSection(
                 id: "stability-testing-1",
                 heading: "Extended Column Test (ECT)",
                 body: "The Extended Column Test is widely considered the gold standard for assessing fracture propagation potential. A 90cm-wide column is isolated on three sides, and progressive taps are applied to one end with increasing force. The test reveals not just whether a weak layer exists (initiation), but whether a fracture will propagate across the column (propagation). A result of ECTP (propagation across the full column) on easy to moderate taps is a strong red flag. The ECT's advantage over older tests like the Rutschblock is that it specifically tests propagation, which is the critical step between a localized failure and a full slab release.",
+                imageName: "Photos/avalanche-column-test",
+                imageCaption: "Extended Column Test setup in the field",
                 diagram: nil,
                 keyFacts: [
                     "ECT specifically tests fracture propagation, not just initiation",
@@ -410,6 +432,7 @@ enum AvalancheExplore {
         title: "Wind Loading & Slab Formation",
         summary: "Wind is the most efficient architect of avalanche slabs. It can deposit snow ten times faster than a storm, building dense, reactive wind slabs on lee slopes that are often invisible from the windward side of a ridge.",
         icon: "wind",
+        heroImageName: "Photos/Heroes/hero-avalanche-wind-loading",
         sections: [
             ExploreSection(
                 id: "wind-loading-1",
@@ -428,6 +451,8 @@ enum AvalancheExplore {
                 id: "wind-loading-2",
                 heading: "Reading Wind Effect in the Field",
                 body: "Wind leaves visible signatures in the snow that practitioners must learn to read. Sastrugi (wind-sculpted ridges), cornices on ridge crests, snow plumes blowing off summits, and pillow-shaped deposits on lee slopes all indicate active or recent wind transport. The texture of the snow surface changes dramatically between windward and lee aspects: scoured, hard-packed snow on the wind side and soft, deep deposits on the lee side. Cracking or hollow-sounding snow underfoot on a lee slope is a direct warning of wind slab formation. These field observations are among the most reliable real-time indicators of current avalanche conditions.",
+                imageName: "Photos/avalanche-wind-signs",
+                imageCaption: "Wind effect indicators: sastrugi and cornices",
                 diagram: nil,
                 keyFacts: [
                     "Sastrugi, cornices, and plumes are visible indicators of wind transport",
@@ -471,11 +496,14 @@ enum AvalancheExplore {
         title: "Human Factors & Heuristic Traps",
         summary: "The majority of avalanche accidents involve experienced people making poor decisions, not beginners who do not know better. Understanding the cognitive shortcuts and social dynamics that lead to bad decisions is as important as understanding snow science.",
         icon: "brain.head.profile",
+        heroImageName: "Photos/Heroes/hero-avalanche-human-factors",
         sections: [
             ExploreSection(
                 id: "human-factors-1",
                 heading: "The Six Heuristic Traps",
                 body: "Ian McCammon's research identified six heuristic traps that lead backcountry travelers into avalanches. Familiarity: \"I've skied this slope many times and it's never slid.\" Commitment: \"We drove four hours to get here; we're not turning around.\" Social proof: \"Other people are skiing it, so it must be fine.\" The expert halo: \"She's a certified guide, so her decision must be right.\" Scarcity: \"This is the last powder day of the season.\" Acceptance: \"I don't want to be the one who calls it off and looks weak.\" These traps operate below conscious awareness, hijacking rational assessment with emotional shortcuts that feel like good reasoning.",
+                imageName: "Photos/avalanche-group-decision",
+                imageCaption: "Group decision-making in avalanche terrain",
                 diagram: nil,
                 keyFacts: [
                     "Familiarity: past safe outcomes create false sense of security",
@@ -534,6 +562,7 @@ enum AvalancheExplore {
         title: "Avalanche Decision Frameworks",
         summary: "Structured decision frameworks counteract the heuristic traps and cognitive biases that lead to avalanche accidents. From the Avalanche Terrain Exposure Scale to the Obvious Clues method, these tools turn intuitive guessing into systematic assessment.",
         icon: "checklist",
+        heroImageName: "Photos/Heroes/hero-avalanche-decision-frameworks",
         sections: [
             ExploreSection(
                 id: "decision-frameworks-1",
@@ -595,6 +624,7 @@ enum AvalancheExplore {
         title: "Companion Rescue",
         summary: "When an avalanche buries a partner, organized rescue by the surviving group members is the only realistic chance of a live recovery. Professional rescue takes too long. The survival window is brutally short, and every second of practice before the event translates directly into lives saved.",
         icon: "figure.run",
+        heroImageName: "Photos/Heroes/hero-avalanche-companion-rescue",
         sections: [
             ExploreSection(
                 id: "companion-rescue-1",
@@ -623,6 +653,8 @@ enum AvalancheExplore {
                 id: "companion-rescue-2",
                 heading: "Transceiver, Probe, Shovel: The Sequence",
                 body: "Companion rescue follows a strict sequence that must be practiced until it is automatic. First, switch your transceiver to search mode and begin a systematic signal search pattern, moving quickly across the debris. As the signal strengthens, narrow your search using the transceiver's distance and directional indicators. When the transceiver reads 3 meters or less, switch to a fine search by lowering the transceiver to the snow surface and moving in a cross pattern to find the minimum distance reading. At the minimum, begin probing in a spiral pattern from the center outward. When you get a positive probe strike, leave the probe in place and begin strategic shoveling from the downhill side, creating a ramp rather than digging a vertical hole. A vertical hole is slower and risks collapsing onto the victim.",
+                imageName: "Photos/avalanche-transceiver-search",
+                imageCaption: "Transceiver search pattern in debris field",
                 diagram: nil,
                 keyFacts: [
                     "Signal search: move quickly across the debris field following the transceiver signal",

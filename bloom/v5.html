@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOOM — Nature-First</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Source+Serif+4:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #1a1612;
+            --bg-surface: #231f1a;
+            --cream: #f5f0e8;
+            --sand: #d4c5b0;
+            --terracotta: #c67a4a;
+            --moss: #4a6741;
+            --forest: #2d4a3e;
+            --gold: #c9a227;
+            --bark: #5c4a3a;
+            --text: #e8e2d9;
+            --text-muted: #a69b8a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Source Serif 4', Georgia, serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Organic texture overlay */
+        .texture-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(to bottom, var(--bg) 0%, transparent 100%);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            color: var(--cream);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Content wrapper */
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #growth-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-flower {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 3rem;
+            position: relative;
+        }
+
+        .petal {
+            position: absolute;
+            width: 40px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--terracotta), var(--gold));
+            border-radius: 50% 50% 50% 50%;
+            opacity: 0.8;
+            transform-origin: bottom center;
+            animation: bloom 3s ease-out forwards;
+        }
+
+        @keyframes bloom {
+            from { transform: rotate(var(--rotation)) scale(0); opacity: 0; }
+            to { transform: rotate(var(--rotation)) scale(1); opacity: 0.8; }
+        }
+
+        .petal:nth-child(1) { --rotation: 0deg; animation-delay: 0s; left: 40px; top: 0; }
+        .petal:nth-child(2) { --rotation: 51.4deg; animation-delay: 0.1s; left: 70px; top: 15px; }
+        .petal:nth-child(3) { --rotation: 102.8deg; animation-delay: 0.2s; left: 75px; top: 45px; }
+        .petal:nth-child(4) { --rotation: 154.2deg; animation-delay: 0.3s; left: 55px; top: 70px; }
+        .petal:nth-child(5) { --rotation: 205.6deg; animation-delay: 0.4s; left: 25px; top: 70px; }
+        .petal:nth-child(6) { --rotation: 257deg; animation-delay: 0.5s; left: 5px; top: 45px; }
+        .petal:nth-child(7) { --rotation: 308.4deg; animation-delay: 0.6s; left: 10px; top: 15px; }
+
+        .flower-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle, var(--gold), var(--bark));
+            border-radius: 50%;
+            z-index: 1;
+            animation: bloom 3s ease-out 0.7s forwards;
+            opacity: 0;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            margin-bottom: 1.5rem;
+            color: var(--cream);
+        }
+
+        .hero-tagline {
+            font-size: 1.25rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            font-style: italic;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .hero-tagline em {
+            color: var(--gold);
+            font-style: normal;
+        }
+
+        /* Section styles */
+        section {
+            padding: 8rem 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-label::before,
+        .section-label::after {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--bark);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--cream);
+        }
+
+        /* About */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .about-visual {
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fibonacci-spiral {
+            width: 300px;
+            height: 300px;
+            position: relative;
+        }
+
+        .spiral-arc {
+            position: absolute;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        .spiral-arc:nth-child(1) { width: 20px; height: 20px; top: 140px; left: 140px; }
+        .spiral-arc:nth-child(2) { width: 30px; height: 30px; top: 135px; left: 125px; }
+        .spiral-arc:nth-child(3) { width: 50px; height: 50px; top: 120px; left: 100px; }
+        .spiral-arc:nth-child(4) { width: 80px; height: 80px; top: 90px; left: 70px; }
+        .spiral-arc:nth-child(5) { width: 130px; height: 130px; top: 50px; left: 50px; }
+        .spiral-arc:nth-child(6) { width: 210px; height: 210px; top: 10px; left: 40px; }
+
+        .about-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            line-height: 1.3;
+            margin-bottom: 2rem;
+            color: var(--cream);
+        }
+
+        .about-text h2 em {
+            color: var(--gold);
+            font-style: normal;
+        }
+
+        .about-text p {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .about-stat {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bark);
+        }
+
+        .about-stat .number {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 400;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .about-stat .label {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        /* Process */
+        .process-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .process-card {
+            background: var(--bg-surface);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .process-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--moss), var(--gold));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .process-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .process-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        /* Seed icon */
+        .process-card:nth-child(1) .card-icon::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--terracotta), var(--bark));
+            border-radius: 50% 50% 45% 45%;
+            top: 10px;
+            left: 15px;
+        }
+
+        /* Root icon */
+        .process-card:nth-child(2) .card-icon::before {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 40px;
+            background: var(--moss);
+            top: 5px;
+            left: 28px;
+        }
+
+        .process-card:nth-child(2) .card-icon::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border-left: 3px solid var(--moss);
+            border-bottom: 3px solid var(--moss);
+            border-radius: 0 0 0 50%;
+            top: 30px;
+            left: 28px;
+        }
+
+        /* Bloom icon */
+        .process-card:nth-child(3) .card-icon::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, var(--gold), var(--terracotta));
+            border-radius: 50%;
+            top: 10px;
+            left: 10px;
+        }
+
+        .card-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--cream);
+        }
+
+        .card-desc {
+            font-size: 0.9375rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .portfolio-card {
+            background: var(--bg-surface);
+            border-radius: 20px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .portfolio-card:hover {
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .portfolio-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle at bottom right, rgba(201, 162, 39, 0.1), transparent);
+            pointer-events: none;
+        }
+
+        .portfolio-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: var(--moss);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-leaf {
+            width: 12px;
+            height: 12px;
+            background: var(--moss);
+            border-radius: 50% 0 50% 0;
+            transform: rotate(45deg);
+        }
+
+        .portfolio-card:nth-child(2) .status-leaf {
+            background: var(--terracotta);
+        }
+
+        .portfolio-card:nth-child(2) .portfolio-status {
+            color: var(--terracotta);
+        }
+
+        .portfolio-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: var(--cream);
+        }
+
+        .portfolio-desc {
+            font-size: 1.0625rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .portfolio-tag {
+            font-size: 0.75rem;
+            padding: 0.5rem 1rem;
+            background: rgba(74, 103, 65, 0.2);
+            border-radius: 20px;
+            color: var(--sand);
+            letter-spacing: 0.05em;
+        }
+
+        /* Principles */
+        .principles-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .principle {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .principle-icon {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--forest), var(--moss));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .principle-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--cream);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .principle h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--cream);
+        }
+
+        .principle p {
+            font-size: 0.9375rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        footer {
+            padding: 6rem 4rem;
+            background: var(--bg-surface);
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-brand h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+            color: var(--cream);
+        }
+
+        .footer-brand p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .footer-col h4 {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col a {
+            display: block;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            margin-bottom: 0.75rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--cream);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 4rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid var(--bark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+        }
+
+        .back-link {
+            font-size: 0.75rem;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 3.5rem; }
+            .about-content { grid-template-columns: 1fr; gap: 3rem; }
+            .about-visual { display: none; }
+            .process-cards { grid-template-columns: 1fr; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .principles-list { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr 1fr; gap: 2rem; }
+        }
+
+        @media (max-width: 640px) {
+            nav { padding: 1rem 2rem; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; letter-spacing: 0.1em; }
+            section { padding: 4rem 2rem; }
+            .section-title { font-size: 2rem; }
+            .footer-content { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="texture-overlay"></div>
+
+    <nav>
+        <div class="logo">BLOOM</div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#process">Process</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#principles">Principles</a>
+        </div>
+    </nav>
+
+    <div class="content">
+        <section class="hero">
+            <canvas id="growth-canvas"></canvas>
+            <div class="hero-content">
+                <div class="hero-flower">
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="petal"></div>
+                    <div class="flower-center"></div>
+                </div>
+                <h1>BLOOM</h1>
+                <p class="hero-tagline">Where fields <em>converge</em>, things bloom</p>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="section-header">
+                <span class="section-label">Our Thesis</span>
+                <h2 class="section-title">About</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-visual">
+                    <div class="fibonacci-spiral">
+                        <div class="spiral-arc"></div>
+                        <div class="spiral-arc"></div>
+                        <div class="spiral-arc"></div>
+                        <div class="spiral-arc"></div>
+                        <div class="spiral-arc"></div>
+                        <div class="spiral-arc"></div>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h2>We identify bottlenecks in decentralised finance and build products to <em>solve them</em>.</h2>
+                    <p>BLOOM is a for-profit venture studio operating at the intersection of physics and nature. We see DeFi not as a collection of protocols, but as an emergent field—complex systems where small interventions can cascade into fundamental shifts.</p>
+                    <p>Our thesis: find the friction, build the solution, let it bloom.</p>
+                    <div class="about-stat">
+                        <span class="number">5+</span>
+                        <span class="label">Years cultivating in DeFi</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="process">
+            <div class="section-header">
+                <span class="section-label">How We Grow</span>
+                <h2 class="section-title">Process</h2>
+            </div>
+            <div class="process-cards">
+                <div class="process-card">
+                    <div class="card-icon"></div>
+                    <span class="card-number">01 — Seed</span>
+                    <h3 class="card-title">Identify</h3>
+                    <p class="card-desc">We map the field. Through deep immersion in DeFi ecosystems, we locate points of friction—places where value leaks, trust breaks, or complexity overwhelms.</p>
+                </div>
+                <div class="process-card">
+                    <div class="card-icon"></div>
+                    <span class="card-number">02 — Root</span>
+                    <h3 class="card-title">Architect</h3>
+                    <p class="card-desc">We design from first principles. Every solution begins with the physics of the problem—understanding the forces at play before proposing structure.</p>
+                </div>
+                <div class="process-card">
+                    <div class="card-icon"></div>
+                    <span class="card-number">03 — Bloom</span>
+                    <h3 class="card-title">Cultivate</h3>
+                    <p class="card-desc">We build for emergence. Products launch lean, iterate with users, and grow organically. Forced growth fails; natural growth compounds.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <div class="section-header">
+                <span class="section-label">Our Garden</span>
+                <h2 class="section-title">Portfolio</h2>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-card">
+                    <div class="portfolio-status">
+                        <span class="status-leaf"></span>
+                        In Bloom
+                    </div>
+                    <h3 class="portfolio-name">TIPZ</h3>
+                    <p class="portfolio-desc">Privacy-first micro-tipping for creators using Zcash shielded addresses. Support without surveillance.</p>
+                    <div class="portfolio-tags">
+                        <span class="portfolio-tag">Privacy</span>
+                        <span class="portfolio-tag">Zcash</span>
+                        <span class="portfolio-tag">Creator Economy</span>
+                    </div>
+                </div>
+                <div class="portfolio-card">
+                    <div class="portfolio-status">
+                        <span class="status-leaf"></span>
+                        Germinating
+                    </div>
+                    <h3 class="portfolio-name">Project II</h3>
+                    <p class="portfolio-desc">Bottleneck identified. Solution taking root. Details emerging with the season.</p>
+                    <div class="portfolio-tags">
+                        <span class="portfolio-tag">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="principles">
+            <div class="section-header">
+                <span class="section-label">Our Roots</span>
+                <h2 class="section-title">Principles</h2>
+            </div>
+            <div class="principles-list">
+                <div class="principle">
+                    <div class="principle-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93s3.06-7.44 7-7.93v15.86z"/></svg>
+                    </div>
+                    <div>
+                        <h3>Privacy is Fundamental</h3>
+                        <p>Financial surveillance enables control. We build tools that preserve autonomy and protect the individual.</p>
+                    </div>
+                </div>
+                <div class="principle">
+                    <div class="principle-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L4 7v10l8 5 8-5V7l-8-5zm0 2.3l6 3.75v7.5l-6 3.75-6-3.75v-7.5l6-3.75z"/></svg>
+                    </div>
+                    <div>
+                        <h3>Emergence Over Force</h3>
+                        <p>Complex systems resist top-down control. We design for organic growth, not manufactured adoption.</p>
+                    </div>
+                </div>
+                <div class="principle">
+                    <div class="principle-icon">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/></svg>
+                    </div>
+                    <div>
+                        <h3>Simplicity at the Surface</h3>
+                        <p>Sophisticated technology should feel inevitable. Complexity hidden, utility exposed.</p>
+                    </div>
+                </div>
+                <div class="principle">
+                    <div class="principle-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    </div>
+                    <div>
+                        <h3>Long-Term Alignment</h3>
+                        <p>We build products we'd use ourselves. Incentives matter; we eat our own cooking.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>BLOOM</h2>
+                <p>A DeFi venture studio cultivating at the intersection of physics and nature.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Studio</h4>
+                <a href="#about">About</a>
+                <a href="#process">Process</a>
+                <a href="#principles">Principles</a>
+            </div>
+            <div class="footer-col">
+                <h4>Portfolio</h4>
+                <a href="#">TIPZ</a>
+                <a href="#">Project II</a>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <a href="#">Twitter</a>
+                <a href="#">GitHub</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 BLOOM VENTURE STUDIO</p>
+            <a href="index.html" class="back-link">← View All Designs</a>
+        </div>
+    </footer>
+
+    <script>
+        // Organic growth/branching animation
+        const canvas = document.getElementById('growth-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        const branches = [];
+
+        const colors = {
+            moss: '#4a6741',
+            gold: '#c9a227',
+            bark: '#5c4a3a',
+            terracotta: '#c67a4a'
+        };
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        class Branch {
+            constructor(x, y, angle, length, depth) {
+                this.x = x;
+                this.y = y;
+                this.angle = angle;
+                this.length = length;
+                this.depth = depth;
+                this.currentLength = 0;
+                this.grown = false;
+                this.children = [];
+                this.color = depth > 3 ? colors.moss : colors.bark;
+                this.width = Math.max(1, 6 - depth);
+            }
+
+            grow() {
+                if (this.currentLength < this.length) {
+                    this.currentLength += this.length * 0.02;
+                } else if (!this.grown && this.depth < 6) {
+                    this.grown = true;
+                    // Create child branches using golden angle (137.5 degrees in radians)
+                    const goldenAngle = 2.39996;
+                    const childCount = this.depth < 3 ? 2 : 1;
+
+                    for (let i = 0; i < childCount; i++) {
+                        const angleOffset = (i === 0 ? -1 : 1) * (0.3 + Math.random() * 0.3);
+                        const newAngle = this.angle + angleOffset;
+                        const newLength = this.length * (0.6 + Math.random() * 0.2);
+                        const endX = this.x + Math.cos(this.angle) * this.currentLength;
+                        const endY = this.y + Math.sin(this.angle) * this.currentLength;
+
+                        this.children.push(new Branch(endX, endY, newAngle, newLength, this.depth + 1));
+                    }
+                }
+
+                this.children.forEach(child => child.grow());
+            }
+
+            draw() {
+                const endX = this.x + Math.cos(this.angle) * this.currentLength;
+                const endY = this.y + Math.sin(this.angle) * this.currentLength;
+
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(endX, endY);
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = this.width;
+                ctx.lineCap = 'round';
+                ctx.globalAlpha = 0.4;
+                ctx.stroke();
+                ctx.globalAlpha = 1;
+
+                // Draw leaf at end if fully grown and deep enough
+                if (this.grown && this.depth >= 5) {
+                    ctx.beginPath();
+                    ctx.arc(endX, endY, 3, 0, Math.PI * 2);
+                    ctx.fillStyle = colors.gold;
+                    ctx.globalAlpha = 0.6;
+                    ctx.fill();
+                    ctx.globalAlpha = 1;
+                }
+
+                this.children.forEach(child => child.draw());
+            }
+        }
+
+        function init() {
+            resize();
+            branches.length = 0;
+
+            // Create multiple root branches from bottom
+            const rootCount = 5;
+            for (let i = 0; i < rootCount; i++) {
+                const x = width * (0.2 + (i / rootCount) * 0.6);
+                const y = height + 50;
+                const angle = -Math.PI / 2 + (Math.random() - 0.5) * 0.3;
+                const length = 100 + Math.random() * 100;
+                branches.push(new Branch(x, y, angle, length, 0));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            branches.forEach(branch => {
+                branch.grow();
+                branch.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            resize();
+            init();
+        });
+
+        init();
+        animate();
+    </script>
+</body>
+</html>

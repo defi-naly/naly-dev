@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asymmetric Bets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #08090a;
+      font-family: 'JetBrains Mono', monospace;
+      color: #e4e4e7;
+      padding: 40px;
+      min-height: 100vh;
+    }
+
+    .card {
+      background: #0f1012;
+      border: 1px solid #27272a;
+      border-radius: 12px;
+      padding: 48px;
+      max-width: 800px;
+      margin: 0 auto 60px;
+    }
+
+    .card-header {
+      margin-bottom: 40px;
+    }
+
+    .card-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: #71717a;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 28px;
+      font-weight: 600;
+      color: #fafafa;
+      margin-bottom: 8px;
+    }
+
+    .card-subtitle {
+      font-size: 14px;
+      color: #a1a1aa;
+    }
+
+    .bar-container {
+      margin-bottom: 32px;
+    }
+
+    .bar-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .bar-label {
+      width: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fafafa;
+      flex-shrink: 0;
+    }
+
+    .bar-track {
+      flex: 1;
+      height: 48px;
+      background: #18181b;
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 16px;
+      font-size: 14px;
+      font-weight: 600;
+      min-width: fit-content;
+    }
+
+    .bar-fill.gold {
+      background: linear-gradient(90deg, #b8860b 0%, #daa520 100%);
+      color: #1a1a1a;
+    }
+
+    .bar-fill.btc {
+      background: linear-gradient(90deg, #f7931a 0%, #ffab40 100%);
+      color: #1a1a1a;
+    }
+
+    .bar-fill.zec {
+      background: linear-gradient(90deg, #f4b728 0%, #ffd54f 100%);
+      color: #1a1a1a;
+    }
+
+    .bar-fill.hype {
+      background: linear-gradient(90deg, #a3e635 0%, #84cc16 100%);
+      color: #1a1a1a;
+    }
+
+    .bar-fill.binance {
+      background: linear-gradient(90deg, #f0b90b 0%, #fcd535 100%);
+      color: #1a1a1a;
+    }
+
+    .ratio-callout {
+      background: #18181b;
+      border: 1px solid #27272a;
+      border-radius: 8px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .ratio-number {
+      font-size: 36px;
+      font-weight: 700;
+      color: #22c55e;
+    }
+
+    .ratio-text {
+      font-size: 14px;
+      color: #a1a1aa;
+      line-height: 1.5;
+    }
+
+    .ratio-text strong {
+      color: #fafafa;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 16px;
+      color: #71717a;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    /* Individual card styles for screenshots */
+    .card-1 .ratio-number { color: #f7931a; }
+    .card-2 .ratio-number { color: #f4b728; }
+    .card-3 .ratio-number { color: #a3e635; }
+  </style>
+</head>
+<body>
+
+  <div class="section-title">Asymmetric Bets — The Gap Is The Opportunity</div>
+
+  <!-- Card 1: BTC vs Gold -->
+  <div class="card card-1" id="btc-gold">
+    <div class="card-header">
+      <div class="card-label">Asymmetric Bet #1</div>
+      <div class="card-title">Bitcoin vs Gold</div>
+      <div class="card-subtitle">Store of value market share</div>
+    </div>
+
+    <div class="bar-container">
+      <div class="bar-row">
+        <div class="bar-label">GOLD</div>
+        <div class="bar-track">
+          <div class="bar-fill gold" style="width: 100%;">$33.9T</div>
+        </div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">BTC</div>
+        <div class="bar-track">
+          <div class="bar-fill btc" style="width: 3.8%; min-width: 80px;">$1.29T</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ratio-callout">
+      <div class="ratio-number">3.8%</div>
+      <div class="ratio-text">
+        Bitcoin is <strong>3.8%</strong> of gold's market cap.<br>
+        If digital gold captures even 25%, that's <strong>6.5x from here</strong>.
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 2: ZEC vs BTC -->
+  <div class="card card-2" id="zec-btc">
+    <div class="card-header">
+      <div class="card-label">Asymmetric Bet #2</div>
+      <div class="card-title">Zcash vs Bitcoin</div>
+      <div class="card-subtitle">Private store of value</div>
+    </div>
+
+    <div class="bar-container">
+      <div class="bar-row">
+        <div class="bar-label">BTC</div>
+        <div class="bar-track">
+          <div class="bar-fill btc" style="width: 100%;">$1.29T</div>
+        </div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">ZEC</div>
+        <div class="bar-track">
+          <div class="bar-fill zec" style="width: 0.27%; min-width: 80px;">$3.53B</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ratio-callout">
+      <div class="ratio-number">0.27%</div>
+      <div class="ratio-text">
+        Zcash is <strong>0.27%</strong> of Bitcoin's market cap.<br>
+        If privacy captures 5% of BTC's TAM, that's <strong>18x from here</strong>.
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 3: HYPE vs Binance -->
+  <div class="card card-3" id="hype-binance">
+    <div class="card-header">
+      <div class="card-label">Asymmetric Bet #3</div>
+      <div class="card-title">Hyperliquid vs Binance</div>
+      <div class="card-subtitle">24h Perpetual Futures Volume</div>
+    </div>
+
+    <div class="bar-container">
+      <div class="bar-row">
+        <div class="bar-label">BINANCE</div>
+        <div class="bar-track">
+          <div class="bar-fill binance" style="width: 100%;">$162.7B</div>
+        </div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">HYPE</div>
+        <div class="bar-track">
+          <div class="bar-fill hype" style="width: 17.5%; min-width: 80px;">$28.4B</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ratio-callout">
+      <div class="ratio-number">17.5%</div>
+      <div class="ratio-text">
+        Hyperliquid is already <strong>17.5%</strong> of Binance's perp volume.<br>
+        DEX is eating CEX. <strong>Own the casino, don't play in it.</strong>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

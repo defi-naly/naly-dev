@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
-import { durableAssets } from '../../data/method';
+import { foundations } from '../../data/method';
 import type { AssetDiagnosticResult } from '../../lib/diagnostic';
 
 interface DiagnosticResultsProps {
@@ -29,7 +29,7 @@ export default function DiagnosticResults({ result, onRestart }: DiagnosticResul
         body: JSON.stringify({
           name: 'Diagnostic User',
           email: email.trim(),
-          message: `BLOOM Diagnostic completed. Grade: ${result.grade} (${result.overallScore}/5). Weakest asset: ${result.weakestAsset.name} (${result.weakestAsset.score}/5). Asset scores: ${result.assetScores.map(a => `${a.assetId}: ${a.average}`).join(', ')}.`,
+          message: `BLOOM Diagnostic completed. Grade: ${result.grade} (${result.overallScore}/5). Weakest foundation: ${result.weakestFoundation.name} (${result.weakestFoundation.score}/5). Foundation scores: ${result.assetScores.map(a => `${a.assetId}: ${a.average}`).join(', ')}.`,
         }),
       });
     } catch {
@@ -68,12 +68,12 @@ export default function DiagnosticResults({ result, onRestart }: DiagnosticResul
 
       {/* Asset Scores */}
       <div className="diag-section">
-        <h3 className="diag-section-title">Asset Scores</h3>
+        <h3 className="diag-section-title">Foundation Scores</h3>
         <div className="diag-pillar-scores">
           {result.assetScores.map((as, i) => {
-            const asset = durableAssets.find((a) => a.id === as.assetId);
+            const asset = foundations.find((a) => a.id === as.assetId);
             if (!asset) return null;
-            const isWeakest = as.assetId === result.weakestAsset.id;
+            const isWeakest = as.assetId === result.weakestFoundation.id;
             return (
               <motion.div
                 key={as.assetId}
@@ -115,17 +115,23 @@ export default function DiagnosticResults({ result, onRestart }: DiagnosticResul
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.9 }}
       >
-        <h3 className="diag-section-title">Your Weakest Asset</h3>
+        <h3 className="diag-section-title">Your Weakest Foundation</h3>
         <div className="diag-weakest-card">
           <p className="diag-weakest-text">
-            Your weakest asset is <strong>{result.weakestAsset.name}</strong> ({result.weakestAsset.score}/5).
-            This is where you&apos;re most exposed to disruption.
+            Your weakest foundation is <strong>{result.weakestFoundation.name}</strong> ({result.weakestFoundation.score}/5).
+            This is where you&apos;re most exposed.
+          </p>
+          <p className="diag-weakest-price">
+            One sprint closes this gap. <strong>$15,000.</strong>
+          </p>
+          <p className="diag-weakest-anchor">
+            Most agencies quote $50K+ over 3 months for comparable work.
           </p>
           <a
-            href="/bloom#contact"
+            href="/bloom/foundations#contact"
             className="diag-sprint-cta"
           >
-            {result.weakestAsset.sprintCTA} <ArrowRight size={14} strokeWidth={1.5} />
+            {result.weakestFoundation.sprintCTA} — $15,000 <ArrowRight size={14} strokeWidth={1.5} />
           </a>
         </div>
       </motion.div>
@@ -140,7 +146,7 @@ export default function DiagnosticResults({ result, onRestart }: DiagnosticResul
             transition={{ delay: 1 }}
           >
             <p className="diag-email-gate-text">
-              Get your full asset report with detailed recommendations.
+              Get your full foundation report with detailed recommendations.
             </p>
             <div className="diag-email-gate-form">
               <input
@@ -166,7 +172,7 @@ export default function DiagnosticResults({ result, onRestart }: DiagnosticResul
             animate={{ opacity: 1 }}
           >
             <p className="diag-email-gate-text">
-              Thanks — we&apos;ll send your full asset report shortly.
+              Thanks — we&apos;ll send your full foundation report shortly.
             </p>
           </motion.div>
         )}
@@ -175,7 +181,7 @@ export default function DiagnosticResults({ result, onRestart }: DiagnosticResul
       {/* Bottom CTAs */}
       <div className="diag-bottom-ctas">
         <a
-          href="/bloom#contact"
+          href="/bloom/foundations#contact"
           className="bloom-hero-cta"
           style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}
         >

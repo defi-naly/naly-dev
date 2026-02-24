@@ -497,11 +497,11 @@ export function createBlankScorecard(): AuditScorecard[] {
 }
 
 // ============================================================
-// DURABLE ASSET MODEL — New Diagnostic Framework
-// 4 Durable Assets × 3 Dimensions each
+// FOUNDATION MODEL — Diagnostic Framework
+// 3 Foundations × 3 Dimensions each
 // ============================================================
 
-export type AssetId = 'distribution' | 'trust' | 'network_effects' | 'judgment';
+export type AssetId = 'distribution' | 'trust' | 'judgment';
 
 export interface AssetDimension {
   name: string;
@@ -509,7 +509,7 @@ export interface AssetDimension {
   rubric: [string, string, string, string, string];
 }
 
-export interface DurableAssetDefinition {
+export interface FoundationDefinition {
   id: AssetId;
   name: string;
   subtitle: string;
@@ -518,9 +518,10 @@ export interface DurableAssetDefinition {
   dimensions: AssetDimension[];
   sprintCTA: string;
   sprintDuration: string;
+  price: number;
 }
 
-export const durableAssets: DurableAssetDefinition[] = [
+export const foundations: FoundationDefinition[] = [
   {
     id: 'distribution',
     name: 'Distribution',
@@ -565,6 +566,7 @@ export const durableAssets: DurableAssetDefinition[] = [
     ],
     sprintCTA: 'Start a Distribution Sprint',
     sprintDuration: '1 week',
+    price: 15000,
   },
   {
     id: 'trust',
@@ -610,51 +612,7 @@ export const durableAssets: DurableAssetDefinition[] = [
     ],
     sprintCTA: 'Start a Trust Sprint',
     sprintDuration: '1 week',
-  },
-  {
-    id: 'network_effects',
-    name: 'Network Effects',
-    subtitle: 'What keeps people coming back',
-    description:
-      'The loops and stickiness built into your product that make it more valuable over time — and harder to leave.',
-    icon: 'Network',
-    dimensions: [
-      {
-        name: 'User-to-User Value',
-        description: 'Does your product get better as more people use it?',
-        rubric: [
-          'Product value is the same whether 1 or 1,000 people use it',
-          'Minimal network benefit — some shared content or community features',
-          'Users benefit from others (shared data, templates, community)',
-          'Clear network effects — each new user adds measurable value for existing users',
-          'Strong flywheel — users actively recruit others because it improves their experience',
-        ],
-      },
-      {
-        name: 'Retention Loops',
-        description: 'Do users have reasons to come back without prompting?',
-        rubric: [
-          'No built-in reason to return — usage is one-off or sporadic',
-          'Some email reminders or notifications, but weak engagement',
-          'Regular use patterns with clear triggers for re-engagement',
-          'Strong habits formed — users return unprompted on a regular cadence',
-          'Product is embedded in daily workflow — absence would be painful',
-        ],
-      },
-      {
-        name: 'Switching Cost',
-        description: 'How hard is it for users to leave?',
-        rubric: [
-          'Zero switching cost — trivial to replace with any alternative',
-          'Mild inconvenience — some data or preferences to recreate',
-          'Moderate switching cost — meaningful data, integrations, or learning invested',
-          'High switching cost — deep integrations, team workflows, or compliance dependencies',
-          'Extremely high — switching would require organizational restructuring',
-        ],
-      },
-    ],
-    sprintCTA: 'Start a Network Effects Sprint',
-    sprintDuration: '1 week',
+    price: 15000,
   },
   {
     id: 'judgment',
@@ -700,5 +658,6 @@ export const durableAssets: DurableAssetDefinition[] = [
     ],
     sprintCTA: 'Start a Judgment Sprint',
     sprintDuration: '1 week',
+    price: 15000,
   },
 ];

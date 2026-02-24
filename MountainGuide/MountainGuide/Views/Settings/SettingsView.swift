@@ -5,9 +5,54 @@ struct SettingsView: View {
     @State private var showExportSheet = false
     @State private var showResetAlert = false
 
+    @StateObject private var healthKit = HealthKitService.shared
+    @StateObject private var xcontest = XContestService.shared
+
     var body: some View {
         NavigationStack {
             List {
+                // Connected Accounts
+                Section {
+                    NavigationLink {
+                        HealthKitConnectionView()
+                    } label: {
+                        HStack {
+                            Image(systemName: "heart.fill")
+                                .foregroundStyle(.red)
+                                .frame(width: 24)
+                            Text("Apple Health (Garmin)")
+                                .font(.mono(13))
+                                .foregroundStyle(Color.textPrimary)
+                            Spacer()
+                            Text(healthKit.isAuthorized ? "Connected" : "Not Connected")
+                                .font(.mono(11))
+                                .foregroundStyle(healthKit.isAuthorized ? Color.emerald : Color.textMuted)
+                        }
+                    }
+                    .listRowBackground(Color.terminalSurface)
+
+                    NavigationLink {
+                        XContestConnectionView()
+                    } label: {
+                        HStack {
+                            Image(systemName: "globe")
+                                .foregroundStyle(Color.flyingAccent)
+                                .frame(width: 24)
+                            Text("XContest")
+                                .font(.mono(13))
+                                .foregroundStyle(Color.textPrimary)
+                            Spacer()
+                            Text(xcontest.username != nil ? "Connected" : "Not Connected")
+                                .font(.mono(11))
+                                .foregroundStyle(xcontest.username != nil ? Color.emerald : Color.textMuted)
+                        }
+                    }
+                    .listRowBackground(Color.terminalSurface)
+                } header: {
+                    Text("Connected Accounts")
+                        .font(.mono(11, weight: .bold))
+                }
+
                 // Stats section
                 Section {
                     statRow("Total reviews", value: "\(store.state.stats.totalReviews)")
@@ -75,7 +120,6 @@ struct SettingsView: View {
             .background(Color.terminalBg)
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbarColorScheme(.dark, for: .navigationBar)
             .sheet(isPresented: $showExportSheet) {
                 if let data = store.exportJSON(),
                    let json = String(data: data, encoding: .utf8) {
@@ -149,7 +193,6 @@ struct ExportView: View {
             .background(Color.terminalBg)
             .navigationTitle("Exported Data")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbarColorScheme(.dark, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Done") { dismiss() }

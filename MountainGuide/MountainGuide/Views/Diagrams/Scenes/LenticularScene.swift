@@ -8,7 +8,7 @@ struct LenticularScene: View {
         ZStack {
             // Sky gradient
             LinearGradient(
-                colors: [Color(hex: "0f172a"), Color(hex: "1e3a5f")],
+                colors: [Color(hex: "DBEAFE"), Color(hex: "93C5FD")],
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -17,7 +17,7 @@ struct LenticularScene: View {
             CloudShapes.mountainSilhouette(width: width, height: height, peakY: 0.45)
                 .fill(
                     LinearGradient(
-                        colors: [Color(hex: "374151"), Color(hex: "1f2937")],
+                        colors: [Color(hex: "78716C"), Color(hex: "57534E")],
                         startPoint: .top,
                         endPoint: .bottom
                     )

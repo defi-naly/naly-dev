@@ -8,7 +8,7 @@ struct CloudStreetScene: View {
         ZStack {
             // Blue sky
             LinearGradient(
-                colors: [Color(hex: "1e3a5f"), Color(hex: "2563eb").opacity(0.3)],
+                colors: [Color(hex: "DBEAFE"), Color(hex: "93C5FD")],
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -61,7 +61,7 @@ struct CloudStreetScene: View {
             }
             .fill(
                 LinearGradient(
-                    colors: [Color(hex: "374151").opacity(0.4), Color(hex: "1f2937").opacity(0.3)],
+                    colors: [Color(hex: "86EFAC").opacity(0.4), Color(hex: "4ADE80").opacity(0.3)],
                     startPoint: .top,
                     endPoint: .bottom
                 )

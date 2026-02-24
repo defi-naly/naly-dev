@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOOM — Deep Space Organic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-void: #030508;
+            --bg-deep: #050a12;
+            --bg-surface: #0a1220;
+            --teal: #0d9488;
+            --teal-glow: #2dd4bf;
+            --teal-bright: #5eead4;
+            --amber: #f59e0b;
+            --amber-glow: #fbbf24;
+            --blue-deep: #0c4a6e;
+            --purple: #8b5cf6;
+            --purple-glow: #a78bfa;
+            --rose: #f43f5e;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg-void);
+            color: var(--text);
+            font-family: 'Fraunces', Georgia, serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Animated nebula background */
+        .nebula-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .nebula-layer {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.5;
+            animation: drift 25s ease-in-out infinite;
+        }
+
+        .nebula-1 {
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(ellipse, var(--teal) 0%, transparent 60%);
+            top: -300px;
+            right: -200px;
+            animation-delay: 0s;
+        }
+
+        .nebula-2 {
+            width: 1000px;
+            height: 1000px;
+            background: radial-gradient(ellipse, var(--blue-deep) 0%, transparent 60%);
+            bottom: -400px;
+            left: -300px;
+            animation-delay: -8s;
+        }
+
+        .nebula-3 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(ellipse, var(--amber) 0%, transparent 60%);
+            top: 50%;
+            left: 20%;
+            opacity: 0.25;
+            animation-delay: -16s;
+        }
+
+        .nebula-4 {
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(ellipse, var(--purple) 0%, transparent 60%);
+            top: 30%;
+            right: 5%;
+            opacity: 0.3;
+            animation-delay: -12s;
+        }
+
+        .nebula-5 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(ellipse, var(--rose) 0%, transparent 60%);
+            bottom: 20%;
+            right: 30%;
+            opacity: 0.15;
+            animation-delay: -20s;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            25% { transform: translate(40px, -40px) scale(1.08) rotate(5deg); }
+            50% { transform: translate(-30px, 30px) scale(0.95) rotate(-3deg); }
+            75% { transform: translate(25px, 40px) scale(1.03) rotate(2deg); }
+        }
+
+        /* Star field */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.15s; }
+        .reveal-delay-2 { transition-delay: 0.3s; }
+        .reveal-delay-3 { transition-delay: 0.45s; }
+        .reveal-delay-4 { transition-delay: 0.6s; }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(to bottom, var(--bg-void) 0%, transparent 100%);
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 400;
+            letter-spacing: 0.5em;
+            color: var(--text);
+            text-shadow: 0 0 30px var(--teal);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background: var(--teal-glow);
+            box-shadow: 0 0 15px var(--teal-glow), 0 0 30px var(--teal);
+            transition: all 0.4s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover {
+            color: var(--teal-bright);
+            text-shadow: 0 0 20px var(--teal);
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        /* Content wrapper */
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        #cosmos-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        /* Black Hole */
+        .black-hole {
+            width: 320px;
+            height: 320px;
+            margin: 0 auto 4rem;
+            position: relative;
+            perspective: 800px;
+        }
+
+        /* Outer gravitational lensing glow */
+        .lens-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                transparent 40%,
+                rgba(45, 212, 191, 0.03) 50%,
+                rgba(45, 212, 191, 0.08) 55%,
+                rgba(45, 212, 191, 0.03) 60%,
+                transparent 70%
+            );
+            animation: lens-pulse 6s ease-in-out infinite;
+        }
+
+        @keyframes lens-pulse {
+            0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        /* Accretion disk - back half (behind event horizon) */
+        .accretion-disk {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            transform-style: preserve-3d;
+        }
+
+        .accretion-back {
+            transform: translate(-50%, -50%) rotateX(75deg);
+            background: conic-gradient(
+                from 0deg,
+                rgba(255, 140, 50, 0.5) 0deg,
+                rgba(255, 200, 100, 0.7) 90deg,
+                rgba(255, 255, 200, 0.9) 180deg,
+                rgba(255, 200, 100, 0.5) 270deg,
+                rgba(255, 140, 50, 0.3) 360deg
+            );
+            mask-image: radial-gradient(circle, transparent 35%, black 40%, black 48%, transparent 52%);
+            -webkit-mask-image: radial-gradient(circle, transparent 35%, black 40%, black 48%, transparent 52%);
+            animation: accretion-spin 15s linear infinite;
+            filter: blur(2px);
+        }
+
+        .accretion-front {
+            transform: translate(-50%, -50%) rotateX(75deg);
+            background: conic-gradient(
+                from 180deg,
+                rgba(255, 100, 30, 0.4) 0deg,
+                rgba(255, 180, 80, 0.8) 90deg,
+                rgba(255, 255, 220, 1) 180deg,
+                rgba(255, 180, 80, 0.6) 270deg,
+                rgba(255, 100, 30, 0.3) 360deg
+            );
+            mask-image: radial-gradient(circle, transparent 35%, black 40%, black 48%, transparent 52%);
+            -webkit-mask-image: radial-gradient(circle, transparent 35%, black 40%, black 48%, transparent 52%);
+            animation: accretion-spin 15s linear infinite;
+            filter: blur(1px);
+            z-index: 10;
+        }
+
+        @keyframes accretion-spin {
+            from { transform: translate(-50%, -50%) rotateX(75deg) rotateZ(0deg); }
+            to { transform: translate(-50%, -50%) rotateX(75deg) rotateZ(360deg); }
+        }
+
+        /* Event horizon - the void */
+        .event-horizon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                #000000 0%,
+                #000000 60%,
+                #010203 80%,
+                #020406 100%
+            );
+            box-shadow:
+                inset 0 0 30px rgba(0, 0, 0, 1),
+                inset 0 0 60px rgba(0, 0, 0, 0.8);
+            z-index: 5;
+        }
+
+        /* Inner singularity - pure darkness */
+        .singularity {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #000000;
+        }
+
+        /* Photon ring - light bending around the event horizon */
+        .photon-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: transparent;
+            border: 2px solid transparent;
+            background-image: linear-gradient(#000, #000),
+                              linear-gradient(90deg,
+                                  rgba(255, 255, 255, 0.9) 0%,
+                                  rgba(45, 212, 191, 0.8) 25%,
+                                  rgba(255, 255, 255, 0.6) 50%,
+                                  rgba(45, 212, 191, 0.8) 75%,
+                                  rgba(255, 255, 255, 0.9) 100%);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            box-shadow:
+                0 0 15px rgba(255, 255, 255, 0.3),
+                0 0 30px rgba(45, 212, 191, 0.2),
+                inset 0 0 15px rgba(45, 212, 191, 0.1);
+            animation: photon-pulse 3s ease-in-out infinite;
+            z-index: 4;
+        }
+
+        @keyframes photon-pulse {
+            0%, 100% {
+                opacity: 1;
+                box-shadow:
+                    0 0 15px rgba(255, 255, 255, 0.3),
+                    0 0 30px rgba(45, 212, 191, 0.2),
+                    inset 0 0 15px rgba(45, 212, 191, 0.1);
+            }
+            50% {
+                opacity: 0.8;
+                box-shadow:
+                    0 0 20px rgba(255, 255, 255, 0.4),
+                    0 0 40px rgba(45, 212, 191, 0.3),
+                    inset 0 0 20px rgba(45, 212, 191, 0.15);
+            }
+        }
+
+        /* Infalling particles - spiral toward the void */
+        .infalling-particle {
+            position: absolute;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+        }
+
+        .infall-1 {
+            width: 6px;
+            height: 6px;
+            background: var(--amber-glow);
+            box-shadow: 0 0 12px var(--amber), 0 0 24px rgba(251, 191, 36, 0.5);
+            animation: spiral-infall-1 8s ease-in infinite;
+        }
+
+        .infall-2 {
+            width: 5px;
+            height: 5px;
+            background: var(--purple-glow);
+            box-shadow: 0 0 10px var(--purple), 0 0 20px rgba(139, 92, 246, 0.5);
+            animation: spiral-infall-2 12s ease-in infinite;
+            animation-delay: -4s;
+        }
+
+        .infall-3 {
+            width: 4px;
+            height: 4px;
+            background: var(--teal-bright);
+            box-shadow: 0 0 8px var(--teal), 0 0 16px rgba(45, 212, 191, 0.5);
+            animation: spiral-infall-3 10s ease-in infinite;
+            animation-delay: -7s;
+        }
+
+        /* Spiral infall animations - particles drawn toward the void */
+        @keyframes spiral-infall-1 {
+            0% {
+                transform: rotate(0deg) translateX(150px) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: rotate(720deg) translateX(45px) scale(0.3);
+                opacity: 0;
+            }
+        }
+
+        @keyframes spiral-infall-2 {
+            0% {
+                transform: rotate(120deg) translateX(140px) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: rotate(840deg) translateX(45px) scale(0.2);
+                opacity: 0;
+            }
+        }
+
+        @keyframes spiral-infall-3 {
+            0% {
+                transform: rotate(240deg) translateX(160px) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                transform: rotate(960deg) translateX(45px) scale(0.25);
+                opacity: 0;
+            }
+        }
+
+        .hero h1 {
+            font-size: 6rem;
+            font-weight: 300;
+            letter-spacing: 0.25em;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--text) 0%, var(--teal-glow) 40%, var(--amber-glow) 70%, var(--purple-glow) 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 8s ease-in-out infinite;
+            text-shadow: none;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero-tagline {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-tagline em {
+            color: var(--teal-glow);
+            font-style: normal;
+            text-shadow: 0 0 20px var(--teal);
+        }
+
+        .hero-subtext {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            letter-spacing: 0.08em;
+            max-width: 550px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .scroll-indicator span {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--teal-glow), transparent);
+            animation: scroll-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scroll-pulse {
+            0%, 100% { opacity: 1; height: 50px; }
+            50% { opacity: 0.4; height: 30px; }
+        }
+
+        /* Section styles */
+        section {
+            padding: 10rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.4em;
+            color: var(--teal);
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-label::before,
+        .section-label::after {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--teal));
+        }
+
+        .section-label::after {
+            background: linear-gradient(90deg, var(--teal), transparent);
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            background: linear-gradient(135deg, var(--text) 0%, var(--teal-glow) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* About */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 8rem;
+            align-items: center;
+        }
+
+        .about-visual {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .orb-system {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        .main-orb {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%,
+                rgba(45, 212, 191, 0.4) 0%,
+                rgba(13, 148, 136, 0.3) 40%,
+                transparent 70%
+            );
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            box-shadow:
+                0 0 60px rgba(13, 148, 136, 0.3),
+                inset 0 0 60px rgba(45, 212, 191, 0.1);
+            backdrop-filter: blur(20px);
+            animation: main-orb-float 6s ease-in-out infinite;
+        }
+
+        @keyframes main-orb-float {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -55%) scale(1.02); }
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .orb-1 {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 30% 30%, var(--amber-glow), var(--amber), transparent);
+            top: 10%;
+            left: 15%;
+            box-shadow: 0 0 30px var(--amber);
+            animation: float-orb 8s ease-in-out infinite;
+        }
+
+        .orb-2 {
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle at 30% 30%, var(--purple-glow), var(--purple), transparent);
+            bottom: 15%;
+            right: 10%;
+            box-shadow: 0 0 25px var(--purple);
+            animation: float-orb 10s ease-in-out infinite reverse;
+        }
+
+        .orb-3 {
+            width: 25px;
+            height: 25px;
+            background: radial-gradient(circle at 30% 30%, var(--teal-bright), var(--teal), transparent);
+            top: 60%;
+            left: 5%;
+            box-shadow: 0 0 20px var(--teal);
+            animation: float-orb 12s ease-in-out infinite;
+            animation-delay: -4s;
+        }
+
+        .orb-4 {
+            width: 35px;
+            height: 35px;
+            background: radial-gradient(circle at 30% 30%, var(--rose), #be123c, transparent);
+            top: 25%;
+            right: 20%;
+            box-shadow: 0 0 20px var(--rose);
+            animation: float-orb 9s ease-in-out infinite;
+            animation-delay: -2s;
+        }
+
+        @keyframes float-orb {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            50% { transform: translateY(10px) translateX(-15px); }
+            75% { transform: translateY(-10px) translateX(5px); }
+        }
+
+        /* Connection lines */
+        .connection-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .about-text h2 {
+            font-size: 2.75rem;
+            font-weight: 300;
+            line-height: 1.35;
+            margin-bottom: 2rem;
+        }
+
+        .about-text h2 em {
+            color: var(--teal-glow);
+            font-style: normal;
+            text-shadow: 0 0 30px var(--teal);
+        }
+
+        .about-text p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-stat {
+            display: flex;
+            align-items: baseline;
+            gap: 1.5rem;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(13, 148, 136, 0.05);
+            border: 1px solid rgba(13, 148, 136, 0.2);
+            border-radius: 12px;
+        }
+
+        .about-stat .number {
+            font-size: 4rem;
+            font-weight: 300;
+            background: linear-gradient(135deg, var(--teal-glow), var(--amber-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .about-stat .label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Process */
+        .process-container {
+            position: relative;
+        }
+
+        .process-line {
+            position: absolute;
+            top: 80px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--teal), var(--amber), var(--purple), transparent);
+            opacity: 0.4;
+        }
+
+        .process-flow {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-orb {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .step-orb::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%,
+                rgba(45, 212, 191, 0.15) 0%,
+                rgba(13, 148, 136, 0.1) 50%,
+                transparent 70%
+            );
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            transition: all 0.5s ease;
+        }
+
+        .step-orb::after {
+            content: '';
+            position: absolute;
+            inset: -15px;
+            border-radius: 50%;
+            border: 1px solid rgba(45, 212, 191, 0.1);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .step-orb:hover {
+            transform: scale(1.08);
+        }
+
+        .step-orb:hover::before {
+            background: radial-gradient(circle at 30% 30%,
+                rgba(45, 212, 191, 0.25) 0%,
+                rgba(13, 148, 136, 0.15) 50%,
+                transparent 70%
+            );
+            box-shadow: 0 0 40px rgba(13, 148, 136, 0.3);
+        }
+
+        .step-orb:hover::after {
+            opacity: 1;
+            inset: -20px;
+        }
+
+        .step-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.75rem;
+            font-weight: 300;
+            color: var(--teal-glow);
+            text-shadow: 0 0 20px var(--teal);
+        }
+
+        .step-title {
+            font-size: 1.75rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            letter-spacing: 0.02em;
+        }
+
+        .step-desc {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            max-width: 280px;
+            margin: 0 auto;
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 0.6fr;
+            gap: 2rem;
+        }
+
+        .portfolio-card {
+            background: rgba(10, 18, 32, 0.6);
+            border: 1px solid rgba(45, 212, 191, 0.15);
+            border-radius: 24px;
+            padding: 3.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(20px);
+        }
+
+        .portfolio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.08) 0%, transparent 40%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .portfolio-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(45, 212, 191, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .portfolio-card:hover {
+            border-color: var(--teal);
+            box-shadow:
+                0 0 60px rgba(13, 148, 136, 0.15),
+                0 25px 50px rgba(0, 0, 0, 0.3);
+            transform: translateY(-8px);
+        }
+
+        .portfolio-card:hover::before {
+            opacity: 1;
+        }
+
+        .portfolio-card:hover::after {
+            opacity: 1;
+        }
+
+        .portfolio-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            color: var(--amber);
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--amber);
+            box-shadow: 0 0 15px var(--amber);
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.3); }
+        }
+
+        .portfolio-card:nth-child(2) .status-dot {
+            background: var(--purple);
+            box-shadow: 0 0 15px var(--purple);
+        }
+
+        .portfolio-card:nth-child(2) .portfolio-status {
+            color: var(--purple-glow);
+        }
+
+        .portfolio-name {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.08em;
+        }
+
+        .portfolio-desc {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            line-height: 1.9;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .portfolio-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            padding: 0.6rem 1.2rem;
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            border-radius: 24px;
+            letter-spacing: 0.12em;
+            color: var(--teal-glow);
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-tag:hover {
+            background: rgba(45, 212, 191, 0.1);
+            border-color: var(--teal);
+        }
+
+        /* Principles */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2px;
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: 24px;
+            overflow: hidden;
+            padding: 2px;
+        }
+
+        .principle {
+            background: var(--bg-void);
+            padding: 3.5rem;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        .principle:first-child { border-radius: 22px 0 0 0; }
+        .principle:nth-child(2) { border-radius: 0 22px 0 0; }
+        .principle:nth-child(3) { border-radius: 0 0 0 22px; }
+        .principle:last-child { border-radius: 0 0 22px 0; }
+
+        .principle:hover {
+            background: rgba(13, 148, 136, 0.05);
+        }
+
+        .principle-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.2) 0%, rgba(30, 58, 95, 0.3) 100%);
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--teal-glow);
+            transition: all 0.5s ease;
+        }
+
+        .principle:hover .principle-icon {
+            box-shadow: 0 0 30px rgba(13, 148, 136, 0.3);
+            transform: scale(1.1);
+        }
+
+        .principle h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            letter-spacing: 0.01em;
+        }
+
+        .principle p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 8rem 4rem;
+            position: relative;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, var(--teal));
+        }
+
+        .cta-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(13, 148, 136, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .cta-section h2 {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .cta-section p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 0.08em;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--bg-void);
+            text-decoration: none;
+            padding: 1.25rem 3rem;
+            background: linear-gradient(135deg, var(--teal-glow), var(--teal));
+            border: none;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(13, 148, 136, 0.3);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--teal-bright), var(--teal-glow));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 50px rgba(13, 148, 136, 0.5);
+        }
+
+        .cta-button:hover::before {
+            opacity: 1;
+        }
+
+        .cta-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Footer */
+        footer {
+            padding: 6rem 4rem;
+            border-top: 1px solid rgba(45, 212, 191, 0.1);
+            margin-top: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-brand h2 {
+            font-size: 1.75rem;
+            font-weight: 300;
+            letter-spacing: 0.4em;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text) 0%, var(--teal-glow) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-brand p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.7;
+        }
+
+        .footer-col h4 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            color: var(--teal);
+            text-transform: uppercase;
+            margin-bottom: 1.75rem;
+        }
+
+        .footer-col a {
+            display: block;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 1rem;
+            margin-bottom: 0.875rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--text);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 5rem auto 0;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(45, 212, 191, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-bottom p {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--text-dim);
+            letter-spacing: 0.15em;
+        }
+
+        .back-link {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--teal);
+            text-decoration: none;
+            letter-spacing: 0.12em;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(45, 212, 191, 0.1);
+            border-color: var(--teal);
+            box-shadow: 0 0 20px rgba(13, 148, 136, 0.2);
+        }
+
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 4rem; }
+            .black-hole { width: 240px; height: 240px; }
+            .lens-ring { width: 210px; height: 210px; }
+            .accretion-disk { width: 200px; height: 200px; }
+            .event-horizon { width: 70px; height: 70px; }
+            .photon-ring { width: 78px; height: 78px; }
+            .singularity { width: 30px; height: 30px; }
+            .about-content { grid-template-columns: 1fr; gap: 4rem; }
+            .about-visual { height: 300px; }
+            .process-flow { grid-template-columns: 1fr; gap: 4rem; }
+            .process-line { display: none; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .principles-grid { grid-template-columns: 1fr; }
+            .principle { border-radius: 0 !important; }
+            .principle:first-child { border-radius: 22px 22px 0 0 !important; }
+            .principle:last-child { border-radius: 0 0 22px 22px !important; }
+            .footer-content { grid-template-columns: 1fr 1fr; gap: 3rem; }
+        }
+
+        @media (max-width: 640px) {
+            nav { padding: 1.5rem 2rem; }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.75rem; letter-spacing: 0.15em; }
+            .hero-tagline { font-size: 1.1rem; }
+            section { padding: 6rem 2rem; }
+            .section-title { font-size: 2.25rem; }
+            .about-text h2 { font-size: 2rem; }
+            .footer-content { grid-template-columns: 1fr; }
+            .cta-section h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="nebula-bg">
+        <div class="nebula-layer nebula-1"></div>
+        <div class="nebula-layer nebula-2"></div>
+        <div class="nebula-layer nebula-3"></div>
+        <div class="nebula-layer nebula-4"></div>
+        <div class="nebula-layer nebula-5"></div>
+    </div>
+
+    <div class="stars" id="stars"></div>
+
+    <nav>
+        <div class="logo">BLOOM</div>
+        <div class="nav-links">
+            <a href="#about">Thesis</a>
+            <a href="#process">Process</a>
+            <a href="#portfolio">Work</a>
+            <a href="#principles">Principles</a>
+        </div>
+    </nav>
+
+    <div class="content">
+        <section class="hero">
+            <canvas id="cosmos-canvas"></canvas>
+            <div class="hero-content">
+                <div class="black-hole">
+                    <!-- Outer gravitational lensing glow -->
+                    <div class="lens-ring"></div>
+
+                    <!-- Accretion disk (back half - behind event horizon) -->
+                    <div class="accretion-disk accretion-back"></div>
+
+                    <!-- The void - event horizon -->
+                    <div class="event-horizon">
+                        <div class="singularity"></div>
+                    </div>
+
+                    <!-- Photon ring - light bending around -->
+                    <div class="photon-ring"></div>
+
+                    <!-- Accretion disk (front half - in front of event horizon) -->
+                    <div class="accretion-disk accretion-front"></div>
+
+                    <!-- Infalling matter -->
+                    <div class="infalling-particle infall-1"></div>
+                    <div class="infalling-particle infall-2"></div>
+                    <div class="infalling-particle infall-3"></div>
+                </div>
+                <h1>BLOOM</h1>
+                <p class="hero-tagline">Find the friction. <em>Build the solution</em>. Let it bloom.</p>
+                <p class="hero-subtext">A DeFi venture studio. We find friction in decentralized finance and build the products that remove it.</p>
+            </div>
+            <div class="scroll-indicator">
+                <span>Descend</span>
+                <div class="scroll-line"></div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="section-header reveal">
+                <span class="section-label">Our Thesis</span>
+                <h2 class="section-title">About</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-visual reveal reveal-delay-1">
+                    <div class="orb-system">
+                        <div class="main-orb"></div>
+                        <div class="orb orb-1"></div>
+                        <div class="orb orb-2"></div>
+                        <div class="orb orb-3"></div>
+                        <div class="orb orb-4"></div>
+                        <svg class="connection-lines" viewBox="0 0 300 300">
+                            <line x1="150" y1="150" x2="60" y2="50" stroke="rgba(45, 212, 191, 0.2)" stroke-width="1"/>
+                            <line x1="150" y1="150" x2="260" y2="230" stroke="rgba(139, 92, 246, 0.2)" stroke-width="1"/>
+                            <line x1="150" y1="150" x2="30" y2="200" stroke="rgba(45, 212, 191, 0.15)" stroke-width="1"/>
+                            <line x1="150" y1="150" x2="240" y2="90" stroke="rgba(244, 63, 94, 0.15)" stroke-width="1"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h2 class="reveal reveal-delay-2">DeFi is full of broken plumbing. We find the leaks and <em>fix them</em>.</h2>
+                    <p class="reveal reveal-delay-3">Most teams chase features. We hunt friction. For five years, we've lived inside DeFi—not watching from the sidelines, but using it, stress-testing it, feeling where it breaks. Every product we build starts with a problem we've experienced ourselves.</p>
+                    <div class="about-stat reveal reveal-delay-4">
+                        <span class="number">5+</span>
+                        <span class="label">Years building in DeFi</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="process">
+            <div class="section-header reveal">
+                <span class="section-label">How We Work</span>
+                <h2 class="section-title">Process</h2>
+            </div>
+            <div class="process-container">
+                <div class="process-line"></div>
+                <div class="process-flow">
+                    <div class="process-step reveal reveal-delay-1">
+                        <div class="step-orb">
+                            <span class="step-number">01</span>
+                        </div>
+                        <h3 class="step-title">Find the friction</h3>
+                        <p class="step-desc">We don't brainstorm in conference rooms. We operate inside protocols, talk to power users, and track where value disappears.</p>
+                    </div>
+                    <div class="process-step reveal reveal-delay-2">
+                        <div class="step-orb">
+                            <span class="step-number">02</span>
+                        </div>
+                        <h3 class="step-title">Design from physics</h3>
+                        <p class="step-desc">Before writing code, we map the forces at play—incentives, attack vectors, user behaviors. Solutions that ignore dynamics fail.</p>
+                    </div>
+                    <div class="process-step reveal reveal-delay-3">
+                        <div class="step-orb">
+                            <span class="step-number">03</span>
+                        </div>
+                        <h3 class="step-title">Grow, don't force</h3>
+                        <p class="step-desc">We launch lean, iterate with early users, and let adoption happen organically. Forced growth creates fragile systems.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <div class="section-header reveal">
+                <span class="section-label">Our Work</span>
+                <h2 class="section-title">Portfolio</h2>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-card reveal reveal-delay-1">
+                    <div class="portfolio-status">
+                        <span class="status-dot"></span>
+                        Live Now
+                    </div>
+                    <h3 class="portfolio-name">TIPZ</h3>
+                    <p class="portfolio-desc">Creators deserve support that doesn't come with surveillance. TIPZ enables private micro-tipping through Zcash shielded addresses—no platform fees, no data harvesting, no trace. Your supporters stay yours.</p>
+                    <div class="portfolio-tags">
+                        <span class="portfolio-tag">Privacy</span>
+                        <span class="portfolio-tag">Zcash</span>
+                        <span class="portfolio-tag">Creator Economy</span>
+                    </div>
+                </div>
+                <div class="portfolio-card reveal reveal-delay-2">
+                    <div class="portfolio-status">
+                        <span class="status-dot"></span>
+                        Building
+                    </div>
+                    <h3 class="portfolio-name">Project II</h3>
+                    <p class="portfolio-desc">Another bottleneck identified. Another solution taking shape. Details when it's ready.</p>
+                    <div class="portfolio-tags">
+                        <span class="portfolio-tag">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="principles">
+            <div class="section-header reveal">
+                <span class="section-label">What We Believe</span>
+                <h2 class="section-title">Principles</h2>
+            </div>
+            <div class="principles-grid">
+                <div class="principle reveal reveal-delay-1">
+                    <div class="principle-icon">01</div>
+                    <h3>Privacy isn't optional</h3>
+                    <p>Every indexed transaction is leverage against the individual. Financial surveillance enables control. We build tools that can't be weaponized.</p>
+                </div>
+                <div class="principle reveal reveal-delay-2">
+                    <div class="principle-icon">02</div>
+                    <h3>Emergence beats force</h3>
+                    <p>Complex systems resist top-down mandates. Products that require artificial push eventually collapse. We design for organic adoption.</p>
+                </div>
+                <div class="principle reveal reveal-delay-3">
+                    <div class="principle-icon">03</div>
+                    <h3>Simple surface, deep structure</h3>
+                    <p>The best technology feels inevitable—like it was always obvious. Complexity should exist in the architecture, never in the interface.</p>
+                </div>
+                <div class="principle reveal reveal-delay-4">
+                    <div class="principle-icon">04</div>
+                    <h3>Skin in the game</h3>
+                    <p>We use what we build. We hold what we believe in. When your incentives align with your users, the product takes care of itself.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="cta-section">
+            <div class="cta-glow"></div>
+            <h2 class="reveal">Building something in DeFi?</h2>
+            <p class="reveal reveal-delay-1">We're always interested in hard problems and aligned founders.</p>
+            <a href="mailto:hello@bloom.studio" class="cta-button reveal reveal-delay-2">
+                <span>Get in touch</span>
+                <span>→</span>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>BLOOM</h2>
+                <p>A venture studio building infrastructure for decentralized finance. We find the friction and build products that remove it.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Studio</h4>
+                <a href="#about">Thesis</a>
+                <a href="#process">Process</a>
+                <a href="#principles">Principles</a>
+            </div>
+            <div class="footer-col">
+                <h4>Work</h4>
+                <a href="https://tipz.cash" target="_blank" rel="noopener">TIPZ</a>
+                <a href="#portfolio">Project II</a>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <a href="https://twitter.com/bloomstudio" target="_blank" rel="noopener">Twitter</a>
+                <a href="https://github.com/bloom-studio" target="_blank" rel="noopener">GitHub</a>
+                <a href="mailto:hello@bloom.studio">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 BLOOM VENTURE STUDIO</p>
+            <a href="index.html" class="back-link">← All Designs</a>
+        </div>
+    </footer>
+
+    <script>
+        // Generate star field
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = (2 + Math.random() * 2) + 's';
+            star.style.width = (1 + Math.random() * 2) + 'px';
+            star.style.height = star.style.width;
+            starsContainer.appendChild(star);
+        }
+
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            revealElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const revealPoint = 120;
+                if (elementTop < windowHeight - revealPoint) {
+                    el.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+
+        // Cosmos canvas - enhanced particle system with connections
+        const canvas = document.getElementById('cosmos-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        const particles = [];
+        const PARTICLE_COUNT = 100;
+        const CONNECTION_DISTANCE = 150;
+
+        const colors = [
+            { r: 45, g: 212, b: 191, a: 0.6 },   // teal
+            { r: 251, g: 191, b: 36, a: 0.5 },   // amber
+            { r: 139, g: 92, b: 246, a: 0.5 },   // purple
+            { r: 244, g: 63, b: 94, a: 0.4 },    // rose
+        ];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.alpha = Math.random() * 0.5 + 0.2;
+                this.pulseSpeed = Math.random() * 0.015 + 0.005;
+                this.pulseOffset = Math.random() * Math.PI * 2;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Gentle wave motion
+                this.x += Math.sin(Date.now() * 0.0005 + this.pulseOffset) * 0.3;
+                this.y += Math.cos(Date.now() * 0.0007 + this.pulseOffset) * 0.2;
+
+                // Pulse alpha
+                this.alpha = 0.3 + Math.sin(Date.now() * this.pulseSpeed + this.pulseOffset) * 0.2;
+
+                // Wrap around edges
+                if (this.x < -50) this.x = width + 50;
+                if (this.x > width + 50) this.x = -50;
+                if (this.y < -50) this.y = height + 50;
+                if (this.y > height + 50) this.y = -50;
+            }
+
+            draw() {
+                // Glow
+                const gradient = ctx.createRadialGradient(
+                    this.x, this.y, 0,
+                    this.x, this.y, this.size * 4
+                );
+                gradient.addColorStop(0, `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.alpha * this.color.a})`);
+                gradient.addColorStop(1, 'transparent');
+
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size * 4, 0, Math.PI * 2);
+                ctx.fillStyle = gradient;
+                ctx.fill();
+
+                // Core
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.alpha + 0.3})`;
+                ctx.fill();
+            }
+        }
+
+        function drawConnections() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < CONNECTION_DISTANCE) {
+                        const opacity = (1 - dist / CONNECTION_DISTANCE) * 0.15;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(45, 212, 191, ${opacity})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function init() {
+            resize();
+            particles.length = 0;
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            drawConnections();
+
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            resize();
+        });
+
+        init();
+        animate();
+    </script>
+</body>
+</html>

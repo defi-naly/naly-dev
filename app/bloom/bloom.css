@@ -360,6 +360,21 @@ body {
   margin-inline: auto;
 }
 
+.bloom-section.stats-section {
+  padding-top: clamp(3rem, 5vh, 5rem);
+  padding-bottom: clamp(3rem, 5vh, 5rem);
+}
+
+.stats-bridge {
+  color: var(--muted);
+  font-size: var(--text-sm);
+  letter-spacing: 0.02em;
+  text-align: center;
+  max-width: 38rem;
+  margin: 2.5rem auto 0;
+  line-height: 1.7;
+}
+
 /* ========================================
    SECTION DIVIDERS
    ======================================== */
@@ -401,6 +416,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
+  align-items: stretch;
 }
 
 .stat-block {
@@ -408,6 +424,7 @@ body {
   border: 1px solid var(--border);
   position: relative;
   transition: all 0.3s ease;
+  height: 100%;
 }
 
 .stat-block:hover {
@@ -442,6 +459,15 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.2em;
   margin-top: 0.75rem;
+}
+
+.stat-sublabel {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-transform: none;
+  letter-spacing: 0.02em;
+  margin-top: 0.25rem;
 }
 
 .about-text h2 {
@@ -536,6 +562,8 @@ body {
   position: relative;
   transition: border-color 0.3s ease, background 0.3s ease;
   min-height: 160px;
+  display: flex;
+  flex-direction: column;
 }
 
 .edge-item::before {
@@ -610,7 +638,7 @@ body {
   font-family: var(--font-body);
   font-size: var(--text-xs);
   color: var(--muted);
-  margin-top: 1.25rem;
+  margin-top: auto;
   padding-top: 1rem;
   border-top: 1px solid var(--border);
   opacity: 0.7;
@@ -891,13 +919,15 @@ body {
   left: 0.75rem;
   top: 0;
   width: 2px;
-  height: 0;
+  height: 100%;
   background: linear-gradient(to bottom, var(--bloom-accent), var(--bloom-accent) 80%, transparent);
+  transform: scaleY(0);
+  transform-origin: top;
   animation: timeline-draw 1.5s ease-out 0.5s forwards;
 }
 
 @keyframes timeline-draw {
-  to { height: 100%; }
+  to { transform: scaleY(1); }
 }
 
 .portfolio-item {
@@ -938,11 +968,11 @@ body {
 
 @keyframes live-pulse {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+    opacity: 1;
     transform: scale(1);
   }
   50% {
-    box-shadow: 0 0 20px 8px rgba(255, 255, 255, 0.15);
+    opacity: 0.7;
     transform: scale(1.2);
   }
 }
@@ -1449,6 +1479,203 @@ body {
 }
 
 /* ========================================
+   INVESTMENT ANCHORING SECTION
+   ======================================== */
+
+.investment-section {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 4rem 0;
+}
+
+.investment-headline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-2xl);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.investment-subline {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-xl);
+  text-align: center;
+  color: var(--bloom-accent);
+  margin-bottom: 3rem;
+}
+
+.investment-comparison {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--border);
+}
+
+.investment-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.75rem;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s ease;
+}
+
+.investment-row:last-child {
+  border-bottom: none;
+}
+
+.investment-row:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.investment-row-label {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.investment-row-cost {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-base);
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+.investment-row-bloom {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin: -1px;
+}
+
+.investment-row-bloom .investment-row-label {
+  color: var(--bright);
+  font-weight: 500;
+}
+
+.investment-row-bloom .investment-row-cost {
+  color: var(--bloom-accent);
+  font-size: var(--text-lg);
+}
+
+/* ========================================
+   MULTI-SPRINT PRICING TIERS
+   ======================================== */
+
+.pricing-tiers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.pricing-tier {
+  padding: 2rem;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+  text-align: center;
+  transition: border-color 0.3s ease, background 0.3s ease;
+  position: relative;
+}
+
+.pricing-tier:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.pricing-tier-featured {
+  border-color: var(--bloom-accent);
+}
+
+.pricing-tier-featured::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--bloom-accent);
+}
+
+.pricing-tier-label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.pricing-tier-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.pricing-tier-price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-2xl);
+  color: var(--bloom-accent);
+  margin-bottom: 0.5rem;
+}
+
+.pricing-tier-savings {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1.5rem;
+  min-height: 1.25rem;
+}
+
+.pricing-tier-desc {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .pricing-tiers {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================
+   DIAGNOSTIC RESULTS — PRICING
+   ======================================== */
+
+.diag-weakest-price {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--bright);
+  margin-top: 1rem;
+}
+
+.diag-weakest-price strong {
+  color: var(--bloom-accent);
+}
+
+.diag-weakest-anchor {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ========================================
    FOOTER
    ======================================== */
 
@@ -1562,14 +1789,14 @@ body {
   pointer-events: none;
   z-index: 9999;
   mix-blend-mode: difference;
-  transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
-  transform: translate(-50%, -50%);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform: translate(-50%, -50%) scale(1);
   opacity: 0.8;
+  will-change: transform;
 }
 
 .custom-cursor.hovering {
-  width: 48px;
-  height: 48px;
+  transform: translate(-50%, -50%) scale(4);
   opacity: 0.4;
 }
 

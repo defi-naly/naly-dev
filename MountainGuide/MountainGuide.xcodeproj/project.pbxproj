@@ -7,127 +7,178 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A10000001 /* MountainGuideApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000001; };
-		A10000002 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000002; };
-		A10000003 /* SRSCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000003; };
-		A10000004 /* Domain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000004; };
-		A10000005 /* Scenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000005; };
-		A10000006 /* SRSEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000006; };
-		A10000007 /* MasteryEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000007; };
-		A10000008 /* CardGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000008; };
-		A10000009 /* DomainContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000009; };
-		A10000010 /* ScenarioContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010; };
-		A10000011 /* KnowledgeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000011; };
-		A10000012 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000012; };
-		A10000013 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000013; };
-		A10000014 /* ReviewSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000014; };
-		A10000015 /* DomainListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000015; };
-		A10000016 /* ModuleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000016; };
-		A10000017 /* ScenarioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000017; };
-		A10000018 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000018; };
-		B10000001 /* LessonContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000001; };
-		B10000002 /* PracticeQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000002; };
-		B10000003 /* GamificationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000003; };
-		B10000004 /* GamificationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000004; };
-		B10000005 /* WeatherLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000005; };
-		B10000006 /* AvalancheLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000006; };
-		B10000007 /* FlyingLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000007; };
-		B10000008 /* LessonContentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000008; };
-		B10000009 /* LayeredStackDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000009; };
-		B10000010 /* CrossSectionDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000010; };
-		B10000011 /* InteractiveGaugeDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000011; };
-		B10000012 /* ComparisonSplitDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000012; };
-		B10000013 /* ForceArrowDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000013; };
-		B10000014 /* TriangleDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000014; };
-		B10000015 /* TimelineDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000015; };
-		B10000016 /* LabeledSceneDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000016; };
-		B10000017 /* DiagramFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000017; };
-		B10000018 /* MCQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000018; };
-		B10000019 /* SequenceOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000019; };
-		B10000020 /* LabelDiagramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000020; };
-		B10000021 /* TrueFalseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000021; };
-		B10000022 /* CalculationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000022; };
-		B10000023 /* HotspotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000023; };
-		B10000024 /* MatchPairsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000024; };
-		B10000025 /* PracticeQuestionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000025; };
-		B10000026 /* ProgressDotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000026; };
-		B10000027 /* XPAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000027; };
-		B10000028 /* MedalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000028; };
-		B10000029 /* AnimatedCounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000029; };
-		B10000030 /* ConceptMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000030; };
-		B10000031 /* LessonTeachingPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000031; };
-		B10000032 /* LessonPracticePhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000032; };
-		B10000033 /* LessonSynthesisPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000033; };
-		B10000034 /* LessonResultsPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000034; };
-		B10000035 /* LessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000035; };
-		C10000001 /* CloudShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000001; };
-		C10000002 /* SceneRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000002; };
-		C10000003 /* DefaultScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000003; };
-		C10000004 /* CumulusScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000004; };
-		C10000005 /* LenticularScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000005; };
-		C10000006 /* CumulonimbusScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000006; };
-		C10000007 /* CloudStreetScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000007; };
-		C10000008 /* DyingVsBuildingScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000008; };
-		C10000009 /* MountainCloudOverviewScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000009; };
-		C10000010 /* SurfaceTypesScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000010; };
-		C10000011 /* TerrainTrapCrossSectionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000011; };
-		C10000012 /* GullyComparisonScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000012; };
-		C10000013 /* CliffBandScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000013; };
-		C10000014 /* ForestTerrainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000014; };
-		C10000015 /* MapContourScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000015; };
-		C10000016 /* KnotDiagramScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000016; };
-		C10000017 /* GlacierSurfaceScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000017; };
-		C10000018 /* BodyAssessmentScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000018; };
-		C10000019 /* RopeTeamScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000019; };
-		C10000020 /* AnchorSystemScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000020; };
-		D10000001 /* ExploreContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000001; };
-		D10000002 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000002; };
-		D10000003 /* ExploreArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000003; };
-		D10000004 /* ExploreContentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000004; };
-		D10000005 /* WeatherExplore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000005; };
-		D10000006 /* AvalancheExplore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000006; };
-		D10000007 /* FlyingExplore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000007; };
-		D10000008 /* NavigationExplore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000008; };
-		D10000009 /* RopeSystemsExplore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000009; };
-		D10000010 /* GlacierTravelExplore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000010; };
-		D10000011 /* FirstAidExplore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000011; };
-		E10000001 /* NavigationLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20000001; };
-		E10000002 /* RopeSystemsLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20000002; };
-		E10000003 /* GlacierTravelLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20000003; };
-		E10000004 /* FirstAidLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20000004; };
-		F10000001 /* SwissTopoMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20000001; };
-		F10000002 /* PhotoPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20000002; };
-		G10000001 /* LottieAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = G20000001; };
+		A10000001 /* MountainGuideApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000001 /* MountainGuideApp.swift */; };
+		A10000002 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000002 /* Theme.swift */; };
+		A10000003 /* SRSCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000003 /* SRSCard.swift */; };
+		A10000004 /* Domain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000004 /* Domain.swift */; };
+		A10000005 /* Scenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000005 /* Scenario.swift */; };
+		A10000006 /* SRSEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000006 /* SRSEngine.swift */; };
+		A10000007 /* MasteryEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000007 /* MasteryEngine.swift */; };
+		A10000008 /* CardGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000008 /* CardGenerator.swift */; };
+		A10000009 /* DomainContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000009 /* DomainContent.swift */; };
+		A10000010 /* ScenarioContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010 /* ScenarioContent.swift */; };
+		A10000011 /* KnowledgeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000011 /* KnowledgeStore.swift */; };
+		A10000012 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000012 /* NotificationService.swift */; };
+		A10000013 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000013 /* DashboardView.swift */; };
+		A10000014 /* ReviewSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000014 /* ReviewSessionView.swift */; };
+		A10000015 /* DomainListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000015 /* DomainListView.swift */; };
+		A10000016 /* ModuleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000016 /* ModuleDetailView.swift */; };
+		A10000017 /* ScenarioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000017 /* ScenarioView.swift */; };
+		A10000018 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000018 /* SettingsView.swift */; };
+		B10000001 /* LessonContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000001 /* LessonContent.swift */; };
+		B10000002 /* PracticeQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000002 /* PracticeQuestion.swift */; };
+		B10000003 /* GamificationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000003 /* GamificationState.swift */; };
+		B10000004 /* GamificationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000004 /* GamificationEngine.swift */; };
+		B10000005 /* WeatherLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000005 /* WeatherLessons.swift */; };
+		B10000006 /* AvalancheLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000006 /* AvalancheLessons.swift */; };
+		B10000007 /* FlyingLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000007 /* FlyingLessons.swift */; };
+		B10000008 /* LessonContentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000008 /* LessonContentData.swift */; };
+		B10000009 /* LayeredStackDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000009 /* LayeredStackDiagram.swift */; };
+		B10000010 /* CrossSectionDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000010 /* CrossSectionDiagram.swift */; };
+		B10000011 /* InteractiveGaugeDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000011 /* InteractiveGaugeDiagram.swift */; };
+		B10000012 /* ComparisonSplitDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000012 /* ComparisonSplitDiagram.swift */; };
+		B10000013 /* ForceArrowDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000013 /* ForceArrowDiagram.swift */; };
+		B10000014 /* TriangleDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000014 /* TriangleDiagram.swift */; };
+		B10000015 /* TimelineDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000015 /* TimelineDiagram.swift */; };
+		B10000016 /* LabeledSceneDiagram.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000016 /* LabeledSceneDiagram.swift */; };
+		B10000017 /* DiagramFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000017 /* DiagramFactory.swift */; };
+		B10000018 /* MCQView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000018 /* MCQView.swift */; };
+		B10000019 /* SequenceOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000019 /* SequenceOrderView.swift */; };
+		B10000020 /* LabelDiagramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000020 /* LabelDiagramView.swift */; };
+		B10000021 /* TrueFalseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000021 /* TrueFalseView.swift */; };
+		B10000022 /* CalculationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000022 /* CalculationView.swift */; };
+		B10000023 /* HotspotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000023 /* HotspotView.swift */; };
+		B10000024 /* MatchPairsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000024 /* MatchPairsView.swift */; };
+		B10000025 /* PracticeQuestionFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000025 /* PracticeQuestionFactory.swift */; };
+		B10000026 /* ProgressDotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000026 /* ProgressDotsView.swift */; };
+		B10000027 /* XPAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000027 /* XPAnimationView.swift */; };
+		B10000028 /* MedalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000028 /* MedalView.swift */; };
+		B10000029 /* AnimatedCounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000029 /* AnimatedCounterView.swift */; };
+		B10000030 /* ConceptMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000030 /* ConceptMapView.swift */; };
+		B10000031 /* LessonTeachingPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000031 /* LessonTeachingPhase.swift */; };
+		B10000032 /* LessonPracticePhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000032 /* LessonPracticePhase.swift */; };
+		B10000033 /* LessonSynthesisPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000033 /* LessonSynthesisPhase.swift */; };
+		B10000034 /* LessonResultsPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000034 /* LessonResultsPhase.swift */; };
+		B10000035 /* LessonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20000035 /* LessonView.swift */; };
+		C10000001 /* CloudShapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000001 /* CloudShapes.swift */; };
+		C10000002 /* SceneRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000002 /* SceneRenderer.swift */; };
+		C10000003 /* DefaultScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000003 /* DefaultScene.swift */; };
+		C10000004 /* CumulusScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000004 /* CumulusScene.swift */; };
+		C10000005 /* LenticularScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000005 /* LenticularScene.swift */; };
+		C10000006 /* CumulonimbusScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000006 /* CumulonimbusScene.swift */; };
+		C10000007 /* CloudStreetScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000007 /* CloudStreetScene.swift */; };
+		C10000008 /* DyingVsBuildingScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000008 /* DyingVsBuildingScene.swift */; };
+		C10000009 /* MountainCloudOverviewScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000009 /* MountainCloudOverviewScene.swift */; };
+		C10000010 /* SurfaceTypesScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000010 /* SurfaceTypesScene.swift */; };
+		C10000011 /* TerrainTrapCrossSectionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000011 /* TerrainTrapCrossSectionScene.swift */; };
+		C10000012 /* GullyComparisonScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000012 /* GullyComparisonScene.swift */; };
+		C10000013 /* CliffBandScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000013 /* CliffBandScene.swift */; };
+		C10000014 /* ForestTerrainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000014 /* ForestTerrainScene.swift */; };
+		C10000015 /* MapContourScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000015 /* MapContourScene.swift */; };
+		C10000016 /* KnotDiagramScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000016 /* KnotDiagramScene.swift */; };
+		C10000017 /* GlacierSurfaceScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000017 /* GlacierSurfaceScene.swift */; };
+		C10000018 /* BodyAssessmentScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000018 /* BodyAssessmentScene.swift */; };
+		C10000019 /* RopeTeamScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000019 /* RopeTeamScene.swift */; };
+		C10000020 /* AnchorSystemScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20000020 /* AnchorSystemScene.swift */; };
+		D10000001 /* ExploreContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000001 /* ExploreContent.swift */; };
+		D10000002 /* ExploreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000002 /* ExploreView.swift */; };
+		D10000003 /* ExploreArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000003 /* ExploreArticleView.swift */; };
+		D10000004 /* ExploreContentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000004 /* ExploreContentData.swift */; };
+		D10000005 /* WeatherExplore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000005 /* WeatherExplore.swift */; };
+		D10000006 /* AvalancheExplore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000006 /* AvalancheExplore.swift */; };
+		D10000007 /* FlyingExplore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000007 /* FlyingExplore.swift */; };
+		D10000008 /* NavigationExplore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000008 /* NavigationExplore.swift */; };
+		D10000009 /* RopeSystemsExplore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000009 /* RopeSystemsExplore.swift */; };
+		D10000010 /* GlacierTravelExplore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000010 /* GlacierTravelExplore.swift */; };
+		D10000011 /* FirstAidExplore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20000011 /* FirstAidExplore.swift */; };
+		E10000001 /* NavigationLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20000001 /* NavigationLessons.swift */; };
+		E10000002 /* RopeSystemsLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20000002 /* RopeSystemsLessons.swift */; };
+		E10000003 /* GlacierTravelLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20000003 /* GlacierTravelLessons.swift */; };
+		E10000004 /* FirstAidLessons.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20000004 /* FirstAidLessons.swift */; };
+		F10000001 /* SwissTopoMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20000001 /* SwissTopoMapView.swift */; };
+		F10000002 /* PhotoPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20000002 /* PhotoPlaceholder.swift */; };
+		F10000003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F20000003 /* Assets.xcassets */; };
+		G10000001 /* LottieAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = G20000001 /* LottieAnimationView.swift */; };
 		G10000002 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = G30000001 /* Lottie */; };
-		G10000003 /* Animations in Resources */ = {isa = PBXBuildFile; fileRef = G20000002; };
-		H10000001 /* RiveAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000001; };
+		G10000003 /* Animations in Resources */ = {isa = PBXBuildFile; fileRef = G20000002 /* Animations */; };
+		H10000001 /* RiveAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000001 /* RiveAnimationView.swift */; };
 		H10000002 /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = H30000001 /* RiveRuntime */; };
-		H10000003 /* IllustrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000003; };
-		H10000004 /* IllustrationRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000004; };
-		H10000005 /* SkyPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000005; };
-		H10000006 /* TerrainPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000006; };
-		H10000007 /* SnowPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000007; };
-		H10000008 /* WeatherPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000008; };
-		H10000009 /* VegetationPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000009; };
-		H10000010 /* EquipmentPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000010; };
-		H10000011 /* HumanPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000011; };
-		H10000012 /* PatternPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000012; };
-		H10000013 /* WeatherIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000013; };
-		H10000014 /* AvalancheIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000014; };
-		H10000015 /* FlyingIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000015; };
-		H10000016 /* NavigationIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000016; };
-		H10000017 /* RopeSystemsIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000017; };
-		H10000018 /* GlacierIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000018; };
-		H10000019 /* FirstAidIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000019; };
-		I10000001 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000001; };
-		I10000002 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000002; };
-		I10000003 /* FieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000003; };
-		I10000004 /* InclinometerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000004; };
-		I10000005 /* CompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000005; };
-		I10000006 /* AltimeterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000006; };
-		I10000007 /* ReductionMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000007; };
-		I10000008 /* ConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000008; };
-		I10000009 /* InstrumentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000009; };
+		H10000003 /* IllustrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000003 /* IllustrationView.swift */; };
+		H10000004 /* IllustrationRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000004 /* IllustrationRegistry.swift */; };
+		H10000005 /* SkyPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000005 /* SkyPrimitives.swift */; };
+		H10000006 /* TerrainPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000006 /* TerrainPrimitives.swift */; };
+		H10000007 /* SnowPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000007 /* SnowPrimitives.swift */; };
+		H10000008 /* WeatherPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000008 /* WeatherPrimitives.swift */; };
+		H10000009 /* VegetationPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000009 /* VegetationPrimitives.swift */; };
+		H10000010 /* EquipmentPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000010 /* EquipmentPrimitives.swift */; };
+		H10000011 /* HumanPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000011 /* HumanPrimitives.swift */; };
+		H10000012 /* PatternPrimitives.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000012 /* PatternPrimitives.swift */; };
+		H10000013 /* WeatherIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000013 /* WeatherIllustrations.swift */; };
+		H10000014 /* AvalancheIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000014 /* AvalancheIllustrations.swift */; };
+		H10000015 /* FlyingIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000015 /* FlyingIllustrations.swift */; };
+		H10000016 /* NavigationIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000016 /* NavigationIllustrations.swift */; };
+		H10000017 /* RopeSystemsIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000017 /* RopeSystemsIllustrations.swift */; };
+		H10000018 /* GlacierIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000018 /* GlacierIllustrations.swift */; };
+		H10000019 /* FirstAidIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = H20000019 /* FirstAidIllustrations.swift */; };
+		I10000001 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000001 /* WeatherData.swift */; };
+		I10000002 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000002 /* WeatherService.swift */; };
+		I10000003 /* FieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000003 /* FieldView.swift */; };
+		I10000004 /* InclinometerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000004 /* InclinometerView.swift */; };
+		I10000005 /* CompassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000005 /* CompassView.swift */; };
+		I10000006 /* AltimeterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000006 /* AltimeterView.swift */; };
+		I10000007 /* ReductionMethodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000007 /* ReductionMethodView.swift */; };
+		I10000008 /* ConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000008 /* ConditionsView.swift */; };
+		I10000009 /* InstrumentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = I20000009 /* InstrumentCard.swift */; };
+		J10000001 /* BulletinData.swift in Sources */ = {isa = PBXBuildFile; fileRef = J20000001 /* BulletinData.swift */; };
+		J10000002 /* TourData.swift in Sources */ = {isa = PBXBuildFile; fileRef = J20000002 /* TourData.swift */; };
+		J10000003 /* BulletinService.swift in Sources */ = {isa = PBXBuildFile; fileRef = J20000003 /* BulletinService.swift */; };
+		J10000004 /* TourStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = J20000004 /* TourStore.swift */; };
+		J10000005 /* BulletinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = J20000005 /* BulletinView.swift */; };
+		J10000006 /* BulletinCardViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = J20000006 /* BulletinCardViews.swift */; };
+		J10000007 /* TourPlannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = J20000007 /* TourPlannerView.swift */; };
+		J10000008 /* TourMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = J20000008 /* TourMapView.swift */; };
+		J10000009 /* TourListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = J20000009 /* TourListView.swift */; };
+		J10000010 /* RiskAssessmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = J20000010 /* RiskAssessmentView.swift */; };
+		K10000001 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = K20000001 /* Activity.swift */; };
+		K10000002 /* ActivityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = K20000002 /* ActivityStore.swift */; };
+		K10000003 /* LearnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = K20000003 /* LearnView.swift */; };
+		K10000004 /* MapTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = K20000004 /* MapTabView.swift */; };
+		K10000005 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = K20000005 /* ProfileView.swift */; };
+		K10000006 /* ActivitySelectorBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = K20000006 /* ActivitySelectorBar.swift */; };
+		L10000001 /* AirspaceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = L20000001 /* AirspaceData.swift */; };
+		L10000002 /* ThermalForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = L20000002 /* ThermalForecast.swift */; };
+		L10000003 /* ActivityLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = L20000003 /* ActivityLog.swift */; };
+		L10000004 /* AirspaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = L20000004 /* AirspaceService.swift */; };
+		L10000005 /* FlightLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = L20000005 /* FlightLogger.swift */; };
+		L10000006 /* ActivityLogStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = L20000006 /* ActivityLogStore.swift */; };
+		L10000007 /* ActivityMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = L20000007 /* ActivityMapView.swift */; };
+		L10000008 /* AirspaceOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = L20000008 /* AirspaceOverlay.swift */; };
+		L10000009 /* PreFlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = L20000009 /* PreFlightView.swift */; };
+		L10000010 /* FlightLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = L20000010 /* FlightLogView.swift */; };
+		M10000001 /* ActivitySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = M20000001 /* ActivitySource.swift */; };
+		M10000002 /* PostTripReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = M20000002 /* PostTripReview.swift */; };
+		M10000003 /* MergedActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = M20000003 /* MergedActivity.swift */; };
+		M10000004 /* ActivityFileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = M20000004 /* ActivityFileStore.swift */; };
+		N10000001 /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = N20000001 /* HealthKitService.swift */; };
+		N10000002 /* HealthKitConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = N20000002 /* HealthKitConnectionView.swift */; };
+		N10000003 /* ImportProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = N20000003 /* ImportProgressView.swift */; };
+		O10000001 /* XContestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = O20000001 /* XContestService.swift */; };
+		O10000002 /* IGCParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = O20000002 /* IGCParser.swift */; };
+		O10000003 /* IGCImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = O20000003 /* IGCImporter.swift */; };
+		O10000004 /* MergeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = O20000004 /* MergeEngine.swift */; };
+		O10000005 /* MergeSuggestionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = O20000005 /* MergeSuggestionCard.swift */; };
+		O10000006 /* XContestConnectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = O20000006 /* XContestConnectionView.swift */; };
+		P10000001 /* HazardContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = P20000001 /* HazardContent.swift */; };
+		P10000002 /* PostTripReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = P20000002 /* PostTripReviewView.swift */; };
+		P10000003 /* ReviewStepViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = P20000003 /* ReviewStepViews.swift */; };
+		P10000004 /* LogbookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = P20000004 /* LogbookView.swift */; };
+		P10000005 /* ActivityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = P20000005 /* ActivityDetailView.swift */; };
+		P10000006 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = P20000006 /* StatsView.swift */; };
+		Q10000001 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = Q20000001 /* HomeView.swift */; };
+		R10000001 /* LaunchSiteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = R20000001 /* LaunchSiteData.swift */; };
+		R10000002 /* ParaglidingEarthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = R20000002 /* ParaglidingEarthService.swift */; };
+		S10000001 /* DangerRegionOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = S20000001 /* DangerRegionOverlay.swift */; };
+		T10000001 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = T20000001 /* LocationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -252,6 +303,56 @@
 		I20000007 /* ReductionMethodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReductionMethodView.swift; sourceTree = "<group>"; };
 		I20000008 /* ConditionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionsView.swift; sourceTree = "<group>"; };
 		I20000009 /* InstrumentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentCard.swift; sourceTree = "<group>"; };
+		J20000001 /* BulletinData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinData.swift; sourceTree = "<group>"; };
+		J20000002 /* TourData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourData.swift; sourceTree = "<group>"; };
+		J20000003 /* BulletinService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinService.swift; sourceTree = "<group>"; };
+		J20000004 /* TourStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourStore.swift; sourceTree = "<group>"; };
+		J20000005 /* BulletinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinView.swift; sourceTree = "<group>"; };
+		J20000006 /* BulletinCardViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletinCardViews.swift; sourceTree = "<group>"; };
+		J20000007 /* TourPlannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourPlannerView.swift; sourceTree = "<group>"; };
+		J20000008 /* TourMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourMapView.swift; sourceTree = "<group>"; };
+		J20000009 /* TourListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourListView.swift; sourceTree = "<group>"; };
+		J20000010 /* RiskAssessmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskAssessmentView.swift; sourceTree = "<group>"; };
+		K20000001 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		K20000002 /* ActivityStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityStore.swift; sourceTree = "<group>"; };
+		K20000003 /* LearnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnView.swift; sourceTree = "<group>"; };
+		K20000004 /* MapTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabView.swift; sourceTree = "<group>"; };
+		K20000005 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		K20000006 /* ActivitySelectorBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySelectorBar.swift; sourceTree = "<group>"; };
+		L20000001 /* AirspaceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirspaceData.swift; sourceTree = "<group>"; };
+		L20000002 /* ThermalForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThermalForecast.swift; sourceTree = "<group>"; };
+		L20000003 /* ActivityLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLog.swift; sourceTree = "<group>"; };
+		L20000004 /* AirspaceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirspaceService.swift; sourceTree = "<group>"; };
+		L20000005 /* FlightLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightLogger.swift; sourceTree = "<group>"; };
+		L20000006 /* ActivityLogStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLogStore.swift; sourceTree = "<group>"; };
+		L20000007 /* ActivityMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityMapView.swift; sourceTree = "<group>"; };
+		L20000008 /* AirspaceOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirspaceOverlay.swift; sourceTree = "<group>"; };
+		L20000009 /* PreFlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreFlightView.swift; sourceTree = "<group>"; };
+		L20000010 /* FlightLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightLogView.swift; sourceTree = "<group>"; };
+		M20000001 /* ActivitySource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitySource.swift; sourceTree = "<group>"; };
+		M20000002 /* PostTripReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTripReview.swift; sourceTree = "<group>"; };
+		M20000003 /* MergedActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergedActivity.swift; sourceTree = "<group>"; };
+		M20000004 /* ActivityFileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFileStore.swift; sourceTree = "<group>"; };
+		N20000001 /* HealthKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitService.swift; sourceTree = "<group>"; };
+		N20000002 /* HealthKitConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitConnectionView.swift; sourceTree = "<group>"; };
+		N20000003 /* ImportProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportProgressView.swift; sourceTree = "<group>"; };
+		O20000001 /* XContestService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XContestService.swift; sourceTree = "<group>"; };
+		O20000002 /* IGCParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGCParser.swift; sourceTree = "<group>"; };
+		O20000003 /* IGCImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGCImporter.swift; sourceTree = "<group>"; };
+		O20000004 /* MergeEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeEngine.swift; sourceTree = "<group>"; };
+		O20000005 /* MergeSuggestionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeSuggestionCard.swift; sourceTree = "<group>"; };
+		O20000006 /* XContestConnectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XContestConnectionView.swift; sourceTree = "<group>"; };
+		P20000001 /* HazardContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HazardContent.swift; sourceTree = "<group>"; };
+		P20000002 /* PostTripReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTripReviewView.swift; sourceTree = "<group>"; };
+		P20000003 /* ReviewStepViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewStepViews.swift; sourceTree = "<group>"; };
+		P20000004 /* LogbookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookView.swift; sourceTree = "<group>"; };
+		P20000005 /* ActivityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailView.swift; sourceTree = "<group>"; };
+		P20000006 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		Q20000001 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		R20000001 /* LaunchSiteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchSiteData.swift; sourceTree = "<group>"; };
+		R20000002 /* ParaglidingEarthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParaglidingEarthService.swift; sourceTree = "<group>"; };
+		S20000001 /* DangerRegionOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerRegionOverlay.swift; sourceTree = "<group>"; };
+		T20000001 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,6 +403,16 @@
 				B20000003 /* GamificationState.swift */,
 				D20000001 /* ExploreContent.swift */,
 				I20000001 /* WeatherData.swift */,
+				J20000001 /* BulletinData.swift */,
+				J20000002 /* TourData.swift */,
+				K20000001 /* Activity.swift */,
+				L20000001 /* AirspaceData.swift */,
+				L20000002 /* ThermalForecast.swift */,
+				L20000003 /* ActivityLog.swift */,
+				M20000001 /* ActivitySource.swift */,
+				M20000002 /* PostTripReview.swift */,
+				M20000003 /* MergedActivity.swift */,
+				R20000001 /* LaunchSiteData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -313,6 +424,7 @@
 				A20000007 /* MasteryEngine.swift */,
 				A20000008 /* CardGenerator.swift */,
 				B20000004 /* GamificationEngine.swift */,
+				O20000004 /* MergeEngine.swift */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -330,50 +442,31 @@
 				E20000003 /* GlacierTravelLessons.swift */,
 				E20000004 /* FirstAidLessons.swift */,
 				B20000008 /* LessonContentData.swift */,
+				P20000001 /* HazardContent.swift */,
 				C50000001 /* Explore */,
 			);
 			path = Content;
 			sourceTree = "<group>";
 		};
-		C50000001 /* Explore */ = {
-			isa = PBXGroup;
-			children = (
-				D20000004 /* ExploreContentData.swift */,
-				D20000005 /* WeatherExplore.swift */,
-				D20000006 /* AvalancheExplore.swift */,
-				D20000007 /* FlyingExplore.swift */,
-				D20000008 /* NavigationExplore.swift */,
-				D20000009 /* RopeSystemsExplore.swift */,
-				D20000010 /* GlacierTravelExplore.swift */,
-				D20000011 /* FirstAidExplore.swift */,
-			);
-			path = Explore;
-			sourceTree = "<group>";
-		};
 		A50000006 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				Q50000001 /* Home */,
+				K50000001 /* Map */,
+				A50000008 /* Learn */,
+				I50000001 /* Field */,
+				K50000002 /* Profile */,
+				L50000001 /* Activity */,
 				A50000007 /* Dashboard */,
 				A50000011 /* Review */,
-				A50000008 /* Learn */,
 				D50000001 /* Explore */,
 				A50000012 /* Settings */,
-				I50000001 /* Field */,
 				B50000001 /* Diagrams */,
 				B50000002 /* Practice */,
 				B50000003 /* Components */,
 				H50000001 /* Illustrations */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		D50000001 /* Explore */ = {
-			isa = PBXGroup;
-			children = (
-				D20000002 /* ExploreView.swift */,
-				D20000003 /* ExploreArticleView.swift */,
-			);
-			path = Explore;
 			sourceTree = "<group>";
 		};
 		A50000007 /* Dashboard */ = {
@@ -387,6 +480,7 @@
 		A50000008 /* Learn */ = {
 			isa = PBXGroup;
 			children = (
+				K20000003 /* LearnView.swift */,
 				A20000015 /* DomainListView.swift */,
 				A20000016 /* ModuleDetailView.swift */,
 				A20000017 /* ScenarioView.swift */,
@@ -405,6 +499,19 @@
 				A20000011 /* KnowledgeStore.swift */,
 				A20000012 /* NotificationService.swift */,
 				I20000002 /* WeatherService.swift */,
+				J20000003 /* BulletinService.swift */,
+				J20000004 /* TourStore.swift */,
+				K20000002 /* ActivityStore.swift */,
+				L20000004 /* AirspaceService.swift */,
+				L20000005 /* FlightLogger.swift */,
+				L20000006 /* ActivityLogStore.swift */,
+				M20000004 /* ActivityFileStore.swift */,
+				N20000001 /* HealthKitService.swift */,
+				O20000001 /* XContestService.swift */,
+				O20000002 /* IGCParser.swift */,
+				O20000003 /* IGCImporter.swift */,
+				R20000002 /* ParaglidingEarthService.swift */,
+				T20000001 /* LocationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -429,6 +536,8 @@
 			isa = PBXGroup;
 			children = (
 				A20000018 /* SettingsView.swift */,
+				N20000002 /* HealthKitConnectionView.swift */,
+				O20000006 /* XContestConnectionView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -448,33 +557,6 @@
 				C50000002 /* Scenes */,
 			);
 			path = Diagrams;
-			sourceTree = "<group>";
-		};
-		C50000002 /* Scenes */ = {
-			isa = PBXGroup;
-			children = (
-				C20000001 /* CloudShapes.swift */,
-				C20000002 /* SceneRenderer.swift */,
-				C20000003 /* DefaultScene.swift */,
-				C20000004 /* CumulusScene.swift */,
-				C20000005 /* LenticularScene.swift */,
-				C20000006 /* CumulonimbusScene.swift */,
-				C20000007 /* CloudStreetScene.swift */,
-				C20000008 /* DyingVsBuildingScene.swift */,
-				C20000009 /* MountainCloudOverviewScene.swift */,
-				C20000010 /* SurfaceTypesScene.swift */,
-				C20000011 /* TerrainTrapCrossSectionScene.swift */,
-				C20000012 /* GullyComparisonScene.swift */,
-				C20000013 /* CliffBandScene.swift */,
-				C20000014 /* ForestTerrainScene.swift */,
-				C20000015 /* MapContourScene.swift */,
-				C20000016 /* KnotDiagramScene.swift */,
-				C20000017 /* GlacierSurfaceScene.swift */,
-				C20000018 /* BodyAssessmentScene.swift */,
-				C20000019 /* RopeTeamScene.swift */,
-				C20000020 /* AnchorSystemScene.swift */,
-			);
-			path = Scenes;
 			sourceTree = "<group>";
 		};
 		B50000002 /* Practice */ = {
@@ -504,8 +586,60 @@
 				F20000002 /* PhotoPlaceholder.swift */,
 				G20000001 /* LottieAnimationView.swift */,
 				H20000001 /* RiveAnimationView.swift */,
+				K20000006 /* ActivitySelectorBar.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		C50000001 /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				D20000004 /* ExploreContentData.swift */,
+				D20000005 /* WeatherExplore.swift */,
+				D20000006 /* AvalancheExplore.swift */,
+				D20000007 /* FlyingExplore.swift */,
+				D20000008 /* NavigationExplore.swift */,
+				D20000009 /* RopeSystemsExplore.swift */,
+				D20000010 /* GlacierTravelExplore.swift */,
+				D20000011 /* FirstAidExplore.swift */,
+			);
+			path = Explore;
+			sourceTree = "<group>";
+		};
+		C50000002 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				C20000001 /* CloudShapes.swift */,
+				C20000002 /* SceneRenderer.swift */,
+				C20000003 /* DefaultScene.swift */,
+				C20000004 /* CumulusScene.swift */,
+				C20000005 /* LenticularScene.swift */,
+				C20000006 /* CumulonimbusScene.swift */,
+				C20000007 /* CloudStreetScene.swift */,
+				C20000008 /* DyingVsBuildingScene.swift */,
+				C20000009 /* MountainCloudOverviewScene.swift */,
+				C20000010 /* SurfaceTypesScene.swift */,
+				C20000011 /* TerrainTrapCrossSectionScene.swift */,
+				C20000012 /* GullyComparisonScene.swift */,
+				C20000013 /* CliffBandScene.swift */,
+				C20000014 /* ForestTerrainScene.swift */,
+				C20000015 /* MapContourScene.swift */,
+				C20000016 /* KnotDiagramScene.swift */,
+				C20000017 /* GlacierSurfaceScene.swift */,
+				C20000018 /* BodyAssessmentScene.swift */,
+				C20000019 /* RopeTeamScene.swift */,
+				C20000020 /* AnchorSystemScene.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		D50000001 /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				D20000002 /* ExploreView.swift */,
+				D20000003 /* ExploreArticleView.swift */,
+			);
+			path = Explore;
 			sourceTree = "<group>";
 		};
 		H50000001 /* Illustrations */ = {
@@ -558,8 +692,57 @@
 				I20000007 /* ReductionMethodView.swift */,
 				I20000008 /* ConditionsView.swift */,
 				I20000009 /* InstrumentCard.swift */,
+				J20000005 /* BulletinView.swift */,
+				J20000006 /* BulletinCardViews.swift */,
+				J20000007 /* TourPlannerView.swift */,
+				J20000008 /* TourMapView.swift */,
+				J20000009 /* TourListView.swift */,
+				J20000010 /* RiskAssessmentView.swift */,
 			);
 			path = Field;
+			sourceTree = "<group>";
+		};
+		K50000001 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				K20000004 /* MapTabView.swift */,
+				L20000007 /* ActivityMapView.swift */,
+				L20000008 /* AirspaceOverlay.swift */,
+				S20000001 /* DangerRegionOverlay.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		K50000002 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				K20000005 /* ProfileView.swift */,
+				P20000004 /* LogbookView.swift */,
+				P20000006 /* StatsView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		L50000001 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				L20000009 /* PreFlightView.swift */,
+				L20000010 /* FlightLogView.swift */,
+				N20000003 /* ImportProgressView.swift */,
+				O20000005 /* MergeSuggestionCard.swift */,
+				P20000002 /* PostTripReviewView.swift */,
+				P20000003 /* ReviewStepViews.swift */,
+				P20000005 /* ActivityDetailView.swift */,
+			);
+			path = Activity;
+			sourceTree = "<group>";
+		};
+		Q50000001 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				Q20000001 /* HomeView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -622,6 +805,18 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		G50000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				G10000003 /* Animations in Resources */,
+				F10000003 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A70000001 /* Sources */ = {
@@ -746,21 +941,60 @@
 				I10000007 /* ReductionMethodView.swift in Sources */,
 				I10000008 /* ConditionsView.swift in Sources */,
 				I10000009 /* InstrumentCard.swift in Sources */,
+				J10000001 /* BulletinData.swift in Sources */,
+				J10000002 /* TourData.swift in Sources */,
+				J10000003 /* BulletinService.swift in Sources */,
+				J10000004 /* TourStore.swift in Sources */,
+				J10000005 /* BulletinView.swift in Sources */,
+				J10000006 /* BulletinCardViews.swift in Sources */,
+				J10000007 /* TourPlannerView.swift in Sources */,
+				J10000008 /* TourMapView.swift in Sources */,
+				J10000009 /* TourListView.swift in Sources */,
+				J10000010 /* RiskAssessmentView.swift in Sources */,
+				K10000001 /* Activity.swift in Sources */,
+				K10000002 /* ActivityStore.swift in Sources */,
+				K10000003 /* LearnView.swift in Sources */,
+				K10000004 /* MapTabView.swift in Sources */,
+				K10000005 /* ProfileView.swift in Sources */,
+				K10000006 /* ActivitySelectorBar.swift in Sources */,
+				L10000001 /* AirspaceData.swift in Sources */,
+				L10000002 /* ThermalForecast.swift in Sources */,
+				L10000003 /* ActivityLog.swift in Sources */,
+				L10000004 /* AirspaceService.swift in Sources */,
+				L10000005 /* FlightLogger.swift in Sources */,
+				L10000006 /* ActivityLogStore.swift in Sources */,
+				L10000007 /* ActivityMapView.swift in Sources */,
+				L10000008 /* AirspaceOverlay.swift in Sources */,
+				L10000009 /* PreFlightView.swift in Sources */,
+				L10000010 /* FlightLogView.swift in Sources */,
+				M10000001 /* ActivitySource.swift in Sources */,
+				M10000002 /* PostTripReview.swift in Sources */,
+				M10000003 /* MergedActivity.swift in Sources */,
+				M10000004 /* ActivityFileStore.swift in Sources */,
+				N10000001 /* HealthKitService.swift in Sources */,
+				N10000002 /* HealthKitConnectionView.swift in Sources */,
+				N10000003 /* ImportProgressView.swift in Sources */,
+				O10000001 /* XContestService.swift in Sources */,
+				O10000002 /* IGCParser.swift in Sources */,
+				O10000003 /* IGCImporter.swift in Sources */,
+				O10000004 /* MergeEngine.swift in Sources */,
+				O10000005 /* MergeSuggestionCard.swift in Sources */,
+				O10000006 /* XContestConnectionView.swift in Sources */,
+				P10000001 /* HazardContent.swift in Sources */,
+				P10000002 /* PostTripReviewView.swift in Sources */,
+				P10000003 /* ReviewStepViews.swift in Sources */,
+				P10000004 /* LogbookView.swift in Sources */,
+				P10000005 /* ActivityDetailView.swift in Sources */,
+				P10000006 /* StatsView.swift in Sources */,
+				Q10000001 /* HomeView.swift in Sources */,
+				R10000001 /* LaunchSiteData.swift in Sources */,
+				R10000002 /* ParaglidingEarthService.swift in Sources */,
+				S10000001 /* DangerRegionOverlay.swift in Sources */,
+				T10000001 /* LocationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXResourcesBuildPhase section */
-		G50000001 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				G10000003 /* Animations in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
 		A80000101 /* Debug */ = {
@@ -887,16 +1121,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MountainGuide/MountainGuide.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2JQ92FGH4S;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "MountainGuide reads your workouts to track mountain activities and award XP.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "MountainGuide uses your location for local weather, compass heading, GPS altitude, and flight tracking.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -915,16 +1152,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MountainGuide/MountainGuide.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2JQ92FGH4S;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "MountainGuide reads your workouts to track mountain activities and award XP.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "MountainGuide uses your location for local weather, compass heading, GPS altitude, and flight tracking.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -992,7 +1232,6 @@
 			productName = RiveRuntime;
 		};
 /* End XCSwiftPackageProductDependency section */
-
 	};
 	rootObject = A90000001 /* Project object */;
 }

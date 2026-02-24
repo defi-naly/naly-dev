@@ -172,6 +172,23 @@ struct RevealItem: Codable, Identifiable {
     let y: CGFloat
 }
 
+// MARK: - Map Configuration
+
+struct MapPinData: Codable, Identifiable {
+    let id: String
+    let lat: Double
+    let lon: Double
+    let label: String
+}
+
+struct MapConfig: Codable {
+    let centerLat: Double
+    let centerLon: Double
+    let spanLat: Double
+    let spanLon: Double
+    let pins: [MapPinData]?
+}
+
 // MARK: - Teaching Step
 
 struct TeachingStep: Codable, Identifiable {
@@ -182,6 +199,30 @@ struct TeachingStep: Codable, Identifiable {
     let diagramConfig: DiagramConfig
     let interactionHint: String?
     let revealItems: [RevealItem]?
+    let mapConfig: MapConfig?
+    let animationName: String?
+
+    init(
+        id: String,
+        headline: String,
+        body: String,
+        diagramType: DiagramType,
+        diagramConfig: DiagramConfig,
+        interactionHint: String? = nil,
+        revealItems: [RevealItem]? = nil,
+        mapConfig: MapConfig? = nil,
+        animationName: String? = nil
+    ) {
+        self.id = id
+        self.headline = headline
+        self.body = body
+        self.diagramType = diagramType
+        self.diagramConfig = diagramConfig
+        self.interactionHint = interactionHint
+        self.revealItems = revealItems
+        self.mapConfig = mapConfig
+        self.animationName = animationName
+    }
 }
 
 // MARK: - Concept Map Node

@@ -62,7 +62,7 @@ function createNoise3D(seed = 42) {
 
 /* ── Enneper Minimal Surface ── */
 
-const SEGMENTS = 64;       // resolution in each direction
+const SEGMENTS = 56;       // compromise: 64 was overkill, 48 too coarse
 const RANGE = 1.6;         // parameter range [-R, R] — controls ruffle amount
 const SCALE = 0.7;         // smaller to fit hero
 
@@ -113,6 +113,7 @@ const BloomScene = () => {
   const meshRef = useRef<THREE.Mesh>(null);
   const noise3D = useMemo(() => createNoise3D(55), []);
   const timeRef = useRef(0);
+  const frameCount = useRef(0);
 
   const baseGeo = useMemo(() => createEnneperGeometry(), []);
 
@@ -125,13 +126,16 @@ const BloomScene = () => {
   useFrame((_, delta) => {
     if (!meshRef.current) return;
     timeRef.current += delta;
-    const time = timeRef.current;
+    frameCount.current += 1;
 
-    // Full rotation across Y and Z
+    // Rotation runs every frame (cheap, keeps it smooth)
     meshRef.current.rotation.y += delta * 0.1;
     meshRef.current.rotation.z -= delta * 0.12;
 
-    // Subtle noise-driven vertex drift — organic breathing
+    // Vertex displacement only every 3rd frame (~20fps breathing)
+    if (frameCount.current % 3 !== 0) return;
+
+    const time = timeRef.current;
     const pos = baseGeo.attributes.position as THREE.BufferAttribute;
     const arr = pos.array as Float32Array;
     const noiseAmp = 0.04;
@@ -174,7 +178,7 @@ const WireframeMesh = () => {
         camera={{ position: [0, 0, 10], fov: 50 }}
         style={{ touchAction: 'none', background: 'transparent' }}
         gl={{ alpha: true, antialias: true }}
-        dpr={[1, 1.5]}
+        dpr={[1, 2]}
       >
         <BloomScene />
       </Canvas>

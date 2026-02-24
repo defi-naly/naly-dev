@@ -24,7 +24,18 @@ enum NavigationLessons {
                     animationStyle: "fade"
                 ),
                 interactionHint: "Tap hotspots to explore map features",
-                revealItems: nil
+                revealItems: nil,
+                mapConfig: MapConfig(
+                    centerLat: 46.5365,
+                    centerLon: 7.9615,
+                    spanLat: 0.05,
+                    spanLon: 0.05,
+                    pins: [
+                        MapPinData(id: "jungfrau", lat: 46.5365, lon: 7.9615, label: "Jungfrau 4,158m"),
+                        MapPinData(id: "kleine-scheidegg", lat: 46.5853, lon: 7.9611, label: "Kleine Scheidegg 2,061m"),
+                        MapPinData(id: "eiger", lat: 46.5775, lon: 8.0053, label: "Eiger 3,967m")
+                    ]
+                )
             ),
             TeachingStep(
                 id: "map-2",
@@ -154,7 +165,18 @@ enum NavigationLessons {
                     animationStyle: "fade"
                 ),
                 interactionHint: "Tap compass parts to learn their function",
-                revealItems: nil
+                revealItems: nil,
+                mapConfig: MapConfig(
+                    centerLat: 45.9766,
+                    centerLon: 7.6585,
+                    spanLat: 0.04,
+                    spanLon: 0.04,
+                    pins: [
+                        MapPinData(id: "matterhorn", lat: 45.9766, lon: 7.6585, label: "Matterhorn 4,478m"),
+                        MapPinData(id: "hornli-hut", lat: 45.9833, lon: 7.6667, label: "Hörnlihütte 3,260m"),
+                        MapPinData(id: "zermatt", lat: 46.0207, lon: 7.7491, label: "Zermatt 1,608m")
+                    ]
+                )
             ),
             TeachingStep(
                 id: "compass-2",
@@ -429,7 +451,18 @@ enum NavigationLessons {
                     currentValue: 5
                 ),
                 interactionHint: "Drag to estimate trip duration by conditions",
-                revealItems: nil
+                revealItems: nil,
+                mapConfig: MapConfig(
+                    centerLat: 46.56,
+                    centerLon: 7.90,
+                    spanLat: 0.08,
+                    spanLon: 0.08,
+                    pins: [
+                        MapPinData(id: "grindelwald", lat: 46.6243, lon: 8.0413, label: "Grindelwald 1,034m"),
+                        MapPinData(id: "lauterbrunnen", lat: 46.5936, lon: 7.9086, label: "Lauterbrunnen 795m"),
+                        MapPinData(id: "schilthorn", lat: 46.5586, lon: 7.8350, label: "Schilthorn 2,970m")
+                    ]
+                )
             ),
             TeachingStep(
                 id: "route-2",
@@ -979,7 +1012,18 @@ enum NavigationLessons {
                     animationStyle: "sequential"
                 ),
                 interactionHint: nil,
-                revealItems: nil
+                revealItems: nil,
+                mapConfig: MapConfig(
+                    centerLat: 46.55,
+                    centerLon: 7.93,
+                    spanLat: 0.06,
+                    spanLon: 0.06,
+                    pins: [
+                        MapPinData(id: "konkordia", lat: 46.4958, lon: 7.9479, label: "Konkordiaplatz 2,857m"),
+                        MapPinData(id: "jungfraujoch", lat: 46.5472, lon: 7.9853, label: "Jungfraujoch 3,466m"),
+                        MapPinData(id: "finsteraarhorn", lat: 46.5372, lon: 8.1261, label: "Finsteraarhorn 4,274m")
+                    ]
+                )
             ),
             TeachingStep(
                 id: "white-2",

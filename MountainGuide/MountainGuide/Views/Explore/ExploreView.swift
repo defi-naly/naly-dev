@@ -44,7 +44,6 @@ struct ExploreView: View {
             .background(Color.terminalBg)
             .navigationTitle("Explore")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbarColorScheme(.dark, for: .navigationBar)
         }
     }
 

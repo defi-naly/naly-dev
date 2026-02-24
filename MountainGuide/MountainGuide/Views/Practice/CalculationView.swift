@@ -43,7 +43,7 @@ struct CalculationView: View {
                 } label: {
                     Text("Check")
                         .font(.mono(14, weight: .bold))
-                        .foregroundStyle(Color.terminalBg)
+                        .foregroundStyle(.white)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 14)
                         .background(Color.amber)

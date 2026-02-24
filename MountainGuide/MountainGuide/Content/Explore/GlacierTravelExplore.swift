@@ -25,6 +25,8 @@ enum GlacierTravelExplore {
         title: "Glacier Anatomy",
         summary: "A glacier is a river of ice shaped by gravity, climate, and the terrain it flows through. Understanding its zones, features, and internal structure is the foundation for every decision you make on glaciated terrain.",
         icon: "mountain.2.fill",
+        heroImageName: "Photos/Heroes/hero-glacier-anatomy",
+        heroImageCaption: "Alpine glacier showing accumulation and ablation zones",
         sections: [
             ExploreSection(
                 id: "glacier-anatomy-1",
@@ -68,6 +70,8 @@ enum GlacierTravelExplore {
                 id: "glacier-anatomy-3",
                 heading: "Bergschrund, Randkluft, and Terminus",
                 body: "Three features mark the boundaries of a glacier. The bergschrund is a crevasse that forms where the glacier pulls away from the headwall at the top of its cirque. It can be meters wide and tens of meters deep, and it often presents a serious route-finding obstacle on summit approaches. The randkluft is a gap between the glacier and the rock on its sides, formed by differential heating of the rock. Both features tend to open wider as the season progresses and the glacier thins. At the lower end, the terminus is where the glacier ends, often marked by a snout of dirty, debris-laden ice and a pile of terminal moraine. The terminus zone is unstable: ice collapses, rockfall is common, and meltwater streams can undercut the ice, creating hidden cavities.",
+                imageName: "Photos/glacier-bergschrund",
+                imageCaption: "Bergschrund crevasse separating glacier from headwall",
                 diagram: nil,
                 keyFacts: [
                     "The bergschrund separates moving glacier ice from the static snow and ice on the headwall",
@@ -81,6 +85,9 @@ enum GlacierTravelExplore {
                 id: "glacier-anatomy-4",
                 heading: "Glacial Movement and Flow",
                 body: "Glaciers move through a combination of internal deformation and basal sliding. Internal deformation occurs as the weight of overlying ice causes the crystals to creep and recrystallize, with the upper layers moving faster than the lower layers. Basal sliding occurs when meltwater lubricates the interface between the glacier and its bed, allowing the entire mass to slide forward. Flow rates vary enormously: a few centimeters per day on a small alpine glacier to several meters per day on a fast-moving tidewater glacier. The center of a glacier moves faster than the edges due to friction against the valley walls. This differential flow is what opens marginal crevasses, which angle upstream at roughly 45 degrees from the glacier's edge.",
+                imageName: "Photos/glacier-flow-patterns",
+                imageCaption: "Glacier surface showing differential flow patterns",
+                animationName: "anim-glacier-flow",
                 diagram: nil,
                 keyFacts: [
                     "Glacier flow combines internal deformation (crystal creep) and basal sliding",
@@ -112,11 +119,15 @@ enum GlacierTravelExplore {
         title: "Crevasse Identification",
         summary: "Crevasses are fractures in the glacier surface caused by tensile stress as ice flows over and around obstacles. Learning to read their types, patterns, and hidden indicators is the most critical visual skill in glacier travel.",
         icon: "line.diagonal",
+        heroImageName: "Photos/Heroes/hero-glacier-crevasse-id",
+        heroImageCaption: "Crevasse field with transverse fractures on a glacier surface",
         sections: [
             ExploreSection(
                 id: "crevasse-id-1",
                 heading: "Transverse and Longitudinal Crevasses",
                 body: "Transverse crevasses run perpendicular to the direction of glacier flow. They open wherever the glacier accelerates, typically where the bed steepens or drops over a step. The ice stretches longitudinally, and because the upper 30 meters of ice is brittle, it fractures. Transverse crevasses are the most common type encountered on glacier travel and often span the entire width of the glacier. Longitudinal crevasses run parallel to the direction of flow and form where the glacier spreads laterally, such as where a valley widens or where the glacier emerges from a narrow constriction onto a broad plain. Both types can be tens of meters deep and meters wide, though the practical danger limit is the upper 30 meters where brittle fracture dominates.",
+                imageName: "Photos/glacier-crevasse-field",
+                imageCaption: "Crevasse field on a glacier surface",
                 diagram: ExploreDiagram(
                     type: .labeledScene,
                     config: DiagramConfig(
@@ -140,6 +151,8 @@ enum GlacierTravelExplore {
                 id: "crevasse-id-2",
                 heading: "Marginal Crevasses and Chevron Patterns",
                 body: "Marginal crevasses form along the edges of a glacier where friction against the valley walls slows the ice relative to the faster-moving center. They angle upstream at roughly 45 degrees from the glacier margin, creating a distinctive chevron pattern that points up-valley. Marginal crevasses are typically shorter and shallower than transverse crevasses, but they are a consistent hazard when traveling near the glacier's edge or ascending lateral moraines. Where marginal crevasses intersect transverse crevasses, the ice becomes highly fractured and chaotic, forming seracs and ice towers. These intersection zones are among the most dangerous terrain on a glacier and should be avoided entirely when possible.",
+                imageName: "Photos/glacier-marginal-crevasse",
+                imageCaption: "Marginal crevasses angling upstream along glacier edge",
                 diagram: nil,
                 keyFacts: [
                     "Marginal crevasses angle upstream at ~45 degrees from the glacier edge",
@@ -153,6 +166,8 @@ enum GlacierTravelExplore {
                 id: "crevasse-id-3",
                 heading: "Hidden Crevasses and Snow Bridges",
                 body: "The most dangerous crevasses are the ones you cannot see. In the accumulation zone and after fresh snowfall, crevasses become hidden beneath snow bridges. A snow bridge forms when wind-blown or falling snow spans the gap, creating a surface that may look identical to solid glacier. Snow bridges vary enormously in strength: a thick bridge formed in mid-winter may support a truck; a thin bridge in late summer may collapse under a single footstep. Visual clues to hidden crevasses include subtle linear depressions in the snow surface, slight color changes where the snow is thinner over a void, and sagging or drooping of the snow surface. In whiteout conditions, these subtle clues become invisible, which is why glacier travel in poor visibility is extremely dangerous.",
+                imageName: "Photos/glacier-snow-bridge",
+                imageCaption: "Snow bridge spanning a hidden crevasse",
                 diagram: nil,
                 keyFacts: [
                     "Snow bridges can look identical to solid glacier surface",
@@ -198,11 +213,15 @@ enum GlacierTravelExplore {
         title: "Rope Team Travel",
         summary: "The rope team is your primary safety system on a glacier. Proper spacing, coiling, communication, and coordinated movement transform a crevasse fall from a fatal event into a manageable one.",
         icon: "link",
+        heroImageName: "Photos/Heroes/hero-glacier-rope-team",
+        heroImageCaption: "Rope team traversing a glaciated alpine ridge",
         sections: [
             ExploreSection(
                 id: "rope-team-1",
                 heading: "Team Size and Rope Spacing",
                 body: "A two-person rope team is the minimum for glacier travel. The partner must self-arrest and hold the fall alone, which is demanding but workable with a solid arrest position and firm snow. A three-person team is safer: two people share the arrest load, and there is redundancy if one person is injured or pulled off balance. Three is widely considered the ideal number for glacier travel by AMGA and Freedom of the Hills standards. Spacing depends on team size and terrain: 10-15 meters between members on a two-person team, 8-12 meters on a three-person team. Too little rope between climbers means insufficient friction on the crevasse lip to slow the fall. Too much rope means more slack to take up before the arrest engages.",
+                imageName: "Photos/glacier-rope-team",
+                imageCaption: "Rope team crossing a glacier",
                 diagram: ExploreDiagram(
                     type: .labeledScene,
                     config: DiagramConfig(
@@ -227,6 +246,8 @@ enum GlacierTravelExplore {
                 id: "rope-team-2",
                 heading: "Carrying Coils and Kiwi Coils",
                 body: "Each climber on a glacier rope team carries several coils of extra rope wrapped around their torso, called kiwi coils or body coils. These serve two critical functions. First, they absorb the initial shock of a crevasse fall, providing a few meters of stretch as the coils pay out before the rope comes tight between climbers. Second, they provide extra rope that the fallen climber can use for self-rescue or that the surface team can use for hauling. Typically, each climber carries 3-5 coils. The coils are tied off with a figure-eight on a bight clipped to the harness with a locking carabiner, so they can be released under load if needed. The remaining rope between climbers should be kept taut during travel to minimize fall distance.",
+                imageName: "Photos/glacier-kiwi-coils",
+                imageCaption: "Climber carrying kiwi coils wrapped around torso",
                 diagram: nil,
                 keyFacts: [
                     "Kiwi coils absorb initial fall shock and provide rescue rope",
@@ -254,6 +275,8 @@ enum GlacierTravelExplore {
                 id: "rope-team-4",
                 heading: "Movement Techniques on Rope",
                 body: "Rope team movement requires coordination and discipline. All members move simultaneously, maintaining a taut rope at all times. The leader sets the pace and route, probing suspect areas. When the leader stops to probe, the team stops. When changing direction, the team adjusts to keep the rope from crossing crevasses at an angle that could drag multiple members in. On steeper terrain or in heavily crevassed zones, the team may switch to running belays or even pitched travel, where one person moves while the others provide a belay from an anchor. The transition from simultaneous travel to belayed travel is a judgment call that depends on crevasse density, snow bridge condition, and consequence of a fall. Always err on the side of slowing down.",
+                imageName: "Photos/glacier-simultaneous-travel",
+                imageCaption: "Rope team moving simultaneously across glacier terrain",
                 diagram: nil,
                 keyFacts: [
                     "Simultaneous travel with a taut rope is the default movement technique",
@@ -285,11 +308,15 @@ enum GlacierTravelExplore {
         title: "Probe Techniques",
         summary: "Probing is the primary method for detecting hidden crevasses and assessing snow bridge strength. Systematic probing techniques and route wanding turn invisible hazards into manageable risks.",
         icon: "arrow.down.to.line",
+        heroImageName: "Photos/Heroes/hero-glacier-probe",
+        heroImageCaption: "Mountaineer probing snow surface ahead of rope team",
         sections: [
             ExploreSection(
                 id: "probe-techniques-1",
                 heading: "Probing for Hidden Crevasses",
                 body: "Probing uses a long, stiff pole or collapsible avalanche probe to test the snow surface ahead for hidden voids. The probe is driven into the snow at a 45-degree angle, roughly one to two meters ahead and to both sides of the intended path. A solid strike against glacier ice feels firm and unyielding. A strike into a snow bridge feels softer, and the probe may punch through with moderate pressure, revealing a void beneath. If the probe punches through with body weight alone, the snow bridge will not hold a person. Probing should be systematic: every step in suspect terrain, not just occasional spot checks. In heavily crevassed terrain, the leader probes continuously while the team provides a taut rope from behind.",
+                imageName: "Photos/glacier-probe-technique",
+                imageCaption: "Mountaineer probing at 45 degrees ahead of travel path",
                 diagram: nil,
                 keyFacts: [
                     "Probe at 45 degrees ahead and to both sides of the travel path",
@@ -304,6 +331,8 @@ enum GlacierTravelExplore {
                 id: "probe-techniques-2",
                 heading: "Wanding Routes",
                 body: "Wanding is the practice of marking a safe route across a glacier with bamboo stakes or marker wands placed at regular intervals. Once the leader has probed and confirmed a safe path, wands are placed every 30-50 meters so the team can follow the same path and, critically, so the team can retrace its route in deteriorating visibility. Wands are essential for glacier camps: the route from tent to latrine, from camp to the climbing route, and from camp to any cached gear must all be wanded. In whiteout conditions, wands may be the only navigation possible. Place them close enough that each wand is visible from the previous one. Carry at least 20-30 wands per team for a day of glacier travel.",
+                imageName: "Photos/glacier-wanded-route",
+                imageCaption: "Wanded route marked with bamboo stakes across glacier",
                 diagram: nil,
                 keyFacts: [
                     "Place wands every 30-50 meters along confirmed safe routes",
@@ -349,6 +378,8 @@ enum GlacierTravelExplore {
         title: "Glacier Route Finding",
         summary: "Route finding on a glacier requires reading terrain to predict crevasse locations, choosing paths that minimize exposure to hazards, and adjusting plans as conditions change. The safest route is rarely the most direct.",
         icon: "map.fill",
+        heroImageName: "Photos/Heroes/hero-glacier-route",
+        heroImageCaption: "Climber surveying a glacier route from a high vantage point",
         sections: [
             ExploreSection(
                 id: "route-finding-1",
@@ -445,6 +476,8 @@ enum GlacierTravelExplore {
         title: "Travel Protocols",
         summary: "Glacier travel protocols are the systematic procedures that transform a group of climbers into a functional safety system. From roping up to rest stops to gear management, every protocol exists because someone died when it was not followed.",
         icon: "checklist.checked",
+        heroImageName: "Photos/Heroes/hero-glacier-protocols",
+        heroImageCaption: "Rope team preparing gear before stepping onto a glacier",
         sections: [
             ExploreSection(
                 id: "travel-protocols-1",
@@ -523,11 +556,15 @@ enum GlacierTravelExplore {
         title: "Crevasse Rescue",
         summary: "Crevasse rescue is the culmination of every glacier travel skill. Self-rescue with prusiks, team rescue with hauling systems, and the Z-pulley technique are skills that must be practiced until they are automatic, because the crevasse will not wait for you to learn.",
         icon: "arrow.up.circle.fill",
+        heroImageName: "Photos/Heroes/hero-glacier-rescue",
+        heroImageCaption: "Crevasse rescue hauling system rigged on glacier surface",
         sections: [
             ExploreSection(
                 id: "crevasse-rescue-1",
                 heading: "Self-Rescue with Prusiks",
                 body: "Self-rescue is the fastest way out of a crevasse if the fallen climber is uninjured and the crevasse geometry allows it. The climber uses two pre-rigged prusik loops attached to the rope above them: one connected to their harness via a sling (the waist prusik) and one for a foot loop (the foot prusik). The technique is simple but physically demanding: stand in the foot loop, slide the waist prusik up, sit back on the waist prusik, slide the foot prusik up, repeat. In practice, the hardest part is getting started. The climber is hanging in their harness, possibly spinning, cold, and frightened. They must orient themselves, locate their prusik loops, and begin the mechanical process of ascending. This is why prusiks must be pre-rigged and practiced before the trip, not learned from a book while hanging in a crevasse.",
+                imageName: "Photos/glacier-prusik-ascent",
+                imageCaption: "Climber ascending rope with prusik loops in crevasse",
                 diagram: nil,
                 keyFacts: [
                     "Self-rescue uses two prusik loops: one for the waist/harness, one for a foot loop",
@@ -556,6 +593,7 @@ enum GlacierTravelExplore {
                 id: "crevasse-rescue-3",
                 heading: "The Z-Pulley Hauling System",
                 body: "The Z-pulley (or Z-rig) is a 3:1 mechanical advantage system used to haul a fallen climber out of a crevasse. After the load is transferred to the anchor, the rescuer pads the crevasse lip with a pack or foam pad to reduce friction, then sets up the Z-pulley on the loaded rope. A prusik is attached to the load rope going into the crevasse, clipped to a carabiner, and a separate rope or the tail of the climbing rope is run from the anchor, through this carabiner, back to a second prusik on the load rope near the anchor, and then out to the hauling end. Pulling on the hauling end gives a 3:1 mechanical advantage. The prusiks grip the rope when loaded and slide when unloaded, allowing ratcheting progress. In practice, friction at the lip and through the system reduces actual mechanical advantage significantly.",
+                animationName: "anim-crevasse-rescue",
                 diagram: ExploreDiagram(
                     type: .timeline,
                     config: DiagramConfig(
@@ -581,6 +619,8 @@ enum GlacierTravelExplore {
                 id: "crevasse-rescue-4",
                 heading: "Rescue Complications and Time Pressure",
                 body: "Real crevasse rescues rarely go as smoothly as practice scenarios. The fallen climber may be injured, unconscious, or hanging in a harness that restricts blood flow to the legs (suspension trauma can become life-threatening within 15-20 minutes). The rope may have cut deeply into the crevasse lip, creating enormous friction that no hauling system can overcome without lip padding. The anchor snow may be poor quality, requiring multiple anchors equalized together. The surface team may be only one person on a two-person rope team, executing every step alone while maintaining the arrest. Cold, wind, altitude, and fear all degrade performance. The only way to prepare for these complications is to practice in conditions that simulate real stress: at altitude, in cold weather, with gloves on, under time pressure.",
+                imageName: "Photos/glacier-rescue-complications",
+                imageCaption: "Rescuer managing rope at crevasse lip during team rescue",
                 diagram: nil,
                 keyFacts: [
                     "Suspension trauma can become life-threatening within 15-20 minutes of hanging in a harness",
@@ -612,6 +652,8 @@ enum GlacierTravelExplore {
         title: "Glacier Camping",
         summary: "Camping on a glacier introduces unique hazards that do not exist on rock or soil. Crevasse safety, anchor systems, waste management, and weather exposure all require glacier-specific protocols that differ from standard mountaineering camp practices.",
         icon: "tent.fill",
+        heroImageName: "Photos/Heroes/hero-glacier-camping",
+        heroImageCaption: "High camp pitched on a glacier with mountain backdrop",
         sections: [
             ExploreSection(
                 id: "glacier-camping-1",
@@ -641,6 +683,8 @@ enum GlacierTravelExplore {
                 id: "glacier-camping-2",
                 heading: "Anchoring and Camp Infrastructure",
                 body: "Everything on a glacier must be anchored. Tents are staked with snow pickets, ice axes, or deadman anchors buried deeply and stamped down. In warm conditions, stakes can melt out as solar radiation heats the metal, so bury them horizontally with attached cord for retrieval. Packs, ropes, and loose gear left on the glacier surface will either blow away in katabatic winds or sink into the snow as solar heat melts them in. Wand the path from tent to latrine, from tent to kitchen area, and from camp to the start of the climbing route. These wanded paths must follow probed, safe ground. At night or in whiteout conditions, the wanded path is the only safe way to move around camp.",
+                imageName: "Photos/glacier-camp-anchors",
+                imageCaption: "Snow pickets and deadman anchors securing tent on glacier",
                 diagram: nil,
                 keyFacts: [
                     "Anchor tents with deep-buried snow pickets, axes, or deadman anchors",
@@ -700,6 +744,8 @@ enum GlacierTravelExplore {
         title: "Seasonal Glacier Changes",
         summary: "Glaciers are dynamic systems that change dramatically through the year. Spring, summer, and fall present fundamentally different hazard profiles, and understanding seasonal patterns is essential for planning safe glacier travel.",
         icon: "calendar",
+        heroImageName: "Photos/Heroes/hero-glacier-seasonal",
+        heroImageCaption: "Glacier surface showing seasonal melt patterns and exposed ice",
         sections: [
             ExploreSection(
                 id: "seasonal-changes-1",
@@ -741,6 +787,8 @@ enum GlacierTravelExplore {
                 id: "seasonal-changes-2",
                 heading: "Summer Conditions: Visible Hazards, Weak Bridges",
                 body: "As summer progresses, the snow line retreats upward and the ablation zone expands. Crevasses that were hidden in spring become exposed as bare ice, which is actually safer in one sense — you can see what you are dealing with. But the hidden crevasses that remain in the shrinking accumulation zone above have weakened snow bridges that may collapse with little provocation. Summer also brings other hazards: meltwater streams carve channels and moulins in the ice, rockfall increases as permafrost thaws in surrounding terrain, and seracs become less stable as warm temperatures weaken the ice bonds holding them in place. The daily freeze-thaw cycle becomes the governing factor: travel in the early morning when overnight freezing has re-strengthened snow bridges, and be off dangerous terrain by midday when warming weakens them.",
+                imageName: "Photos/glacier-summer-melt",
+                imageCaption: "Exposed ablation zone with meltwater channels in summer",
                 diagram: nil,
                 keyFacts: [
                     "Exposed crevasses in the ablation zone are visible and can be navigated around",
@@ -786,6 +834,8 @@ enum GlacierTravelExplore {
         title: "Glacier Weather",
         summary: "Glaciers create their own microclimate. Katabatic winds, whiteout conditions, temperature inversions, and intense solar radiation are weather hazards unique to glaciated terrain that can transform a straightforward day into a survival situation.",
         icon: "wind.snow",
+        heroImageName: "Photos/Heroes/hero-glacier-weather",
+        heroImageCaption: "Storm clouds building over a glaciated mountain range",
         sections: [
             ExploreSection(
                 id: "glacier-weather-1",

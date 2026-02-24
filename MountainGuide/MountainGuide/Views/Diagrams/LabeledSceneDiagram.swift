@@ -17,15 +17,9 @@ struct LabeledSceneDiagram: View {
             let h = geo.size.height
 
             ZStack {
-                // Scene background
+                // Scene background (transparent — scene handles its own bg)
                 RoundedRectangle(cornerRadius: 8)
-                    .fill(
-                        LinearGradient(
-                            colors: [Color(hex: "1a1a2e"), Color(hex: "0f172a")],
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                    )
+                    .fill(Color.lightBg)
 
                 // Rendered scene content
                 if let desc = config.sceneDescription {
@@ -57,13 +51,13 @@ struct LabeledSceneDiagram: View {
                                 .overlay(
                                     Text("?")
                                         .font(.mono(10, weight: .bold))
-                                        .foregroundStyle(Color.terminalBg)
+                                        .foregroundStyle(.white)
                                         .opacity(isRevealed ? 0 : 1)
                                 )
                                 .overlay(
                                     Image(systemName: "checkmark")
                                         .font(.system(size: 10, weight: .bold))
-                                        .foregroundStyle(Color.terminalBg)
+                                        .foregroundStyle(.white)
                                         .opacity(isRevealed ? 1 : 0)
                                 )
                         }

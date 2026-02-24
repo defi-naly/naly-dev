@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import '../diagnostic/diagnostic.css';
 
 export const metadata: Metadata = {
   title: 'Foundations | BLOOM — Distribution, Trust, Judgment',

@@ -9,7 +9,7 @@ struct AnchorSystemScene: View {
             // Rock face background
             let bg = Path(roundedRect: CGRect(origin: .zero, size: size), cornerRadius: 0)
             context.fill(bg, with: .linearGradient(
-                Gradient(colors: [Color(hex: "1a1a2e"), Color(hex: "292524")]),
+                Gradient(colors: [Color(hex: "E7E5E4"), Color(hex: "D6D3D1")]),
                 startPoint: CGPoint(x: size.width / 2, y: 0), endPoint: CGPoint(x: size.width / 2, y: size.height)
             ))
 

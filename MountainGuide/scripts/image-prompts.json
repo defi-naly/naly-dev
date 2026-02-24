@@ -1,0 +1,914 @@
+[
+  {
+    "imageName": "hero-weather-atmosphere",
+    "path": "Photos/Heroes/hero-weather-atmosphere.imageset",
+    "prompt": "Dramatic panoramic view from a high Alpine summit looking across multiple mountain ranges with visible atmospheric haze layers. Dawn light creating golden and purple gradients across the sky. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-weather-pressure-systems",
+    "path": "Photos/Heroes/hero-weather-pressure-systems.imageset",
+    "prompt": "Vast Alpine landscape under dramatic cloud formations showing clear high and low pressure weather patterns. Lenticular clouds forming over peaks with cumulus building in valleys. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-weather-fronts",
+    "path": "Photos/Heroes/hero-weather-fronts.imageset",
+    "prompt": "Dramatic cold front approaching Alpine peaks, with a sharp line of dark cumulonimbus clouds advancing over snow-capped mountains. Clear sky giving way to storm. Wide angle. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-weather-cloud-types",
+    "path": "Photos/Heroes/hero-weather-cloud-types.imageset",
+    "prompt": "Alpine skyscape displaying multiple cloud types at different altitudes — wispy cirrus high above, mid-level altocumulus, and puffy cumulus near the peaks. Mountain ridge silhouette below. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-weather-thermals",
+    "path": "Photos/Heroes/hero-weather-thermals.imageset",
+    "prompt": "Paraglider circling in a thermal updraft above sun-heated Alpine slopes, with visible cumulus cloud forming at the top of the thermal column. Green meadows below, rocky peaks in background. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-weather-lapse-rates",
+    "path": "Photos/Heroes/hero-weather-lapse-rates.imageset",
+    "prompt": "Alpine valley with visible temperature inversion layer — fog or low cloud filling the valley floor while peaks above bask in clear sunshine. Dramatic contrast between cold valley and warm heights. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-weather-mountain-winds",
+    "path": "Photos/Heroes/hero-weather-mountain-winds.imageset",
+    "prompt": "Wind-blasted ridge in the Swiss Alps with snow being swept off the peaks in dramatic plumes. Wind-sculpted snow formations (sastrugi) in foreground. Clear sky with wind-driven cloud banner on summit. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-weather-mountain-waves",
+    "path": "Photos/Heroes/hero-weather-mountain-waves.imageset",
+    "prompt": "Spectacular lenticular cloud stack (altocumulus lenticularis) hovering over an Alpine peak, showing classic mountain wave pattern. Smooth, lens-shaped clouds in layers against blue sky. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-weather-convergence",
+    "path": "Photos/Heroes/hero-weather-convergence.imageset",
+    "prompt": "Alpine valley showing convergence zone where two air masses meet, visible as a line of developing cumulus clouds along a valley. Green slopes below, building clouds above. Afternoon light. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-weather-thunderstorms",
+    "path": "Photos/Heroes/hero-weather-thunderstorms.imageset",
+    "prompt": "Massive cumulonimbus thunderstorm developing over Alpine peaks at sunset. Dramatic anvil-shaped cloud top with lightning visible. Dark storm base contrasting with golden light on remaining peaks. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-avalanche-triangle",
+    "path": "Photos/Heroes/hero-avalanche-triangle.imageset",
+    "prompt": "Backcountry skier standing at ridge looking down at vast avalanche-prone alpine terrain. Fresh snow on steep slopes with wind-loaded features visible. Dramatic winter mountain landscape. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-avalanche-slab-mechanics",
+    "path": "Photos/Heroes/hero-avalanche-slab-mechanics.imageset",
+    "prompt": "Close-up of a natural avalanche fracture line on a steep Alpine slope, showing the clean slab release with visible crown face and bed surface. Fresh debris below. Winter conditions. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-avalanche-slope-angle",
+    "path": "Photos/Heroes/hero-avalanche-slope-angle.imageset",
+    "prompt": "Steep Alpine slope in winter showing classic avalanche terrain between 30-45 degrees. Ski tracks visible on adjacent safe ridge. Clear view of slope steepness with snow-loaded face. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-avalanche-terrain-traps",
+    "path": "Photos/Heroes/hero-avalanche-terrain-traps.imageset",
+    "prompt": "Narrow Alpine gully filled with avalanche debris, showing how terrain features funnel and trap snow. Cliff bands above, deep deposition zone below. Winter backcountry setting. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-avalanche-snowpack",
+    "path": "Photos/Heroes/hero-avalanche-snowpack.imageset",
+    "prompt": "Cross-section of alpine snowpack visible in a snow pit, showing distinct layers of different snow crystals and densities. Gloved hand examining layers. Clean cut wall of snow pit. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-avalanche-stability-testing",
+    "path": "Photos/Heroes/hero-avalanche-stability-testing.imageset",
+    "prompt": "Mountain guide performing an Extended Column Test in a snow pit on an Alpine slope. Clean snow pit wall with distinct layers visible. Backcountry skiing equipment nearby. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-avalanche-wind-loading",
+    "path": "Photos/Heroes/hero-avalanche-wind-loading.imageset",
+    "prompt": "Wind-loaded Alpine cornice on a ridge crest with visible wind slab formation on the leeward slope. Wind-sculpted snow features, blue sky above. Dramatic scale showing danger of wind-deposited snow. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-avalanche-human-factors",
+    "path": "Photos/Heroes/hero-avalanche-human-factors.imageset",
+    "prompt": "Group of backcountry skiers at a decision point on an Alpine ridge, consulting maps and discussing terrain. Dramatic mountain backdrop with avalanche terrain visible. Team decision-making moment. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-avalanche-decision-frameworks",
+    "path": "Photos/Heroes/hero-avalanche-decision-frameworks.imageset",
+    "prompt": "Backcountry skier studying avalanche bulletin on a phone while looking at Alpine terrain. Snow-covered peaks in background. Morning light, fresh snow conditions. Planning and assessment moment. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-avalanche-companion-rescue",
+    "path": "Photos/Heroes/hero-avalanche-companion-rescue.imageset",
+    "prompt": "Avalanche rescue training scene with rescuer using transceiver to search debris field. Probe and shovel visible. Urgency of companion rescue in Alpine winter setting. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-flying-soaring",
+    "path": "Photos/Heroes/hero-flying-soaring.imageset",
+    "prompt": "Paraglider soaring high above Alpine valleys with panoramic mountain views in every direction. Colorful wing against deep blue sky. Green valleys far below. Freedom of flight. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-flying-thermal-structure",
+    "path": "Photos/Heroes/hero-flying-thermal-structure.imageset",
+    "prompt": "Multiple paragliders circling together in a strong thermal updraft, spiraling upward toward a developing cumulus cloud. Alpine landscape below showing sun-heated slopes. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-flying-sky-reading",
+    "path": "Photos/Heroes/hero-flying-sky-reading.imageset",
+    "prompt": "Paraglider pilot's perspective looking up at a sky filled with well-developed cumulus clouds marking thermal streets. Alpine peaks on the horizon. Perfect soaring conditions. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-flying-centering",
+    "path": "Photos/Heroes/hero-flying-centering.imageset",
+    "prompt": "Single paraglider banking steeply in a tight thermal core, wing tip pointed at the ground far below. Dynamic flying moment with Alpine terrain visible. Afternoon light. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-flying-cloudbase",
+    "path": "Photos/Heroes/hero-flying-cloudbase.imageset",
+    "prompt": "Paraglider approaching cloudbase, nearly touching the flat bottom of a cumulus cloud with Alpine peaks poking through cloud layer below. Ethereal high-altitude flying scene. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-flying-valley-tactics",
+    "path": "Photos/Heroes/hero-flying-valley-tactics.imageset",
+    "prompt": "Paraglider flying along an Alpine valley with dramatic rock walls on either side. Valley wind conditions visible in the cloud patterns. Strategic ridge soaring along valley edge. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-flying-speed-to-fly",
+    "path": "Photos/Heroes/hero-flying-speed-to-fly.imageset",
+    "prompt": "Paraglider in full speed glide between thermals, wing pulled back on speed bar, flying fast over Alpine terrain. Long glide with next thermal source visible ahead. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-flying-xc-planning",
+    "path": "Photos/Heroes/hero-flying-xc-planning.imageset",
+    "prompt": "Panoramic view from a paraglider at high altitude showing a long cross-country route ahead with multiple Alpine ridges and valleys stretching to the horizon. Epic XC conditions. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-flying-convergence",
+    "path": "Photos/Heroes/hero-flying-convergence.imageset",
+    "prompt": "Dramatic convergence line visible as a wall of cumulus clouds forming where two air masses meet above an Alpine valley. Paraglider flying along the convergence. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-flying-glide",
+    "path": "Photos/Heroes/hero-flying-glide.imageset",
+    "prompt": "Paraglider making a final glide toward a landing field in an Alpine valley, with evening golden light illuminating the mountains. Peaceful descent with village visible below. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-navigation-map-reading",
+    "path": "Photos/Heroes/hero-navigation-map-reading.imageset",
+    "prompt": "Mountaineer's hands holding a topographic map spread across a rock, with the actual Alpine terrain visible in the background matching the map. Compass nearby. Morning light. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-navigation-compass",
+    "path": "Photos/Heroes/hero-navigation-compass.imageset",
+    "prompt": "Close-up of a high-quality baseplate compass being used for navigation on an Alpine ridge. Mountain panorama stretching behind. Clear bearings being taken. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-navigation-gps",
+    "path": "Photos/Heroes/hero-navigation-gps.imageset",
+    "prompt": "Handheld GPS device showing a route on an Alpine mountain trail with actual peaks and ridges visible behind matching the terrain. Modern navigation in wilderness. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-navigation-route-planning",
+    "path": "Photos/Heroes/hero-navigation-route-planning.imageset",
+    "prompt": "Mountaineer at a trailhead studying a detailed topographic map with route markings, Alpine peaks rising behind. Backpack and trekking poles nearby. Planning a mountain traverse. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-navigation-terrain",
+    "path": "Photos/Heroes/hero-navigation-terrain.imageset",
+    "prompt": "Complex Alpine terrain with ridges, valleys, spurs, and re-entrants visible from a high vantage point. Varied terrain features that test navigation skills. Clear day showing terrain in detail. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-navigation-contouring",
+    "path": "Photos/Heroes/hero-navigation-contouring.imageset",
+    "prompt": "Mountaineer traversing a steep Alpine hillside on a contouring path, maintaining elevation across a slope. Trail visible cutting horizontally across the mountainside. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-navigation-triangulation",
+    "path": "Photos/Heroes/hero-navigation-triangulation.imageset",
+    "prompt": "Mountaineer on a summit with compass and map, taking bearings on identifiable peaks in the distance for triangulation. Clear visibility, multiple peaks visible. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-navigation-whiteout",
+    "path": "Photos/Heroes/hero-navigation-whiteout.imageset",
+    "prompt": "Mountaineers in complete whiteout conditions on an Alpine glacier or snowfield, visibility reduced to meters. Disorienting flat white conditions where sky meets snow. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-navigation-night",
+    "path": "Photos/Heroes/hero-navigation-night.imageset",
+    "prompt": "Mountaineer navigating by headlamp on an Alpine trail at night, beam cutting through darkness. Stars visible above mountain silhouettes. Night navigation atmosphere. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-navigation-emergency",
+    "path": "Photos/Heroes/hero-navigation-emergency.imageset",
+    "prompt": "Mountaineer in challenging weather on an Alpine ridge using map and compass for emergency navigation. Cloud closing in, reduced visibility. Urgent navigation situation. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-rope-knots",
+    "path": "Photos/Heroes/hero-rope-knots.imageset",
+    "prompt": "Close-up of expertly tied climbing knots on a climbing rope against an Alpine rock face background. Figure-eight follow-through and clove hitch visible. Climbing gear on harness. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-rope-anchors",
+    "path": "Photos/Heroes/hero-rope-anchors.imageset",
+    "prompt": "Alpine climbing anchor built with multiple pieces of protection on a granite face. Equalized slings connecting to a master point. Mountain panorama visible behind. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-rope-belaying",
+    "path": "Photos/Heroes/hero-rope-belaying.imageset",
+    "prompt": "Climber belaying their partner on an Alpine rock route, rope running through belay device. Dramatic exposure with valley far below. Focused belay technique. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-rope-rappelling",
+    "path": "Photos/Heroes/hero-rope-rappelling.imageset",
+    "prompt": "Climber rappelling down a steep Alpine rock face, rope stretching down to the next anchor. Dramatic vertical exposure with mountain scenery. Controlled descent. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-rope-mechanics",
+    "path": "Photos/Heroes/hero-rope-mechanics.imageset",
+    "prompt": "Close-up detail of climbing rope running through carabiners and protection on an Alpine route. Dynamic rope stretch and force distribution visible in the system. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-rope-top-rope",
+    "path": "Photos/Heroes/hero-rope-top-rope.imageset",
+    "prompt": "Climber on a top-rope route on an Alpine crag with rope running up to anchor at top and back down to belayer. Clean climbing on solid rock. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-rope-multi-pitch",
+    "path": "Photos/Heroes/hero-rope-multi-pitch.imageset",
+    "prompt": "Two climbers on a multi-pitch Alpine rock route, one at a belay station on a ledge, the other climbing above. Multiple rope lengths of climbing visible. Dramatic vertical terrain. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-rope-rescue",
+    "path": "Photos/Heroes/hero-rope-rescue.imageset",
+    "prompt": "Mountain rescue scenario on an Alpine face, rescuer lowering an injured climber with rope systems. Technical rescue equipment visible. Dramatic mountain setting. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-rope-crevasse",
+    "path": "Photos/Heroes/hero-rope-crevasse.imageset",
+    "prompt": "Rope team approaching a crevasse zone on an Alpine glacier, rope stretched taut between climbers. Crevasses visible in the ice. Glacier travel with rope protection. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-rope-improvised",
+    "path": "Photos/Heroes/hero-rope-improvised.imageset",
+    "prompt": "Mountaineer building an improvised anchor using natural features — a rock horn and ice axe — on an Alpine ridge. Creative problem-solving with limited gear. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-glacier-anatomy",
+    "path": "Photos/Heroes/hero-glacier-anatomy.imageset",
+    "prompt": "Vast Alpine glacier flowing between mountain peaks, showing the full anatomy — accumulation zone, crevasse fields, moraines, and terminus. Aerial-style wide view. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-glacier-crevasse-id",
+    "path": "Photos/Heroes/hero-glacier-crevasse-id.imageset",
+    "prompt": "Deep open crevasse in an Alpine glacier showing blue ice walls and the dark depth below. Snow bridges partially spanning the gap. Dramatic close view of glacier hazard. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-glacier-rope-team",
+    "path": "Photos/Heroes/hero-glacier-rope-team.imageset",
+    "prompt": "Rope team of three mountaineers traveling across an Alpine glacier in proper formation, evenly spaced with rope taut between them. Crevassed terrain around them. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-glacier-probe",
+    "path": "Photos/Heroes/hero-glacier-probe.imageset",
+    "prompt": "Mountaineer probing a suspected snow bridge on an Alpine glacier with an avalanche probe, testing before stepping forward. Rope team belaying from behind. Careful glacier navigation. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-glacier-route",
+    "path": "Photos/Heroes/hero-glacier-route.imageset",
+    "prompt": "Wanded route marked with bamboo poles across a heavily crevassed Alpine glacier. Path weaving between crevasses. Morning light on glacial ice. Safe passage through dangerous terrain. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-glacier-protocols",
+    "path": "Photos/Heroes/hero-glacier-protocols.imageset",
+    "prompt": "Rope team navigating a complex icefall section of an Alpine glacier. Seracs and ice blocks towering above. Careful protocol following through hazardous terrain. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-glacier-rescue",
+    "path": "Photos/Heroes/hero-glacier-rescue.imageset",
+    "prompt": "Crevasse rescue in progress on an Alpine glacier. Rescuer at the crevasse lip with rope system rigged, extracting a fallen team member. Technical rescue operation. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-glacier-camping",
+    "path": "Photos/Heroes/hero-glacier-camping.imageset",
+    "prompt": "Mountain camp pitched on an Alpine glacier, tents anchored to the ice with proper snow walls. Dramatic evening light on surrounding peaks. High-altitude glacier camp. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-glacier-seasonal",
+    "path": "Photos/Heroes/hero-glacier-seasonal.imageset",
+    "prompt": "Alpine glacier showing seasonal changes — bare blue ice in summer with meltwater streams, exposed crevasses, and retreating snow line. Late summer glacier conditions. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-glacier-weather",
+    "path": "Photos/Heroes/hero-glacier-weather.imageset",
+    "prompt": "Storm approaching a glacier-covered Alpine peak, dark clouds rolling over the ice. Rope team moving quickly toward shelter. Dramatic weather change on the glacier. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-firstaid-assessment",
+    "path": "Photos/Heroes/hero-firstaid-assessment.imageset",
+    "prompt": "Mountain rescuer performing initial patient assessment on an injured hiker on an Alpine trail. Emergency medical gear spread out. Dramatic mountain setting with rescue urgency. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-firstaid-hypothermia",
+    "path": "Photos/Heroes/hero-firstaid-hypothermia.imageset",
+    "prompt": "Rescue team wrapping a hypothermic mountaineer in emergency blankets and insulation on a cold Alpine ridge. Winter conditions, steam from breath visible. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-firstaid-altitude",
+    "path": "Photos/Heroes/hero-firstaid-altitude.imageset",
+    "prompt": "Mountaineer showing signs of altitude sickness being helped by companion at high altitude on an Alpine peak. Thin air environment, snow and rock above treeline. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-firstaid-fractures",
+    "path": "Photos/Heroes/hero-firstaid-fractures.imageset",
+    "prompt": "Mountain rescue team splinting a leg fracture on a remote Alpine trail. SAM splint and first aid supplies visible. Patient on the ground, team working efficiently. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-firstaid-wounds",
+    "path": "Photos/Heroes/hero-firstaid-wounds.imageset",
+    "prompt": "Close-up of wilderness wound care being performed on a mountaineer's arm on an Alpine trail. Clean bandaging technique, first aid kit open nearby. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-firstaid-lightning",
+    "path": "Photos/Heroes/hero-firstaid-lightning.imageset",
+    "prompt": "Dramatic lightning strike near an Alpine peak with hikers taking shelter in the correct lightning protection position. Dark storm clouds, electric atmosphere. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-firstaid-frostbite",
+    "path": "Photos/Heroes/hero-firstaid-frostbite.imageset",
+    "prompt": "Mountaineer examining frostbitten fingers on an Alpine climb, showing the pale, waxy appearance of cold-injured tissue. Cold conditions, ice-covered terrain. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-firstaid-heat",
+    "path": "Photos/Heroes/hero-firstaid-heat.imageset",
+    "prompt": "Hiker suffering from heat exhaustion on a hot Alpine trail in summer, being cooled by companion with water. Sunny exposed terrain, no shade. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-firstaid-shelter",
+    "path": "Photos/Heroes/hero-firstaid-shelter.imageset",
+    "prompt": "Emergency snow shelter (snow trench or bivouac) being constructed on an Alpine slope during deteriorating weather. Survival shelter building in action. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "hero-firstaid-evacuation",
+    "path": "Photos/Heroes/hero-firstaid-evacuation.imageset",
+    "prompt": "Mountain rescue helicopter approaching a rescue site on an Alpine slope, rescue team preparing patient for evacuation. Dramatic mountain rescue scene. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "hero"
+  },
+  {
+    "imageName": "weather-cold-front",
+    "path": "Photos/weather-cold-front.imageset",
+    "prompt": "Dramatic cold front passage over Alpine peaks, sharp line between clear sky and advancing dark clouds. Temperature contrast visible in cloud formations. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "weather-cumulus",
+    "path": "Photos/weather-cumulus.imageset",
+    "prompt": "Beautiful fair-weather cumulus clouds developing over sun-heated Alpine slopes in the afternoon. Classic cauliflower-shaped white clouds against blue sky. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "weather-thermal-source",
+    "path": "Photos/weather-thermal-source.imageset",
+    "prompt": "Sun-heated dark rock face and alpine meadow generating thermal lift, with visible haze shimmer and a cumulus cloud forming directly above. Thermal source identification. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "weather-stability-sky",
+    "path": "Photos/weather-stability-sky.imageset",
+    "prompt": "Comparison sky showing stable atmosphere with flat stratus clouds on one side transitioning to unstable conditions with towering cumulus on the other. Alpine horizon. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "weather-foehn-wall",
+    "path": "Photos/weather-foehn-wall.imageset",
+    "prompt": "Classic Foehn wall cloud formation over an Alpine ridge — a dramatic wall of cloud spilling over the crest but evaporating on the lee side. Clear sky below. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "weather-convergence-line",
+    "path": "Photos/weather-convergence-line.imageset",
+    "prompt": "Line of developing cumulus clouds marking a convergence zone in an Alpine valley where two air masses meet. Clear air on either side of the cloud line. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "weather-cumulonimbus",
+    "path": "Photos/weather-cumulonimbus.imageset",
+    "prompt": "Massive cumulonimbus cloud with classic anvil top towering above Alpine peaks. Storm cell showing full vertical development from dark base to icy anvil. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "weather-lenticular",
+    "path": "Photos/weather-lenticular.imageset",
+    "prompt": "Perfect lenticular cloud (altocumulus lenticularis) hovering motionless over an Alpine peak like a UFO. Smooth lens shape with iridescent colors at edges. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "weather-lightning-ridge",
+    "path": "Photos/weather-lightning-ridge.imageset",
+    "prompt": "Lightning bolt striking an Alpine ridge at dusk, illuminating the mountain and nearby clouds. Dramatic electrical discharge with mountain silhouette. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "avalanche-slab-anatomy",
+    "path": "Photos/avalanche-slab-anatomy.imageset",
+    "prompt": "Close-up of an avalanche slab fracture showing distinct layers — the crown face, stauchwall, bed surface, and debris. Clean cross-section of failed snow slab. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "avalanche-slope-angle",
+    "path": "Photos/avalanche-slope-angle.imageset",
+    "prompt": "Alpine slope clearly showing the critical 30-45 degree angle range for avalanche release. Inclinometer or ski pole angle reference. Steep snow-loaded terrain. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "avalanche-terrain-trap",
+    "path": "Photos/avalanche-terrain-trap.imageset",
+    "prompt": "Dangerous terrain trap in Alpine backcountry — a gully or depression below avalanche-prone slopes that would funnel and concentrate debris. Deep burial hazard visible. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "avalanche-debris",
+    "path": "Photos/avalanche-debris.imageset",
+    "prompt": "Fresh avalanche debris field at the bottom of an Alpine slope, showing blocks of compacted snow, broken trees, and the destructive power of a slide. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "avalanche-crystal-types",
+    "path": "Photos/avalanche-crystal-types.imageset",
+    "prompt": "Close-up macro photography of different snow crystal types on a gloved hand or crystal screen — faceted crystals, rounded grains, and surface hoar. Alpine setting. Professional macro photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "avalanche-column-test",
+    "path": "Photos/avalanche-column-test.imageset",
+    "prompt": "Mountain guide performing a compression test or Extended Column Test in a snow pit. Shovel blade on top of isolated column, testing for fracture propagation. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "avalanche-wind-signs",
+    "path": "Photos/avalanche-wind-signs.imageset",
+    "prompt": "Visible wind effect signs on Alpine snow — wind lip on a ridge, cross-loaded gully, wind slab texture, and sastrugi formations indicating wind direction. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "avalanche-group-decision",
+    "path": "Photos/avalanche-group-decision.imageset",
+    "prompt": "Group of backcountry skiers having a terrain discussion at a safe point, pointing at slopes and consulting devices. Group decision-making in avalanche terrain. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "avalanche-transceiver-search",
+    "path": "Photos/avalanche-transceiver-search.imageset",
+    "prompt": "Rescuer performing avalanche transceiver search pattern on debris field, following signal with digital transceiver. Probe and shovel ready. Urgency of companion rescue. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "flying-three-lift-sources",
+    "path": "Photos/flying-three-lift-sources.imageset",
+    "prompt": "Alpine landscape showing three sources of lift for paragliders — thermal bubble rising from a dark field, ridge lift along a windward slope, and convergence cloud line. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "flying-thermal-street",
+    "path": "Photos/flying-thermal-street.imageset",
+    "prompt": "Row of cumulus clouds forming a thermal street stretching across an Alpine valley, marking a corridor of rising air. Paragliders using the street for cross-country flight. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "flying-paraglider-thermal",
+    "path": "Photos/flying-paraglider-thermal.imageset",
+    "prompt": "Paraglider thermaling in tight circles directly below a well-formed cumulus cloud, silhouetted against the bright cloud. Classic thermal climbing technique. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "flying-cumulus-markers",
+    "path": "Photos/flying-cumulus-markers.imageset",
+    "prompt": "Several cumulus clouds at various development stages over Alpine terrain — wisps forming, mature clouds with flat bases, and one beginning to overdevelop. Cloud reading guide. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "flying-blue-thermal-haze",
+    "path": "Photos/flying-blue-thermal-haze.imageset",
+    "prompt": "Clear blue sky over Alpine terrain with subtle haze and shimmer indicating blue thermal activity without cloud markers. Difficult-to-read thermal conditions. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "flying-speed-bar-cockpit",
+    "path": "Photos/flying-speed-bar-cockpit.imageset",
+    "prompt": "Close-up of paraglider cockpit setup — variometer, GPS, speed bar system, and brake toggles. In-flight view with Alpine landscape visible below. Technical flying equipment. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "flying-xc-cockpit-setup",
+    "path": "Photos/flying-xc-cockpit-setup.imageset",
+    "prompt": "Paraglider pilot checking instruments during cross-country flight — GPS showing route, variometer reading climb rate. Cockpit view with long Alpine valley stretching ahead. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "flying-convergence-line",
+    "path": "Photos/flying-convergence-line.imageset",
+    "prompt": "Dramatic convergence line visible as a long wall of cumulus clouds forming where valley wind meets plain wind above Alpine terrain. Paragliders flying along the line. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "flying-sea-breeze-front",
+    "path": "Photos/flying-sea-breeze-front.imageset",
+    "prompt": "Sea breeze front approaching Alpine foothills, visible as a line of cumulus with clear air ahead and hazy air behind. Thermal conditions changing as front arrives. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "flying-low-save-terrain",
+    "path": "Photos/flying-low-save-terrain.imageset",
+    "prompt": "Paraglider at low altitude scanning for a safe landing option in complex Alpine terrain — valley floor fields, river, and restricted areas visible. Emergency landing assessment. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "navigation-topo-contours",
+    "path": "Photos/navigation-topo-contours.imageset",
+    "prompt": "Detailed topographic map spread on a rock showing contour lines with the actual Alpine terrain matching in the background. Contour interpretation in practice. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "navigation-map-scale",
+    "path": "Photos/navigation-map-scale.imageset",
+    "prompt": "Mountaineer measuring distance on a topographic map using a compass baseplate ruler. Close-up of hands, map, and measuring technique. Alpine setting. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "navigation-compass-map",
+    "path": "Photos/navigation-compass-map.imageset",
+    "prompt": "Compass placed on a topographic map aligned with grid north, showing proper map-compass technique. Orienting lines visible. Mountain terrain behind. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "navigation-route-card",
+    "path": "Photos/navigation-route-card.imageset",
+    "prompt": "Handwritten route card on waterproof paper with bearings, distances, and timing notes. Compass and map nearby. Pre-planned mountain navigation. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "navigation-ridge-route",
+    "path": "Photos/navigation-ridge-route.imageset",
+    "prompt": "Mountaineer following a clearly defined Alpine ridge route with steep drops on either side. Natural handrail feature for navigation. Dramatic exposure. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "navigation-stream-handrail",
+    "path": "Photos/navigation-stream-handrail.imageset",
+    "prompt": "Mountain stream being used as a navigation handrail feature in Alpine terrain. Hiker following the watercourse through valley. Natural linear feature for navigation. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "navigation-slope-aspect",
+    "path": "Photos/navigation-slope-aspect.imageset",
+    "prompt": "Alpine hillside showing different slope aspects — south-facing sunny with melted snow, north-facing shaded with snow remaining. Aspect identification for navigation. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "navigation-compass-pacing",
+    "path": "Photos/navigation-compass-pacing.imageset",
+    "prompt": "Mountaineer counting paces while navigating on a bearing across open Alpine terrain. Compass in hand, focused on maintaining direction. Featureless terrain. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "navigation-headlamp-night",
+    "path": "Photos/navigation-headlamp-night.imageset",
+    "prompt": "Mountaineer navigating by headlamp beam on an Alpine trail at night. Circle of light on the trail, darkness beyond. Night navigation technique. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "navigation-night-group",
+    "path": "Photos/navigation-night-group.imageset",
+    "prompt": "Group of mountaineers navigating together at night with headlamps, maintaining close formation on an Alpine path. Multiple light beams in darkness. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "navigation-star-sky",
+    "path": "Photos/navigation-star-sky.imageset",
+    "prompt": "Clear night sky over Alpine peaks showing prominent star patterns and constellations used for navigation — Polaris, Big Dipper visible. Mountain silhouettes below. Shot in the Swiss Alps. Professional outdoor photography, long exposure, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "navigation-gps-device",
+    "path": "Photos/navigation-gps-device.imageset",
+    "prompt": "Modern handheld GPS device being used on an Alpine summit, screen showing waypoints and track. Real terrain matching the display. Technology in mountain navigation. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "navigation-whiteout-conditions",
+    "path": "Photos/navigation-whiteout-conditions.imageset",
+    "prompt": "Complete whiteout conditions on an Alpine snow field, no horizon visible, sky merging with snow. Mountaineer barely visible in the disorienting conditions. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "rope-figure-eight",
+    "path": "Photos/rope-figure-eight.imageset",
+    "prompt": "Close-up of a perfectly tied figure-eight follow-through knot in climbing rope, attached to a climbing harness. Sharp detail on rope fibers and knot structure. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "rope-clove-hitch",
+    "path": "Photos/rope-clove-hitch.imageset",
+    "prompt": "Close-up of a clove hitch tied on a carabiner at an Alpine belay station. Clean knot with rope running in correct orientation. Rock face background. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "rope-munter-hitch",
+    "path": "Photos/rope-munter-hitch.imageset",
+    "prompt": "Close-up of a Munter hitch (Italian hitch) loaded on an HMS carabiner for belaying. Rope running through the hitch showing proper configuration. Alpine setting. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "rope-prusik-knot",
+    "path": "Photos/rope-prusik-knot.imageset",
+    "prompt": "Close-up of a prusik knot tied with cord on a climbing rope, showing the friction hitch gripping the main line. Detail of wraps and engagement. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "rope-anchor-system",
+    "path": "Photos/rope-anchor-system.imageset",
+    "prompt": "Multi-point climbing anchor equalized with a cordelette on Alpine granite. Three pieces of protection connected to a single master point. Professional construction. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "rope-cordelette",
+    "path": "Photos/rope-cordelette.imageset",
+    "prompt": "Cordelette anchor setup with figure-eight master point connecting multiple protection pieces on Alpine rock. Close-up showing equalization technique. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "rope-belay-device-setup",
+    "path": "Photos/rope-belay-device-setup.imageset",
+    "prompt": "Close-up of a belay device (tube-style) properly threaded with climbing rope and clipped to a locking carabiner on a harness. Ready for belaying. Alpine crag setting. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "rope-rappel-anchor",
+    "path": "Photos/rope-rappel-anchor.imageset",
+    "prompt": "Rappel anchor on an Alpine descent — two bolts or natural features connected with cord, rappel rope threaded through. Setup before committing to the descent. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "rope-snow-bollard",
+    "path": "Photos/rope-snow-bollard.imageset",
+    "prompt": "Snow bollard (mushroom anchor) carved in firm Alpine snow for rappel or belay. Horseshoe-shaped trench with rope around the snow feature. Emergency anchor technique. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "rope-hauling-system",
+    "path": "Photos/rope-hauling-system.imageset",
+    "prompt": "3:1 mechanical advantage hauling system (Z-pulley) rigged on a crevasse lip for glacier rescue. Pulleys, prusiks, and rope showing the complete system. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "rope-prusik-ascending",
+    "path": "Photos/rope-prusik-ascending.imageset",
+    "prompt": "Climber ascending a fixed rope using prusik knots — foot prusik and chest prusik in sequence. Self-rescue ascending technique on Alpine terrain. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "rope-crevasse-lip",
+    "path": "Photos/rope-crevasse-lip.imageset",
+    "prompt": "View looking down into a crevasse from the lip, rescue rope disappearing into the blue ice depths. Dramatic crevasse rescue perspective. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "rope-coil",
+    "path": "Photos/rope-coil.imageset",
+    "prompt": "Neatly coiled climbing rope on a rock at an Alpine crag. Butterfly coil or mountaineer's coil showing proper rope management. Mountain scenery behind. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "glacier-bergschrund",
+    "path": "Photos/glacier-bergschrund.imageset",
+    "prompt": "Large bergschrund (gap between glacier and headwall) on an Alpine glacier, showing the separation between moving ice and static rock. Dark crevice with blue ice walls. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "glacier-flow-patterns",
+    "path": "Photos/glacier-flow-patterns.imageset",
+    "prompt": "Alpine glacier showing visible flow patterns — crevasse patterns indicating faster flow in center, compression at bends, and lateral moraines. Aerial-style view. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "glacier-crevasse-field",
+    "path": "Photos/glacier-crevasse-field.imageset",
+    "prompt": "Dense crevasse field on an Alpine glacier with multiple parallel crevasses, some open and some snow-bridged. Complex route-finding challenge visible. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "glacier-marginal-crevasse",
+    "path": "Photos/glacier-marginal-crevasse.imageset",
+    "prompt": "Marginal crevasse at the edge of an Alpine glacier where ice meets the rock valley wall. Lateral separation with debris and meltwater. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "glacier-snow-bridge",
+    "path": "Photos/glacier-snow-bridge.imageset",
+    "prompt": "Snow bridge spanning a crevasse on an Alpine glacier, showing the thin snow structure over the gap. Some sagging visible indicating weakness. Hazardous crossing point. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "glacier-rope-team",
+    "path": "Photos/glacier-rope-team.imageset",
+    "prompt": "Three-person rope team in proper glacier travel formation, evenly spaced with taut rope. Crampons on glacier ice, ice axes ready. Moving through crevasse terrain. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "glacier-kiwi-coils",
+    "path": "Photos/glacier-kiwi-coils.imageset",
+    "prompt": "Mountaineer with kiwi coils (extra rope coils) around their shoulder while glacier traveling. Close-up showing the proper coil technique with rope to next team member. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "glacier-simultaneous-travel",
+    "path": "Photos/glacier-simultaneous-travel.imageset",
+    "prompt": "Rope team moving simultaneously across an Alpine glacier, maintaining spacing and tension. Efficient glacier travel technique with all members moving. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "glacier-probe-technique",
+    "path": "Photos/glacier-probe-technique.imageset",
+    "prompt": "Mountaineer probing a snow bridge with an avalanche probe before crossing, testing snow depth and strength over a hidden crevasse. Careful glacier navigation. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "glacier-wanded-route",
+    "path": "Photos/glacier-wanded-route.imageset",
+    "prompt": "Bamboo wands (marker poles) placed along a route across an Alpine glacier, marking safe passage through crevasse fields. Line of wands stretching into distance. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "glacier-camp-anchors",
+    "path": "Photos/glacier-camp-anchors.imageset",
+    "prompt": "Tent anchored to Alpine glacier ice using pickets and deadman anchors. Close-up of glacier camping anchor system. Snow walls partially built around camp. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "glacier-rescue-complications",
+    "path": "Photos/glacier-rescue-complications.imageset",
+    "prompt": "Complex crevasse rescue scenario showing rope cutting into the crevasse lip, creating friction problems. Rescue team working to pad the lip and extract the fallen climber. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "glacier-summer-melt",
+    "path": "Photos/glacier-summer-melt.imageset",
+    "prompt": "Alpine glacier in late summer showing exposed blue ice, meltwater streams, and retreating snow line. Sun cups and surface features of melting ice. Seasonal glacier conditions. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "glacier-prusik-ascent",
+    "path": "Photos/glacier-prusik-ascent.imageset",
+    "prompt": "Mountaineer ascending from a crevasse using prusik knots on the rescue rope. View from above showing the climber emerging from the blue ice crevasse. Self-rescue technique. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "firstaid-scene-safety",
+    "path": "Photos/firstaid-scene-safety.imageset",
+    "prompt": "Mountain rescuer approaching an accident scene on an Alpine trail, assessing the area for hazards before treating the patient. Loose rock, steep terrain visible. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "firstaid-assessment",
+    "path": "Photos/firstaid-assessment.imageset",
+    "prompt": "Mountain first aider performing primary assessment (ABCDE) on a patient lying on an Alpine trail. Checking airway and breathing. First aid kit open nearby. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "firstaid-head-to-toe",
+    "path": "Photos/firstaid-head-to-toe.imageset",
+    "prompt": "Systematic head-to-toe physical examination of an injured mountaineer on a mountain trail. Rescuer methodically checking for injuries. Alpine setting. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "firstaid-hypothermia-treatment",
+    "path": "Photos/firstaid-hypothermia-treatment.imageset",
+    "prompt": "Rescuer treating a hypothermic mountaineer — removing wet layers and applying warm insulation in a sheltered spot on an Alpine mountain. Vapor barrier visible. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "firstaid-hypothermia-wrap",
+    "path": "Photos/firstaid-hypothermia-wrap.imageset",
+    "prompt": "Hypothermia wrap technique being demonstrated — casualty wrapped in multiple insulation layers including bivvy bag, sleeping bag, and padding from the ground. Alpine setting. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "firstaid-altitude-symptoms",
+    "path": "Photos/firstaid-altitude-symptoms.imageset",
+    "prompt": "Mountaineer at high altitude showing signs of altitude sickness — resting against rocks, looking unwell. Companion monitoring closely. High Alpine environment above treeline. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "firstaid-sam-splint",
+    "path": "Photos/firstaid-sam-splint.imageset",
+    "prompt": "SAM splint being shaped and applied to an injured forearm on a mountain trail. Close-up of the orange aluminum splint being formed and secured with bandage. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "firstaid-kit",
+    "path": "Photos/firstaid-kit.imageset",
+    "prompt": "Well-organized wilderness first aid kit contents laid out on a rock on an Alpine trail. Bandages, splint, medications, tools all visible. Essential mountain medical supplies. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "firstaid-wound-irrigation",
+    "path": "Photos/firstaid-wound-irrigation.imageset",
+    "prompt": "Wound irrigation being performed on a mountain trail — clean water being flushed over a wound using a syringe. Close-up of wilderness wound care technique. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "firstaid-lightning-position",
+    "path": "Photos/firstaid-lightning-position.imageset",
+    "prompt": "Group of hikers in the lightning protection position on an Alpine slope — crouched on insulating pads, spread apart, away from the ridge. Storm overhead. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "firstaid-frostbite-stages",
+    "path": "Photos/firstaid-frostbite-stages.imageset",
+    "prompt": "Close-up of frostbitten fingers showing different stages — pale white superficial frostbite and darker deep frostbite. Clinical mountain medicine documentation. Professional medical photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "firstaid-heat-exhaustion",
+    "path": "Photos/firstaid-heat-exhaustion.imageset",
+    "prompt": "Hiker suffering from heat exhaustion on a hot Alpine trail, resting in shade while companion provides cooling and hydration. Red-faced, sweating. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "firstaid-snow-shelter",
+    "path": "Photos/firstaid-snow-shelter.imageset",
+    "prompt": "Emergency snow shelter (snow trench or quinzee) being constructed on an Alpine slope. Partially built shelter showing the digging technique. Survival shelter construction. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  },
+  {
+    "imageName": "firstaid-improvised-litter",
+    "path": "Photos/firstaid-improvised-litter.imageset",
+    "prompt": "Improvised stretcher/litter built from trekking poles and jackets being used to carry an injured mountaineer on an Alpine trail. Team evacuation technique. Shot in the Swiss Alps. Professional outdoor photography, natural lighting, high detail. No text, no watermarks, no UI elements.",
+    "category": "section"
+  }
+]

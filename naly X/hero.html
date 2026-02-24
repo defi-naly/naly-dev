@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What I'm Buying While You Panic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Space Mono', monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px;
+      background: #0a0a0a;
+    }
+
+    .canvas {
+      width: 1200px;
+      height: 480px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Banner image as background */
+    .banner-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('1080x360.jpeg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Left-side gradient for text readability */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.55) 0%,
+        rgba(0, 0, 0, 0.35) 30%,
+        rgba(0, 0, 0, 0.1) 60%,
+        transparent 100%
+      );
+    }
+
+    /* Content layer */
+    .content {
+      position: relative;
+      z-index: 10;
+      height: 100%;
+      padding: 44px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .header {
+      max-width: 100%;
+    }
+
+    .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.85);
+      text-transform: uppercase;
+      letter-spacing: 0.35em;
+      margin-bottom: 14px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6), 0 2px 12px rgba(0,0,0,0.4);
+    }
+
+    .title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 80px;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.7),
+        0 4px 24px rgba(0, 0, 0, 0.5),
+        0 8px 48px rgba(0, 0, 0, 0.3);
+    }
+
+    .subtitle {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 400;
+      margin-top: 14px;
+      letter-spacing: 0.04em;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6), 0 2px 12px rgba(0,0,0,0.4);
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    /* Floating data bars without card container */
+    .strata {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .stratum {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .stratum-label {
+      width: 42px;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.9);
+      text-align: right;
+      letter-spacing: 0.08em;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6), 0 2px 12px rgba(0,0,0,0.4);
+    }
+
+    .stratum-bar {
+      height: 28px;
+      border-radius: 4px;
+      position: relative;
+      box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.4),
+        0 4px 20px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .stratum-bar::after {
+      content: attr(data-value);
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .stratum-gold {
+      width: 320px;
+      background: linear-gradient(90deg,
+        #9a7a40 0%,
+        #c9a84a 30%,
+        #dbb855 60%,
+        #c9a84a 100%
+      );
+    }
+    .stratum-gold::after {
+      color: #3d3015;
+    }
+
+    .stratum-btc {
+      width: 12px;
+      min-width: 70px;
+      background: linear-gradient(90deg,
+        #c06010 0%,
+        #f7931a 40%,
+        #ffaa40 100%
+      );
+    }
+    .stratum-btc::after {
+      color: #4a2810;
+    }
+
+    /* Floating inscription callout */
+    .inscription {
+      text-align: right;
+    }
+
+    .inscription-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.7),
+        0 4px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .inscription-text {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      color: rgba(255, 255, 255, 0.8);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 6px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6), 0 2px 12px rgba(0,0,0,0.4);
+    }
+
+    .author {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: 0.08em;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6), 0 2px 12px rgba(0,0,0,0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="canvas">
+    <!-- Your X banner as background -->
+    <div class="banner-bg"></div>
+    <div class="overlay"></div>
+
+    <!-- Content -->
+    <div class="content">
+      <div class="header">
+        <div class="label">Research</div>
+        <h1 class="title">What I'm Buying While You Panic</h1>
+        <p class="subtitle">Three asymmetric bets with uncapped upside</p>
+      </div>
+
+      <div class="footer">
+        <div class="strata">
+          <div class="stratum">
+            <div class="stratum-label">GOLD</div>
+            <div class="stratum-bar stratum-gold" data-value="$33.9T"></div>
+          </div>
+          <div class="stratum">
+            <div class="stratum-label">BTC</div>
+            <div class="stratum-bar stratum-btc" data-value="$1.29T"></div>
+          </div>
+        </div>
+
+        <div class="inscription">
+          <div class="inscription-number">26×</div>
+          <div class="inscription-text">The gap is the opportunity</div>
+        </div>
+
+        <div class="author">@defi_naly</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

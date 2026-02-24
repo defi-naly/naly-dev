@@ -8,7 +8,7 @@ struct CliffBandScene: View {
         ZStack {
             // Background
             LinearGradient(
-                colors: [Color(hex: "1a1a2e"), Color(hex: "1e293b")],
+                colors: [Color(hex: "F5F0EB"), Color(hex: "E7E5E4")],
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -32,7 +32,7 @@ struct CliffBandScene: View {
             }
             .fill(
                 LinearGradient(
-                    colors: [Color(hex: "4B5563"), Color(hex: "374151"), Color(hex: "1f2937")],
+                    colors: [Color(hex: "A8A29E"), Color(hex: "78716C"), Color(hex: "57534E")],
                     startPoint: .top,
                     endPoint: .bottom
                 )

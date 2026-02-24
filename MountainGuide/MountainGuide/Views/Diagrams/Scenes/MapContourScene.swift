@@ -8,7 +8,7 @@ struct MapContourScene: View {
         Canvas { context, size in
             // Parchment-like map background
             let bg = Path(roundedRect: CGRect(origin: .zero, size: size), cornerRadius: 0)
-            context.fill(bg, with: .color(Color(hex: "1a1a2e")))
+            context.fill(bg, with: .color(Color(hex: "FEF3C7")))
 
             // Contour lines — concentric rounded shapes representing a summit
             let center = CGPoint(x: size.width * 0.45, y: size.height * 0.4)
@@ -25,12 +25,12 @@ struct MapContourScene: View {
                 let contour = Path(ellipseIn: rect)
                 let opacity = i % 5 == 0 ? 0.5 : 0.25
                 let lineWidth: CGFloat = i % 5 == 0 ? 1.2 : 0.6
-                context.stroke(contour, with: .color(Color(hex: "8B5CF6").opacity(opacity)), lineWidth: lineWidth)
+                context.stroke(contour, with: .color(Color(hex: "1B5C85").opacity(opacity)), lineWidth: lineWidth)
             }
 
             // Summit marker
             let summitDot = Path(ellipseIn: CGRect(x: center.x - 3, y: center.y - 3, width: 6, height: 6))
-            context.fill(summitDot, with: .color(Color(hex: "8B5CF6").opacity(0.7)))
+            context.fill(summitDot, with: .color(Color(hex: "1B5C85").opacity(0.7)))
 
             // A stream line (blue)
             var stream = Path()

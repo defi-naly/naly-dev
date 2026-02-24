@@ -3,63 +3,160 @@ import SwiftUI
 struct ExploreArticleView: View {
     let article: ExploreArticle
 
+    @State private var sectionsAppeared: Set<Int> = []
+
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                // Header
-                VStack(alignment: .leading, spacing: 8) {
-                    // Domain badge
-                    HStack(spacing: 6) {
-                        Image(systemName: article.domain.icon)
-                            .font(.system(size: 12))
-                        Text(article.domain.rawValue.capitalized)
-                            .font(.mono(10, weight: .bold))
-                    }
-                    .foregroundStyle(article.domain.color)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 4)
-                    .background(article.domain.color.opacity(0.1))
-                    .cornerRadius(6)
+            VStack(alignment: .leading, spacing: 0) {
+                // Hero image
+                heroImageView
 
-                    // Title
-                    Text(article.title)
-                        .font(.mono(22, weight: .bold))
-                        .foregroundStyle(Color.textPrimary)
-
-                    // Summary
-                    Text(article.summary)
-                        .font(.mono(13))
-                        .foregroundStyle(Color.textMuted)
-                        .lineSpacing(2)
+                // Header (below hero when no image, overlaid when hero exists)
+                if article.heroImageName == nil {
+                    headerView
+                        .padding(.horizontal)
+                        .padding(.top, 8)
                 }
-                .padding(.horizontal)
-                .padding(.top, 8)
 
                 Divider()
                     .background(Color.terminalBorder)
                     .padding(.horizontal)
+                    .padding(.top, article.heroImageName != nil ? 16 : 12)
 
-                // Sections
-                ForEach(article.sections) { section in
+                // Sections with staggered reveal
+                ForEach(Array(article.sections.enumerated()), id: \.element.id) { index, section in
                     sectionView(section)
+                        .opacity(sectionsAppeared.contains(index) ? 1 : 0)
+                        .offset(y: sectionsAppeared.contains(index) ? 0 : 20)
+                        .animation(.spring(response: 0.5).delay(Double(index) * 0.08), value: sectionsAppeared.contains(index))
+                        .onAppear {
+                            sectionsAppeared.insert(index)
+                        }
+                        .padding(.top, 20)
                 }
 
                 // Related articles
                 if !article.relatedArticles.isEmpty {
                     relatedArticlesSection
+                        .padding(.top, 20)
                 }
 
                 // Related modules link
                 if !article.relatedModules.isEmpty {
                     relatedModulesSection
+                        .padding(.top, 20)
                 }
             }
             .padding(.bottom, 32)
         }
         .background(Color.terminalBg)
         .navigationBarTitleDisplayMode(.inline)
-        .toolbarColorScheme(.dark, for: .navigationBar)
     }
+
+    // MARK: - Hero Image
+
+    @ViewBuilder
+    private var heroImageView: some View {
+        if let heroImageName = article.heroImageName {
+            if UIImage(named: heroImageName) != nil {
+                ZStack(alignment: .bottomLeading) {
+                    Image(heroImageName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: 260)
+                        .clipped()
+
+                    // Gradient scrim
+                    LinearGradient(
+                        colors: [Color.black.opacity(0.6), Color.black.opacity(0.0)],
+                        startPoint: .bottom,
+                        endPoint: .top
+                    )
+                    .frame(height: 140)
+
+                    // Title overlay
+                    VStack(alignment: .leading, spacing: 8) {
+                        domainBadge(light: true)
+                        Text(article.title)
+                            .font(.mono(22, weight: .bold))
+                            .foregroundStyle(.white)
+                        Text(article.summary)
+                            .font(.mono(12))
+                            .foregroundStyle(.white.opacity(0.85))
+                            .lineSpacing(2)
+                    }
+                    .padding(16)
+                }
+                .frame(height: 260)
+                .clipped()
+                .clipShape(
+                    UnevenRoundedRectangle(
+                        bottomLeadingRadius: 12,
+                        bottomTrailingRadius: 12
+                    )
+                )
+            } else {
+                // Hero illustration fallback
+                ZStack(alignment: .bottomLeading) {
+                    IllustrationView(imageName: heroImageName, domain: article.domain, height: 200)
+
+                    // Gradient scrim for text readability
+                    LinearGradient(
+                        colors: [Color.black.opacity(0.4), Color.black.opacity(0.0)],
+                        startPoint: .bottom,
+                        endPoint: .top
+                    )
+                    .frame(height: 100)
+
+                    VStack(alignment: .leading, spacing: 8) {
+                        domainBadge(light: true)
+                        Text(article.title)
+                            .font(.mono(22, weight: .bold))
+                            .foregroundStyle(.white)
+                        Text(article.summary)
+                            .font(.mono(12))
+                            .foregroundStyle(.white.opacity(0.85))
+                            .lineSpacing(2)
+                    }
+                    .padding(16)
+                }
+            }
+        } else {
+            // No hero image — show standard header
+            headerView
+                .padding(.horizontal)
+                .padding(.top, 8)
+        }
+    }
+
+    private var headerView: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            domainBadge(light: false)
+            Text(article.title)
+                .font(.mono(22, weight: .bold))
+                .foregroundStyle(Color.textPrimary)
+            Text(article.summary)
+                .font(.mono(13))
+                .foregroundStyle(Color.textMuted)
+                .lineSpacing(2)
+        }
+    }
+
+    private func domainBadge(light: Bool) -> some View {
+        HStack(spacing: 6) {
+            Image(systemName: article.domain.icon)
+                .font(.system(size: 12))
+            Text(article.domain.rawValue.capitalized)
+                .font(.mono(10, weight: .bold))
+        }
+        .foregroundStyle(light ? .white : article.domain.color)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 4)
+        .background(light ? Color.white.opacity(0.2) : article.domain.color.opacity(0.1))
+        .cornerRadius(6)
+    }
+
+    // MARK: - Section View
 
     private func sectionView(_ section: ExploreSection) -> some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -67,6 +164,43 @@ struct ExploreArticleView: View {
             Text(section.heading)
                 .font(.mono(16, weight: .bold))
                 .foregroundStyle(Color.textPrimary)
+
+            // Animation (highest priority)
+            if let animName = section.animationName {
+                RiveAnimationView(animationName: animName)
+                    .frame(height: 240)
+                    .cornerRadius(12)
+                    .padding(.vertical, 4)
+            }
+
+            // Photo (with graceful fallback)
+            if let imageName = section.imageName {
+                if UIImage(named: imageName) != nil {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Image(imageName)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(height: 200)
+                            .clipped()
+                            .cornerRadius(8)
+                        if let caption = section.imageCaption {
+                            Text(caption)
+                                .font(.system(size: 11))
+                                .foregroundStyle(Color.textTertiary)
+                        }
+                    }
+                } else {
+                    VStack(alignment: .leading, spacing: 4) {
+                        IllustrationView(imageName: imageName, domain: article.domain, height: 160)
+                            .cornerRadius(8)
+                        if let caption = section.imageCaption {
+                            Text(caption)
+                                .font(.system(size: 11))
+                                .foregroundStyle(Color.textTertiary)
+                        }
+                    }
+                }
+            }
 
             // Body text
             Text(section.body)
@@ -139,6 +273,8 @@ struct ExploreArticleView: View {
         }
         .padding(.horizontal)
     }
+
+    // MARK: - Related Sections
 
     private var relatedArticlesSection: some View {
         VStack(alignment: .leading, spacing: 8) {

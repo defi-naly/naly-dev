@@ -42,7 +42,6 @@ struct DomainListView: View {
             .background(Color.terminalBg)
             .navigationTitle("Learn")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbarColorScheme(.dark, for: .navigationBar)
         }
     }
 }
@@ -149,7 +148,6 @@ struct ModuleListView: View {
         .background(Color.terminalBg)
         .navigationTitle(domain.name)
         .navigationBarTitleDisplayMode(.inline)
-        .toolbarColorScheme(.dark, for: .navigationBar)
     }
 }
 

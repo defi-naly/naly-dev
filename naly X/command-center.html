@@ -1,0 +1,2711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@defi_naly — Command Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --void: #08090c;
+      --soil: #0f1014;
+      --surface: #161819;
+      --border: #1e1c1a;
+      --border-hover: #2e2a26;
+      --bright: #f0efe9;
+      --text: #d4cfc4;
+      --muted: #a69b8a;
+      --dim: #6b6560;
+      --gold: #7ba3c9;
+      --gold-bright: #96bade;
+      --gold-glow: rgba(123, 163, 201, 0.25);
+      --green: #3d9970;
+      --red: #b54a4a;
+      --amber: #c67a4a;
+      --blue: #5b8fb9;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Inter', sans-serif;
+      --display: 'Space Grotesk', sans-serif;
+      --radius: 8px;
+      --radius-lg: 14px;
+      --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--void);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    ::selection { background: var(--gold); color: var(--void); }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(8, 9, 12, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      height: 60px;
+    }
+
+    .nav-brand {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 16px;
+      color: #dce4f0;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-right: 48px;
+      flex-shrink: 0;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 0;
+      height: 100%;
+    }
+
+    .nav-tab {
+      display: flex;
+      align-items: center;
+      padding: 0 22px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+      height: 100%;
+      user-select: none;
+    }
+
+    .nav-tab:hover { color: var(--muted); }
+    .nav-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    .nav-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-indicator {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--dim);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-indicator .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px rgba(61, 153, 112, 0.4);
+    }
+
+    /* ─── MAIN ─── */
+    main {
+      padding: 92px 32px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ─── CARDS ─── */
+    .card {
+      background: var(--soil);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s ease, box-shadow 0.35s ease;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(123, 163, 201, 0.2), transparent);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-card);
+    }
+
+    .card:hover::before { opacity: 1; }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .card-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .card-title {
+      font-family: var(--display);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--bright);
+      margin-bottom: 4px;
+      letter-spacing: -0.01em;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ─── GRID ─── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px; }
+
+    @media (max-width: 768px) {
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    }
+
+    /* ─── STAT CARDS ─── */
+    .stat-card {
+      background: var(--soil);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: border-color 0.25s ease, box-shadow 0.35s ease;
+    }
+
+    .stat-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-card);
+    }
+
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+    }
+
+    .stat-value {
+      font-family: var(--display);
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--bright);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .stat-delta {
+      font-family: var(--mono);
+      font-size: 12px;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .stat-delta.positive { color: var(--green); }
+    .stat-delta.negative { color: var(--red); }
+    .stat-delta.neutral { color: var(--dim); }
+
+    .stat-target {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--dim);
+      margin-top: 6px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── PROGRESS BAR ─── */
+    .progress-bar {
+      height: 4px;
+      background: var(--surface);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 14px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .progress-fill.gold { background: linear-gradient(90deg, #4a7a9e, var(--gold), var(--gold-bright)); }
+    .progress-fill.green { background: linear-gradient(90deg, #2d7a56, var(--green)); }
+    .progress-fill.amber { background: linear-gradient(90deg, #8a5430, var(--amber)); }
+    .progress-fill.red { background: linear-gradient(90deg, #7a2e2e, var(--red)); }
+
+    /* ─── FORMS ─── */
+    label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 13px;
+      padding: 11px 14px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(123, 163, 201, 0.08);
+    }
+
+    textarea { resize: vertical; min-height: 80px; }
+
+    .form-row {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .form-group {
+      flex: 1;
+      margin-bottom: 18px;
+    }
+
+    .form-group-inline {
+      flex: 1;
+      margin-bottom: 0;
+    }
+
+    /* ─── BUTTONS ─── */
+    button {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 11px 22px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--void);
+      border-color: var(--gold);
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-bright);
+      border-color: var(--gold-bright);
+      box-shadow: 0 0 20px var(--gold-glow);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--muted);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      color: var(--text);
+      border-color: var(--border-hover);
+    }
+
+    .btn-danger {
+      background: transparent;
+      color: var(--red);
+      border-color: var(--border);
+    }
+
+    .btn-danger:hover {
+      border-color: var(--red);
+    }
+
+    .btn-small {
+      padding: 7px 14px;
+      font-size: 10px;
+    }
+
+    .btn-copy {
+      background: transparent;
+      color: var(--gold);
+      border-color: rgba(123, 163, 201, 0.3);
+    }
+
+    .btn-copy:hover {
+      background: var(--gold);
+      color: var(--void);
+      border-color: var(--gold);
+    }
+
+    /* ─── TABLES ─── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      font-size: 13px;
+      color: var(--text);
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(30, 28, 26, 0.6);
+    }
+
+    tr:hover td { background: rgba(123, 163, 201, 0.02); }
+
+    .pill {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 3px;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .pill-bridge { background: rgba(123, 163, 201, 0.12); color: var(--gold); }
+    .pill-thesis { background: rgba(61, 153, 112, 0.12); color: var(--green); }
+    .pill-vibe { background: rgba(198, 122, 74, 0.12); color: var(--amber); }
+    /* Legacy pill aliases */
+    .pill-math { background: rgba(123, 163, 201, 0.12); color: var(--gold); }
+    .pill-signal { background: rgba(91, 143, 185, 0.12); color: var(--blue); }
+    .pill-privacy { background: rgba(61, 153, 112, 0.12); color: var(--green); }
+    .pill-venue { background: rgba(198, 122, 74, 0.12); color: var(--amber); }
+    .pill-admission { background: rgba(181, 74, 74, 0.12); color: var(--red); }
+
+    .pill-x { background: rgba(240, 239, 233, 0.06); color: var(--muted); }
+    .pill-substack { background: rgba(198, 122, 74, 0.12); color: var(--amber); }
+
+    /* ─── SECTION HEADERS ─── */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      font-family: var(--display);
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--bright);
+      letter-spacing: -0.02em;
+    }
+
+    /* ─── CADENCE GRID ─── */
+    .cadence-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+    }
+
+    .cadence-day {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .cadence-day:hover { border-color: var(--border-hover); }
+
+    .cadence-day.posted {
+      border-color: rgba(61, 153, 112, 0.4);
+      background: rgba(61, 153, 112, 0.06);
+    }
+
+    .cadence-day-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+
+    .cadence-day-type {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--muted);
+      margin-top: 6px;
+      letter-spacing: 0.02em;
+    }
+
+    .cadence-check {
+      font-size: 18px;
+      line-height: 1;
+      color: var(--dim);
+    }
+
+    .cadence-day.posted .cadence-check {
+      color: var(--green);
+    }
+
+    /* ─── PILLAR BAR ─── */
+    .pillar-bars { margin-top: 16px; }
+
+    .pillar-bar-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 14px;
+    }
+
+    .pillar-bar-label {
+      width: 80px;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      flex-shrink: 0;
+    }
+
+    .pillar-bar-track {
+      flex: 1;
+      height: 18px;
+      background: var(--surface);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .pillar-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 8px;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .pillar-bar-fill.bridge { background: linear-gradient(90deg, #4a7a9e, var(--gold)); color: var(--void); }
+    .pillar-bar-fill.thesis { background: linear-gradient(90deg, #2d6b4e, var(--green)); color: var(--void); }
+    .pillar-bar-fill.vibe { background: linear-gradient(90deg, #8a5430, var(--amber)); color: var(--void); }
+
+    /* ─── STUDIO ─── */
+    .studio-layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .studio-layout { grid-template-columns: 1fr; }
+    }
+
+    .brain-panel {
+      background: var(--soil);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .brain-header {
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brain-list {
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    .brain-item {
+      padding: 14px 22px;
+      border-bottom: 1px solid rgba(30, 28, 26, 0.5);
+      cursor: pointer;
+      transition: background 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brain-item:hover { background: rgba(123, 163, 201, 0.03); }
+    .brain-item.selected { background: rgba(123, 163, 201, 0.06); border-left: 2px solid var(--gold); }
+
+    .brain-item-title {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .brain-item-type {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .brain-item-remove {
+      font-size: 11px;
+      color: var(--dim);
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: all 0.15s ease;
+    }
+
+    .brain-item-remove:hover { color: var(--red); background: rgba(181, 74, 74, 0.1); }
+
+    .composer-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .template-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px;
+    }
+
+    .template-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+
+    .template-card:hover { border-color: var(--border-hover); }
+    .template-card.selected { border-color: var(--gold); background: rgba(123, 163, 201, 0.06); }
+
+    .template-card-name {
+      font-family: var(--display);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .template-card-pillar {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--dim);
+      letter-spacing: 0.04em;
+    }
+
+    .prompt-output {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-height: 400px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    /* ─── CHECKLIST ─── */
+    .checklist {
+      list-style: none;
+    }
+
+    .checklist li {
+      padding: 10px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--muted);
+      cursor: pointer;
+      transition: color 0.15s ease;
+    }
+
+    .checklist li:hover { color: var(--text); }
+    .checklist li.checked { color: var(--green); text-decoration: line-through; text-decoration-color: rgba(61, 153, 112, 0.3); }
+
+    .check-box {
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      transition: all 0.15s ease;
+    }
+
+    .checklist li.checked .check-box {
+      background: var(--green);
+      border-color: var(--green);
+      color: var(--void);
+    }
+
+    /* ─── PHASE INDICATOR ─── */
+    .phase-track {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 28px;
+    }
+
+    .phase-segment {
+      flex: 1;
+      height: 6px;
+      background: var(--surface);
+      border-radius: 3px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phase-segment .fill {
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .phase-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .phase-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .phase-label.active { color: var(--gold); font-weight: 600; }
+
+    /* ─── STRATEGY CARDS ─── */
+    .strategy-pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+    }
+
+    .strategy-pillar-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: border-color 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .strategy-pillar-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-card);
+    }
+
+    .strategy-pillar-name {
+      font-family: var(--display);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--bright);
+      margin-bottom: 8px;
+    }
+
+    .strategy-pillar-desc {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .strategy-pillar-freq {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--dim);
+      letter-spacing: 0.03em;
+    }
+
+    /* ─── WEEKLY CALENDAR ─── */
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+    }
+
+    .calendar-day {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 14px;
+      transition: border-color 0.2s ease;
+    }
+
+    .calendar-day:hover {
+      border-color: var(--border-hover);
+    }
+
+    .calendar-day-name {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 10px;
+    }
+
+    .calendar-day-content {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ─── TABS WITHIN SECTIONS ─── */
+    .sub-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .sub-tab {
+      padding: 12px 18px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--dim);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .sub-tab:hover { color: var(--muted); }
+    .sub-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    .sub-content { display: none; }
+    .sub-content.active { display: block; }
+
+    /* ─── IMAGE DROP ─── */
+    .image-drop {
+      border: 1px dashed var(--border-hover);
+      border-radius: var(--radius);
+      padding: 28px;
+      text-align: center;
+      color: var(--dim);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .image-drop:hover { border-color: var(--muted); color: var(--muted); }
+    .image-drop.dragover { border-color: var(--gold); background: rgba(123, 163, 201, 0.04); }
+
+    .image-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .image-preview img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+
+    /* ─── EMPTY STATE ─── */
+    .empty-state {
+      text-align: center;
+      padding: 72px 24px;
+      color: var(--dim);
+    }
+
+    .empty-state-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+      opacity: 0.4;
+    }
+
+    .empty-state-text {
+      font-size: 13px;
+      margin-bottom: 16px;
+      color: var(--muted);
+    }
+
+    /* ─── TOAST ─── */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: var(--soil);
+      border: 1px solid rgba(61, 153, 112, 0.4);
+      border-radius: var(--radius);
+      padding: 14px 22px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--green);
+      letter-spacing: 0.04em;
+      z-index: 200;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(8, 9, 12, 0.8);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 150;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.show { display: flex; }
+
+    .modal {
+      background: var(--soil);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-title {
+      font-family: var(--display);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--bright);
+      margin-bottom: 24px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 28px;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
+
+    /* ─── GROWTH CHART ─── */
+    .chart-container {
+      position: relative;
+      height: 200px;
+      padding: 20px 0;
+    }
+
+    .chart-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 8px;
+    }
+
+    .chart-label {
+      width: 32px;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--dim);
+      text-align: right;
+      flex-shrink: 0;
+      letter-spacing: 0.04em;
+    }
+
+    .chart-bar-track {
+      flex: 1;
+      height: 22px;
+      background: var(--surface);
+      border-radius: 3px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chart-bar-target {
+      position: absolute;
+      top: 0; bottom: 0;
+      border-right: 1px dashed var(--dim);
+      opacity: 0.3;
+    }
+
+    .chart-bar-actual {
+      height: 100%;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      padding-left: 8px;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .chart-value {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      flex-shrink: 0;
+      width: 50px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── EDITABLE STAT ─── */
+    .editable-stat {
+      cursor: pointer;
+      position: relative;
+    }
+
+    .editable-stat:hover::after {
+      content: '✎';
+      position: absolute;
+      right: -22px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      color: var(--dim);
+    }
+
+    .editable-stat input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--gold);
+      font-family: var(--display);
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--bright);
+      width: 130px;
+      padding: 0;
+      letter-spacing: -0.02em;
+    }
+
+    /* ─── MOUNTAIN BACKGROUND ─── */
+    .mountain-bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .mountain-img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.3;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .mountain-fade-top {
+      display: none;
+    }
+
+    .mountain-fade-bottom {
+      display: none;
+    }
+
+    .mountain-fade-sides {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(8, 9, 12, 0.45);
+    }
+
+    /* ─── REDUCED MOTION ─── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ MOUNTAIN BACKGROUND ═══════════ -->
+<div class="mountain-bg">
+  <img src="1080x360.jpeg" alt="" class="mountain-img">
+  <div class="mountain-fade mountain-fade-top"></div>
+  <div class="mountain-fade mountain-fade-bottom"></div>
+  <div class="mountain-fade mountain-fade-sides"></div>
+</div>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav>
+  <div class="nav-brand">defi_naly</div>
+  <div class="nav-tabs">
+    <div class="nav-tab active" data-tab="dashboard">Dashboard</div>
+    <div class="nav-tab" data-tab="strategy">Strategy</div>
+    <div class="nav-tab" data-tab="studio">Content Studio</div>
+    <div class="nav-tab" data-tab="analytics">Analytics</div>
+    <div class="nav-tab" data-tab="tracker">Growth</div>
+  </div>
+  <div class="nav-right">
+    <div class="nav-indicator">
+      <div class="dot"></div>
+      <span id="nav-phase">Foundation</span>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- ═══════════ DASHBOARD ═══════════ -->
+<div class="tab-content active" id="tab-dashboard">
+
+  <div class="section-header">
+    <div class="section-title">Dashboard</div>
+    <div style="font-family: var(--mono); font-size: 11px; color: var(--dim); letter-spacing: 0.02em;" id="dashboard-date"></div>
+  </div>
+
+  <!-- Stats Row -->
+  <div class="grid-4" style="margin-bottom: 16px;">
+    <div class="stat-card">
+      <div class="stat-label">X Followers</div>
+      <div class="stat-value editable-stat" id="stat-x-followers" data-key="xFollowers" data-default="14000"></div>
+      <div class="stat-delta neutral" id="stat-x-delta"></div>
+      <div class="stat-target" id="stat-x-target"></div>
+      <div class="progress-bar"><div class="progress-fill gold" id="x-progress"></div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Substack Subs</div>
+      <div class="stat-value editable-stat" id="stat-sub-followers" data-key="substackSubs" data-default="1000"></div>
+      <div class="stat-delta neutral" id="stat-sub-delta"></div>
+      <div class="stat-target" id="stat-sub-target"></div>
+      <div class="progress-bar"><div class="progress-fill gold" id="sub-progress"></div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Posts This Week</div>
+      <div class="stat-value" id="stat-posts-week">0</div>
+      <div class="stat-target">Target: 7-10</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Articles This Month</div>
+      <div class="stat-value" id="stat-articles-month">0</div>
+      <div class="stat-target">Target: 2</div>
+    </div>
+  </div>
+
+  <!-- Cadence This Week -->
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="card-title">Posting Cadence</div>
+        <div class="card-subtitle">Click to mark posted. <span id="cadence-week-label"></span></div>
+      </div>
+      <button class="btn-secondary btn-small" onclick="resetCadence()">Reset Week</button>
+    </div>
+    <div class="cadence-grid" id="cadence-grid"></div>
+  </div>
+
+  <!-- Pillar Distribution + Recent Posts -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Pillar Distribution</div>
+        <div class="card-label">This Month</div>
+      </div>
+      <div class="pillar-bars" id="pillar-bars"></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Recent Posts</div>
+        <button class="btn-secondary btn-small" onclick="switchTab('analytics')">View All</button>
+      </div>
+      <div id="recent-posts"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ STRATEGY ═══════════ -->
+<div class="tab-content" id="tab-strategy">
+
+  <div class="section-header">
+    <div class="section-title">Strategy</div>
+  </div>
+
+  <!-- Identity -->
+  <div class="card" style="border-left: 2px solid var(--gold);">
+    <div class="card-label" style="margin-bottom: 14px;">Identity</div>
+    <div style="font-family: var(--display); font-size: 17px; color: var(--bright); font-weight: 500; line-height: 1.6; letter-spacing: -0.01em;">
+      DeFi Maxi &middot; Writing about Privacy & AI &middot; @beets_fi prev @balancer
+    </div>
+    <div style="font-size: 13px; color: var(--muted); margin-top: 14px; line-height: 1.6;">
+      DeFi strategist (Balancer, Beets Fi), 14.3K X followers. Building at the intersection of DeFi, privacy, and AI. 12-month runway to reposition and find next role.
+    </div>
+  </div>
+
+  <!-- Core Thesis -->
+  <div class="card" style="border-left: 2px solid var(--green);">
+    <div class="card-label" style="margin-bottom: 14px;">Core Thesis</div>
+    <div style="font-family: var(--display); font-size: 17px; color: var(--bright); font-weight: 500; line-height: 1.6; letter-spacing: -0.01em;">
+      "Privacy is becoming foundational infrastructure, not a feature."
+    </div>
+    <div style="font-size: 13px; color: var(--muted); margin-top: 14px; line-height: 1.7;">
+      Three forces converging:<br>
+      <span style="color: var(--gold);">1.</span> Vitalik says on-chain governance requires anonymous voting to work.<br>
+      <span style="color: var(--gold);">2.</span> Altman says every company becomes an API company, with AI agents calling services dynamically.<br>
+      <span style="color: var(--gold);">3.</span> AI agents transacting on-chain create fully legible behavior patterns. They need private financial rails.<br><br>
+      <span style="color: var(--bright);">Nobody is consistently connecting these dots publicly. That's the gap to own.</span>
+    </div>
+  </div>
+
+  <!-- Content Mix -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Content Mix</div>
+    </div>
+    <div class="strategy-pillar-grid">
+      <div class="strategy-pillar-card" style="border-top: 2px solid var(--gold);">
+        <div class="strategy-pillar-name">Bridge Content</div>
+        <div style="font-family: var(--mono); font-size: 28px; font-weight: 600; color: var(--gold); margin-bottom: 6px;">50%</div>
+        <div class="strategy-pillar-desc">Use DeFi insider credibility to lead people toward the privacy thesis. Hook with DeFi knowledge, land on privacy insight.</div>
+      </div>
+      <div class="strategy-pillar-card" style="border-top: 2px solid var(--green);">
+        <div class="strategy-pillar-name">Pure Thesis</div>
+        <div style="font-family: var(--mono); font-size: 28px; font-weight: 600; color: var(--green); margin-bottom: 6px;">30%</div>
+        <div class="strategy-pillar-desc">Zcash, privacy infrastructure, AI agents needing private rails. The hard conviction content.</div>
+      </div>
+      <div class="strategy-pillar-card" style="border-top: 2px solid var(--amber);">
+        <div class="strategy-pillar-name">Personality / Vibe</div>
+        <div style="font-family: var(--mono); font-size: 28px; font-weight: 600; color: var(--amber); margin-bottom: 6px;">20%</div>
+        <div class="strategy-pillar-desc">Zen degen energy, skating, mountains. The human behind the thesis.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIPZ -->
+  <div class="card" style="border-left: 2px solid var(--amber);">
+    <div class="card-label" style="margin-bottom: 14px;">TIPZ = Portfolio Piece, Not a Startup</div>
+    <div style="font-size: 13px; color: var(--muted); line-height: 1.7;">
+      Demonstrates thesis + domain knowledge + ability to ship with AI tools. It's a calling card, not a company. Space TIPZ teases out: one every week or two, not daily.
+    </div>
+  </div>
+
+  <!-- Content Rules -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Content Rules</div>
+    </div>
+    <ul class="checklist" id="content-rules-checklist">
+      <li onclick="toggleCheck(this)"><span class="check-box"></span> Thesis first, product second. Never lead with TIPZ screenshots.</li>
+      <li onclick="toggleCheck(this)"><span class="check-box"></span> Separate insight posts from product posts. Insight builds reputation, product spends it.</li>
+      <li onclick="toggleCheck(this)"><span class="check-box"></span> QT ecosystem news only when there's a natural connection. Add the privacy angle nobody else is providing.</li>
+      <li onclick="toggleCheck(this)"><span class="check-box"></span> Every post should work standalone. Don't rely on people clicking through.</li>
+      <li onclick="toggleCheck(this)"><span class="check-box"></span> Lead with an insight, let TIPZ be supporting evidence.</li>
+    </ul>
+  </div>
+
+  <!-- Recurring Themes -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Recurring Themes</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px;">
+        <div style="font-family: var(--display); font-size: 14px; color: var(--bright); font-weight: 500; margin-bottom: 6px;">"Privacy isn't a feature, it's the foundation"</div>
+        <div style="font-size: 12px; color: var(--muted);">Governance, payments, agent transactions all require it.</div>
+      </div>
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px;">
+        <div style="font-family: var(--display); font-size: 14px; color: var(--bright); font-weight: 500; margin-bottom: 6px;">The False Choice</div>
+        <div style="font-size: 12px; color: var(--muted);">Platform serfdom vs on-chain surveillance. The third way is ownership without surveillance.</div>
+      </div>
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px;">
+        <div style="font-family: var(--display); font-size: 14px; color: var(--bright); font-weight: 500; margin-bottom: 6px;">AI Agents Need Private Rails</div>
+        <div style="font-size: 12px; color: var(--muted);">Competitive intelligence becomes trivial if agent transactions are public.</div>
+      </div>
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px;">
+        <div style="font-family: var(--display); font-size: 14px; color: var(--bright); font-weight: 500; margin-bottom: 6px;">"Privacy needs to be an API, not an app"</div>
+        <div style="font-size: 12px; color: var(--muted);">Infrastructure-level privacy, not user-facing feature.</div>
+      </div>
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px;">
+        <div style="font-family: var(--display); font-size: 14px; color: var(--bright); font-weight: 500; margin-bottom: 6px;">Vibe Coding Changes What's Valuable</div>
+        <div style="font-size: 12px; color: var(--muted);">APIs, money, and AI survive. Everything else gets commoditized.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Target Roles -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Target Roles (Months 4-12)</div>
+    </div>
+    <div class="strategy-pillar-grid">
+      <div class="strategy-pillar-card">
+        <div class="strategy-pillar-name">Privacy Protocol</div>
+        <div class="strategy-pillar-desc">Head of Growth / BD at Zcash ecosystem, Namada, Penumbra, Aztec</div>
+      </div>
+      <div class="strategy-pillar-card">
+        <div class="strategy-pillar-name">DeFi Protocol</div>
+        <div class="strategy-pillar-desc">Protocol strategist exploring private pools</div>
+      </div>
+      <div class="strategy-pillar-card">
+        <div class="strategy-pillar-name">Founding Team</div>
+        <div class="strategy-pillar-desc">Something new in private DeFi infrastructure</div>
+      </div>
+      <div class="strategy-pillar-card">
+        <div class="strategy-pillar-name">AI x Crypto</div>
+        <div class="strategy-pillar-desc">Ritual, Giza, Autonolas, or similar</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 90-Day Check -->
+  <div class="card" style="border-left: 2px solid var(--blue);">
+    <div class="card-label" style="margin-bottom: 14px;">90-Day Check</div>
+    <div style="font-size: 13px; color: var(--muted); line-height: 1.7;">
+      Engagement per post should be climbing, with a visible shift toward <span style="color: var(--bright);">privacy/AI audience engaging</span> rather than legacy degen followers.
+    </div>
+  </div>
+
+  <!-- Voice & Style Check -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header"><div class="card-title">Voice Check</div></div>
+      <ul class="checklist" id="voice-checklist">
+        <li onclick="toggleCheck(this)"><span class="check-box"></span> Would I actually say this out loud?</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span> Sounds like me after two drinks with a smart friend?</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span> At least one line someone would screenshot?</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span> Did I admit something real about myself?</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span> Is the ending quotable?</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-title">Style Check</div></div>
+      <ul class="checklist" id="style-checklist">
+        <li onclick="toggleCheck(this)"><span class="check-box"></span> No em dashes</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span> No "it's not X, it's Y" constructions</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span> No AI-speak (delve, dive, unpack, leverage)</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span> No throat-clearing openers</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span> Specific over vague (numbers, names, dates)</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span> Arena, not sidelines. Sardonic, not cynical.</li>
+        <li onclick="toggleCheck(this)"><span class="check-box"></span> Profanity as punctuation, not decoration</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ CONTENT STUDIO ═══════════ -->
+<div class="tab-content" id="tab-studio">
+
+  <div class="section-header">
+    <div class="section-title">Content Studio</div>
+  </div>
+
+  <div class="studio-layout">
+    <!-- Brain Panel -->
+    <div class="brain-panel">
+      <div class="brain-header">
+        <div class="card-label">Voice Brain</div>
+        <button class="btn-secondary btn-small" onclick="openAddBrain()">+ Add</button>
+      </div>
+      <div class="brain-list" id="brain-list"></div>
+    </div>
+
+    <!-- Composer -->
+    <div class="composer-panel">
+      <!-- Template Selection -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Template</div>
+        </div>
+        <div class="template-cards" id="template-cards"></div>
+      </div>
+
+      <!-- Topic Input -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Compose</div>
+        </div>
+        <div class="form-group">
+          <label>Topic / Context</label>
+          <textarea id="composer-topic" placeholder="e.g., SOL vs ETH market cap comparison, current numbers from CoinGecko..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Additional Instructions</label>
+          <input type="text" id="composer-instructions" placeholder="e.g., Make it punchy, focus on the downside risk...">
+        </div>
+        <div class="form-group">
+          <label>Reference Images</label>
+          <div class="image-drop" id="image-drop" onclick="document.getElementById('image-input').click()">
+            Drop images here or click to upload
+          </div>
+          <input type="file" id="image-input" accept="image/*" multiple style="display:none" onchange="handleImageUpload(event)">
+          <div class="image-preview" id="image-preview"></div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-primary" onclick="generatePrompt()">Build Prompt</button>
+          <button class="btn-copy" id="copy-prompt-btn" onclick="copyPrompt()" style="display:none;">Copy to Clipboard</button>
+        </div>
+      </div>
+
+      <!-- Prompt Output -->
+      <div class="card" id="prompt-output-card" style="display:none;">
+        <div class="card-header">
+          <div class="card-title">Generated Prompt</div>
+          <button class="btn-copy btn-small" onclick="copyPrompt()">Copy</button>
+        </div>
+        <div class="prompt-output" id="prompt-output"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ ANALYTICS ═══════════ -->
+<div class="tab-content" id="tab-analytics">
+
+  <div class="section-header">
+    <div class="section-title">Analytics</div>
+  </div>
+
+  <div class="sub-tabs">
+    <div class="sub-tab active" data-subtab="postlog">Post Log</div>
+    <div class="sub-tab" data-subtab="reviews">Weekly Reviews</div>
+    <div class="sub-tab" data-subtab="experiments">Experiments</div>
+  </div>
+
+  <!-- Post Log -->
+  <div class="sub-content active" id="subtab-postlog">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Log a Post</div>
+      </div>
+      <div class="form-row">
+        <div class="form-group-inline">
+          <label>Date</label>
+          <input type="date" id="post-date">
+        </div>
+        <div class="form-group-inline">
+          <label>Platform</label>
+          <select id="post-platform">
+            <option value="x">X</option>
+            <option value="substack">Substack</option>
+          </select>
+        </div>
+        <div class="form-group-inline">
+          <label>Pillar</label>
+          <select id="post-pillar">
+            <option value="bridge">Bridge (DeFi → Privacy)</option>
+            <option value="thesis">Pure Thesis (Privacy/AI)</option>
+            <option value="vibe">Personality / Vibe</option>
+          </select>
+        </div>
+        <div class="form-group-inline">
+          <label>Format</label>
+          <select id="post-format">
+            <option value="tweet">Tweet</option>
+            <option value="visual">Visual/Data Card</option>
+            <option value="qt">Quote Tweet</option>
+            <option value="thread">Thread</option>
+            <option value="article">Article</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Content (first line or summary)</label>
+        <input type="text" id="post-content" placeholder="ZEC is 0.27% of BTC...">
+      </div>
+      <div class="form-row">
+        <div class="form-group-inline">
+          <label>Impressions</label>
+          <input type="number" id="post-impressions" placeholder="0">
+        </div>
+        <div class="form-group-inline">
+          <label>Engagement Rate %</label>
+          <input type="number" id="post-er" step="0.1" placeholder="0.0">
+        </div>
+        <div class="form-group-inline">
+          <label>Bookmarks</label>
+          <input type="number" id="post-bookmarks" placeholder="0">
+        </div>
+        <div class="form-group-inline">
+          <label>Follower Δ (48h)</label>
+          <input type="number" id="post-follower-delta" placeholder="0">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Link</label>
+        <input type="text" id="post-link" placeholder="https://x.com/defi_naly/status/...">
+      </div>
+      <div class="form-group">
+        <label>Notes</label>
+        <input type="text" id="post-notes" placeholder="What worked / didn't...">
+      </div>
+      <button class="btn-primary" onclick="addPost()">Log Post</button>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Post History</div>
+        <div style="display: flex; gap: 8px;">
+          <select id="filter-pillar" onchange="renderPosts()" style="width: auto;">
+            <option value="all">All Categories</option>
+            <option value="bridge">Bridge</option>
+            <option value="thesis">Thesis</option>
+            <option value="vibe">Vibe</option>
+          </select>
+          <button class="btn-secondary btn-small" onclick="exportPosts()">Export CSV</button>
+        </div>
+      </div>
+      <div id="post-table-container"></div>
+    </div>
+  </div>
+
+  <!-- Weekly Reviews -->
+  <div class="sub-content" id="subtab-reviews">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">New Weekly Review</div>
+      </div>
+      <div class="form-row">
+        <div class="form-group-inline">
+          <label>Week Of</label>
+          <input type="date" id="review-date">
+        </div>
+        <div class="form-group-inline">
+          <label>X Followers (current)</label>
+          <input type="number" id="review-x" placeholder="14000">
+        </div>
+        <div class="form-group-inline">
+          <label>Substack Subs (current)</label>
+          <input type="number" id="review-sub" placeholder="1000">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group-inline">
+          <label>Top Performer</label>
+          <input type="text" id="review-top" placeholder="Post description or link">
+        </div>
+        <div class="form-group-inline">
+          <label>Why it worked</label>
+          <input type="text" id="review-top-why" placeholder="Screenshottable ratio, hit during...">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group-inline">
+          <label>Bottom Performer</label>
+          <input type="text" id="review-bottom" placeholder="Post description or link">
+        </div>
+        <div class="form-group-inline">
+          <label>Why it flopped</label>
+          <input type="text" id="review-bottom-why" placeholder="Too vague, wrong time, weak hook...">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>One Concrete Learning</label>
+        <input type="text" id="review-learning" placeholder="Single sentence. Be specific.">
+      </div>
+      <div class="form-group">
+        <label>Next Week's Plan</label>
+        <textarea id="review-plan" placeholder="Pillars to hit, experiments to run, article topic..."></textarea>
+      </div>
+      <button class="btn-primary" onclick="addReview()">Save Review</button>
+    </div>
+    <div id="reviews-list"></div>
+  </div>
+
+  <!-- Experiments -->
+  <div class="sub-content" id="subtab-experiments">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">New Experiment</div>
+      </div>
+      <div class="form-group">
+        <label>Experiment Name</label>
+        <input type="text" id="exp-name" placeholder="Morning vs evening posting time">
+      </div>
+      <div class="form-group">
+        <label>Hypothesis</label>
+        <input type="text" id="exp-hypothesis" placeholder="If I post at 7-9am, impressions will be higher because...">
+      </div>
+      <div class="form-row">
+        <div class="form-group-inline">
+          <label>Variable</label>
+          <input type="text" id="exp-variable" placeholder="Posting time">
+        </div>
+        <div class="form-group-inline">
+          <label>Metric</label>
+          <input type="text" id="exp-metric" placeholder="Impressions">
+        </div>
+        <div class="form-group-inline">
+          <label>Data Points Needed</label>
+          <input type="number" id="exp-points" value="10">
+        </div>
+      </div>
+      <button class="btn-primary" onclick="addExperiment()">Start Experiment</button>
+    </div>
+    <div id="experiments-list"></div>
+  </div>
+</div>
+
+<!-- ═══════════ GROWTH TRACKER ═══════════ -->
+<div class="tab-content" id="tab-tracker">
+
+  <div class="section-header">
+    <div class="section-title">Growth Tracker</div>
+  </div>
+
+  <!-- Phase Progress -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">12-Month Trajectory</div>
+      <div class="card-label" id="current-month-label"></div>
+    </div>
+    <div class="phase-track">
+      <div class="phase-segment" id="phase-1"><div class="fill" style="background: linear-gradient(90deg, #4a7a9e, var(--gold));"></div></div>
+      <div class="phase-segment" id="phase-2"><div class="fill" style="background: linear-gradient(90deg, #3a6a8f, var(--blue));"></div></div>
+      <div class="phase-segment" id="phase-3"><div class="fill" style="background: linear-gradient(90deg, #2d6b4e, var(--green));"></div></div>
+      <div class="phase-segment" id="phase-4"><div class="fill" style="background: linear-gradient(90deg, #8a5430, var(--amber));"></div></div>
+    </div>
+    <div class="phase-labels">
+      <span class="phase-label" id="pl-foundation">Foundation (1-3)</span>
+      <span class="phase-label" id="pl-momentum">Momentum (4-6)</span>
+      <span class="phase-label" id="pl-acceleration">Acceleration (7-9)</span>
+      <span class="phase-label" id="pl-compounding">Compounding (10-12)</span>
+    </div>
+  </div>
+
+  <!-- X Growth Chart -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">X Followers</div>
+        <div class="card-label">14K → 50K</div>
+      </div>
+      <div id="x-growth-chart"></div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Substack Subscribers</div>
+        <div class="card-label">1K → 10K</div>
+      </div>
+      <div id="sub-growth-chart"></div>
+    </div>
+  </div>
+
+  <!-- Monthly Input -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">Update Monthly Actuals</div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>Phase</th>
+          <th>X Target</th>
+          <th>X Actual</th>
+          <th>Sub Target</th>
+          <th>Sub Actual</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="growth-table-body"></tbody>
+    </table>
+  </div>
+</div>
+
+</main>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Add Brain Modal -->
+<div class="modal-overlay" id="add-brain-modal">
+  <div class="modal">
+    <div class="modal-title">Add to Voice Brain</div>
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" id="brain-title" placeholder="e.g., My latest article, competitor analysis...">
+    </div>
+    <div class="form-group">
+      <label>Type</label>
+      <select id="brain-type">
+        <option value="article">Article</option>
+        <option value="reference">Style Reference</option>
+        <option value="example">Example Post</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Content</label>
+      <textarea id="brain-content" style="min-height: 200px;" placeholder="Paste the full text here..."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeAddBrain()">Cancel</button>
+      <button class="btn-primary" onclick="saveBrainItem()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════ DATA LAYER ═══════════
+
+const STORAGE_KEYS = {
+  posts: 'naly_posts',
+  reviews: 'naly_reviews',
+  experiments: 'naly_experiments',
+  brain: 'naly_brain',
+  growth: 'naly_growth',
+  cadence: 'naly_cadence',
+  stats: 'naly_stats',
+  startMonth: 'naly_start_month'
+};
+
+function load(key) {
+  try { return JSON.parse(localStorage.getItem(key)) || null; } catch { return null; }
+}
+
+function save(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+// Growth targets
+const X_TARGETS = [14000,14700,15600,17000,19000,21000,23000,26500,30000,33000,38500,44000,50000];
+const SUB_TARGETS = [1000,1075,1375,2000,2500,3200,4000,5000,6000,7000,8000,9000,10000];
+const PHASES = ['Foundation','Foundation','Foundation','Momentum','Momentum','Momentum','Acceleration','Acceleration','Acceleration','Compounding','Compounding','Compounding'];
+
+// Content templates
+const TEMPLATES = [
+  { id: 'bridge-defi', name: 'DeFi Bridge', pillar: 'Bridge', desc: 'DeFi insight → privacy landing',
+    structure: `[DeFi insider observation — specific, credible]
+
+[Why this matters for the broader ecosystem]
+
+[Pivot to privacy angle nobody else is making]
+
+[One-line conviction statement.]` },
+  { id: 'bridge-math', name: 'The Math', pillar: 'Bridge', desc: 'Ratio + multiplier from here',
+    structure: `[Asset A]: [market cap or metric]
+[Asset B]: [market cap or metric]
+
+[Asset A] is [X]% of [Asset B].
+
+If that gap closes to [Y]% → [multiplier]x.
+If [Z]% → [multiplier]x.
+
+[One-line conviction statement.]` },
+  { id: 'thesis-privacy', name: 'Privacy Thesis', pillar: 'Thesis', desc: 'Privacy as infrastructure, not feature',
+    structure: `[Specific event or trend showing privacy need]
+
+[Why current approaches fail]
+
+[Privacy as foundational infrastructure — connect the dots]
+
+[Quotable closer]` },
+  { id: 'thesis-agents', name: 'AI Agent Rails', pillar: 'Thesis', desc: 'AI agents need private financial rails',
+    structure: `[AI agent behavior that creates legible patterns]
+
+[Why public chains expose competitive intelligence]
+
+[Private rails as the solution]
+
+[Forward-looking implication]` },
+  { id: 'thesis-convergence', name: 'The Convergence', pillar: 'Thesis', desc: 'Connect Vitalik + Altman + agents',
+    structure: `[Quote or development from Vitalik, Altman, or similar]
+
+[Second force that connects to it]
+
+[Your synthesis: why privacy is the connective tissue]
+
+[Nobody is saying this yet. That's the gap.]` },
+  { id: 'qt-ecosystem', name: 'Ecosystem QT', pillar: 'Bridge', desc: 'QT Zcash/privacy news with your angle',
+    structure: `[Quote tweet the news]
+
+[Your take: the privacy angle nobody else is providing]
+
+[Why this matters beyond the headline]` },
+  { id: 'vibe-personal', name: 'Real Talk', pillar: 'Vibe', desc: 'Personal, human, zen degen energy',
+    structure: `[Personal moment, observation, or admission]
+
+[Why it connects to the bigger picture]
+
+[Reframe for the reader — quotable]` },
+  { id: 'reframe', name: 'The Reframe', pillar: 'Bridge', desc: 'Trending consensus → contrarian flip with data',
+    structure: `[Trending topic or consensus narrative]
+
+[What everyone is saying]
+
+[Contrarian flip — backed by a specific number or framework]` }
+];
+
+// ═══════════ DEFAULT BRAIN CONTENT ═══════════
+
+const DEFAULT_BRAIN = [
+  {
+    id: 'voice-guide',
+    title: 'Voice Guide',
+    type: 'reference',
+    content: `Core Voice: Conversational and direct, not corporate. Philosophical depth in accessible language. Self-aware, admits mistakes. Profanity sparingly but effectively. Never preachy: arena, not sidelines.
+
+Identity: DeFi strategist (Balancer, Beets Fi). Writing about Privacy & AI. Zen degen energy.
+
+Core Thesis: Privacy is becoming foundational infrastructure, not a feature. Three forces converging: Vitalik on anonymous governance, Altman on API-first companies, AI agents needing private financial rails. Nobody connects these dots publicly.
+
+Content Mix: 50% bridge content (DeFi credibility leading to privacy insight), 30% pure thesis (Zcash, privacy infra, AI agent rails), 20% personality/vibe (skating, mountains, real talk).
+
+Rules: Thesis first, product second. Never lead with TIPZ screenshots. Separate insight posts from product posts. QT ecosystem news only with a natural privacy angle. Every post works standalone.
+
+Sentence Rhythm: Mix short punches with longer flowing sentences. Fragments for emphasis. Like this. Rhetorical questions. Parenthetical asides with personality.
+
+Humor: Dry & sardonic. Self-deprecating. Deadpan observations.
+
+Closing Style: End with a reframe. Make it quotable. Tie back to the opening.
+
+The Test: 1) Say it out loud? 2) Two drinks, smart friend? 3) Screenshot line? 4) Admit something real? 5) Quotable ending?`
+  },
+  {
+    id: 'article-style',
+    title: 'Article Style Rules',
+    type: 'reference',
+    content: `NO em dashes — use colons, periods, parentheses, semicolons.
+NO "it's not X, it's Y" — rephrase with "rather than" or restructure.
+NO AI-speak: delve, dive, unpack, leverage, navigate, unlock, empower, explore (non-literal).
+NO throat-clearing: "It's worth noting...", "Interestingly...", "Let's dive in...", "In today's world..."
+NO hedging: "it seems like", "perhaps", "it could be argued"
+NO weak intensifiers: very, really, extremely, incredibly
+NO filler: just, actually, basically
+NO corporate: innovative, robust, seamless, cutting-edge, game-changer, paradigm shift
+
+DO: Present tense, active voice. Specific over vague (0.27% not "a small fraction"). Short paragraphs (1-3 sentences). Front-load the point. Name your frameworks.
+
+Seven Sweeps: 1) Clarity 2) Voice & Tone 3) So What 4) Prove It 5) Specificity 6) Heightened Emotion 7) Zero Risk`
+  },
+  {
+    id: 'reference-article',
+    title: '"What I\'m Buying While You Panic"',
+    type: 'article',
+    content: `Imagine waking up in three years and realizing you were right about everything — the thesis, the timing, the asset — but you sold during the drawdown because your nervous system couldn't handle watching red candles for another month.
+
+That's not a hypothetical. That's most people's actual story.
+
+Crypto is down bad. Timeline's quiet. The memecoins that were going to "retire your bloodline" have returned to the dust from which they came. The tourists fucked off back to whatever TikTok trend replaced us. And everyone who was going to capitulate? They already have.
+
+Good.
+
+This is exactly when asymmetric bets get mispriced. When the crowd is busy doom-scrolling, they're not doing math. And the math right now? It's screaming at anyone willing to listen.
+
+[Bet #1: BTC vs Gold] Bitcoin: $1.29T. Gold: $33.9T. Bitcoin is 3.8% of gold. BTC captures 10% → 2.6x. 25% → 6.5x. Parity → 26x.
+
+[Bet #2: ZEC vs BTC] BTC: $1.29T. ZEC: $3.53B. Zcash is 0.27% of Bitcoin. 1% → 3.6x. 5% → 18x. 10% → 36x. Edward Snowden participated in Zcash genesis ceremony under codename "John Dobbertin."
+
+[Bet #3: HYPE vs Binance] Binance perps: $162.7B/day. Hyperliquid: $28.4B/day. 17.5% of Binance on a DEX with no token incentives. The last decade decentralized money. The next decade decentralizes the infrastructure.
+
+The edge isn't information. The edge is temperament. The game isn't about finding the right lottery ticket. It's about building a portfolio where you no longer need one.`
+  }
+];
+
+
+// ═══════════ INIT ═══════════
+
+function init() {
+  // Set today's date
+  document.getElementById('dashboard-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  document.getElementById('post-date').valueAsDate = new Date();
+  document.getElementById('review-date').valueAsDate = new Date();
+
+  // Set start month if not set
+  if (!load(STORAGE_KEYS.startMonth)) {
+    save(STORAGE_KEYS.startMonth, new Date().toISOString().slice(0, 7));
+  }
+
+  // Init brain with defaults if empty
+  if (!load(STORAGE_KEYS.brain)) {
+    save(STORAGE_KEYS.brain, DEFAULT_BRAIN);
+  }
+
+  // Init growth if empty
+  if (!load(STORAGE_KEYS.growth)) {
+    const growth = [];
+    for (let i = 0; i < 12; i++) {
+      growth.push({ month: i + 1, xActual: null, subActual: null });
+    }
+    save(STORAGE_KEYS.growth, growth);
+  }
+
+  // Init stats
+  if (!load(STORAGE_KEYS.stats)) {
+    save(STORAGE_KEYS.stats, { xFollowers: 14000, substackSubs: 1000 });
+  }
+
+  // Tab navigation
+  document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+  });
+
+  // Sub-tab navigation
+  document.querySelectorAll('.sub-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.sub-content').forEach(c => c.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('subtab-' + tab.dataset.subtab).classList.add('active');
+    });
+  });
+
+  // Image drop
+  const drop = document.getElementById('image-drop');
+  drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('dragover'); });
+  drop.addEventListener('dragleave', () => drop.classList.remove('dragover'));
+  drop.addEventListener('drop', e => {
+    e.preventDefault();
+    drop.classList.remove('dragover');
+    handleFiles(e.dataTransfer.files);
+  });
+
+  // Editable stats
+  document.querySelectorAll('.editable-stat').forEach(el => {
+    el.addEventListener('click', () => makeEditable(el));
+  });
+
+  // Render everything
+  renderDashboard();
+  renderBrain();
+  renderTemplates();
+  renderPosts();
+  renderReviews();
+  renderExperiments();
+  renderGrowthTracker();
+  renderCadence();
+  updatePhase();
+}
+
+// ═══════════ NAVIGATION ═══════════
+
+function switchTab(tabId) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+  document.getElementById('tab-' + tabId).classList.add('active');
+}
+
+// ═══════════ DASHBOARD ═══════════
+
+function renderDashboard() {
+  const stats = load(STORAGE_KEYS.stats) || { xFollowers: 14000, substackSubs: 1000 };
+  const currentMonth = getCurrentMonth();
+  const xTarget = X_TARGETS[currentMonth] || X_TARGETS[12];
+  const subTarget = SUB_TARGETS[currentMonth] || SUB_TARGETS[12];
+
+  // Stat values
+  document.getElementById('stat-x-followers').textContent = stats.xFollowers.toLocaleString();
+  document.getElementById('stat-sub-followers').textContent = stats.substackSubs.toLocaleString();
+
+  // X progress
+  const xProgress = Math.min(100, ((stats.xFollowers - 14000) / (xTarget - 14000)) * 100);
+  document.getElementById('x-progress').style.width = Math.max(0, xProgress) + '%';
+  document.getElementById('stat-x-target').textContent = `Month ${currentMonth + 1} target: ${xTarget.toLocaleString()}`;
+
+  // Sub progress
+  const subProgress = Math.min(100, ((stats.substackSubs - 1000) / (subTarget - 1000)) * 100);
+  document.getElementById('sub-progress').style.width = Math.max(0, subProgress) + '%';
+  document.getElementById('stat-sub-target').textContent = `Month ${currentMonth + 1} target: ${subTarget.toLocaleString()}`;
+
+  // Posts this week
+  const posts = load(STORAGE_KEYS.posts) || [];
+  const weekAgo = new Date(); weekAgo.setDate(weekAgo.getDate() - 7);
+  const thisWeekPosts = posts.filter(p => new Date(p.date) >= weekAgo);
+  document.getElementById('stat-posts-week').textContent = thisWeekPosts.length;
+
+  // Articles this month
+  const monthStart = new Date(); monthStart.setDate(1);
+  const thisMonthArticles = posts.filter(p => p.format === 'article' && new Date(p.date) >= monthStart);
+  document.getElementById('stat-articles-month').textContent = thisMonthArticles.length;
+
+  // Pillar distribution
+  renderPillarBars(posts);
+
+  // Recent posts
+  renderRecentPosts(posts.slice(-5).reverse());
+}
+
+function renderPillarBars(posts) {
+  const monthStart = new Date(); monthStart.setDate(1);
+  const monthPosts = posts.filter(p => new Date(p.date) >= monthStart);
+  const total = monthPosts.length || 1;
+  const counts = { bridge: 0, thesis: 0, vibe: 0 };
+  monthPosts.forEach(p => { if (counts[p.pillar] !== undefined) counts[p.pillar]++; });
+
+  const container = document.getElementById('pillar-bars');
+  const pillars = [
+    { key: 'bridge', label: 'Bridge', cls: 'bridge', target: '50%' },
+    { key: 'thesis', label: 'Thesis', cls: 'thesis', target: '30%' },
+    { key: 'vibe', label: 'Vibe', cls: 'vibe', target: '20%' }
+  ];
+
+  container.innerHTML = pillars.map(p => {
+    const pct = Math.round((counts[p.key] / total) * 100);
+    return `<div class="pillar-bar-row">
+      <div class="pillar-bar-label">${p.label}</div>
+      <div class="pillar-bar-track">
+        <div class="pillar-bar-fill ${p.cls}" style="width: ${Math.max(pct, 2)}%">${counts[p.key] > 0 ? pct + '%' : ''}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderRecentPosts(posts) {
+  const container = document.getElementById('recent-posts');
+  if (!posts.length) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-state-text">No posts logged yet. Go to Analytics to log your first post.</div></div>';
+    return;
+  }
+  container.innerHTML = posts.map(p => `
+    <div style="padding: 12px 0; border-bottom: 1px solid rgba(30,28,26,0.5); display: flex; align-items: center; justify-content: space-between;">
+      <div>
+        <div style="font-size: 13px; color: var(--text); margin-bottom: 6px;">${escapeHtml(p.content || 'No content')}</div>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <span class="pill pill-${p.pillar}">${p.pillar}</span>
+          <span class="pill pill-${p.platform}">${p.platform}</span>
+          <span style="font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.02em;">${p.date}</span>
+        </div>
+      </div>
+      <div style="text-align: right; flex-shrink: 0; margin-left: 16px;">
+        <div style="font-family: var(--display); font-size: 14px; color: var(--bright); font-weight: 500;">${(p.impressions || 0).toLocaleString()}</div>
+        <div style="font-family: var(--mono); font-size: 10px; color: var(--dim); letter-spacing: 0.06em; text-transform: uppercase;">impressions</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ═══════════ CADENCE ═══════════
+
+const DAY_SCHEDULE = [
+  { day: 'Mon', type: 'Bridge' },
+  { day: 'Tue', type: 'Bridge' },
+  { day: 'Wed', type: 'Thesis' },
+  { day: 'Thu', type: 'Bridge/QT' },
+  { day: 'Fri', type: 'Thesis' },
+  { day: 'Sat', type: 'Vibe' },
+  { day: 'Sun', type: 'Review' }
+];
+
+function getWeekKey() {
+  const now = new Date();
+  const start = new Date(now.getFullYear(), 0, 1);
+  const week = Math.ceil((((now - start) / 86400000) + start.getDay() + 1) / 7);
+  return `${now.getFullYear()}-W${week}`;
+}
+
+function renderCadence() {
+  const weekKey = getWeekKey();
+  const cadence = load(STORAGE_KEYS.cadence) || {};
+  const weekData = cadence[weekKey] || [false, false, false, false, false, false, false];
+
+  const weekNum = parseInt(weekKey.split('W')[1]);
+  const isArticleWeek = weekNum % 2 === 1;
+  document.getElementById('cadence-week-label').textContent = isArticleWeek ? 'Article Week (A)' : 'Tweet Week (B)';
+
+  const grid = document.getElementById('cadence-grid');
+  grid.innerHTML = DAY_SCHEDULE.map((d, i) => `
+    <div class="cadence-day ${weekData[i] ? 'posted' : ''}" onclick="toggleCadence(${i})">
+      <div class="cadence-day-label">${d.day}</div>
+      <div class="cadence-check">${weekData[i] ? '&#10003;' : '&#9675;'}</div>
+      <div class="cadence-day-type">${d.type}</div>
+    </div>
+  `).join('');
+}
+
+function toggleCadence(dayIndex) {
+  const weekKey = getWeekKey();
+  const cadence = load(STORAGE_KEYS.cadence) || {};
+  const weekData = cadence[weekKey] || [false, false, false, false, false, false, false];
+  weekData[dayIndex] = !weekData[dayIndex];
+  cadence[weekKey] = weekData;
+  save(STORAGE_KEYS.cadence, cadence);
+  renderCadence();
+}
+
+function resetCadence() {
+  const weekKey = getWeekKey();
+  const cadence = load(STORAGE_KEYS.cadence) || {};
+  cadence[weekKey] = [false, false, false, false, false, false, false];
+  save(STORAGE_KEYS.cadence, cadence);
+  renderCadence();
+}
+
+// ═══════════ EDITABLE STATS ═══════════
+
+function makeEditable(el) {
+  const key = el.dataset.key;
+  const stats = load(STORAGE_KEYS.stats) || {};
+  const current = stats[key] || parseInt(el.dataset.default);
+  el.innerHTML = `<input type="number" value="${current}" onblur="saveStat(this, '${key}')" onkeydown="if(event.key==='Enter')this.blur()">`;
+  el.querySelector('input').focus();
+}
+
+function saveStat(input, key) {
+  const stats = load(STORAGE_KEYS.stats) || {};
+  stats[key] = parseInt(input.value) || 0;
+  save(STORAGE_KEYS.stats, stats);
+  renderDashboard();
+}
+
+// ═══════════ VOICE BRAIN ═══════════
+
+function renderBrain() {
+  const brain = load(STORAGE_KEYS.brain) || DEFAULT_BRAIN;
+  const list = document.getElementById('brain-list');
+  list.innerHTML = brain.map((item, i) => `
+    <div class="brain-item ${item.selected ? 'selected' : ''}" onclick="toggleBrainSelect(${i})">
+      <div>
+        <div class="brain-item-title">${escapeHtml(item.title)}</div>
+        <div class="brain-item-type">${item.type} &bull; ${item.content.length} chars</div>
+      </div>
+      ${item.id && ['voice-guide','article-style','reference-article'].includes(item.id) ? '' :
+        `<span class="brain-item-remove" onclick="event.stopPropagation(); removeBrainItem(${i})">&#10005;</span>`}
+    </div>
+  `).join('');
+}
+
+function toggleBrainSelect(index) {
+  const brain = load(STORAGE_KEYS.brain) || [];
+  brain[index].selected = !brain[index].selected;
+  save(STORAGE_KEYS.brain, brain);
+  renderBrain();
+}
+
+function removeBrainItem(index) {
+  const brain = load(STORAGE_KEYS.brain) || [];
+  brain.splice(index, 1);
+  save(STORAGE_KEYS.brain, brain);
+  renderBrain();
+}
+
+function openAddBrain() {
+  document.getElementById('add-brain-modal').classList.add('show');
+}
+
+function closeAddBrain() {
+  document.getElementById('add-brain-modal').classList.remove('show');
+  document.getElementById('brain-title').value = '';
+  document.getElementById('brain-content').value = '';
+}
+
+function saveBrainItem() {
+  const title = document.getElementById('brain-title').value.trim();
+  const type = document.getElementById('brain-type').value;
+  const content = document.getElementById('brain-content').value.trim();
+  if (!title || !content) return;
+
+  const brain = load(STORAGE_KEYS.brain) || [];
+  brain.push({ id: Date.now().toString(), title, type, content, selected: false });
+  save(STORAGE_KEYS.brain, brain);
+  renderBrain();
+  closeAddBrain();
+  showToast('Added to voice brain');
+}
+
+// ═══════════ TEMPLATES & COMPOSER ═══════════
+
+let selectedTemplate = null;
+
+function renderTemplates() {
+  const container = document.getElementById('template-cards');
+  container.innerHTML = TEMPLATES.map(t => `
+    <div class="template-card ${selectedTemplate === t.id ? 'selected' : ''}" onclick="selectTemplate('${t.id}')">
+      <div class="template-card-name">${t.name}</div>
+      <div class="template-card-pillar">${t.pillar}</div>
+    </div>
+  `).join('');
+}
+
+function selectTemplate(id) {
+  selectedTemplate = selectedTemplate === id ? null : id;
+  renderTemplates();
+}
+
+function generatePrompt() {
+  const brain = load(STORAGE_KEYS.brain) || [];
+  const selectedBrain = brain.filter(b => b.selected);
+  const template = TEMPLATES.find(t => t.id === selectedTemplate);
+  const topic = document.getElementById('composer-topic').value.trim();
+  const instructions = document.getElementById('composer-instructions').value.trim();
+
+  if (!topic) {
+    showToast('Enter a topic first');
+    return;
+  }
+
+  let prompt = `You are writing as @defi_naly. DeFi strategist (Balancer, Beets Fi prev). Core thesis: privacy is foundational infrastructure, not a feature. Follow the voice and style rules exactly.\n\n`;
+
+  // Add brain context
+  if (selectedBrain.length > 0) {
+    prompt += `═══ VOICE & STYLE REFERENCE ═══\n\n`;
+    selectedBrain.forEach(b => {
+      prompt += `--- ${b.title} (${b.type}) ---\n${b.content}\n\n`;
+    });
+  } else {
+    // Include defaults if nothing selected
+    const defaults = brain.filter(b => ['voice-guide', 'article-style'].includes(b.id));
+    if (defaults.length) {
+      prompt += `═══ VOICE & STYLE REFERENCE ═══\n\n`;
+      defaults.forEach(b => {
+        prompt += `--- ${b.title} ---\n${b.content}\n\n`;
+      });
+    }
+  }
+
+  // Add template
+  if (template) {
+    prompt += `═══ TEMPLATE: ${template.name.toUpperCase()} ═══\n\n`;
+    prompt += `Pillar: ${template.pillar}\n`;
+    prompt += `Description: ${template.desc}\n\n`;
+    prompt += `Structure:\n${template.structure}\n\n`;
+  }
+
+  // Add topic
+  prompt += `═══ TOPIC ═══\n\n${topic}\n\n`;
+
+  // Add instructions
+  if (instructions) {
+    prompt += `═══ ADDITIONAL INSTRUCTIONS ═══\n\n${instructions}\n\n`;
+  }
+
+  // Add rules
+  prompt += `═══ HARD RULES ═══\n\n`;
+  prompt += `- NO em dashes. Use colons, periods, parentheses, or semicolons.\n`;
+  prompt += `- NO "it's not X, it's Y" constructions.\n`;
+  prompt += `- NO AI-speak: delve, dive, unpack, leverage, navigate, unlock, empower.\n`;
+  prompt += `- NO throat-clearing openers.\n`;
+  prompt += `- Specific numbers over vague claims.\n`;
+  prompt += `- Profanity sparingly, for emphasis only.\n`;
+  prompt += `- Must pass the voice test: sounds like a real person after two drinks talking to a smart friend.\n`;
+  prompt += `- End with something quotable.\n`;
+
+  document.getElementById('prompt-output').textContent = prompt;
+  document.getElementById('prompt-output-card').style.display = 'block';
+  document.getElementById('copy-prompt-btn').style.display = 'inline-block';
+}
+
+function copyPrompt() {
+  const text = document.getElementById('prompt-output').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('Prompt copied to clipboard');
+  });
+}
+
+// ═══════════ IMAGE HANDLING ═══════════
+
+function handleImageUpload(event) {
+  handleFiles(event.target.files);
+}
+
+function handleFiles(files) {
+  const preview = document.getElementById('image-preview');
+  Array.from(files).forEach(file => {
+    if (!file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = document.createElement('img');
+      img.src = e.target.result;
+      preview.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// ═══════════ POST LOG ═══════════
+
+function addPost() {
+  const post = {
+    id: Date.now(),
+    date: document.getElementById('post-date').value,
+    platform: document.getElementById('post-platform').value,
+    pillar: document.getElementById('post-pillar').value,
+    format: document.getElementById('post-format').value,
+    content: document.getElementById('post-content').value.trim(),
+    impressions: parseInt(document.getElementById('post-impressions').value) || 0,
+    er: parseFloat(document.getElementById('post-er').value) || 0,
+    bookmarks: parseInt(document.getElementById('post-bookmarks').value) || 0,
+    followerDelta: parseInt(document.getElementById('post-follower-delta').value) || 0,
+    link: document.getElementById('post-link').value.trim(),
+    notes: document.getElementById('post-notes').value.trim()
+  };
+
+  if (!post.date || !post.content) {
+    showToast('Date and content are required');
+    return;
+  }
+
+  const posts = load(STORAGE_KEYS.posts) || [];
+  posts.push(post);
+  save(STORAGE_KEYS.posts, posts);
+
+  // Clear form
+  document.getElementById('post-content').value = '';
+  document.getElementById('post-impressions').value = '';
+  document.getElementById('post-er').value = '';
+  document.getElementById('post-bookmarks').value = '';
+  document.getElementById('post-follower-delta').value = '';
+  document.getElementById('post-link').value = '';
+  document.getElementById('post-notes').value = '';
+
+  renderPosts();
+  renderDashboard();
+  showToast('Post logged');
+}
+
+function renderPosts() {
+  const posts = load(STORAGE_KEYS.posts) || [];
+  const filter = document.getElementById('filter-pillar').value;
+  const filtered = filter === 'all' ? posts : posts.filter(p => p.pillar === filter);
+  const sorted = [...filtered].reverse();
+
+  const container = document.getElementById('post-table-container');
+  if (!sorted.length) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-state-text">No posts logged yet.</div></div>';
+    return;
+  }
+
+  container.innerHTML = `<table>
+    <thead><tr>
+      <th>Date</th><th>Platform</th><th>Pillar</th><th>Format</th><th>Content</th><th>Impr</th><th>ER%</th><th>Bkmk</th><th>Δ</th><th></th>
+    </tr></thead>
+    <tbody>${sorted.map(p => `<tr>
+      <td style="white-space: nowrap;">${p.date}</td>
+      <td><span class="pill pill-${p.platform}">${p.platform}</span></td>
+      <td><span class="pill pill-${p.pillar}">${p.pillar}</span></td>
+      <td style="font-size: 11px;">${p.format}</td>
+      <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${escapeHtml(p.content)}</td>
+      <td>${(p.impressions || 0).toLocaleString()}</td>
+      <td>${p.er || 0}%</td>
+      <td>${p.bookmarks || 0}</td>
+      <td class="${(p.followerDelta || 0) >= 0 ? 'positive' : 'negative'}" style="color: ${(p.followerDelta || 0) >= 0 ? 'var(--green)' : 'var(--red)'}">
+        ${(p.followerDelta || 0) >= 0 ? '+' : ''}${p.followerDelta || 0}
+      </td>
+      <td><span class="brain-item-remove" onclick="deletePost(${p.id})">&#10005;</span></td>
+    </tr>`).join('')}</tbody>
+  </table>`;
+}
+
+function deletePost(id) {
+  let posts = load(STORAGE_KEYS.posts) || [];
+  posts = posts.filter(p => p.id !== id);
+  save(STORAGE_KEYS.posts, posts);
+  renderPosts();
+  renderDashboard();
+}
+
+function exportPosts() {
+  const posts = load(STORAGE_KEYS.posts) || [];
+  if (!posts.length) return;
+  const headers = ['date', 'platform', 'pillar', 'format', 'content', 'impressions', 'er', 'bookmarks', 'followerDelta', 'link', 'notes'];
+  const csv = [headers.join(','), ...posts.map(p => headers.map(h => `"${(p[h] || '').toString().replace(/"/g, '""')}"`).join(','))].join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `naly-posts-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+  showToast('CSV exported');
+}
+
+// ═══════════ WEEKLY REVIEWS ═══════════
+
+function addReview() {
+  const review = {
+    id: Date.now(),
+    date: document.getElementById('review-date').value,
+    xFollowers: parseInt(document.getElementById('review-x').value) || 0,
+    substackSubs: parseInt(document.getElementById('review-sub').value) || 0,
+    topPerformer: document.getElementById('review-top').value.trim(),
+    topWhy: document.getElementById('review-top-why').value.trim(),
+    bottomPerformer: document.getElementById('review-bottom').value.trim(),
+    bottomWhy: document.getElementById('review-bottom-why').value.trim(),
+    learning: document.getElementById('review-learning').value.trim(),
+    plan: document.getElementById('review-plan').value.trim()
+  };
+
+  const reviews = load(STORAGE_KEYS.reviews) || [];
+  reviews.push(review);
+  save(STORAGE_KEYS.reviews, reviews);
+
+  // Update stats with latest follower counts
+  if (review.xFollowers || review.substackSubs) {
+    const stats = load(STORAGE_KEYS.stats) || {};
+    if (review.xFollowers) stats.xFollowers = review.xFollowers;
+    if (review.substackSubs) stats.substackSubs = review.substackSubs;
+    save(STORAGE_KEYS.stats, stats);
+    renderDashboard();
+  }
+
+  // Clear form
+  ['review-top', 'review-top-why', 'review-bottom', 'review-bottom-why', 'review-learning', 'review-plan'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+
+  renderReviews();
+  showToast('Review saved');
+}
+
+function renderReviews() {
+  const reviews = load(STORAGE_KEYS.reviews) || [];
+  const container = document.getElementById('reviews-list');
+
+  if (!reviews.length) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-state-text">No weekly reviews yet. Start your first one above.</div></div>';
+    return;
+  }
+
+  container.innerHTML = [...reviews].reverse().map(r => `
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Week of ${r.date}</div>
+          <div class="card-subtitle">X: ${(r.xFollowers || 0).toLocaleString()} &bull; Substack: ${(r.substackSubs || 0).toLocaleString()}</div>
+        </div>
+        <span class="brain-item-remove" onclick="deleteReview(${r.id})">&#10005;</span>
+      </div>
+      ${r.topPerformer ? `<div style="margin-bottom: 16px;">
+        <div class="card-label" style="color: var(--green); margin-bottom: 6px;">Top Performer</div>
+        <div style="font-size: 13px; color: var(--text); margin-bottom: 4px;">${escapeHtml(r.topPerformer)}</div>
+        <div style="font-size: 12px; color: var(--muted);">${escapeHtml(r.topWhy)}</div>
+      </div>` : ''}
+      ${r.bottomPerformer ? `<div style="margin-bottom: 16px;">
+        <div class="card-label" style="color: var(--red); margin-bottom: 6px;">Bottom Performer</div>
+        <div style="font-size: 13px; color: var(--text); margin-bottom: 4px;">${escapeHtml(r.bottomPerformer)}</div>
+        <div style="font-size: 12px; color: var(--muted);">${escapeHtml(r.bottomWhy)}</div>
+      </div>` : ''}
+      ${r.learning ? `<div style="margin-bottom: 16px;">
+        <div class="card-label" style="color: var(--gold); margin-bottom: 6px;">Learning</div>
+        <div style="font-size: 13px; color: var(--text);">${escapeHtml(r.learning)}</div>
+      </div>` : ''}
+      ${r.plan ? `<div>
+        <div class="card-label" style="margin-bottom: 6px;">Next Week</div>
+        <div style="font-size: 12px; color: var(--muted); white-space: pre-wrap;">${escapeHtml(r.plan)}</div>
+      </div>` : ''}
+    </div>
+  `).join('');
+}
+
+function deleteReview(id) {
+  let reviews = load(STORAGE_KEYS.reviews) || [];
+  reviews = reviews.filter(r => r.id !== id);
+  save(STORAGE_KEYS.reviews, reviews);
+  renderReviews();
+}
+
+// ═══════════ EXPERIMENTS ═══════════
+
+function addExperiment() {
+  const exp = {
+    id: Date.now(),
+    name: document.getElementById('exp-name').value.trim(),
+    hypothesis: document.getElementById('exp-hypothesis').value.trim(),
+    variable: document.getElementById('exp-variable').value.trim(),
+    metric: document.getElementById('exp-metric').value.trim(),
+    pointsNeeded: parseInt(document.getElementById('exp-points').value) || 10,
+    pointsCollected: 0,
+    status: 'running',
+    result: '',
+    ruling: ''
+  };
+
+  if (!exp.name) return;
+
+  const experiments = load(STORAGE_KEYS.experiments) || [];
+  experiments.push(exp);
+  save(STORAGE_KEYS.experiments, experiments);
+
+  document.getElementById('exp-name').value = '';
+  document.getElementById('exp-hypothesis').value = '';
+  document.getElementById('exp-variable').value = '';
+  document.getElementById('exp-metric').value = '';
+
+  renderExperiments();
+  showToast('Experiment started');
+}
+
+function renderExperiments() {
+  const experiments = load(STORAGE_KEYS.experiments) || [];
+  const container = document.getElementById('experiments-list');
+
+  if (!experiments.length) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-state-text">No experiments running. Start one above.</div></div>';
+    return;
+  }
+
+  container.innerHTML = [...experiments].reverse().map(e => `
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">${escapeHtml(e.name)}</div>
+          <div class="card-subtitle">${e.status === 'running' ? '&#9679; Running' : '&#10003; Complete'} &bull; ${e.pointsCollected}/${e.pointsNeeded} data points</div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          ${e.status === 'running' ? `<button class="btn-secondary btn-small" onclick="concludeExperiment(${e.id})">Conclude</button>` : ''}
+          <span class="brain-item-remove" onclick="deleteExperiment(${e.id})">&#10005;</span>
+        </div>
+      </div>
+      <div style="font-size: 13px; color: var(--muted); margin-bottom: 10px; line-height: 1.6;"><strong style="color: var(--dim);">Hypothesis:</strong> ${escapeHtml(e.hypothesis)}</div>
+      <div style="display: flex; gap: 20px; font-family: var(--mono); font-size: 11px; color: var(--dim);">
+        <span><strong>Variable:</strong> ${escapeHtml(e.variable)}</span>
+        <span><strong>Metric:</strong> ${escapeHtml(e.metric)}</span>
+      </div>
+      <div class="progress-bar" style="margin-top: 12px;">
+        <div class="progress-fill ${e.status === 'running' ? 'gold' : 'green'}" style="width: ${(e.pointsCollected / e.pointsNeeded) * 100}%"></div>
+      </div>
+      ${e.result ? `<div style="margin-top: 12px; font-size: 12px; color: var(--text);"><strong style="color: var(--gold);">Result:</strong> ${escapeHtml(e.result)}</div>` : ''}
+      ${e.ruling ? `<div style="font-size: 12px; color: var(--green); margin-top: 4px;"><strong>Ruling:</strong> ${escapeHtml(e.ruling)}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+function concludeExperiment(id) {
+  const experiments = load(STORAGE_KEYS.experiments) || [];
+  const exp = experiments.find(e => e.id === id);
+  if (!exp) return;
+  const result = prompt('Result (what happened):');
+  if (result === null) return;
+  const ruling = prompt('Ruling (Keep / Kill / Modify):');
+  if (ruling === null) return;
+  exp.status = 'complete';
+  exp.result = result;
+  exp.ruling = ruling;
+  save(STORAGE_KEYS.experiments, experiments);
+  renderExperiments();
+}
+
+function deleteExperiment(id) {
+  let experiments = load(STORAGE_KEYS.experiments) || [];
+  experiments = experiments.filter(e => e.id !== id);
+  save(STORAGE_KEYS.experiments, experiments);
+  renderExperiments();
+}
+
+// ═══════════ GROWTH TRACKER ═══════════
+
+function getCurrentMonth() {
+  const startStr = load(STORAGE_KEYS.startMonth);
+  if (!startStr) return 0;
+  const start = new Date(startStr + '-01');
+  const now = new Date();
+  const months = (now.getFullYear() - start.getFullYear()) * 12 + (now.getMonth() - start.getMonth());
+  return Math.max(0, Math.min(11, months));
+}
+
+function updatePhase() {
+  const month = getCurrentMonth();
+  const phase = PHASES[month];
+  document.getElementById('nav-phase').textContent = phase;
+  document.getElementById('current-month-label').textContent = `Month ${month + 1}`;
+
+  // Phase track fills
+  const phaseFills = [
+    { el: 'phase-1', range: [0, 2] },
+    { el: 'phase-2', range: [3, 5] },
+    { el: 'phase-3', range: [6, 8] },
+    { el: 'phase-4', range: [9, 11] }
+  ];
+
+  phaseFills.forEach(pf => {
+    const fill = document.querySelector(`#${pf.el} .fill`);
+    if (month > pf.range[1]) {
+      fill.style.width = '100%';
+    } else if (month >= pf.range[0]) {
+      const progress = ((month - pf.range[0]) / (pf.range[1] - pf.range[0] + 1)) * 100;
+      fill.style.width = Math.min(100, progress + 33) + '%';
+    } else {
+      fill.style.width = '0%';
+    }
+  });
+
+  // Phase labels
+  const labelIds = ['pl-foundation', 'pl-momentum', 'pl-acceleration', 'pl-compounding'];
+  const phaseRanges = [[0,2],[3,5],[6,8],[9,11]];
+  labelIds.forEach((id, i) => {
+    const el = document.getElementById(id);
+    el.classList.toggle('active', month >= phaseRanges[i][0] && month <= phaseRanges[i][1]);
+  });
+}
+
+function renderGrowthTracker() {
+  const growth = load(STORAGE_KEYS.growth) || [];
+  const currentMonth = getCurrentMonth();
+  const maxX = X_TARGETS[12];
+  const maxSub = SUB_TARGETS[12];
+
+  // Growth charts
+  renderGrowthChart('x-growth-chart', X_TARGETS, growth.map(g => g.xActual), maxX, 'gold');
+  renderGrowthChart('sub-growth-chart', SUB_TARGETS, growth.map(g => g.subActual), maxSub, 'gold');
+
+  // Growth table
+  const tbody = document.getElementById('growth-table-body');
+  tbody.innerHTML = growth.map((g, i) => {
+    const isCurrent = i === currentMonth;
+    const xOnTrack = g.xActual !== null ? (g.xActual >= X_TARGETS[i + 1] ? 'var(--green)' : 'var(--red)') : 'var(--dim)';
+    const subOnTrack = g.subActual !== null ? (g.subActual >= SUB_TARGETS[i + 1] ? 'var(--green)' : 'var(--red)') : 'var(--dim)';
+    return `<tr style="${isCurrent ? 'background: rgba(123, 163, 201, 0.04);' : ''}">
+      <td style="font-family: var(--mono); font-weight: ${isCurrent ? '600' : '400'}; color: ${isCurrent ? 'var(--gold)' : 'var(--text)'};">M${g.month}</td>
+      <td style="font-size: 11px; color: var(--dim);">${PHASES[i]}</td>
+      <td>${X_TARGETS[i].toLocaleString()} → ${X_TARGETS[i + 1].toLocaleString()}</td>
+      <td><input type="number" value="${g.xActual || ''}" placeholder="—" style="width: 90px; padding: 4px 8px; font-size: 12px;"
+        onchange="updateGrowth(${i}, 'xActual', this.value)"></td>
+      <td>${SUB_TARGETS[i].toLocaleString()} → ${SUB_TARGETS[i + 1].toLocaleString()}</td>
+      <td><input type="number" value="${g.subActual || ''}" placeholder="—" style="width: 90px; padding: 4px 8px; font-size: 12px;"
+        onchange="updateGrowth(${i}, 'subActual', this.value)"></td>
+      <td style="color: ${g.xActual !== null ? xOnTrack : 'var(--dim)'}; font-size: 12px;">
+        ${g.xActual !== null ? (g.xActual >= X_TARGETS[i + 1] ? '&#10003; On track' : '&#9888; Behind') : '—'}
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function renderGrowthChart(containerId, targets, actuals, max, color) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+
+  for (let i = 0; i < 12; i++) {
+    const targetPct = (targets[i + 1] / max) * 100;
+    const actualVal = actuals[i];
+    const actualPct = actualVal ? (actualVal / max) * 100 : 0;
+    const isAhead = actualVal && actualVal >= targets[i + 1];
+
+    const row = document.createElement('div');
+    row.className = 'chart-row';
+    row.innerHTML = `
+      <div class="chart-label">M${i + 1}</div>
+      <div class="chart-bar-track">
+        <div class="chart-bar-target" style="left: ${targetPct}%;"></div>
+        ${actualVal ? `<div class="chart-bar-actual" style="width: ${actualPct}%; background: ${isAhead ? 'var(--green)' : 'var(--gold)'}; color: var(--void);">
+          ${actualVal >= 1000 ? (actualVal / 1000).toFixed(1) + 'K' : actualVal}
+        </div>` : ''}
+      </div>
+      <div class="chart-value">${targets[i + 1] >= 1000 ? (targets[i + 1] / 1000).toFixed(1) + 'K' : targets[i + 1]}</div>
+    `;
+    container.appendChild(row);
+  }
+}
+
+function updateGrowth(monthIndex, field, value) {
+  const growth = load(STORAGE_KEYS.growth) || [];
+  growth[monthIndex][field] = value ? parseInt(value) : null;
+  save(STORAGE_KEYS.growth, growth);
+  renderGrowthTracker();
+}
+
+// ═══════════ CHECKLIST ═══════════
+
+function toggleCheck(li) {
+  li.classList.toggle('checked');
+  const box = li.querySelector('.check-box');
+  box.textContent = li.classList.contains('checked') ? '✓' : '';
+}
+
+// ═══════════ UTILITIES ═══════════
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+// ═══════════ START ═══════════
+init();
+</script>
+
+</body>
+</html>

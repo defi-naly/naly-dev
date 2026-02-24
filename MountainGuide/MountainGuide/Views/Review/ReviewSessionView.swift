@@ -22,7 +22,6 @@ struct ReviewSessionView: View {
             }
             .navigationTitle("Review")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbarColorScheme(.dark, for: .navigationBar)
             .onAppear {
                 sessionCards = store.dueCards
                 currentIndex = 0

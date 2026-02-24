@@ -8,7 +8,7 @@ struct KnotDiagramScene: View {
         Canvas { context, size in
             // Dark background
             let bg = Path(roundedRect: CGRect(origin: .zero, size: size), cornerRadius: 0)
-            context.fill(bg, with: .color(Color(hex: "1a1a2e")))
+            context.fill(bg, with: .color(Color(hex: "E7E5E4")))
 
             // Figure-eight knot illustration
             let cx = size.width * 0.5

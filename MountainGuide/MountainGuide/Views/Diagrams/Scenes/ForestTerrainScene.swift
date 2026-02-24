@@ -8,7 +8,7 @@ struct ForestTerrainScene: View {
         ZStack {
             // Background
             LinearGradient(
-                colors: [Color(hex: "1a1a2e"), Color(hex: "1e293b")],
+                colors: [Color(hex: "F5F0EB"), Color(hex: "E7E5E4")],
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -22,7 +22,7 @@ struct ForestTerrainScene: View {
 
             // Ground on both sides
             Rectangle()
-                .fill(Color(hex: "374151").opacity(0.3))
+                .fill(Color(hex: "A8A29E").opacity(0.3))
                 .frame(width: width, height: height * 0.25)
                 .position(x: width / 2, y: height * 0.875)
 

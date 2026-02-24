@@ -29,11 +29,15 @@ enum RopeSystemsExplore {
         title: "Essential Knots",
         summary: "A small repertoire of knots covers the vast majority of climbing and mountaineering situations. The figure-eight follow-through, clove hitch, munter hitch, and bowline each serve a distinct purpose in the safety chain, and mastering them until they are automatic is a non-negotiable foundation.",
         icon: "link",
+        heroImageName: "Photos/Heroes/hero-rope-knots",
         sections: [
             ExploreSection(
                 id: "essential-knots-1",
                 heading: "The Figure-Eight Follow-Through",
                 body: "The figure-eight follow-through is the standard tie-in knot for climbing worldwide. It is strong, easy to visually inspect, and does not loosen under repeated loading and unloading cycles. To tie it, form a figure-eight in the rope about a meter from the end, pass the tail through both harness tie-in points, and retrace the figure-eight exactly. The finished knot should have five parallel sets of strands with a tail of at least six inches. The figure-eight retains approximately 75-80% of the rope's rated strength, which is more than sufficient given the safety margins built into modern climbing ropes.",
+                imageName: "Photos/rope-figure-eight",
+                imageCaption: "Figure-eight knot tied on a climbing rope",
+                animationName: "anim-figure-eight-knot",
                 diagram: ExploreDiagram(
                     type: .labeledScene,
                     config: DiagramConfig(
@@ -59,6 +63,8 @@ enum RopeSystemsExplore {
                 id: "essential-knots-2",
                 heading: "The Clove Hitch",
                 body: "The clove hitch is the workhorse knot for attaching yourself to anchors and managing rope at belay stations. Its critical advantage is adjustability: you can lengthen or shorten your tether without untying, simply by pulling rope through the knot. This makes transitions at multi-pitch anchors far more efficient than tying and untying figure-eights. The clove hitch must always be tied on a locking carabiner, because it can slip on an unlocked gate. It holds well under sustained load but can creep under repeated small movements, so periodic inspection at long belay stances is good practice.",
+                imageName: "Photos/rope-clove-hitch",
+                imageCaption: "Clove hitch tied on a locking carabiner at an anchor",
                 diagram: nil,
                 keyFacts: [
                     "Adjustable without untying — essential for efficient anchor management",
@@ -73,6 +79,8 @@ enum RopeSystemsExplore {
                 id: "essential-knots-3",
                 heading: "The Munter Hitch",
                 body: "The munter hitch is a friction hitch that can replace a belay or rappel device in an emergency. Tied on a pear-shaped (HMS) locking carabiner, it provides enough friction to catch a leader fall or control a rappel. The munter works by reversing direction as the rope feeds through, creating friction against the carabiner. It kinks the rope badly over extended use, which is why it is reserved for emergencies and specific guide techniques rather than everyday belaying. Every climber should be able to tie a munter hitch by feel, in the dark, because the scenario in which you need one — a dropped belay device on a multi-pitch route — is exactly the scenario where stress is highest.",
+                imageName: "Photos/rope-munter-hitch",
+                imageCaption: "Munter hitch loaded on an HMS carabiner",
                 diagram: ExploreDiagram(
                     type: .forceArrows,
                     config: DiagramConfig(
@@ -99,6 +107,8 @@ enum RopeSystemsExplore {
                 id: "essential-knots-4",
                 heading: "The Bowline and Supporting Knots",
                 body: "The bowline creates a fixed loop that is easy to untie after loading, making it valuable for tying into anchors and creating loops in the middle of a rope. However, the bowline can loosen when unloaded and capsize under ring loading, so it must always be backed up with a stopper knot or Yosemite finish. The double fisherman's knot joins two ropes of similar diameter for rappelling and is effectively permanent once loaded. The prusik knot, tied with a thin cord around a thicker rope, grips when weighted and slides when unweighted, serving as an ascending device and rappel backup. These supporting knots round out a complete climbing repertoire.",
+                imageName: "Photos/rope-prusik-knot",
+                imageCaption: "Prusik knot gripping a climbing rope for ascending",
                 diagram: nil,
                 keyFacts: [
                     "Bowline: easy to untie after loading but must be backed up with a stopper knot",
@@ -130,6 +140,7 @@ enum RopeSystemsExplore {
         title: "Anchor Building",
         summary: "An anchor is the foundation of every rope system. Whether built from natural features, bolts, or removable protection, every anchor must meet the SERENE criteria: Solid, Equalized, Redundant, Efficient, No Extension. Failure to meet any one criterion can be fatal.",
         icon: "shield.fill",
+        heroImageName: "Photos/Heroes/hero-rope-anchors",
         sections: [
             ExploreSection(
                 id: "anchor-building-1",
@@ -149,6 +160,8 @@ enum RopeSystemsExplore {
                 id: "anchor-building-2",
                 heading: "Natural Anchors and Fixed Protection",
                 body: "Natural anchors include trees, rock horns, boulders, and rock tunnels. A living tree of at least 30 centimeters diameter with a healthy root system in solid ground is one of the strongest anchors available. Rock horns must be inspected for fractures and tested by hitting them with the palm — a solid thud indicates integrity while a hollow ring suggests internal cracks. Fixed bolts in good condition are generally the strongest man-made anchors, rated to 25kN or more per bolt. However, bolt condition varies enormously: stainless steel bolts in granite may last decades, while carbon steel bolts in coastal limestone can corrode to failure in just a few years. Never trust a bolt without inspecting it.",
+                imageName: "Photos/rope-anchor-system",
+                imageCaption: "Multi-point anchor system on rock",
                 diagram: ExploreDiagram(
                     type: .labeledScene,
                     config: DiagramConfig(
@@ -208,6 +221,9 @@ enum RopeSystemsExplore {
                 id: "anchor-building-4",
                 heading: "Equalization Methods",
                 body: "The three primary equalization methods are the cordelette, the quad, and the sliding-X. A cordelette is a 6-7 meter loop of 7mm nylon cord tied with a double fisherman's knot. Clipped to each anchor component and pulled into a master point tied with an overhand or figure-eight knot, it provides equalization for a specific loading direction. The quad uses a double-length sling clipped to two anchor points with limiting knots to prevent extension, offering self-equalization across a small range of angles. The sliding-X provides full self-equalization but has no redundancy at the crossing point unless a twist is added to limit extension. Each method has trade-offs between equalization, redundancy, extension potential, and simplicity.",
+                imageName: "Photos/rope-cordelette",
+                imageCaption: "Cordelette equalized to a master point on a three-piece anchor",
+                animationName: "anim-anchor-equalization",
                 diagram: nil,
                 keyFacts: [
                     "Cordelette: equalizes for one direction, no extension risk, requires re-tying for direction changes",
@@ -239,11 +255,14 @@ enum RopeSystemsExplore {
         title: "Belaying Fundamentals",
         summary: "Belaying is the act of managing the rope to catch a falling climber. The brake hand never leaves the rope — this is the single most critical rule in climbing. Everything else in belay technique exists to support this absolute.",
         icon: "hand.raised.fill",
+        heroImageName: "Photos/Heroes/hero-rope-belaying",
         sections: [
             ExploreSection(
                 id: "belaying-1",
                 heading: "The Brake Hand Rule",
                 body: "The brake hand never leaves the rope. This is not a guideline, a best practice, or a suggestion. It is the fundamental rule of belaying from which all technique follows. A belayer with an assisted-braking device who removes their brake hand has defeated the very purpose of the device. The brake position — hand below the device with the rope running over the palm — generates friction that stops a falling climber. The PBUS method (Pull, Brake, Under, Slide) provides a systematic sequence for taking in rope while maintaining brake hand contact at all times. Every belay accident investigation starts with the same question: where was the brake hand?",
+                imageName: "Photos/rope-belay-device-setup",
+                imageCaption: "Belay device loaded with rope in the brake position",
                 diagram: ExploreDiagram(
                     type: .forceArrows,
                     config: DiagramConfig(
@@ -347,11 +366,14 @@ enum RopeSystemsExplore {
         title: "Rappelling Techniques",
         summary: "More climbers are killed rappelling than climbing. The combination of fatigue, complex systems, and irreversible commitment makes rappelling the most dangerous routine activity in climbing. Every step demands deliberate verification.",
         icon: "arrow.down.to.line",
+        heroImageName: "Photos/Heroes/hero-rope-rappelling",
         sections: [
             ExploreSection(
                 id: "rappelling-1",
                 heading: "Rappel Setup and Verification",
                 body: "Before every rappel, verify five things in sequence. First, inspect the anchor: is it solid, and has the rope been threaded correctly through the rings or chains? Second, verify the rope reaches the next station or the ground: pull both strands and visually confirm, or tie knots in the ends. Third, check that your device is correctly loaded on both strands of the rope with the locking carabiner locked. Fourth, confirm your backup is in place — an autoblock or prusik below the device on the brake strand. Fifth, do a weighted test by sitting back on the rope while still connected to the anchor, confirming everything holds before unclipping your tether. Only after all five checks pass do you unclip and commit to the rappel.",
+                imageName: "Photos/rope-rappel-anchor",
+                imageCaption: "Rappel setup at a fixed anchor with rope threaded through chains",
                 diagram: nil,
                 keyFacts: [
                     "Five-point check: anchor, rope reaches, device loaded, backup in place, weighted test",
@@ -424,6 +446,7 @@ enum RopeSystemsExplore {
         title: "Rope Mechanics",
         summary: "Understanding fall factors, impact force, elongation, and the differences between dynamic and static ropes transforms rope selection and system management from guesswork into engineering. The physics of falling is the physics of survival.",
         icon: "arrow.up.and.down.circle",
+        heroImageName: "Photos/Heroes/hero-rope-mechanics",
         sections: [
             ExploreSection(
                 id: "rope-mechanics-1",
@@ -470,6 +493,8 @@ enum RopeSystemsExplore {
                 id: "rope-mechanics-3",
                 heading: "Rope Types and Selection",
                 body: "Single ropes (9.5-10.2mm) are the standard for sport and most trad climbing. Half ropes (8-9mm), used in pairs with each strand clipped to alternating protection, reduce rope drag on wandering routes and provide two strands for full-length rappels. Twin ropes (7-8mm), clipped together through every piece, offer the lightest weight system for alpine routes. Static ropes (10-12mm) are used exclusively for fixed lines, hauling, and top-roping where no lead falls are possible. Selecting the right rope for the objective involves balancing diameter (affects weight and handling), length (60m standard, 70m increasingly common), sheath durability, and dry treatment. A thinner rope is lighter but wears faster and is harder to grip with cold hands.",
+                imageName: "Photos/rope-coil",
+                imageCaption: "Mountaineering rope coiled for glacier travel",
                 diagram: ExploreDiagram(
                     type: .comparisonSplit,
                     config: DiagramConfig(
@@ -521,6 +546,7 @@ enum RopeSystemsExplore {
         title: "Top-Rope Systems",
         summary: "A top-rope system runs the climbing rope through an anchor at the top of the cliff so the climber is always protected from above. It is the safest form of roped climbing when set up correctly, but anchor failure in a top-rope system is catastrophic because both climber and belayer depend on the same anchor.",
         icon: "arrow.up.to.line",
+        heroImageName: "Photos/Heroes/hero-rope-top-rope",
         sections: [
             ExploreSection(
                 id: "top-rope-1",
@@ -585,6 +611,7 @@ enum RopeSystemsExplore {
         title: "Multi-Pitch Climbing",
         summary: "Multi-pitch climbing links multiple rope lengths to ascend cliffs and alpine walls that exceed a single pitch. Every transition between pitches is a potential failure point where efficiency, communication, and systematic procedures determine whether the team moves safely or creates dangerous confusion.",
         icon: "arrow.up.forward",
+        heroImageName: "Photos/Heroes/hero-rope-multi-pitch",
         sections: [
             ExploreSection(
                 id: "multi-pitch-1",
@@ -668,11 +695,14 @@ enum RopeSystemsExplore {
         title: "Rescue Hauling Systems",
         summary: "When a climber is injured or incapacitated and cannot ascend under their own power, hauling systems provide the mechanical advantage needed to raise them. The Z-pulley system is the foundation of all field rescue hauling, and every mountaineer must know how to build one from the gear on their harness.",
         icon: "arrow.up.circle.fill",
+        heroImageName: "Photos/Heroes/hero-rope-rescue",
         sections: [
             ExploreSection(
                 id: "rescue-haul-1",
                 heading: "The 3:1 Z-Pulley System",
                 body: "The Z-pulley is a 3:1 mechanical advantage system that allows a single rescuer to haul a load three times their pulling force. The setup requires a load-bearing anchor, a prusik or mechanical ascender on the load strand below the anchor, a carabiner acting as a redirect pulley at the anchor, and a second prusik or ascender on the load strand further down to serve as a ratchet. The rope runs from the load, up through the anchor redirect, back down to the travelling prusik on the load strand, and then up to the hauler. Each pull raises the load one-third the length of rope pulled through the system. A ratchet prusik at the anchor holds progress so the hauler can reset without losing ground.",
+                imageName: "Photos/rope-hauling-system",
+                imageCaption: "Z-pulley hauling system built from climbing gear on snow",
                 diagram: ExploreDiagram(
                     type: .forceArrows,
                     config: DiagramConfig(
@@ -745,11 +775,14 @@ enum RopeSystemsExplore {
         title: "Crevasse Rescue Rope Work",
         summary: "Crevasse rescue combines self-rescue ascending skills, team hauling systems, and the unique challenges of working on a glacier surface. The rope work must be practiced on flat ground until automatic, because the real scenario involves cold, fear, and a partner's life hanging in the balance.",
         icon: "figure.climbing",
+        heroImageName: "Photos/Heroes/hero-rope-crevasse",
         sections: [
             ExploreSection(
                 id: "crevasse-rescue-1",
                 heading: "Self-Rescue: Prusik Ascending",
                 body: "Self-rescue from a crevasse uses two prusik loops to ascend the rope independently. The foot prusik, a longer loop attached to the harness, reaches down to a foot sling. The chest prusik, shorter, attaches to the belay loop or chest harness point. The technique is systematic: weight the foot prusik and stand up in the sling, simultaneously slide the chest prusik up the rope. Then sit back on the chest prusik, slide the foot prusik up, and repeat. Each cycle gains roughly 30 centimeters. A free-hanging ascent of 30 meters requires approximately 100 cycles and is exhausting, but it is survivable. The key prerequisites are carrying pre-rigged prusik loops on every glacier crossing and practicing the ascending sequence until it requires no thought.",
+                imageName: "Photos/rope-prusik-ascending",
+                imageCaption: "Climber ascending rope with two prusik loops in a crevasse",
                 diagram: nil,
                 keyFacts: [
                     "Two prusik loops required: foot prusik (longer) and chest prusik (shorter)",
@@ -764,6 +797,9 @@ enum RopeSystemsExplore {
                 id: "crevasse-rescue-2",
                 heading: "Team Rescue: Arrest to Haul",
                 body: "When a rope team member falls into a crevasse, the surface team must execute a precise sequence. First, arrest the fall using self-arrest technique with the ice axe. Second, while maintaining the arrest, build a solid anchor (ice screw, buried ice axe, or deadman) and transfer the load from your body to the anchor. Third, pad the crevasse lip where the rope cuts into the snow — this is critical because an unpadded lip can hold the rope with enough friction to make hauling impossible. Fourth, set up a Z-pulley hauling system using the load strand and begin raising the victim. Communication with the victim throughout is essential: they may be injured, hypothermic, or hanging in a position where they can assist by walking up the crevasse wall as you haul.",
+                imageName: "Photos/rope-crevasse-lip",
+                imageCaption: "Padded crevasse lip with hauling system on glacier surface",
+                animationName: "anim-crevasse-rescue",
                 diagram: ExploreDiagram(
                     type: .labeledScene,
                     config: DiagramConfig(
@@ -821,11 +857,14 @@ enum RopeSystemsExplore {
         title: "Improvised Systems",
         summary: "When gear is lost, broken, or insufficient, the mountains test your creativity and fundamental knowledge. A munter hitch replaces a belay device. A prusik replaces an ascender. Webbing becomes a harness. The deepest understanding of rope systems reveals itself when you must improvise with what you have.",
         icon: "wrench.and.screwdriver",
+        heroImageName: "Photos/Heroes/hero-rope-improvised",
         sections: [
             ExploreSection(
                 id: "improvised-1",
                 heading: "Emergency Anchors",
                 body: "When conventional protection is unavailable, the environment itself becomes the anchor system. A bollard — a mushroom-shaped column carved from snow or ice — can hold substantial loads when properly constructed. In snow, a bollard should be at least 60 centimeters in diameter with a trench 15 centimeters deep cut around it. In solid ice, a smaller bollard of 30 centimeters suffices. A buried ice axe in a T-slot anchor, placed perpendicular to the load direction with a sling attached at the shaft-head junction and the whole assembly buried, provides a reliable snow anchor. Rocks can be stacked as deadmen, and even a backpack filled with snow and buried can serve as an emergency anchor. The critical factor is always testing the anchor with a progressive load before committing your life to it.",
+                imageName: "Photos/rope-snow-bollard",
+                imageCaption: "Snow bollard anchor carved for an emergency rappel",
                 diagram: nil,
                 keyFacts: [
                     "Snow bollard: 60cm diameter minimum, 15cm deep trench, for rappel or belay anchor",

@@ -9,7 +9,7 @@ struct RopeTeamScene: View {
             // Snow/glacier background
             let bg = Path(roundedRect: CGRect(origin: .zero, size: size), cornerRadius: 0)
             context.fill(bg, with: .linearGradient(
-                Gradient(colors: [Color(hex: "0f172a"), Color(hex: "1e293b")]),
+                Gradient(colors: [Color(hex: "E0F2FE"), Color(hex: "7DD3FC")]),
                 startPoint: CGPoint(x: size.width / 2, y: 0), endPoint: CGPoint(x: size.width / 2, y: size.height)
             ))
 

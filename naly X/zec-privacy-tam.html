@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Addressable Market — @defi_naly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --void: #08090c;
+      --soil: #0f1014;
+      --surface: #161819;
+      --border: #1e1c1a;
+      --bright: #f0efe9;
+      --text: #d4cfc4;
+      --muted: #a69b8a;
+      --dim: #6b6560;
+      --accent: #7ba3c9;
+      --accent-bright: #96bade;
+      --accent-glow: rgba(123, 163, 201, 0.3);
+      --snow: #e8edf4;
+      --pine: #3d9970;
+      --pine-bright: #4db882;
+      --pine-glow: rgba(61, 153, 112, 0.3);
+      --rock: #6b7a8f;
+      --peak: #b8c4d4;
+      --display: 'Space Grotesk', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Inter', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--void);
+      font-family: var(--sans);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 32px;
+    }
+
+    .bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      opacity: 0.2;
+    }
+
+    .bg-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(8, 9, 12, 0.55);
+    }
+
+    /* Card */
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 800px;
+      background: rgba(15, 16, 20, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(61, 153, 112, 0.12);
+      border-radius: 16px;
+      padding: 48px 52px;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(61, 153, 112, 0.25), transparent);
+    }
+
+    /* Header */
+    .card-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--pine);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-family: var(--display);
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--bright);
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .card-subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 40px;
+      line-height: 1.5;
+    }
+
+    /* Section 1 — Comparison rows */
+    .comparison {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .comp-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .comp-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .comp-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--snow);
+      letter-spacing: 0.04em;
+    }
+
+    .comp-stats {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--dim);
+      letter-spacing: 0.03em;
+      display: flex;
+      gap: 12px;
+    }
+
+    .comp-stats .zec-pct {
+      color: var(--pine);
+      font-weight: 600;
+    }
+
+    .comp-bar-track {
+      width: 100%;
+      height: 24px;
+      background: rgba(22, 24, 25, 0.8);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .comp-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, rgba(61, 153, 112, 0.2), rgba(61, 153, 112, 0.5));
+      min-width: 3px;
+      position: relative;
+    }
+
+    .comp-bar-fill::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--pine);
+      box-shadow: 0 0 6px var(--pine-glow);
+    }
+
+    .comp-bar-label {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--dim);
+      letter-spacing: 0.04em;
+    }
+
+    /* Section divider */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 8px 0 32px 0;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 20px;
+    }
+
+    /* Section 2 — Strata bars */
+    .strata {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .stratum {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .stratum-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--dim);
+      width: 100px;
+      flex-shrink: 0;
+      text-align: right;
+      letter-spacing: 0.04em;
+    }
+
+    .stratum-track {
+      flex: 1;
+      height: 32px;
+      background: rgba(22, 24, 25, 0.8);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stratum-fill {
+      height: 100%;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 12px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .stratum-fill .cap {
+      font-weight: 400;
+      font-size: 10px;
+      opacity: 0.7;
+      margin-right: 8px;
+    }
+
+    .stratum-fill.current {
+      background: linear-gradient(90deg, rgba(61, 153, 112, 0.15), rgba(61, 153, 112, 0.35));
+      color: var(--pine);
+    }
+
+    .stratum-fill.target {
+      background: linear-gradient(90deg, rgba(61, 153, 112, 0.2), rgba(61, 153, 112, 0.5));
+      color: #b8e8d0;
+    }
+
+    .stratum-fill.target-high {
+      background: linear-gradient(90deg, rgba(61, 153, 112, 0.25), rgba(61, 153, 112, 0.65));
+      color: #d0f0e0;
+    }
+
+    .stratum-fill.target-max {
+      background: linear-gradient(90deg, rgba(61, 153, 112, 0.3), rgba(61, 153, 112, 0.75));
+      color: #e8f8f0;
+    }
+
+    .stratum-multiplier {
+      font-family: var(--display);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--snow);
+      width: 60px;
+      flex-shrink: 0;
+      text-align: right;
+    }
+
+    .stratum-multiplier.current-m {
+      color: var(--dim);
+      font-size: 13px;
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 8px 0;
+    }
+
+    /* Footer */
+    .card-footer {
+      font-family: var(--display);
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+    }
+
+    .card-footer strong {
+      color: var(--snow);
+      font-weight: 500;
+    }
+
+    /* Watermark */
+    .watermark {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 20px;
+      text-align: right;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg">
+  <img src="1080x360.jpeg" alt="">
+  <div class="bg-overlay"></div>
+</div>
+
+<div class="card">
+  <div class="card-label">Addressable Market</div>
+  <div class="card-title">What Privacy Is Already Worth</div>
+  <div class="card-subtitle">ZEC market cap vs the wealth that already demands privacy</div>
+
+  <!-- Section 1: Comparison bar -->
+  <div class="comparison">
+    <div class="comp-row">
+      <div class="comp-header">
+        <div class="comp-label">Offshore Private Wealth</div>
+        <div class="comp-stats">
+          <span>~$21T</span>
+          <span class="zec-pct">ZEC = 0.018%</span>
+        </div>
+      </div>
+      <div class="comp-bar-track">
+        <div class="comp-bar-fill" style="width: 1%;"></div>
+        <div class="comp-bar-label">← ZEC $3.75B</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- Section 2: Strata scenarios (offshore wealth as denominator) -->
+  <div class="section-label">If ZEC captures a fraction of offshore demand</div>
+
+  <div class="strata">
+    <div class="stratum">
+      <div class="stratum-label">Current</div>
+      <div class="stratum-track">
+        <div class="stratum-fill current" style="width: 3%;">
+          <span class="cap">$3.75B</span>
+        </div>
+      </div>
+      <div class="stratum-multiplier current-m">1x</div>
+    </div>
+    <div class="stratum">
+      <div class="stratum-label">0.1%</div>
+      <div class="stratum-track">
+        <div class="stratum-fill target" style="width: 16%;">
+          <span class="cap">$21B</span>
+        </div>
+      </div>
+      <div class="stratum-multiplier">5.6x</div>
+    </div>
+    <div class="stratum">
+      <div class="stratum-label">0.5%</div>
+      <div class="stratum-track">
+        <div class="stratum-fill target-high" style="width: 50%;">
+          <span class="cap">$105B</span>
+        </div>
+      </div>
+      <div class="stratum-multiplier">28x</div>
+    </div>
+    <div class="stratum">
+      <div class="stratum-label">1%</div>
+      <div class="stratum-track">
+        <div class="stratum-fill target-max" style="width: 100%;">
+          <span class="cap">$210B</span>
+        </div>
+      </div>
+      <div class="stratum-multiplier">56x</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card-footer">
+    People already pay lawyers, bankers, and shell companies for what Zcash does cryptographically.<br>
+    <strong>The demand isn't theoretical. It's $21 trillion.</strong><br><br>
+    The drawdown can go deeper and last longer than you think. That's the price of asymmetry — not a reason to abandon it. Don't let a red chart destroy a thesis you spent years building. <strong>This is the most asymmetric asset class on earth. The edge is surviving long enough to be right.</strong>
+  </div>
+
+  <div class="watermark">@defi_naly</div>
+</div>
+
+</body>
+</html>

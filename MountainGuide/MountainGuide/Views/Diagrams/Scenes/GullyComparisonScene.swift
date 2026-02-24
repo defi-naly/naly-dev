@@ -8,7 +8,7 @@ struct GullyComparisonScene: View {
         ZStack {
             // Background
             LinearGradient(
-                colors: [Color(hex: "1a1a2e"), Color(hex: "1e293b")],
+                colors: [Color(hex: "F5F0EB"), Color(hex: "E7E5E4")],
                 startPoint: .top,
                 endPoint: .bottom
             )

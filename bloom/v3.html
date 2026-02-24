@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOOM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --void: #050505;
+            --warm: #faf6f1;
+            --warm-mid: #c9bfb0;
+            --warm-dim: #7a7269;
+            --gold: #d4a855;
+            --gold-dim: #8a7340;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--void);
+            color: var(--warm);
+            font-family: 'Instrument Serif', Georgia, serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .mono { font-family: 'Geist Mono', monospace; }
+
+        /* The light follows you */
+        #light {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            width: 900px;
+            height: 900px;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(
+                circle,
+                rgba(212, 168, 85, 0.07) 0%,
+                rgba(250, 246, 241, 0.04) 20%,
+                rgba(250, 246, 241, 0.015) 40%,
+                transparent 65%
+            );
+            mix-blend-mode: screen;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2.5rem 5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.6em;
+            color: var(--warm-dim);
+            transition: color 0.5s;
+        }
+
+        .logo:hover { color: var(--warm); }
+
+        .nav-links {
+            display: flex;
+            gap: 3.5rem;
+        }
+
+        .nav-links a {
+            font-family: 'Geist Mono', monospace;
+            color: var(--warm-dim);
+            text-decoration: none;
+            font-size: 0.6rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            transition: color 0.4s;
+        }
+
+        .nav-links a:hover { color: var(--gold); }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 5rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 750px;
+            margin-left: 8%;
+        }
+
+        .hero h1 {
+            font-size: clamp(4rem, 10vw, 7rem);
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            line-height: 0.95;
+            color: var(--warm);
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-tagline {
+            font-size: 1.4rem;
+            color: var(--warm-mid);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            max-width: 500px;
+        }
+
+        .hero-sub {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--warm-dim);
+            letter-spacing: 0.06em;
+            line-height: 2;
+            max-width: 420px;
+        }
+
+        .scroll-cue {
+            position: absolute;
+            bottom: 4rem;
+            left: 5rem;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.5rem;
+            letter-spacing: 0.4em;
+            color: var(--warm-dim);
+            text-transform: uppercase;
+            opacity: 0.4;
+            writing-mode: vertical-rl;
+        }
+
+        /* Sections */
+        section {
+            padding: 12rem 5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-label {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.5rem;
+            letter-spacing: 0.4em;
+            color: var(--gold-dim);
+            text-transform: uppercase;
+            margin-bottom: 4rem;
+        }
+
+        /* About - Asymmetric */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 8rem;
+            max-width: 1200px;
+        }
+
+        .about-main h2 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            line-height: 1.25;
+            margin-bottom: 2.5rem;
+            color: var(--warm);
+            max-width: 600px;
+        }
+
+        .about-main h2 em {
+            color: var(--gold);
+            font-style: normal;
+        }
+
+        .about-main p {
+            font-size: 1.05rem;
+            color: var(--warm-mid);
+            line-height: 2;
+            max-width: 540px;
+        }
+
+        .about-aside {
+            padding-top: 2rem;
+        }
+
+        .stat-block {
+            margin-bottom: 3.5rem;
+            padding-left: 1.5rem;
+            border-left: 1px solid var(--gold-dim);
+        }
+
+        .stat-value {
+            font-size: 4rem;
+            font-weight: 400;
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.55rem;
+            color: var(--warm-dim);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .thesis-quote {
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--warm-mid);
+            line-height: 1.7;
+            padding-left: 1.5rem;
+            border-left: 1px solid var(--gold-dim);
+        }
+
+        /* Process - Horizontal rhythm */
+        .process-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            max-width: 1200px;
+        }
+
+        .process-item {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 168, 85, 0.2);
+        }
+
+        .process-num {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.5rem;
+            letter-spacing: 0.2em;
+            color: var(--gold-dim);
+            margin-bottom: 2rem;
+        }
+
+        .process-item h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: var(--warm);
+        }
+
+        .process-item p {
+            font-size: 0.9rem;
+            color: var(--warm-dim);
+            line-height: 1.9;
+        }
+
+        /* Portfolio - Overlapping cards */
+        .portfolio-stack {
+            max-width: 1000px;
+        }
+
+        .portfolio-card {
+            padding: 4rem;
+            border: 1px solid rgba(250, 246, 241, 0.06);
+            margin-bottom: 2rem;
+            transition: border-color 0.5s, transform 0.5s;
+        }
+
+        .portfolio-card:hover {
+            border-color: rgba(212, 168, 85, 0.25);
+        }
+
+        .portfolio-card:first-child {
+            margin-left: 0;
+        }
+
+        .portfolio-card:last-child {
+            margin-left: 6rem;
+            margin-top: -2rem;
+        }
+
+        .card-status {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.5rem;
+            letter-spacing: 0.25em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .status-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+
+        .portfolio-card:last-child .status-dot {
+            background: var(--warm-dim);
+        }
+
+        .portfolio-card:last-child .card-status {
+            color: var(--warm-dim);
+        }
+
+        .card-title {
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: var(--warm);
+        }
+
+        .card-desc {
+            font-size: 1rem;
+            color: var(--warm-mid);
+            line-height: 1.9;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .tag {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.5rem;
+            letter-spacing: 0.1em;
+            padding: 0.6rem 1.2rem;
+            border: 1px solid rgba(250, 246, 241, 0.1);
+            color: var(--warm-dim);
+        }
+
+        /* Principles - Grid breaking */
+        .principles-wrap {
+            max-width: 1000px;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 6rem;
+        }
+
+        .principle {
+            padding: 3rem 0;
+            border-bottom: 1px solid rgba(250, 246, 241, 0.04);
+        }
+
+        .principle:nth-child(-n+2) {
+            border-top: 1px solid rgba(250, 246, 241, 0.04);
+        }
+
+        .principle-num {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.5rem;
+            letter-spacing: 0.15em;
+            color: var(--warm-dim);
+            margin-bottom: 1.25rem;
+            opacity: 0.5;
+        }
+
+        .principle h3 {
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-bottom: 0.75rem;
+            color: var(--warm);
+        }
+
+        .principle p {
+            font-size: 0.88rem;
+            color: var(--warm-dim);
+            line-height: 1.8;
+        }
+
+        /* CTA */
+        .cta {
+            padding: 10rem 5rem;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 1.25rem;
+            color: var(--warm);
+        }
+
+        .cta > p {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--warm-dim);
+            letter-spacing: 0.08em;
+            margin-bottom: 3rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--void);
+            background: var(--warm);
+            text-decoration: none;
+            padding: 1.2rem 3rem;
+            transition: background 0.4s;
+        }
+
+        .cta-btn:hover {
+            background: var(--gold);
+        }
+
+        .cta-note {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.55rem;
+            color: var(--warm-dim);
+            margin-top: 1.5rem;
+            opacity: 0.5;
+        }
+
+        /* Footer */
+        footer {
+            padding: 5rem;
+            border-top: 1px solid rgba(250, 246, 241, 0.04);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+        }
+
+        .footer-brand p {
+            font-size: 0.9rem;
+            color: var(--warm-dim);
+            font-style: italic;
+            line-height: 1.8;
+            max-width: 280px;
+            opacity: 0.6;
+        }
+
+        .footer-col h4 {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.5rem;
+            letter-spacing: 0.25em;
+            color: var(--warm-dim);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            opacity: 0.4;
+        }
+
+        .footer-col a {
+            display: block;
+            color: var(--warm-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+            transition: color 0.3s;
+        }
+
+        .footer-col a:hover { color: var(--warm); }
+
+        .footer-bottom {
+            margin-top: 5rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(250, 246, 241, 0.04);
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+        }
+
+        .footer-bottom p,
+        .footer-bottom a {
+            font-family: 'Geist Mono', monospace;
+            font-size: 0.5rem;
+            color: var(--warm-dim);
+            letter-spacing: 0.15em;
+            opacity: 0.4;
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover { opacity: 0.8; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            nav, .hero, section, .cta, footer { padding-left: 3rem; padding-right: 3rem; }
+            .hero-content { margin-left: 0; }
+            .about-grid { grid-template-columns: 1fr; gap: 4rem; }
+            .process-row { grid-template-columns: 1fr; gap: 3rem; }
+            .portfolio-card:last-child { margin-left: 0; margin-top: 0; }
+            .principles-grid { grid-template-columns: 1fr; }
+            .principle:nth-child(2) { border-top: none; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 640px) {
+            nav { padding: 1.5rem 2rem; }
+            .nav-links { display: none; }
+            .hero, section, .cta, footer { padding-left: 2rem; padding-right: 2rem; }
+            .hero h1 { font-size: 3rem; }
+            section { padding-top: 8rem; padding-bottom: 8rem; }
+            .about-main h2 { font-size: 1.8rem; }
+            .footer-grid { grid-template-columns: 1fr; }
+            #light { width: 600px; height: 600px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #light { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div id="light"></div>
+
+    <nav>
+        <div class="logo">BLOOM</div>
+        <div class="nav-links">
+            <a href="#about">Thesis</a>
+            <a href="#process">Process</a>
+            <a href="#work">Work</a>
+            <a href="#principles">Principles</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>BLOOM</h1>
+            <p class="hero-tagline">Find the friction. Build the solution. Let it bloom.</p>
+            <p class="hero-sub">A DeFi venture studio. We illuminate the dark corners of decentralized finance and build the products that clear the way.</p>
+        </div>
+        <span class="scroll-cue">Scroll</span>
+    </section>
+
+    <section id="about">
+        <div class="section-label">01 — Thesis</div>
+        <div class="about-grid">
+            <div class="about-main">
+                <h2>DeFi is full of friction. We find it and <em>remove it</em>.</h2>
+                <p>Most teams build features. We build infrastructure. For five years, we've operated inside DeFi—not observing it, but using it, breaking it, understanding where it fails. Every product we launch targets a specific point of friction that costs real users real value.</p>
+            </div>
+            <div class="about-aside">
+                <div class="stat-block">
+                    <div class="stat-value">5+</div>
+                    <div class="stat-label">Years in DeFi</div>
+                </div>
+                <p class="thesis-quote">"Find the friction. Build the solution. Let it bloom."</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="process">
+        <div class="section-label">02 — Process</div>
+        <div class="process-row">
+            <div class="process-item">
+                <div class="process-num">01</div>
+                <h3>Identify</h3>
+                <p>We operate inside protocols, talk to power users, track where value disappears. Every product starts with friction we've felt ourselves.</p>
+            </div>
+            <div class="process-item">
+                <div class="process-num">02</div>
+                <h3>Architect</h3>
+                <p>Before code, we map incentives, attack vectors, user behaviors. Solutions that ignore system dynamics become tomorrow's problems.</p>
+            </div>
+            <div class="process-item">
+                <div class="process-num">03</div>
+                <h3>Cultivate</h3>
+                <p>Launch lean, iterate with early users, grow organically. Forced growth creates fragile systems. Natural growth compounds.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="work">
+        <div class="section-label">03 — Work</div>
+        <div class="portfolio-stack">
+            <div class="portfolio-card">
+                <div class="card-status">
+                    <span class="status-dot"></span>
+                    Live
+                </div>
+                <h3 class="card-title">TIPZ</h3>
+                <p class="card-desc">Privacy-first micro-tipping for creators. Zcash shielded addresses. No platform fees, no data harvesting, no trace. Support without surveillance.</p>
+                <div class="card-tags">
+                    <span class="tag">Privacy</span>
+                    <span class="tag">Zcash</span>
+                    <span class="tag">Creator Economy</span>
+                </div>
+            </div>
+            <div class="portfolio-card">
+                <div class="card-status">
+                    <span class="status-dot"></span>
+                    Building
+                </div>
+                <h3 class="card-title">Project II</h3>
+                <p class="card-desc">Bottleneck identified. Solution emerging.</p>
+                <div class="card-tags">
+                    <span class="tag">Soon</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="principles">
+        <div class="section-label">04 — Principles</div>
+        <div class="principles-wrap">
+            <div class="principles-grid">
+                <div class="principle">
+                    <div class="principle-num">01</div>
+                    <h3>Privacy is fundamental</h3>
+                    <p>Every indexed transaction is leverage against the individual. We build tools that can't be weaponized.</p>
+                </div>
+                <div class="principle">
+                    <div class="principle-num">02</div>
+                    <h3>Emergence over force</h3>
+                    <p>Complex systems resist top-down control. We design for organic adoption—slower to start, impossible to stop.</p>
+                </div>
+                <div class="principle">
+                    <div class="principle-num">03</div>
+                    <h3>Simple surface, deep structure</h3>
+                    <p>The best technology feels inevitable. Complexity belongs in the architecture, never the interface.</p>
+                </div>
+                <div class="principle">
+                    <div class="principle-num">04</div>
+                    <h3>Skin in the game</h3>
+                    <p>We use what we build. We hold what we believe in. Aligned incentives take care of themselves.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="cta">
+        <h2>Building in DeFi?</h2>
+        <p>We're interested in hard problems and founders who ship.</p>
+        <a href="mailto:hello@bloom.studio" class="cta-btn">Get in touch</a>
+        <p class="cta-note">No pitch deck required. Just tell us the problem.</p>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <p>A venture studio building infrastructure for decentralized finance. We find the friction and build products that remove it.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Studio</h4>
+                <a href="#about">Thesis</a>
+                <a href="#process">Process</a>
+                <a href="#principles">Principles</a>
+            </div>
+            <div class="footer-col">
+                <h4>Work</h4>
+                <a href="https://tipz.cash" target="_blank" rel="noopener">TIPZ</a>
+                <a href="#work">Project II</a>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <a href="https://twitter.com/bloomstudio" target="_blank" rel="noopener">Twitter</a>
+                <a href="https://github.com/bloom-studio" target="_blank" rel="noopener">GitHub</a>
+                <a href="mailto:hello@bloom.studio">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 BLOOM VENTURE STUDIO</p>
+            <a href="index.html">← All Designs</a>
+        </div>
+    </footer>
+
+    <script>
+        const light = document.getElementById('light');
+        let targetX = window.innerWidth / 2;
+        let targetY = window.innerHeight / 2;
+        let currentX = targetX;
+        let currentY = targetY;
+
+        document.addEventListener('mousemove', e => {
+            targetX = e.clientX;
+            targetY = e.clientY;
+        });
+
+        function animate() {
+            // Smooth easing
+            currentX += (targetX - currentX) * 0.06;
+            currentY += (targetY - currentY) * 0.06;
+
+            light.style.left = currentX + 'px';
+            light.style.top = currentY + 'px';
+
+            requestAnimationFrame(animate);
+        }
+
+        // Respect reduced motion
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            animate();
+        }
+    </script>
+</body>
+</html>

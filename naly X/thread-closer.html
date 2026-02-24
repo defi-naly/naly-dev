@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Take — @defi_naly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --void: #08090c;
+      --soil: #0f1014;
+      --surface: #161819;
+      --border: #1e1c1a;
+      --bright: #f0efe9;
+      --text: #d4cfc4;
+      --muted: #a69b8a;
+      --dim: #6b6560;
+      --accent: #7ba3c9;
+      --accent-bright: #96bade;
+      --accent-glow: rgba(123, 163, 201, 0.3);
+      --snow: #e8edf4;
+      --display: 'Space Grotesk', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Inter', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--void);
+      font-family: var(--sans);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 32px;
+    }
+
+    .bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      opacity: 0.2;
+    }
+
+    .bg-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(8, 9, 12, 0.55);
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 800px;
+      background: rgba(15, 16, 20, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(123, 163, 201, 0.1);
+      border-radius: 16px;
+      padding: 64px 52px;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(123, 163, 201, 0.25), transparent);
+    }
+
+    .card-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 40px;
+      text-align: left;
+    }
+
+    .quote-main {
+      font-family: var(--display);
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--bright);
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+      margin-bottom: 20px;
+    }
+
+    .quote-sub {
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 40px 0 20px 0;
+    }
+
+    .watermark {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 20px;
+      text-align: right;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg">
+  <img src="1080x360.jpeg" alt="">
+  <div class="bg-overlay"></div>
+</div>
+
+<div class="card">
+  <div class="card-label">The Take</div>
+
+  <div class="quote-main">Software used to be the product. Now software is the packaging.</div>
+  <div class="quote-sub">
+    The real product is the resource underneath: compute, capital, or connectivity.
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="watermark">@defi_naly</div>
+</div>
+
+</body>
+</html>

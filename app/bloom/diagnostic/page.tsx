@@ -82,7 +82,7 @@ export default function DiagnosticPage() {
               Back
             </a>
             <a href="/bloom/foundations" className="bloom-nav-link">Foundations</a>
-            <a href="/bloom#contact" className="bloom-nav-cta">Start a Sprint</a>
+            <a href="/bloom/foundations#contact" className="bloom-nav-cta">Start a Sprint</a>
           </div>
         </nav>
 
@@ -94,9 +94,9 @@ export default function DiagnosticPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h1 className="diag-title">Find Your Missing Durable Asset</h1>
+            <h1 className="diag-title">Find Your Missing Foundation</h1>
             <p className="diag-subtitle">
-              Score your organization across 4 durable assets. Find where you&apos;re exposed — and which sprint closes the gap.
+              Score your organization across 3 foundations. Find where you&apos;re exposed — and which sprint closes the gap.
             </p>
             <p className="diag-time">~5 minutes</p>
           </motion.div>

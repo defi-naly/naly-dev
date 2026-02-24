@@ -54,7 +54,6 @@ struct ModuleDetailView: View {
         .background(Color.terminalBg)
         .navigationTitle(module.title)
         .navigationBarTitleDisplayMode(.inline)
-        .toolbarColorScheme(.dark, for: .navigationBar)
         .onAppear {
             if mastery?.phase == .locked {
                 store.startModule(domain: module.domain, slug: module.slug)
@@ -157,7 +156,7 @@ struct ModuleDetailView: View {
                             .font(.mono(14, weight: .bold))
                         Image(systemName: "arrow.right")
                     }
-                    .foregroundStyle(Color.terminalBg)
+                    .foregroundStyle(.white)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 14)
                     .background(Color.amber)
@@ -371,7 +370,7 @@ struct ModuleDetailView: View {
                 .font(.mono(14, weight: .bold))
             Image(systemName: "arrow.right")
         }
-        .foregroundStyle(Color.terminalBg)
+        .foregroundStyle(.white)
         .frame(maxWidth: .infinity)
         .padding(.vertical, 14)
         .background(Color.amber)

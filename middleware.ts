@@ -4,11 +4,12 @@ export function middleware(request: NextRequest) {
   const hostname = request.headers.get('host') ?? '';
   const { pathname } = request.nextUrl;
 
-  // Redirect app.naly.dev → naly.dev
-  if (hostname === 'app.naly.dev') {
-    return NextResponse.redirect(
-      new URL(pathname + request.nextUrl.search, 'https://naly.dev')
-    );
+  // Jorge Events domain routing — rewrite to /jorge-events sub-site
+  if (hostname === 'jorge-events.com' || hostname === 'www.jorge-events.com') {
+    if (!pathname.startsWith('/jorge-events') && !pathname.startsWith('/api/jorge-events')) {
+      const rewritePath = pathname === '/' ? '/jorge-events' : `/jorge-events${pathname}`;
+      return NextResponse.rewrite(new URL(rewritePath, request.url));
+    }
   }
 
   // In production, redirect /roots to / to prevent duplicate URLs

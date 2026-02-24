@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Split — @defi_naly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --void: #08090c;
+      --soil: #0f1014;
+      --surface: #161819;
+      --border: #1e1c1a;
+      --bright: #f0efe9;
+      --text: #d4cfc4;
+      --muted: #a69b8a;
+      --dim: #6b6560;
+      --accent: #7ba3c9;
+      --accent-bright: #96bade;
+      --accent-glow: rgba(123, 163, 201, 0.3);
+      --snow: #e8edf4;
+      --pine: #3d9970;
+      --rock: #6b7a8f;
+      --peak: #b8c4d4;
+      --gold: #c9a84c;
+      --gold-bright: #e2c76e;
+      --fade: #3a3530;
+      --display: 'Space Grotesk', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Inter', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--void);
+      font-family: var(--sans);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 32px;
+    }
+
+    .bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      opacity: 0.2;
+    }
+
+    .bg-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(8, 9, 12, 0.55);
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 800px;
+      background: rgba(15, 16, 20, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(123, 163, 201, 0.1);
+      border-radius: 16px;
+      padding: 48px 52px;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(123, 163, 201, 0.25), transparent);
+    }
+
+    .card-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-family: var(--display);
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--bright);
+      letter-spacing: -0.02em;
+      margin-bottom: 40px;
+    }
+
+    /* Section headers */
+    .section-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(30, 28, 26, 0.4);
+    }
+
+    .section-label.faded {
+      color: var(--fade);
+    }
+
+    .section-label.alive {
+      color: var(--accent);
+    }
+
+    /* Rows */
+    .rows {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .rows.dead {
+      margin-bottom: 32px;
+    }
+
+    .rows.alive {
+      margin-bottom: 36px;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(30, 28, 26, 0.3);
+    }
+
+    .row:last-child {
+      border-bottom: none;
+    }
+
+    /* Dead items */
+    .pip {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .pip.dead {
+      background: var(--fade);
+      opacity: 0.5;
+    }
+
+    .pip.blue { background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); }
+    .pip.gold { background: var(--gold); box-shadow: 0 0 8px rgba(201, 168, 76, 0.3); }
+    .pip.snow { background: var(--peak); box-shadow: 0 0 8px rgba(184, 196, 212, 0.3); }
+
+    .row-text {
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .row-text.dead {
+      color: var(--fade);
+      text-decoration: line-through;
+      text-decoration-color: rgba(58, 53, 48, 0.6);
+    }
+
+    .row-text.alive {
+      color: var(--snow);
+    }
+
+    .row-note {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--dim);
+      letter-spacing: 0.03em;
+      flex-shrink: 0;
+      opacity: 0.5;
+    }
+
+    .row-note.alive {
+      opacity: 1;
+      color: var(--muted);
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 4px 0 20px 0;
+    }
+
+    /* Footer */
+    .card-footer {
+      font-family: var(--display);
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+    }
+
+    .card-footer strong {
+      color: var(--snow);
+      font-weight: 500;
+    }
+
+    .watermark {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 20px;
+      text-align: right;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg">
+  <img src="1080x360.jpeg" alt="">
+  <div class="bg-overlay"></div>
+</div>
+
+<div class="card">
+  <div class="card-label">The Split</div>
+  <div class="card-title">What Dies. What Stays.</div>
+
+  <!-- Commoditized section -->
+  <div class="section-label faded">Commoditized</div>
+  <div class="rows dead">
+    <div class="row">
+      <div class="pip dead"></div>
+      <div class="row-text dead">Front-ends</div>
+      <div class="row-note">rebuildable overnight</div>
+    </div>
+    <div class="row">
+      <div class="pip dead"></div>
+      <div class="row-text dead">Dashboards</div>
+      <div class="row-note">UI is a commodity</div>
+    </div>
+    <div class="row">
+      <div class="pip dead"></div>
+      <div class="row-text dead">AI Wrappers</div>
+      <div class="row-note">"ChatGPT but for X"</div>
+    </div>
+  </div>
+
+  <!-- Endures section -->
+  <div class="section-label alive">Endures</div>
+  <div class="rows alive">
+    <div class="row">
+      <div class="pip blue"></div>
+      <div class="row-text alive">APIs</div>
+      <div class="row-note alive">infrastructure</div>
+    </div>
+    <div class="row">
+      <div class="pip gold"></div>
+      <div class="row-text alive">Money</div>
+      <div class="row-note alive">capital + liquidity</div>
+    </div>
+    <div class="row">
+      <div class="pip snow"></div>
+      <div class="row-text alive">AI</div>
+      <div class="row-note alive">compute + models</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card-footer">
+    <strong>If anyone can ship it in a weekend, it stopped being a moat.</strong>
+  </div>
+
+  <div class="watermark">@defi_naly</div>
+</div>
+
+</body>
+</html>

@@ -1,11 +1,9 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
-  const [isHovering, setIsHovering] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const cursor = cursorRef.current;
@@ -15,15 +13,49 @@ export default function CustomCursor() {
     let mouseY = 0;
     let cursorX = 0;
     let cursorY = 0;
+    let animFrameId = 0;
+    let idleTimer: ReturnType<typeof setTimeout> | null = null;
+    let isAnimating = false;
+
+    const animate = () => {
+      const ease = 0.15;
+      cursorX += (mouseX - cursorX) * ease;
+      cursorY += (mouseY - cursorY) * ease;
+
+      cursor.style.left = `${cursorX}px`;
+      cursor.style.top = `${cursorY}px`;
+
+      // Stop loop when cursor has caught up (within 0.5px)
+      if (Math.abs(mouseX - cursorX) < 0.5 && Math.abs(mouseY - cursorY) < 0.5) {
+        isAnimating = false;
+        return;
+      }
+
+      animFrameId = requestAnimationFrame(animate);
+    };
+
+    const startAnimating = () => {
+      if (!isAnimating) {
+        isAnimating = true;
+        animFrameId = requestAnimationFrame(animate);
+      }
+    };
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      setIsVisible(true);
+      cursor.style.opacity = '0.8';
+      startAnimating();
+
+      // Reset idle timer
+      if (idleTimer) clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => {
+        // Let the easing finish naturally — animate() self-stops
+      }, 100);
     };
 
     const handleMouseLeave = () => {
-      setIsVisible(false);
+      cursor.style.opacity = '0';
     };
 
     const handleMouseOver = (e: MouseEvent) => {
@@ -35,7 +67,7 @@ export default function CustomCursor() {
         target.closest('button') ||
         target.dataset.cursor === 'hover'
       ) {
-        setIsHovering(true);
+        cursor.classList.add('hovering');
       }
     };
 
@@ -48,19 +80,8 @@ export default function CustomCursor() {
         target.closest('button') ||
         target.dataset.cursor === 'hover'
       ) {
-        setIsHovering(false);
+        cursor.classList.remove('hovering');
       }
-    };
-
-    const animate = () => {
-      const ease = 0.15;
-      cursorX += (mouseX - cursorX) * ease;
-      cursorY += (mouseY - cursorY) * ease;
-
-      cursor.style.left = `${cursorX}px`;
-      cursor.style.top = `${cursorY}px`;
-
-      requestAnimationFrame(animate);
     };
 
     document.addEventListener('mousemove', handleMouseMove);
@@ -68,23 +89,22 @@ export default function CustomCursor() {
     document.addEventListener('mouseover', handleMouseOver);
     document.addEventListener('mouseout', handleMouseOut);
 
-    const animationId = requestAnimationFrame(animate);
-
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('mouseover', handleMouseOver);
       document.removeEventListener('mouseout', handleMouseOut);
-      cancelAnimationFrame(animationId);
+      cancelAnimationFrame(animFrameId);
+      if (idleTimer) clearTimeout(idleTimer);
     };
   }, []);
 
   return (
     <div
       ref={cursorRef}
-      className={`custom-cursor ${isHovering ? 'hovering' : ''}`}
+      className="custom-cursor"
       style={{
-        opacity: isVisible ? 1 : 0,
+        opacity: 0,
         transform: 'translate(-50%, -50%)',
       }}
     />

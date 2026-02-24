@@ -27,11 +27,14 @@ enum NavigationExplore {
         title: "Map Reading Fundamentals",
         summary: "The topographic map is the most important navigation tool in mountain terrain. Understanding contour lines, scale, symbols, and grid references transforms a sheet of paper into a three-dimensional mental model of the landscape.",
         icon: "map.fill",
+        heroImageName: "Photos/Heroes/hero-navigation-map-reading",
         sections: [
             ExploreSection(
                 id: "map-contour-lines",
                 heading: "Contour Lines: Reading the Third Dimension",
                 body: "Contour lines are the foundation of topographic map reading. Each line connects points of equal elevation, and the vertical distance between successive contour lines — the contour interval — is fixed for any given map. On a 1:25,000 map the interval is typically 10 meters; on a 1:50,000 map it is usually 20 meters. Closely spaced contour lines indicate steep terrain, while widely spaced lines indicate gentle slopes. The shape of contour lines reveals the shape of the ground: concentric circles indicate a summit or hilltop, V-shapes pointing uphill indicate a valley or drainage (the 'V rule'), and V-shapes pointing downhill indicate a spur or ridge. Index contours, drawn as thicker lines every fifth contour, carry elevation labels and allow you to quickly determine height. Mastering contour interpretation means you can look at a map and visualize the terrain as though you were flying over it.",
+                imageName: "Photos/navigation-topo-contours",
+                imageCaption: "Topographic map showing contour lines across alpine terrain",
                 diagram: ExploreDiagram(
                     type: .labeledScene,
                     config: DiagramConfig(
@@ -57,6 +60,8 @@ enum NavigationExplore {
                 id: "map-scale-distance",
                 heading: "Scale, Distance, and Grid References",
                 body: "Map scale determines the relationship between distance on the map and distance on the ground. At 1:25,000, one centimeter on the map equals 250 meters on the ground, and each grid square represents one square kilometer. At 1:50,000, one centimeter equals 500 meters, making the map cover more area but with less detail. For mountain navigation, 1:25,000 is strongly preferred because it reveals the subtle terrain features that guide route-finding. Grid references provide a standardized way to communicate locations. A four-figure reference identifies a one-kilometer square, while a six-figure reference narrows this to a 100-meter square. Always give the easting (left-right) before the northing (bottom-top) — the convention is 'along the corridor and up the stairs.' Measuring distance on a map gives you horizontal distance only; on steep terrain, actual walking distance is greater due to the slope angle, and Naismith's rule accounts for this by adding time for elevation gain.",
+                imageName: "Photos/navigation-map-scale",
+                imageCaption: "Close-up of map scale and grid references on a topographic sheet",
                 diagram: nil,
                 keyFacts: [
                     "1:25,000 scale means 4 cm on the map equals 1 km on the ground",
@@ -105,11 +110,14 @@ enum NavigationExplore {
         title: "Compass Navigation",
         summary: "The magnetic compass is the navigator's most reliable instrument — it requires no batteries, no satellites, and no signal. Mastering bearing work, declination correction, and map orientation is essential for confident mountain travel.",
         icon: "location.north.fill",
+        heroImageName: "Photos/Heroes/hero-navigation-compass",
         sections: [
             ExploreSection(
                 id: "compass-bearing-basics",
                 heading: "Taking and Following Bearings",
                 body: "A bearing is the direction from one point to another, measured as an angle clockwise from north, expressed in degrees from 0 to 360. To take a bearing from a map, place the compass baseplate along the line connecting your position to your target, rotate the bezel until the orienting lines align with the map's grid lines (with the orienting arrow pointing to grid north), and read the bearing at the index mark. To walk on a bearing in the field, hold the compass level in front of you, rotate your body until the magnetic needle sits within the orienting arrow (red in the shed), and walk toward the direction-of-travel arrow. The most common error is accidentally following the back bearing — 180 degrees in the wrong direction — which happens when the needle is reversed in the housing. Always double-check that north on the needle points to north on the bezel before stepping off.",
+                imageName: "Photos/navigation-compass-map",
+                imageCaption: "Compass and topographic map for mountain navigation",
                 diagram: nil,
                 keyFacts: [
                     "Bearings are measured clockwise from north, 0 to 360 degrees",
@@ -169,6 +177,7 @@ enum NavigationExplore {
         title: "GPS and Digital Navigation",
         summary: "GPS receivers and smartphone navigation apps have transformed mountain navigation, providing instant position fixes in any visibility. But they are tools to supplement, not replace, map and compass skills — and understanding their limitations is as important as knowing their strengths.",
         icon: "antenna.radiowaves.left.and.right",
+        heroImageName: "Photos/Heroes/hero-navigation-gps",
         sections: [
             ExploreSection(
                 id: "gps-how-it-works",
@@ -187,6 +196,8 @@ enum NavigationExplore {
                 id: "gps-waypoints-tracks",
                 heading: "Waypoints, Tracks, and Routes",
                 body: "Waypoints are stored coordinates representing specific locations — a summit, a col, a stream crossing, a hut. Before a trip, enter key waypoints from the map and assign each a clear name. In poor visibility, the GPS 'go to' function gives you a bearing and distance to any stored waypoint, essentially replacing the compass bearing you would otherwise have to calculate from the map. Tracks are the breadcrumb trail of your actual path, recorded at intervals as you walk. A recorded track is invaluable for retracing your steps in deteriorating conditions. Routes are pre-planned sequences of waypoints that the GPS follows in order, alerting you as you approach each one. The practical value of these functions is enormous, but they must be set up before you need them. Programming waypoints on a freezing mountain in driving rain with numb fingers and fading daylight is not realistic. Do this work at home, verify the waypoints on the map, and carry spare batteries or a power bank. The GPS that runs out of battery halfway through a whiteout traverse is worse than useless — it has replaced the skills you should have been practicing.",
+                imageName: "Photos/navigation-gps-device",
+                imageCaption: "GPS device showing waypoints on a mountain route",
                 diagram: nil,
                 keyFacts: [
                     "Program key waypoints at home before the trip — not in the field under pressure",
@@ -222,11 +233,14 @@ enum NavigationExplore {
         title: "Route Planning",
         summary: "Good navigation begins long before you step onto the mountain. Thorough route planning — calculating timing, identifying hazards, establishing escape routes, and setting turnaround times — is the framework that turns a walk into a managed journey.",
         icon: "point.topleft.down.to.point.bottomright.curvepath.fill",
+        heroImageName: "Photos/Heroes/hero-navigation-route-planning",
         sections: [
             ExploreSection(
                 id: "route-timing",
                 heading: "Timing Calculations: Naismith's Rule and Beyond",
                 body: "Naismith's rule, formulated in 1892 by Scottish mountaineer William Naismith, remains the foundation of mountain timing estimates. The basic rule allows 5 kilometers per hour on flat ground plus an additional 1 minute for every 10 meters of ascent. For a hill walk covering 12 kilometers with 800 meters of ascent, the calculation gives 2 hours 24 minutes for the distance plus 80 minutes for the climb, totaling 3 hours 44 minutes. Tranter's corrections then adjust this estimate for the fitness of the party and the nature of the terrain. Rough ground, boggy paths, deep snow, or strong headwinds can easily halve your speed. Descent takes longer than many people expect: while you gain time by not climbing, steep or technical descent actually slows you compared to flat walking. A useful correction is to add 1 minute for every 25 meters of steep descent (greater than 12 degrees). Always plan timing based on the slowest member of the group, and add a contingency buffer of 20 to 30 percent for unexpected delays.",
+                imageName: "Photos/navigation-route-card",
+                imageCaption: "Handwritten route card with timing calculations for a mountain traverse",
                 diagram: nil,
                 keyFacts: [
                     "Naismith's rule: 5 km/hr horizontal plus 1 minute per 10 meters of ascent",
@@ -240,6 +254,8 @@ enum NavigationExplore {
                 id: "route-escape-routes",
                 heading: "Escape Routes and Decision Points",
                 body: "Every mountain route should have pre-planned escape routes — alternative descent lines that allow you to bail out safely if conditions deteriorate, someone is injured, or you are running behind schedule. Identify these during the planning stage by examining the map for valleys, paths, and ridges that lead to safety from key points along the route. Mark them on the map with compass bearings from the main route to the start of each escape route. The best escape routes follow natural terrain features — valleys and ridges — that are easy to locate and follow even in poor visibility. Avoid escape routes that cross complex terrain, require navigation through featureless plateaus, or involve steep technical descent unless the party has the skills and equipment to handle it. Decision points are pre-selected locations where you will assess conditions and decide whether to continue, modify the route, or retreat. Establish turnaround times at the planning stage: if you have not reached checkpoint A by a specific time, you take escape route B. This removes the emotional pressure of making retreat decisions on the mountain, where summit fever and group dynamics can override good judgment.",
+                imageName: "Photos/navigation-ridge-route",
+                imageCaption: "Ridge route through alpine terrain",
                 diagram: nil,
                 keyFacts: [
                     "Identify at least one escape route from every major section of the route",
@@ -275,6 +291,7 @@ enum NavigationExplore {
         title: "Terrain Association",
         summary: "Terrain association is the art of continuously relating the map to the ground around you. It is the most efficient form of mountain navigation — faster and less tiring than constant compass work — and the mark of an experienced navigator.",
         icon: "mountain.2.fill",
+        heroImageName: "Photos/Heroes/hero-navigation-terrain",
         sections: [
             ExploreSection(
                 id: "terrain-relating-map-ground",
@@ -306,6 +323,8 @@ enum NavigationExplore {
                 id: "terrain-handrails-attack",
                 heading: "Handrails and Attack Points",
                 body: "A handrail is any linear feature that runs roughly parallel to your direction of travel and that you can follow with minimal navigational effort. Streams, ridges, walls, fence lines, paths, power lines, and forest edges can all serve as handrails. Following a handrail conserves mental energy because you do not need to take or follow compass bearings — you simply walk alongside the feature. The skill lies in identifying handrails on the map during route planning and designing your route to use them wherever possible. An attack point is a clearly identifiable feature close to your objective from which you begin precise navigation for the final approach. Rather than trying to navigate directly from one distant point to another, you navigate to the attack point using coarse methods (terrain association, handrails) and then switch to precise compass and pacing for the short leg from the attack point to the objective. This two-stage approach is both more reliable and more efficient than trying to maintain precision over long distances. For example, to find a small bothy in poor visibility, you might follow a stream (handrail) to the point where it crosses a wall (attack point), then navigate on a precise bearing for 400 meters to the bothy.",
+                imageName: "Photos/navigation-stream-handrail",
+                imageCaption: "Mountain stream used as a natural handrail for navigation",
                 diagram: nil,
                 keyFacts: [
                     "Handrails are linear features parallel to your travel that you follow with minimal effort",
@@ -341,6 +360,7 @@ enum NavigationExplore {
         title: "Contouring and Slope Navigation",
         summary: "Traversing slopes while maintaining elevation is one of the most demanding navigation tasks in mountain terrain. Mastering contouring techniques saves enormous energy and keeps you on route when crossing complex hillsides.",
         icon: "arrow.left.arrow.right",
+        heroImageName: "Photos/Heroes/hero-navigation-contouring",
         sections: [
             ExploreSection(
                 id: "contouring-technique",
@@ -359,6 +379,8 @@ enum NavigationExplore {
                 id: "contouring-slope-aspect",
                 heading: "Slope Aspect and Gradient Reading",
                 body: "Understanding slope aspect — the direction a slope faces — is critical for both navigation and safety. In the Northern Hemisphere, south-facing slopes receive more solar radiation and are typically drier, warmer, and have less snow retention than north-facing slopes. This matters for navigation because slope conditions affect travel speed, visibility, and hazards. To determine slope aspect in the field, face directly downhill and take a compass bearing — that bearing is the aspect. On the map, slope aspect is determined by the direction contour lines descend. Reading gradient in the field is equally important: experienced navigators can estimate slope angle to within a few degrees by observing how the terrain falls away. A useful reference is that a 45-degree slope feels very steep and usually requires hands for support, a 30-degree slope is steep enough for avalanche release, and a 15-degree slope feels like a moderately steep hill walk. Matching the gradient you feel underfoot with the contour spacing on the map helps confirm your position on the hillside.",
+                imageName: "Photos/navigation-slope-aspect",
+                imageCaption: "Hillside showing contrasting slope aspects with varied snow cover",
                 diagram: nil,
                 keyFacts: [
                     "Slope aspect is the compass direction a slope faces — face directly downhill and read the bearing",
@@ -394,6 +416,7 @@ enum NavigationExplore {
         title: "Triangulation and Position Fixing",
         summary: "When you are unsure of your position, the ability to fix your location using compass bearings to visible landmarks is an essential mountain skill. Resection, intersection, and cross-checking with GPS form the navigator's toolkit for position confirmation.",
         icon: "triangle",
+        heroImageName: "Photos/Heroes/hero-navigation-triangulation",
         sections: [
             ExploreSection(
                 id: "triangulation-resection",
@@ -471,11 +494,14 @@ enum NavigationExplore {
         title: "Whiteout Navigation",
         summary: "A whiteout — when cloud, snow, and white terrain merge into a featureless void — is the ultimate test of mountain navigation skill. Without visible landmarks, you must rely entirely on compass, pacing, and systematic techniques to move safely.",
         icon: "cloud.fog.fill",
+        heroImageName: "Photos/Heroes/hero-navigation-whiteout",
         sections: [
             ExploreSection(
                 id: "whiteout-what-happens",
                 heading: "Understanding Whiteout Conditions",
                 body: "A true whiteout occurs when overcast or foggy conditions combine with snow-covered terrain to eliminate all shadows, contrast, and depth perception. The horizon vanishes, the sky merges with the ground, and you cannot distinguish a slope from a flat surface or a dropoff. Even your sense of balance can be affected because your visual system provides no orientation reference. Whiteout is distinct from simple poor visibility: in fog, you can at least see the ground beneath your feet and judge gradient. In a full whiteout on a snow plateau, you may literally be unable to tell whether the ground ahead is rising, falling, or level. This makes navigation without instruments not just difficult but genuinely dangerous, as parties have walked over cornices and cliffs they could not see. The psychological effect is also significant — the sensory deprivation of a whiteout creates disorientation, anxiety, and a strong temptation to rely on instinct rather than instruments. Instinct in a whiteout is almost always wrong. Trust your compass, trust your pacing, and follow your pre-planned route card methodically.",
+                imageName: "Photos/navigation-whiteout-conditions",
+                imageCaption: "Mountaineers navigating through featureless whiteout on a snow plateau",
                 diagram: nil,
                 keyFacts: [
                     "Whiteout eliminates all shadows, contrast, and depth perception — you cannot judge terrain shape",
@@ -489,6 +515,8 @@ enum NavigationExplore {
                 id: "whiteout-compass-pacing",
                 heading: "Compass and Pacing in Zero Visibility",
                 body: "In whiteout conditions, the compass is your only directional reference, and pacing is your only distance measure. Before entering terrain where whiteout is possible, you must know your personal pace count — the number of double paces you take over 100 meters on flat ground, on gentle uphill, on steep uphill, and in deep snow. For most people, this ranges from 60 to 70 double paces per 100 meters on flat ground, increasing to 80 or more on steep terrain or in deep snow. To navigate a leg in whiteout, set your bearing, begin walking, and count every double pace. The compass bearer walks on the bearing while a second person counts paces. Separate these roles because doing both simultaneously degrades accuracy. If navigating alone, stop every 50 paces to re-check your bearing, as it is extremely easy to drift off course in featureless conditions. In strong wind, you will tend to drift downwind, so be aware of the wind direction relative to your bearing and compensate. Each leg should be as short as possible — navigate to the nearest identifiable feature, confirm your position, then set the next leg.",
+                imageName: "Photos/navigation-compass-pacing",
+                imageCaption: "Navigator taking a compass bearing in zero-visibility conditions",
                 diagram: nil,
                 keyFacts: [
                     "Know your pace count: typically 60-70 double paces per 100 meters on flat ground",
@@ -524,11 +552,14 @@ enum NavigationExplore {
         title: "Night Navigation",
         summary: "Navigating in darkness demands adapted techniques, disciplined headlamp use, and heightened reliance on non-visual cues. Whether by necessity or design, night travel in the mountains requires careful preparation and a different navigational mindset.",
         icon: "moon.stars.fill",
+        heroImageName: "Photos/Heroes/hero-navigation-night",
         sections: [
             ExploreSection(
                 id: "night-adaptation",
                 heading: "Dark Adaptation and Headlamp Discipline",
                 body: "Your eyes take 20 to 30 minutes to fully adapt to darkness, and a single flash of bright light resets this process. Preserving night vision is therefore essential for effective night navigation. Use a headlamp with a red-light mode for map reading, as red light has minimal impact on dark adaptation. Keep the white beam for technical terrain where you need full detail, and always warn others before switching to white light. In moonlit conditions on snow or open terrain, you may find you can navigate without any artificial light once your eyes adapt, and this is actually preferable because headlamps create a tunnel of light that distorts depth perception and destroys awareness of the wider terrain. The pool of light from a headlamp also compresses your navigation horizon: instead of looking at features hundreds of meters away, you can only see the ground a few meters ahead. This means you must rely more heavily on compass bearings and pacing, and less on terrain association, than during daylight navigation. Plan for this shift in technique when you know your route will include night travel.",
+                imageName: "Photos/navigation-headlamp-night",
+                imageCaption: "Headlamp beam illuminating a mountain trail at night",
                 diagram: nil,
                 keyFacts: [
                     "Full dark adaptation takes 20-30 minutes and is reset by a single flash of white light",
@@ -555,6 +586,8 @@ enum NavigationExplore {
                 id: "night-hazards-preparation",
                 heading: "Hazards and Preparation",
                 body: "Night navigation introduces specific hazards beyond simply not being able to see. Cliff edges, steep drops, loose scree, and unmarked obstacles are all more dangerous in the dark because you discover them at closer range and have less time to react. Even familiar terrain can feel alien and disorienting at night, and navigation errors that would be quickly caught and corrected in daylight can compound into serious problems before you realize you are off course. Pre-plan your night route during daylight: walk the approach during the day if possible, memorize key features and decision points, and note potential hazards. Keep your navigation legs short and conservative — night is not the time for bold, committing decisions. A GPS with stored waypoints is particularly valuable at night as a position cross-check. Carry spare batteries for both headlamp and GPS, and ensure your spare headlamp is easily accessible in an outside pocket, not buried in your pack. Groups should stay close together at night, as separated group members in darkness on a mountainside can turn a navigational inconvenience into a search and rescue situation very quickly.",
+                imageName: "Photos/navigation-night-group",
+                imageCaption: "Group navigating a mountain path by headlamp in darkness",
                 diagram: nil,
                 keyFacts: [
                     "Cliff edges and steep drops are far more dangerous at night due to reduced reaction distance",
@@ -577,6 +610,7 @@ enum NavigationExplore {
         title: "Emergency Navigation",
         summary: "When your compass is lost, your GPS is dead, and the clouds have closed in, you are not helpless. Natural navigation methods — the sun, the stars, the wind, the vegetation — have guided travelers for millennia and remain available when technology fails.",
         icon: "star.fill",
+        heroImageName: "Photos/Heroes/hero-navigation-emergency",
         sections: [
             ExploreSection(
                 id: "emergency-sun-navigation",
@@ -617,6 +651,8 @@ enum NavigationExplore {
                 id: "emergency-star-navigation",
                 heading: "Star Navigation",
                 body: "On a clear night, the stars provide a reliable directional reference. In the Northern Hemisphere, Polaris — the North Star — sits within one degree of true north and has guided navigators for thousands of years. To find Polaris, locate the constellation Ursa Major (the Plough or Big Dipper). The two stars at the end of the 'bowl' furthest from the handle are the Pointer Stars. Draw an imaginary line through these two stars and extend it approximately five times the distance between them. This line leads directly to Polaris, a moderately bright star that appears alone at the end of the handle of Ursa Minor (the Little Dipper). In the Southern Hemisphere, use the Southern Cross (Crux): extend the long axis of the cross 4.5 times its length to find the approximate position of the south celestial pole. Stars also indicate east and west: any star that has just risen is approximately east; any star that is about to set is approximately west. This works because all stars rise in the east and set in the west due to the Earth's rotation. Watching a star for a few minutes reveals its direction of movement: rising means east, sinking means west, moving right means south (Northern Hemisphere).",
+                imageName: "Photos/navigation-star-sky",
+                imageCaption: "Clear night sky over mountains with Polaris and the Plough visible",
                 diagram: nil,
                 keyFacts: [
                     "Polaris (North Star) is within 1 degree of true north and is found using the Plough's pointer stars",

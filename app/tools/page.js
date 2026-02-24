@@ -266,7 +266,34 @@ function AnalysisTools() {
       <div className="px-4 py-2 border-b border-zinc-800">
         <span className="text-xs font-mono uppercase tracking-wider text-zinc-500">Analysis Tools</span>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-zinc-800">
+      <div className="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-zinc-800">
+        {/* THE SHADOW */}
+        <Link href="/tools/the-shadow" className="block p-4 hover:bg-zinc-900/50 transition-colors">
+          <div className="mb-1">
+            <span className="text-xs font-mono uppercase tracking-wider text-zinc-400">The Shadow</span>
+          </div>
+          <div className="text-[10px] font-mono text-zinc-600 mb-4">BTC vs ZEC Cycle</div>
+
+          <div className="flex items-center gap-3 mb-3">
+            <div className="flex items-center gap-1.5">
+              <div className="w-2 h-0.5 bg-[#F7931A] rounded" />
+              <span className="text-sm font-mono text-[#F7931A]">BTC</span>
+            </div>
+            <span className="text-zinc-700 font-mono text-xs">vs</span>
+            <div className="flex items-center gap-1.5">
+              <div className="w-2 h-0.5 bg-emerald-500 rounded" />
+              <span className="text-sm font-mono text-emerald-400">ZEC</span>
+            </div>
+          </div>
+
+          <div className="text-[10px] font-mono text-zinc-500 mb-2">
+            Same cap. Same halvings.
+          </div>
+          <div className="text-[10px] font-mono text-zinc-600">
+            +shielded privacy
+          </div>
+        </Link>
+
         {/* THE STACK */}
         <Link href="/tools/the-stack" className="block p-4 hover:bg-zinc-900/50 transition-colors">
           <div className="mb-1">

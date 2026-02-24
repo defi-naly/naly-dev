@@ -25,6 +25,7 @@ enum FlyingExplore {
         title: "Soaring Fundamentals",
         summary: "The core principles of unpowered flight: how gliders stay aloft by harvesting energy from the atmosphere rather than an engine.",
         icon: "wind",
+        heroImageName: "Photos/Heroes/hero-flying-soaring",
         sections: [
             ExploreSection(
                 id: "soaring-fund-1",
@@ -43,6 +44,8 @@ enum FlyingExplore {
                 id: "soaring-fund-2",
                 heading: "Three Sources of Lift",
                 body: "Thermal lift is the most common and versatile source: sun-heated ground warms air parcels that eventually detach and rise as buoyant columns. Ridge lift occurs when horizontal wind strikes a slope and is deflected upward, creating a band of lift along the windward face. Wave lift, the rarest and most powerful, forms in the lee of mountain ranges when stable air oscillates in standing waves that can reach the stratosphere. Most cross-country flights rely primarily on thermals, but skilled pilots exploit all three sources depending on the terrain, wind, and time of day.",
+                imageName: "Photos/flying-three-lift-sources",
+                imageCaption: "Three sources of soaring lift: thermal, ridge, and wave",
                 diagram: nil,
                 keyFacts: [
                     "Thermals: buoyant rising air from solar heating, usable from late morning to late afternoon",
@@ -77,6 +80,7 @@ enum FlyingExplore {
         title: "Thermal Structure & Entry",
         summary: "What a thermal actually looks like from the inside, how it forms, and how to transition from straight flight into a centered climb.",
         icon: "arrow.up.circle",
+        heroImageName: "Photos/Heroes/hero-flying-thermal-structure",
         sections: [
             ExploreSection(
                 id: "thermal-struct-1",
@@ -114,6 +118,8 @@ enum FlyingExplore {
                 id: "thermal-struct-2",
                 heading: "Trigger Points and Thermal Streets",
                 body: "Thermals do not release randomly. They tend to detach from specific ground features that heat faster than their surroundings: plowed fields, dark rock faces, parking lots, south-facing slopes, and transitions between different land types. These trigger points become reliable thermal sources that experienced local pilots memorize. When the wind is moderate and consistent, thermals can align into thermal streets: parallel rows of rising air connected by a band of weak lift at their tops. Flying along a thermal street allows sustained climbs with minimal circling.",
+                imageName: "Photos/flying-thermal-street",
+                imageCaption: "Thermal street marked by aligned cumulus clouds over open terrain",
                 diagram: nil,
                 keyFacts: [
                     "Dark surfaces, dry fields, and rock faces are common trigger points",
@@ -127,6 +133,9 @@ enum FlyingExplore {
                 id: "thermal-struct-3",
                 heading: "The Entry Technique",
                 body: "Approaching a thermal requires discipline. Fly toward the suspected lift source at best glide speed and remain alert for asymmetric wing loading. When one wing rises, it indicates the thermal core is on that side. The correct response is immediate: turn toward the rising wing with 30-40 degrees of bank. Hesitation is the most common beginner error because the window of usable lift is narrow, and flying straight through it means exiting into sink before a turn can be established. A tangential entry, approaching the thermal edge at an angle rather than head-on, gives more time to feel the lift gradient and commit to the correct turn direction.",
+                imageName: "Photos/flying-paraglider-thermal",
+                imageCaption: "Paraglider thermalling above a mountain valley",
+                animationName: "anim-thermal-entry",
                 diagram: nil,
                 keyFacts: [
                     "Always enter tangentially, never head-on through the center",
@@ -149,11 +158,14 @@ enum FlyingExplore {
         title: "Reading the Sky",
         summary: "Interpreting cloud formations, haze patterns, and atmospheric signs to locate lift and anticipate changing conditions before instruments confirm them.",
         icon: "cloud.sun",
+        heroImageName: "Photos/Heroes/hero-flying-sky-reading",
         sections: [
             ExploreSection(
                 id: "sky-read-1",
                 heading: "Cumulus as Thermal Markers",
                 body: "Fair-weather cumulus clouds are the pilot's best friends. Each one marks the top of an active thermal where rising air has cooled to its dew point and condensed into visible moisture. The cloud's lifecycle tells you about the thermal beneath it. A sharp, cauliflower-edged cumulus with a flat base is actively fed by a strong thermal. A wispy, dissolving cloud signals a thermal that has already died. Between these extremes, pilots learn to read the stages: forming, mature, decaying. The goal is always to arrive under a cloud in its early mature phase, when the thermal feeding it is strongest.",
+                imageName: "Photos/flying-cumulus-markers",
+                imageCaption: "Fair-weather cumulus clouds marking active thermals at various lifecycle stages",
                 diagram: nil,
                 keyFacts: [
                     "Flat cloud base = condensation level, consistent across a region",
@@ -167,6 +179,8 @@ enum FlyingExplore {
                 id: "sky-read-2",
                 heading: "Blue Thermals and Haze Domes",
                 body: "On drier days, thermals may not produce visible clouds at all. These blue thermals are invisible, but not undetectable. Haze provides a critical clue: rising thermals carry dust, pollen, and moisture upward, creating subtle domes or columns of slightly hazier air against the clearer background. Experienced pilots scan the sky at shallow angles where haze layers are most visible. Circling birds, especially raptors with their exquisite thermal sensitivity, are another reliable indicator. Even insects carried aloft in thermal cores can mark lift, though they are obviously harder to spot at distance.",
+                imageName: "Photos/flying-blue-thermal-haze",
+                imageCaption: "Subtle haze dome visible against clear sky indicating a blue thermal",
                 diagram: nil,
                 keyFacts: [
                     "Blue thermals are common in dry or desert conditions",
@@ -210,11 +224,13 @@ enum FlyingExplore {
         title: "Centering Technique",
         summary: "The skill of adjusting your circle to find and stay in the strongest part of a thermal, maximizing climb rate and minimizing wasted altitude.",
         icon: "scope",
+        heroImageName: "Photos/Heroes/hero-flying-centering",
         sections: [
             ExploreSection(
                 id: "centering-1",
                 heading: "The Basic Centering Rule",
                 body: "Centering a thermal follows one simple principle: when your vario shows increasing lift, straighten up slightly to shift your circle toward the stronger air; when lift decreases, tighten your turn to move the circle center away from the weaker side. In practice, this means you are constantly making small corrections to your bank angle throughout each revolution. The strongest lift is rarely at the center of your first circle. It takes two or three orbits of deliberate adjustment to migrate your circle into the core. Patience and smooth control inputs matter more than aggressive maneuvering.",
+                animationName: "anim-thermal-entry",
                 diagram: nil,
                 keyFacts: [
                     "Stronger lift: widen the turn (reduce bank) to shift circle toward it",
@@ -263,6 +279,7 @@ enum FlyingExplore {
         title: "Climbing to Cloudbase",
         summary: "How thermals behave as they approach condensation level, the risks of cloud suck, and strategies for maximizing altitude safely.",
         icon: "arrow.up.to.line",
+        heroImageName: "Photos/Heroes/hero-flying-cloudbase",
         sections: [
             ExploreSection(
                 id: "cloudbase-1",
@@ -311,11 +328,14 @@ enum FlyingExplore {
         title: "Valley Flying Tactics",
         summary: "Navigating the complex wind and thermal patterns created by mountain terrain: valley breezes, slope winds, convergence lines, and the unique challenges of flying between ridges.",
         icon: "mountain.2",
+        heroImageName: "Photos/Heroes/hero-flying-valley-tactics",
         sections: [
             ExploreSection(
                 id: "valley-1",
                 heading: "The Valley Wind System",
                 body: "Mountain valleys develop their own predictable wind circulation independent of the synoptic (large-scale) weather. In the morning, sun-heated slopes create anabatic winds that flow uphill, drawing air up from the valley floor. This drives a compensating valley breeze that flows up the main valley axis from the plains toward the mountains. In the afternoon, the system reverses: cooling slopes produce katabatic (downhill) flow. This diurnal cycle means that thermal sources, wind direction, and the best flying routes change throughout the day in a predictable pattern that experienced mountain pilots internalize.",
+                imageName: "Photos/flying-valley-overview",
+                imageCaption: "Valley overview from a flying perspective",
                 diagram: nil,
                 keyFacts: [
                     "Morning: anabatic (upslope) winds and up-valley breeze develop",
@@ -329,6 +349,8 @@ enum FlyingExplore {
                 id: "valley-2",
                 heading: "Working the Sunny Side",
                 body: "In valley flying, the sun-exposed slope is where the action is. South-facing slopes (in the Northern Hemisphere) receive maximum solar heating and produce the strongest thermals and anabatic lift. As the day progresses and the sun angle changes, the active side shifts: east-facing slopes are best in the morning, south-facing slopes dominate midday, and west-facing slopes come alive in the afternoon. Skilled valley pilots plan their routes to always be working the currently active slope, crossing the valley to follow the sun. This means your track over the ground may zigzag between valley walls rather than following a straight line down the center.",
+                imageName: "Photos/flying-sunny-slope",
+                imageCaption: "Sun-exposed valley slope generating anabatic lift in the afternoon",
                 diagram: nil,
                 keyFacts: [
                     "Morning: work east-facing slopes for earliest thermal activity",
@@ -359,6 +381,7 @@ enum FlyingExplore {
         title: "Speed-to-Fly Theory",
         summary: "The MacCready framework for choosing optimal inter-thermal cruise speed: flying faster in sink, slower in lift, and adjusting for expected climb rates.",
         icon: "speedometer",
+        heroImageName: "Photos/Heroes/hero-flying-speed-to-fly",
         sections: [
             ExploreSection(
                 id: "stf-1",
@@ -377,6 +400,8 @@ enum FlyingExplore {
                 id: "stf-2",
                 heading: "Speed-to-Fly in Practice",
                 body: "The textbook MacCready speed assumes you fly through uniform air between thermals, but real air is anything but uniform. You encounter patches of lift and sink. The practical rule is: speed up in sink and slow down in lift. When you fly through a sinking air mass, increasing speed minimizes the time you spend losing altitude in that bad air. When you encounter lift between thermals, slowing down lets you gain free altitude without circling. Electronic varios with speed-to-fly directors automate this calculation, showing a command bar that tells you to push or pull relative to current conditions. The pilot's job becomes following the director while also making strategic decisions about whether to stop and circle.",
+                imageName: "Photos/flying-speed-bar-cockpit",
+                imageCaption: "Paraglider cockpit showing speed bar and vario during inter-thermal cruise",
                 diagram: nil,
                 keyFacts: [
                     "Speed up in sink to minimize time in descending air",
@@ -412,11 +437,14 @@ enum FlyingExplore {
         title: "Cross-Country Planning",
         summary: "Strategic planning for cross-country flights: weather analysis, route selection, turnpoint tactics, and the decision framework that transforms a local soaring flight into a distance task.",
         icon: "map",
+        heroImageName: "Photos/Heroes/hero-flying-xc-planning",
         sections: [
             ExploreSection(
                 id: "xc-1",
                 heading: "Pre-Flight Weather Analysis",
                 body: "Every serious XC flight begins hours before launch with a thorough weather assessment. Key parameters include the thermal index (trigger temperature minus forecast maximum), cloud base predictions from the Spread (temperature minus dew point times 400 feet per degree Celsius), wind at altitude for drift and ground speed calculations, and any risk of overdevelopment or spread-out. The atmospheric sounding, if available, reveals the depth of the convective boundary layer, which determines maximum thermal height. Combining these elements into a mental model of the day gives you a usable flying window, expected climb rates, and achievable task distance.",
+                imageName: "Photos/flying-xc-cockpit-setup",
+                imageCaption: "XC flight computer displaying thermal predictions and task overlay",
                 diagram: nil,
                 keyFacts: [
                     "Thermal index predicts convection onset: trigger temp minus surface temp",
@@ -465,11 +493,14 @@ enum FlyingExplore {
         title: "Convergence & Sea Breeze",
         summary: "How colliding air masses create powerful lines of lift, with special focus on sea breeze fronts: their formation, identification, and exploitation for cross-country soaring.",
         icon: "arrow.left.and.right",
+        heroImageName: "Photos/Heroes/hero-flying-convergence",
         sections: [
             ExploreSection(
                 id: "conv-1",
                 heading: "Convergence Basics",
                 body: "When two air masses flowing in different directions meet, the air has nowhere to go but up. This convergence creates a line or zone of lift that can extend for tens or even hundreds of kilometers. Unlike thermals, which are point sources of lift, convergence lines offer sustained lift along their entire length. A pilot who finds a convergence line can fly along it at speed, climbing continuously without circling. Convergence can form between valley breeze systems, at the boundary of different thermal regimes, or most dramatically where a sea breeze front pushes inland against the prevailing gradient wind.",
+                imageName: "Photos/flying-convergence-line",
+                imageCaption: "Convergence line visible as a band of vigorous cumulus stretching to the horizon",
                 diagram: nil,
                 keyFacts: [
                     "Convergence occurs where opposing air flows meet and force air upward",
@@ -483,6 +514,8 @@ enum FlyingExplore {
                 id: "conv-2",
                 heading: "The Sea Breeze Front",
                 body: "The sea breeze is a thermally driven circulation that develops along coastlines when the land heats faster than the water. Cool, dense marine air flows inland as a shallow wedge, pushing under the warmer continental air. The leading edge of this marine air, the sea breeze front, forces the warm air it undercuts sharply upward, creating a wall of lift. The front moves inland through the day, typically reaching 20-50 km from the coast by late afternoon depending on the strength of the onshore pressure gradient. Behind the front, marine air suppresses thermals and conditions become smooth but sinking.",
+                imageName: "Photos/flying-sea-breeze-front",
+                imageCaption: "Sea breeze front approaching inland, marked by a sharp cloud boundary",
                 diagram: nil,
                 keyFacts: [
                     "Sea breeze fronts move inland at roughly 10-30 km/h",
@@ -531,6 +564,7 @@ enum FlyingExplore {
         title: "Glide Management Between Thermals",
         summary: "The art of transitioning between thermals: maintaining energy, choosing glide paths, managing risk at low altitude, and executing final glides.",
         icon: "point.topleft.down.to.point.bottomright.curvepath",
+        heroImageName: "Photos/Heroes/hero-flying-glide",
         sections: [
             ExploreSection(
                 id: "glide-1",
@@ -562,6 +596,8 @@ enum FlyingExplore {
                 id: "glide-2",
                 heading: "The Low Save",
                 body: "Every cross-country pilot will eventually find themselves low with no obvious thermal in reach. This is the low save scenario, and survival depends on changing your priorities instantly. Stop trying to make distance. Your only goal now is to find lift. Slow down to minimum sink speed to maximize your time in the air. Head for the most promising thermal trigger within glide range: a sun-facing slope, a dark field, a ridge. Fly close to the terrain where thermals are strongest and narrowest. Accept weak lift and circle in anything positive. A one meter per second climb is salvation when you are 300 meters above the ground. Many of the best XC flights include a dramatic low save that felt like the flight was over.",
+                imageName: "Photos/flying-low-save-terrain",
+                imageCaption: "Pilot flying close to sun-warmed slope during a low-altitude save attempt",
                 diagram: nil,
                 keyFacts: [
                     "Below 300m AGL: switch entirely to survival mode",

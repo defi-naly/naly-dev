@@ -8,7 +8,7 @@ struct BodyAssessmentScene: View {
         Canvas { context, size in
             // Background
             let bg = Path(roundedRect: CGRect(origin: .zero, size: size), cornerRadius: 0)
-            context.fill(bg, with: .color(Color(hex: "1a1a2e")))
+            context.fill(bg, with: .color(Color(hex: "F5F5F7")))
 
             let cx = size.width * 0.5
             let topY = size.height * 0.08

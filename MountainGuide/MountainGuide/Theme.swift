@@ -1,39 +1,56 @@
 import SwiftUI
 
-// MARK: - Bloomberg Terminal Design System
+// MARK: - Light Theme Design System (White Risk inspired)
 
 extension Color {
     // Backgrounds
-    static let terminalBg = Color(hex: "0a0a0a")
-    static let terminalSurface = Color(hex: "111111")
-    static let terminalBorder = Color(hex: "262626")
+    static let lightBg = Color(hex: "F5F5F7")
+    static let lightSurface = Color(hex: "FFFFFF")
+    static let lightBorder = Color(hex: "E5E7EB")
 
-    // Accents
-    static let amber = Color(hex: "F59E0B")
-    static let amberLight = Color(hex: "FCD34D")
-    static let emerald = Color(hex: "22C55E")
-    static let danger = Color(hex: "EF4444")
+    // Legacy aliases (map to new colors)
+    static let terminalBg = Color.lightBg
+    static let terminalSurface = Color.lightSurface
+    static let terminalBorder = Color.lightBorder
+
+    // Primary accent (institutional blue)
+    static let accent = Color(hex: "1B5C85")
+    static let accentLight = Color(hex: "3B7FA5")
+    static let accentSoft = Color(hex: "DBEAFE")
+
+    // Legacy accent aliases
+    static let amber = Color.accent
+    static let amberLight = Color.accentLight
+
+    // Semantic
+    static let emerald = Color(hex: "059669")
+    static let danger = Color(hex: "DC2626")
+    static let warning = Color(hex: "D97706")
 
     // Text
-    static let textPrimary = Color(hex: "F9FAFB")
-    static let textMuted = Color(hex: "9CA3AF")
-    static let textDim = Color(hex: "6B7280")
+    static let textPrimary = Color(hex: "111827")
+    static let textSecondary = Color(hex: "6B7280")
+    static let textTertiary = Color(hex: "9CA3AF")
 
-    // Domain accents
-    static let weatherAccent = Color(hex: "7BA7CC")
-    static let avalancheAccent = Color.white
-    static let flyingAccent = Color(hex: "E8A87C")
-    static let navigationAccent = Color(hex: "8B5CF6")
-    static let ropeSystemsAccent = Color(hex: "F97316")
-    static let glacierTravelAccent = Color(hex: "06B6D4")
-    static let firstAidAccent = Color(hex: "EF4444")
+    // Legacy text aliases
+    static let textMuted = Color.textSecondary
+    static let textDim = Color.textTertiary
 
-    // Medal colors
-    static let medalBronze = Color(hex: "CD7F32")
-    static let medalSilver = Color(hex: "C0C0C0")
-    static let medalGold = Color(hex: "FFD700")
+    // Domain accents (adjusted for light backgrounds)
+    static let weatherAccent = Color(hex: "2563EB")
+    static let avalancheAccent = Color(hex: "DC2626")
+    static let flyingAccent = Color(hex: "EA580C")
+    static let navigationAccent = Color(hex: "7C3AED")
+    static let ropeSystemsAccent = Color(hex: "B45309")
+    static let glacierTravelAccent = Color(hex: "0891B2")
+    static let firstAidAccent = Color(hex: "BE123C")
 
-    // Diagram palette
+    // Medal colors (darkened for light bg)
+    static let medalBronze = Color(hex: "92400E")
+    static let medalSilver = Color(hex: "6B7280")
+    static let medalGold = Color(hex: "B45309")
+
+    // Diagram palette (keep saturated)
     static let diagramBlue = Color(hex: "3B82F6")
     static let diagramCyan = Color(hex: "06B6D4")
     static let diagramPurple = Color(hex: "8B5CF6")
@@ -45,7 +62,31 @@ extension Color {
     static let diagramYellow = Color(hex: "EAB308")
 
     // XP accent
-    static let xpGlow = Color(hex: "F59E0B")
+    static let xpGlow = Color(hex: "D97706")
+
+    // XP axis colors
+    static let preparationXPColor = Color(hex: "3B82F6")  // Blue
+    static let prowessXPColor = Color(hex: "F59E0B")      // Amber
+    static let safetyXPColor = Color(hex: "22C55E")       // Green
+
+    // European Avalanche Danger Scale
+    static let dangerLow = Color(hex: "4CAF50")
+    static let dangerModerate = Color(hex: "FFC107")
+    static let dangerConsiderable = Color(hex: "FF9800")
+    static let dangerHigh = Color(hex: "F44336")
+    static let dangerVeryHigh = Color(hex: "880E4F")
+    static let dangerNoRating = Color(hex: "9CA3AF")
+
+    static func dangerColor(for level: Int) -> Color {
+        switch level {
+        case 1: return .dangerLow
+        case 2: return .dangerModerate
+        case 3: return .dangerConsiderable
+        case 4: return .dangerHigh
+        case 5: return .dangerVeryHigh
+        default: return .dangerNoRating
+        }
+    }
 
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
@@ -63,29 +104,41 @@ extension Color {
     }
 }
 
+// MARK: - Typography
+
 extension Font {
     static func mono(_ size: CGFloat, weight: Font.Weight = .regular) -> Font {
         .system(size: size, weight: weight, design: .monospaced)
     }
+
+    static func body(_ size: CGFloat = 14, weight: Font.Weight = .regular) -> Font {
+        .system(size: size, weight: weight)
+    }
+
+    static func heading(_ size: CGFloat, weight: Font.Weight = .semibold) -> Font {
+        .system(size: size, weight: weight)
+    }
 }
 
-// MARK: - Card Style Modifier
+// MARK: - Card Style Modifier (shadow-based for light theme)
 
-struct TerminalCard: ViewModifier {
+struct CardModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding(16)
-            .background(Color.terminalSurface)
+            .background(Color.lightSurface)
             .cornerRadius(12)
-            .overlay(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color.terminalBorder, lineWidth: 1)
-            )
+            .shadow(color: .black.opacity(0.04), radius: 2, x: 0, y: 1)
+            .shadow(color: .black.opacity(0.06), radius: 8, x: 0, y: 4)
     }
 }
 
 extension View {
+    func card() -> some View {
+        modifier(CardModifier())
+    }
+
     func terminalCard() -> some View {
-        modifier(TerminalCard())
+        modifier(CardModifier())
     }
 }

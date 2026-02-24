@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asymmetry — @defi_naly</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --void: #08090c;
+      --soil: #0f1014;
+      --surface: #161819;
+      --border: #1e1c1a;
+      --bright: #f0efe9;
+      --text: #d4cfc4;
+      --muted: #a69b8a;
+      --dim: #6b6560;
+      --accent: #7ba3c9;
+      --accent-bright: #96bade;
+      --accent-glow: rgba(123, 163, 201, 0.3);
+      --snow: #e8edf4;
+      --pine: #3d9970;
+      --rock: #6b7a8f;
+      --peak: #b8c4d4;
+      --display: 'Space Grotesk', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Inter', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--void);
+      font-family: var(--sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 48px;
+      padding: 60px 32px;
+      position: relative;
+    }
+
+    /* Mountain background */
+    .bg {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      opacity: 0.2;
+    }
+
+    .bg-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(8, 9, 12, 0.55);
+    }
+
+    /* Card */
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 800px;
+      background: rgba(15, 16, 20, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(123, 163, 201, 0.1);
+      border-radius: 16px;
+      padding: 48px 52px;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(123, 163, 201, 0.25), transparent);
+    }
+
+    /* Header */
+    .card-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-family: var(--display);
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--bright);
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .card-subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 40px;
+      line-height: 1.5;
+    }
+
+    /* Current ratio display */
+    .current-ratio {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .ratio-number {
+      font-family: var(--display);
+      font-size: 56px;
+      font-weight: 700;
+      color: var(--snow);
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .ratio-suffix {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--dim);
+      letter-spacing: 0.05em;
+    }
+
+    .ratio-context {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--dim);
+      letter-spacing: 0.03em;
+      margin-bottom: 40px;
+    }
+
+    .ratio-context span {
+      color: var(--muted);
+    }
+
+    /* Strata visualization */
+    .strata {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .stratum {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .stratum-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--dim);
+      width: 100px;
+      flex-shrink: 0;
+      text-align: right;
+      letter-spacing: 0.04em;
+    }
+
+    .stratum-track {
+      flex: 1;
+      height: 32px;
+      background: rgba(22, 24, 25, 0.8);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stratum-fill {
+      height: 100%;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 12px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .stratum-fill.current {
+      background: linear-gradient(90deg, rgba(123, 163, 201, 0.15), rgba(123, 163, 201, 0.35));
+      color: var(--accent-bright);
+    }
+
+    .stratum-fill.target {
+      background: linear-gradient(90deg, rgba(123, 163, 201, 0.2), rgba(123, 163, 201, 0.5));
+      color: var(--snow);
+    }
+
+    .stratum-fill.target-high {
+      background: linear-gradient(90deg, rgba(123, 163, 201, 0.25), rgba(123, 163, 201, 0.65));
+      color: var(--snow);
+    }
+
+    .stratum-fill.target-max {
+      background: linear-gradient(90deg, rgba(184, 196, 212, 0.2), rgba(184, 196, 212, 0.55));
+      color: var(--snow);
+    }
+
+    .stratum-multiplier {
+      font-family: var(--display);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--snow);
+      width: 60px;
+      flex-shrink: 0;
+      text-align: right;
+    }
+
+    .stratum-multiplier.current-m {
+      color: var(--dim);
+      font-size: 13px;
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 8px 0;
+    }
+
+    /* Bottom quote */
+    .card-footer {
+      font-family: var(--display);
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+    }
+
+    .card-footer strong {
+      color: var(--snow);
+      font-weight: 500;
+    }
+
+    /* Watermark */
+    .watermark {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 20px;
+      text-align: right;
+      opacity: 0.6;
+    }
+
+    /* ZEC-specific green accent */
+    .card.zec .card-label { color: var(--pine); }
+    .card.zec .card::before {
+      background: linear-gradient(90deg, transparent, rgba(61, 153, 112, 0.25), transparent);
+    }
+    .card.zec .stratum-fill.current {
+      background: linear-gradient(90deg, rgba(61, 153, 112, 0.15), rgba(61, 153, 112, 0.35));
+      color: var(--pine);
+    }
+    .card.zec .stratum-fill.target {
+      background: linear-gradient(90deg, rgba(61, 153, 112, 0.2), rgba(61, 153, 112, 0.5));
+      color: #b8e8d0;
+    }
+    .card.zec .stratum-fill.target-high {
+      background: linear-gradient(90deg, rgba(61, 153, 112, 0.25), rgba(61, 153, 112, 0.65));
+      color: #d0f0e0;
+    }
+    .card.zec .stratum-fill.target-max {
+      background: linear-gradient(90deg, rgba(61, 153, 112, 0.3), rgba(61, 153, 112, 0.75));
+      color: #e8f8f0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg">
+  <img src="1080x360.jpeg" alt="">
+  <div class="bg-overlay"></div>
+</div>
+
+<!-- ═══════ BTC vs GOLD ═══════ -->
+<div class="card">
+  <div class="card-label">The Math</div>
+  <div class="card-title">Bitcoin vs Gold</div>
+  <div class="card-subtitle">The gap that arithmetic says must close.</div>
+
+  <div class="current-ratio">
+    <div class="ratio-number">3.7%</div>
+    <div class="ratio-suffix">of gold's market cap</div>
+  </div>
+
+  <div class="ratio-context">
+    <span>BTC $1.29T</span> &nbsp;·&nbsp; <span>Gold $35T</span>
+  </div>
+
+  <div class="strata">
+    <div class="stratum">
+      <div class="stratum-label">Current</div>
+      <div class="stratum-track">
+        <div class="stratum-fill current" style="width: 3.7%"></div>
+      </div>
+      <div class="stratum-multiplier current-m">1x</div>
+    </div>
+    <div class="stratum">
+      <div class="stratum-label">10% of Gold</div>
+      <div class="stratum-track">
+        <div class="stratum-fill target" style="width: 10%"></div>
+      </div>
+      <div class="stratum-multiplier">2.7x</div>
+    </div>
+    <div class="stratum">
+      <div class="stratum-label">25% of Gold</div>
+      <div class="stratum-track">
+        <div class="stratum-fill target-high" style="width: 25%"></div>
+      </div>
+      <div class="stratum-multiplier">6.8x</div>
+    </div>
+    <div class="stratum">
+      <div class="stratum-label">Parity</div>
+      <div class="stratum-track">
+        <div class="stratum-fill target-max" style="width: 100%"></div>
+      </div>
+      <div class="stratum-multiplier">27x</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card-footer">
+    You don't need to believe Bitcoin replaces gold.<br>
+    <strong>You just need to believe the gap narrows.</strong>
+  </div>
+
+  <div class="watermark">@defi_naly</div>
+</div>
+
+<!-- ═══════ ZEC vs BTC ═══════ -->
+<div class="card zec">
+  <div class="card-label" style="color: var(--pine);">The Math</div>
+  <div class="card-title">Zcash vs Bitcoin</div>
+  <div class="card-subtitle">Privacy reprices or it doesn't. The asymmetry is absurd either way.</div>
+
+  <div class="current-ratio">
+    <div class="ratio-number">0.3%</div>
+    <div class="ratio-suffix">of Bitcoin's market cap</div>
+  </div>
+
+  <div class="ratio-context">
+    <span>ZEC $3.85B</span> &nbsp;·&nbsp; <span>BTC $1.29T</span>
+  </div>
+
+  <div class="strata">
+    <div class="stratum">
+      <div class="stratum-label">Current</div>
+      <div class="stratum-track">
+        <div class="stratum-fill current" style="width: 3%"></div>
+      </div>
+      <div class="stratum-multiplier current-m">1x</div>
+    </div>
+    <div class="stratum">
+      <div class="stratum-label">1% of BTC</div>
+      <div class="stratum-track">
+        <div class="stratum-fill target" style="width: 10%"></div>
+      </div>
+      <div class="stratum-multiplier">3.3x</div>
+    </div>
+    <div class="stratum">
+      <div class="stratum-label">5% of BTC</div>
+      <div class="stratum-track">
+        <div class="stratum-fill target-high" style="width: 50%"></div>
+      </div>
+      <div class="stratum-multiplier">16.7x</div>
+    </div>
+    <div class="stratum">
+      <div class="stratum-label">10% of BTC</div>
+      <div class="stratum-track">
+        <div class="stratum-fill target-max" style="width: 100%"></div>
+      </div>
+      <div class="stratum-multiplier">33x</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card-footer">
+    Snowden chose this technology. The surveillance state keeps growing.<br>
+    <strong>You're betting floor, not ceiling.</strong>
+  </div>
+
+  <div class="watermark">@defi_naly</div>
+</div>
+
+</body>
+</html>

@@ -23,12 +23,12 @@ struct AltimeterView: View {
                             color: .textPrimary
                         )
                         Text("GPS ALTITUDE")
-                            .font(.mono(11, weight: .bold))
+                            .font(.body(11, weight: .bold))
                             .foregroundStyle(Color.textSecondary)
                     } else {
                         LargeReading(value: "--", unit: "m", color: .textTertiary)
                         Text("ACQUIRING GPS...")
-                            .font(.mono(11, weight: .bold))
+                            .font(.body(11, weight: .bold))
                             .foregroundStyle(Color.textTertiary)
                     }
                 }
@@ -40,7 +40,7 @@ struct AltimeterView: View {
                         HStack {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("Change since start")
-                                    .font(.mono(12))
+                                    .font(.body(12))
                                     .foregroundStyle(Color.textSecondary)
                                 HStack(alignment: .firstTextBaseline, spacing: 2) {
                                     Text(String(format: "%+.1f", altimeter.relativeAltitude))
@@ -59,7 +59,7 @@ struct AltimeterView: View {
 
                         if !altimeter.isBarometerAvailable {
                             Text("Barometer not available — relative altitude unavailable")
-                                .font(.mono(10))
+                                .font(.body(10))
                                 .foregroundStyle(Color.warning)
                         }
                     }
@@ -85,13 +85,13 @@ struct AltimeterView: View {
                                     .font(.system(size: 20, weight: .semibold))
                                     .foregroundStyle(trendColor)
                                 Text(altimeter.pressureTrend.rawValue)
-                                    .font(.mono(11, weight: .semibold))
+                                    .font(.body(11, weight: .semibold))
                                     .foregroundStyle(trendColor)
                             }
                         }
 
                         Text(altimeter.pressureTrend.weatherImplication)
-                            .font(.mono(11))
+                            .font(.body(11))
                             .foregroundStyle(Color.textSecondary)
                             .frame(maxWidth: .infinity, alignment: .leading)
                     }
@@ -105,7 +105,7 @@ struct AltimeterView: View {
                         PressureRefRow(label: "Low pressure", value: "< 1000 hPa")
                         Divider()
                         Text("Pressure drops ~12 hPa per 100m of altitude gain. A falling barometer often precedes worsening weather.")
-                            .font(.mono(10))
+                            .font(.body(10))
                             .foregroundStyle(Color.textTertiary)
                     }
                 }
@@ -115,7 +115,7 @@ struct AltimeterView: View {
                         Image(systemName: "exclamationmark.triangle")
                             .foregroundStyle(Color.warning)
                         Text("Barometric altimeter unavailable on this device")
-                            .font(.mono(12))
+                            .font(.body(12))
                             .foregroundStyle(Color.textSecondary)
                     }
                     .padding()
@@ -126,6 +126,8 @@ struct AltimeterView: View {
         .background(Color.terminalBg)
         .navigationTitle("Altimeter")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear { altimeter.start() }
+        .onDisappear { altimeter.stop() }
     }
 
     private var trendColor: Color {
@@ -146,7 +148,7 @@ struct PressureRefRow: View {
     var body: some View {
         HStack {
             Text(label)
-                .font(.mono(11))
+                .font(.body(11))
                 .foregroundStyle(Color.textSecondary)
             Spacer()
             Text(value)
@@ -167,36 +169,65 @@ class AltimeterManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
     private let altimeter = CMAltimeter()
     private let locationManager = CLLocationManager()
+    private let altimeterQueue = OperationQueue()
     private var pressureHistory: [Double] = []
+    private var lastUpdateTime: Date = .distantPast
+    private var updateCount: Int = 0
+    private var isRunning = false
 
     override init() {
         super.init()
-
-        // GPS altitude
+        altimeterQueue.name = "com.mountainguide.altimeter"
+        altimeterQueue.maxConcurrentOperationCount = 1
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        isBarometerAvailable = CMAltimeter.isRelativeAltitudeAvailable()
+    }
+
+    func start() {
+        guard !isRunning else { return }
+        isRunning = true
+
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
 
-        // Barometric altimeter
-        guard CMAltimeter.isRelativeAltitudeAvailable() else {
-            isBarometerAvailable = false
-            return
-        }
+        guard isBarometerAvailable else { return }
 
-        altimeter.startRelativeAltitudeUpdates(to: .main) { [weak self] data, error in
+        altimeter.startRelativeAltitudeUpdates(to: altimeterQueue) { [weak self] data, error in
             guard let self, let data, error == nil else { return }
 
-            self.relativeAltitude = data.relativeAltitude.doubleValue
-            self.pressure = data.pressure.doubleValue * 10 // kPa to hPa
+            // Debounce on the background queue — skip if < 1s since last update
+            let now = Date()
+            guard now.timeIntervalSince(self.lastUpdateTime) >= 1.0 else { return }
+            self.lastUpdateTime = now
 
-            // Track pressure trend
-            self.pressureHistory.append(self.pressure)
-            if self.pressureHistory.count > 30 { // ~30 samples
+            let newRelative = data.relativeAltitude.doubleValue
+            let newPressure = data.pressure.doubleValue * 10 // kPa to hPa
+
+            // Pressure trend tracking (stays on background queue)
+            self.updateCount += 1
+            self.pressureHistory.append(newPressure)
+            if self.pressureHistory.count > 30 {
                 self.pressureHistory.removeFirst()
             }
-            self.updatePressureTrend()
+            let newTrend: PressureTrend? = self.updateCount % 5 == 0 ? self.computePressureTrend() : nil
+
+            // Dispatch only the final values to main thread
+            DispatchQueue.main.async {
+                self.relativeAltitude = newRelative
+                self.pressure = newPressure
+                if let trend = newTrend {
+                    self.pressureTrend = trend
+                }
+            }
         }
+    }
+
+    func stop() {
+        guard isRunning else { return }
+        isRunning = false
+        altimeter.stopRelativeAltitudeUpdates()
+        locationManager.stopUpdatingLocation()
     }
 
     deinit {
@@ -205,27 +236,26 @@ class AltimeterManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            gpsAltitude = location.altitude
+        guard let location = locations.last, location.verticalAccuracy >= 0 else { return }
+        gpsAltitude = location.altitude
+        // Switch to significant-change monitoring after a good fix
+        if location.verticalAccuracy < 30 {
+            locationManager.stopUpdatingLocation()
         }
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        // GPS may not be available
+        // GPS may not be available on simulator
     }
 
-    private func updatePressureTrend() {
-        guard pressureHistory.count >= 10 else { return }
+    private func computePressureTrend() -> PressureTrend {
+        guard pressureHistory.count >= 10 else { return .stable }
         let recent = pressureHistory.suffix(5).reduce(0, +) / 5
         let earlier = pressureHistory.prefix(5).reduce(0, +) / 5
         let delta = recent - earlier
 
-        if delta > 0.3 {
-            pressureTrend = .rising
-        } else if delta < -0.3 {
-            pressureTrend = .falling
-        } else {
-            pressureTrend = .stable
-        }
+        if delta > 0.3 { return .rising }
+        if delta < -0.3 { return .falling }
+        return .stable
     }
 }
