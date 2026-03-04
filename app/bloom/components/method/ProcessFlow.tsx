@@ -19,7 +19,7 @@ interface ProcessFlowProps {
 
 export default function ProcessFlow({ steps }: ProcessFlowProps) {
   return (
-    <div className="process-flow">
+    <div className="process-flow" style={{ '--step-count': steps.length } as React.CSSProperties}>
       <motion.div
         className="process-flow-line"
         initial={{ scaleX: 0 }}
@@ -27,7 +27,7 @@ export default function ProcessFlow({ steps }: ProcessFlowProps) {
         viewport={{ once: true, margin: '-50px' }}
         transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
       />
-      <StaggerContainer className="process-flow-steps" style={{ '--step-count': steps.length } as React.CSSProperties}>
+      <StaggerContainer className="process-flow-steps">
         {steps.map((step, i) => {
           const Icon = stageIcons[i % stageIcons.length];
 
