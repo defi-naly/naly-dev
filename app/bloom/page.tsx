@@ -217,7 +217,7 @@ export default function BloomPage() {
                   <h4>Distribution</h4>
                   <p className="edge-tagline">How the network finds you.</p>
                   <p>Your website is your distribution. Sites that convert, built to be owned and operated by you — not dependent on us.</p>
-                  <div className="edge-proof">Proof: Inside Labs — complete site, 1 day</div>
+                  <div className="edge-proof">Proof: Balancer — full rebrand and site for v3 launch</div>
                 </motion.div>
               </StaggerItem>
               <StaggerItem>
@@ -273,12 +273,16 @@ export default function BloomPage() {
             </div>
 
             <ProcessFlow steps={[
-              { id: 'identify', name: 'Identify', duration: 'Day 1',
-                description: 'Which foundation is missing? One conversation to scope the sprint around a single deliverable.' },
-              { id: 'build', name: 'Build', duration: '1\u20134 weeks',
-                description: 'AI-augmented execution at every step. You get a working foundation — not a deck, not a roadmap.' },
+              { id: 'understand', name: 'Understand', duration: 'Week 1',
+                description: 'Deep dive into your existing system — users, data flows, dependencies, pain points. No assumptions.' },
+              { id: 'map', name: 'Map', duration: 'Week 1',
+                description: 'Clean architecture of what exists and what needs to change. Every decision documented.' },
+              { id: 'analyze', name: 'Analyze', duration: 'Week 2',
+                description: 'Identify the foundation gaps — where the system breaks, where AI can replace manual work, where value compounds.' },
+              { id: 'implement', name: 'Implement', duration: 'Weeks 2–4',
+                description: 'AI-augmented build on the new system. Every workflow designed to run without us.' },
               { id: 'ship', name: 'Ship & Own', duration: 'Delivered',
-                description: 'You own it outright. AI workflows included. The foundation compounds. Build the network on top.' },
+                description: 'You own it. Fully operational, documented, and handed to your team. The foundation compounds from here.' },
             ]} />
 
             <MotionReveal>

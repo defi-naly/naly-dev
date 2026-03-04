@@ -103,7 +103,7 @@ export default function FoundationsPage() {
                     </ul>
                   </div>
                   <div className="foundation-proof foundation-proof-highlight">
-                    <strong>Proof:</strong> Inside Labs — complete marketing site, 1 day. AI-augmented content workflows they own and operate.
+                    <strong>Proof:</strong> Balancer — complete rebrand and marketing site for the v3 protocol launch. Distribution they own and operate.
                   </div>
                 </div>
               </div>
@@ -176,23 +176,27 @@ export default function FoundationsPage() {
             </MotionReveal>
           </section>
 
-          {/* ─── THE SPRINT MODEL ─── */}
+          {/* ─── HOW WE WORK ─── */}
           <SectionDivider />
           <section className="bloom-section partners-section">
             <MotionReveal>
-              <h2 className="judgment-headline">Fixed scope. $15,000. Foundation shipped.</h2>
+              <h2 className="judgment-headline">How we work</h2>
               <p className="section-subheading">
-                Not a retainer. Not a roadmap. Not a 90-day engagement. One sprint, one foundation, you own it. Then you build the network on top.
+                We learn your system before we touch it. Then we rebuild the foundation with AI-augmented workflows baked in — and hand you the keys.
               </p>
             </MotionReveal>
 
             <ProcessFlow steps={[
-              { id: 'identify', name: 'Identify', duration: 'Day 1',
-                description: 'Which foundation is missing? One conversation to scope the sprint around a single deliverable.' },
-              { id: 'build', name: 'Build', duration: '1\u20134 weeks',
-                description: 'AI-augmented execution at every step. You get a working foundation — not a deck, not a roadmap.' },
+              { id: 'understand', name: 'Understand', duration: 'Week 1',
+                description: 'Deep dive into your existing system — users, data flows, dependencies, pain points. No assumptions.' },
+              { id: 'map', name: 'Map', duration: 'Week 1',
+                description: 'Clean architecture of what exists and what needs to change. Every decision documented.' },
+              { id: 'analyze', name: 'Analyze', duration: 'Week 2',
+                description: 'Identify the foundation gaps — where the system breaks, where AI can replace manual work, where value compounds.' },
+              { id: 'implement', name: 'Implement', duration: 'Weeks 2–4',
+                description: 'AI-augmented build on the new system. Every workflow designed to run without us.' },
               { id: 'ship', name: 'Ship & Own', duration: 'Delivered',
-                description: 'You own it outright. AI workflows included. The foundation compounds. Build the network on top.' },
+                description: 'You own it. Fully operational, documented, and handed to your team. The foundation compounds from here.' },
             ]} />
           </section>
 

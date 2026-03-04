@@ -784,8 +784,8 @@ body {
 
 .process-flow-steps {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(var(--step-count, 3), 1fr);
+  gap: 1.5rem;
   position: relative;
   z-index: 1;
 }

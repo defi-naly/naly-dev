@@ -1,10 +1,10 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { Crosshair, Layers, TrendingUp } from 'lucide-react';
+import { Search, Layers, Crosshair, Cpu, TrendingUp } from 'lucide-react';
 import { StaggerContainer, StaggerItem } from '../StaggerContainer';
 
-const stageIcons = [Crosshair, Layers, TrendingUp];
+const stageIcons = [Search, Layers, Crosshair, Cpu, TrendingUp];
 
 export interface ProcessStep {
   id: string;
@@ -27,9 +27,9 @@ export default function ProcessFlow({ steps }: ProcessFlowProps) {
         viewport={{ once: true, margin: '-50px' }}
         transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
       />
-      <StaggerContainer className="process-flow-steps">
+      <StaggerContainer className="process-flow-steps" style={{ '--step-count': steps.length } as React.CSSProperties}>
         {steps.map((step, i) => {
-          const Icon = stageIcons[i];
+          const Icon = stageIcons[i % stageIcons.length];
 
           return (
             <StaggerItem key={step.id}>
