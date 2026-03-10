@@ -165,7 +165,7 @@ function createEnneperGeometry(targetRadius: number, segs = 32): THREE.EdgesGeom
 const PROJECTS: { id: string; name: string; label: string; url?: string }[] = [
   { id: 'beets', name: 'BEETS', label: 'DEX · LST · Validator', url: '/beets' },
   { id: 'balancer', name: 'BALANCER', label: 'Custom AMM Infrastructure', url: 'https://balancer.fi' },
-  { id: 'tipz', name: 'TIPZ', label: 'Private Tipping' },
+  { id: 'tipz', name: 'TIPZ', label: 'Private Tipping for Creators', url: 'https://tipz.cash' },
   { id: 'terminal', name: 'TERMINAL', label: 'Interactive Dashboards', url: '/terminal' },
 ];
 
