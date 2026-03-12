@@ -3,10 +3,10 @@ import { Metadata } from 'next';
 import { RootsBodyClass } from './components/RootsBodyClass';
 
 export const metadata: Metadata = {
-  title: 'Naly',
+  title: 'naly.dev',
   description: 'DeFi, digital sovereignty, natural systems — three domains, one portfolio.',
   openGraph: {
-    title: 'Naly',
+    title: 'naly.dev',
     description: 'DeFi, digital sovereignty, natural systems — three domains, one portfolio.',
     url: 'https://naly.dev',
     siteName: 'naly.dev',

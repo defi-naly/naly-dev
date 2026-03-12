@@ -14,13 +14,13 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: 'naly.dev | Interactive Financial Research',
+  title: 'naly.dev',
   description: 'Interactive dashboards, economic analysis tools, and The Money Game.',
   keywords: ['finance', 'economics', 'data visualization', 'dashboards', 'analysis'],
   authors: [{ name: 'Naly' }],
   metadataBase: new URL('https://app.naly.dev'),
   openGraph: {
-    title: 'naly.dev | Interactive Financial Research',
+    title: 'naly.dev',
     description: 'Interactive dashboards, economic analysis tools, and The Money Game.',
     url: 'https://app.naly.dev',
     siteName: 'naly.dev',
@@ -28,7 +28,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'naly.dev | Interactive Financial Research',
+    title: 'naly.dev',
     description: 'Interactive dashboards, economic analysis tools, and The Money Game.',
   },
 };
