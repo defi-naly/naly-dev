@@ -37,7 +37,7 @@ export const domains: Domain[] = [
     color: '#8b7ec8',
     tagline: 'Every network has a topology. The shape determines who has power.',
     projects: [
-      { name: 'TIPZ', description: 'Privacy-first micro-tipping for creators via shielded Zcash', tag: 'Privacy-First Tipping' },
+      { name: 'TIPZ', description: 'Privacy-first micro-tipping for creators via shielded Zcash', tag: 'Private Microtipping', url: 'https://tipz.cash' },
     ],
   },
   {
